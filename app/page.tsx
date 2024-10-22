@@ -1,101 +1,140 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import { MenuIcon, PlusIcon, SendIcon, UserIcon, Mic, MicOff } from "lucide-react"
+
+export default function ChatInterface() {
+  const [messages, setMessages] = useState([
+    { role: "assistant", content: "Hello! How can I assist you today?" },
+  ])
+  const [input, setInput] = useState("")
+  const [isListening, setIsListening] = useState(false)
+  const [recognition, setRecognition] = useState<SpeechRecognition | null>(null)
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || (window as any).webkitSpeechRecognition
+      const recognitionInstance = new SpeechRecognition()
+      
+      recognitionInstance.continuous = false
+      recognitionInstance.interimResults = false
+      recognitionInstance.lang = 'en-US'
+
+      recognitionInstance.onresult = (event: SpeechRecognitionEvent) => {
+        const transcript = event.results[0][0].transcript
+        setInput(prevInput => prevInput + ' ' + transcript)
+      }
+
+      recognitionInstance.onend = () => {
+        setIsListening(false)
+      }
+
+      setRecognition(recognitionInstance)
+    }
+  }, [])
+
+  const handleSend = () => {
+    if (input.trim()) {
+      setMessages([...messages, { role: "user", content: input }])
+      setInput("")
+      // Here you would typically send the message to your AI backend
+      // and then add the AI's response to the messages
+    }
+  }
+
+  const toggleListening = () => {
+    if (recognition) {
+      if (isListening) {
+        recognition.stop()
+      } else {
+        recognition.start()
+        setIsListening(true)
+      }
+    } else {
+      console.error('Speech recognition not supported in this browser')
+      // You might want to show an error message to the user here
+    }
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="flex h-screen bg-gray-100 text-gray-800">
+      {/* Sidebar */}
+      <div className="w-64 bg-gray-900 text-white p-4 hidden md:block">
+        <Button variant="outline" className="w-full mb-4 text-white border-white hover:bg-gray-800">
+          <PlusIcon className="mr-2 h-4 w-4" /> New Chat
+        </Button>
+        <ScrollArea className="h-[calc(100vh-8rem)]">
+          <div className="space-y-2">
+            <Button variant="ghost" className="w-full justify-start text-white hover:bg-gray-800">
+              Chat 1
+            </Button>
+            <Button variant="ghost" className="w-full justify-start text-white hover:bg-gray-800">
+              Chat 2
+            </Button>
+          </div>
+        </ScrollArea>
+      </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <header className="bg-white border-b p-4 flex justify-between items-center">
+          <Button variant="ghost" className="md:hidden">
+            <MenuIcon className="h-6 w-6" />
+          </Button>
+          <h1 className="text-xl font-bold">Avatar</h1>
+          <Button variant="ghost" className="rounded-full">
+            <UserIcon className="h-6 w-4" />
+          </Button>
+        </header>
+
+        {/* Chat Area */}
+        <ScrollArea className="flex-1 p-4">
+          <div className="max-w-2xl mx-auto space-y-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`rounded-lg p-2 max-w-sm ${
+                    message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-200"
+                  }`}
+                >
+                  {message.content}
+                </div>
+              </div>
+            ))}
+          </div>
+        </ScrollArea>
+
+        {/* Input Area */}
+        <div className="border-t p-4">
+          <div className="max-w-2xl mx-auto flex">
+            <Input
+              className="flex-1 mr-2"
+              placeholder="Type your message..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && handleSend()}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <Button 
+              onClick={toggleListening} 
+              variant="outline" 
+              className="mr-2"
+              aria-label={isListening ? "Stop listening" : "Start listening"}
+            >
+              {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+            </Button>
+            <Button onClick={handleSend}>
+              <SendIcon className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
-  );
+  )
 }
