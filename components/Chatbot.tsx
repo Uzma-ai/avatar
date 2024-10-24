@@ -266,7 +266,7 @@ export default function AIAssistant() {
       <div className="relative z-10 w-80 bg-gray-800 bg-opacity-50 p-4 hidden lg:block">
         <div className="mb-4 text-lg font-semibold flex items-center">
           <Video className="mr-2 h-5 w-5" />
-          AI Generated Video
+             Talking Avatar
         </div>
         <div className="aspect-video bg-gray-700 rounded-lg overflow-hidden">
           <video 
