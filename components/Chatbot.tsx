@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { PlusCircle, Send, Sparkles, Mic, Square, Video } from "lucide-react";
-import Image from "next/image";
+
 
 type Message = {
   role: "user" | "assistant";
