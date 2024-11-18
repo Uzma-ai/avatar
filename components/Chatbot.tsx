@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { PlusCircle, Send, Sparkles, Mic, Square } from "lucide-react";
+import { PlusCircle, Send, Sparkles, Mic, Square, Video } from "lucide-react";
 import Image from "next/image";
 
 type Message = {
