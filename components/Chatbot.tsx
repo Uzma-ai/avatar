@@ -4,8 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { PlusCircle, Send, Sparkles, Mic, Square, Video } from "lucide-react";
-
+import { PlusCircle, Send, Sparkles, Mic, Square } from "lucide-react";
+import Image from "next/image";
 
 type Message = {
   role: "user" | "assistant";
@@ -202,7 +202,7 @@ export default function AIAssistant() {
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
 
       {/* Sidebar */}
-      <div className="relative z-10 w-64 bg-gray-800 bg-opacity-50 p-4 hidden md:block">
+      <div className="relative z-10 w-64 bg-gray-800 bg-opacity-50 p-4 hidden md:block ">
         <Button onClick={startNewConversation} className="w-full mb-4">
           <PlusCircle className="mr-2 h-4 w-4" /> New Chat
         </Button>
@@ -223,8 +223,8 @@ export default function AIAssistant() {
 
       {/* Main Chat Area */}
       <div className="flex w-full">
-        <div className="relative z-10 flex-1 flex flex-col">
-          <ScrollArea className="flex-1 p-4">
+        <div className="relative z-10 flex-1 flex flex-col ">
+          <ScrollArea className="flex-1 p-4 hidden md:block">
             {conversations
               .find((conv) => conv.id === currentConversation)
               ?.messages.map((message, index) => (
@@ -256,7 +256,7 @@ export default function AIAssistant() {
             <div ref={messagesEndRef} />
           </ScrollArea>
 
-          <div className="p-4 bg-gray-800 bg-opacity-50">
+          <div className="p-4 bg-gray-800 bg-opacity-50 hidden md:block">
             <form onSubmit={handleSubmit} className="flex space-x-2">
               <Input
                 value={input}
@@ -292,26 +292,21 @@ export default function AIAssistant() {
         </div>
 
         {/* Video Section */}
-        <div className="relative z-10 w-1/2 bg-gray-800 bg-opacity-50 p-4 flex flex-col justify-center">
+        <div className="flex flex-col justify-center items-center md:w-1/2 bg-gray-800 md:bg-opacity-50 ">
           <div className="mb-4 text-lg font-semibold flex items-center">
-            <Video className="mr-2 h-5 w-5" />
             Talking Avatar
           </div>
-          <div className="aspect-video bg-gray-700 rounded-lg overflow-hidden">
-            <video
-              src="./avatar-vid.mp4" // Replace with the correct path to your video
-              width={400}
-              height={500}
-              autoPlay
-              muted
-              loop
-              playsInline
-            >
-              Your browser does not support the video tag.
-            </video>
+          <div className="relative flex-grow h-[70%] bg-gray-700 rounded-lg overflow-hidden">
+            <Image
+              src="/ava-img.png" // Path to your image in the public folder
+              alt="AI-Generated Avatar"
+              width={1000}
+              height={1000}
+              className="rounded-lg"
+            />
           </div>
           <p className="mt-2 text-sm text-gray-300">
-            This video represents an AI-generated visual response to your
+            This image represents an AI-generated visual response to your
             queries.
           </p>
         </div>
