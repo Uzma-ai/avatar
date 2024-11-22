@@ -292,16 +292,16 @@ export default function AIAssistant() {
         </div>
 
         {/* Video Section */}
-        <div className="flex flex-col justify-center items-center md:w-1/2 bg-gray-800 md:bg-opacity-50 ">
+        <div className="flex flex-col justify-center items-center md:w-1/2 bg-gray-800 md:bg-opacity-50">
           <div className="mb-4 text-lg font-semibold flex items-center">
             Talking Avatar
           </div>
-          <div className="relative flex-grow h-[70%] bg-gray-700 rounded-lg overflow-hidden">
+          <div className="relative w-[400px] h-[400px] bg-gray-700 rounded-lg overflow-hidden">
             <Image
-              src="/ava-img.png" // Path to your image in the public folder
+              src="/ava-img.png"
               alt="AI-Generated Avatar"
-              width={1000}
-              height={1000}
+              layout="fill"
+              objectFit="cover"
               className="rounded-lg"
             />
           </div>
