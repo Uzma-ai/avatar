@@ -9,7 +9,13 @@ const config: Config = {
   ],
   theme: {
   	extend: {
-  		colors: {
+		  colors: {
+			primarycolor: "#F3F3F3",
+			secondarycolor: "#5D8BE5",
+			inputbackground: "#E9EEF6",
+			lightgray: "#e1ecee",
+			mediumgray: "#D4D4D4",
+			whitecolor:"#fefefe",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
