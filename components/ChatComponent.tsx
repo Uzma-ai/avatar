@@ -1,7 +1,8 @@
-"use client"; 
+"use client";
 
 import React, { useState, useEffect } from "react";
 import { io, Socket } from "socket.io-client";
+import axios from "axios";
 
 interface Message {
   text: string;
@@ -10,27 +11,23 @@ interface Message {
 
 const ChatComponent: React.FC = () => {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [isConnected, setIsConnected] = useState<boolean>(false); // State to track connection status
+  const [isConnected, setIsConnected] = useState<boolean>(false);
   const [userInput, setUserInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    // Create a WebSocket connection
     const socketConnection: Socket = io("http://localhost:5000");
 
-    // Listen for 'connect' event
     socketConnection.on("connect", () => {
       console.log("WebSocket connection established");
       setIsConnected(true);
     });
 
-    // Listen for 'disconnect' event
     socketConnection.on("disconnect", () => {
       console.log("WebSocket connection disconnected");
       setIsConnected(false);
     });
 
-    // Listen for responses from the server
     socketConnection.on("response", (data: { response: string }) => {
       setMessages((prevMessages) => [
         ...prevMessages,
@@ -40,15 +37,33 @@ const ChatComponent: React.FC = () => {
 
     setSocket(socketConnection);
 
-    // Cleanup the WebSocket connection when the component unmounts
     return () => {
       socketConnection.disconnect();
     };
   }, []);
 
-  const handleSendMessage = () => {
+  // Function to handle translation
+  const translateText = async (text: string, targetLang: string) => {
+    try {
+      const response = await axios.post("https://libretranslate.de/translate", {
+        q: text,
+        source: "auto", // Automatically detects the source language
+        target: targetLang,
+        format: "text",
+      });
+      return response.data.translatedText;
+    } catch (error) {
+      console.error("Error translating text:", error);
+      return text; // Return original text if translation fails
+    }
+  };
+
+  const handleSendMessage = async () => {
     if (socket && userInput.trim()) {
-      socket.emit("user_input", { input: userInput });
+      const translatedInput = await translateText(userInput, "en"); // Translate to English
+
+      socket.emit("user_input", { input: translatedInput });
+
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: userInput, sender: "user" },

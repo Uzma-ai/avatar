@@ -1,5 +1,5 @@
-import AIAssistant from '../components/Chatbot'
+import ChatAssistant from "@/components/Chatavatar"
 
 export default function Home() {
-  return <AIAssistant />
+  return <ChatAssistant />
 }

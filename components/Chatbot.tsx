@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { PlusCircle, Send, Sparkles, Mic, Square } from "lucide-react";
+import { PlusCircle, Send, Sparkles, Mic, Square, Menu, X } from "lucide-react";
 import Image from "next/image";
 
 type Message = {
@@ -197,13 +197,21 @@ export default function AIAssistant() {
     }
   };
 
+   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
   return (
     <div className="relative flex h-screen overflow-hidden bg-gray-900 text-white">
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
 
       {/* Sidebar */}
-      <div className="relative z-10 w-64 bg-gray-800 bg-opacity-50 p-4 hidden md:block ">
-        <Button onClick={startNewConversation} className="w-full mb-4">
+      <div
+        className={`fixed lg:relative z-20 w-64 h-full bg-black bg-opacity-60 lg:bg-gray-800 lg:bg-opacity-50 p-4 transform transition-transform lg:translate-x-0 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <Button onClick={startNewConversation} className="w-full mb-4 mt-14 lg:mt-0">
           <PlusCircle className="mr-2 h-4 w-4" /> New Chat
         </Button>
         <ScrollArea className="h-[calc(100vh-120px)]">
@@ -221,10 +229,22 @@ export default function AIAssistant() {
         </ScrollArea>
       </div>
 
+      {/* Menu Icon for Mobile */}
+      <button
+        className="fixed top-4 left-4 z-30 lg:hidden bg-gray-800 p-2 rounded-full"
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? (
+          <X className="h-6 w-6 text-white" />
+        ) : (
+          <Menu className="h-6 w-6 text-white" />
+        )}
+      </button>
+
       {/* Main Chat Area */}
-      <div className="flex w-full">
-        <div className="relative z-10 flex-1 flex flex-col ">
-          <ScrollArea className="flex-1 p-4 hidden md:block">
+      <div className="flex w-full flex-col-reverse lg:flex-row">
+        <div className="relative z-10 h-3/5 lg:h-full lg:flex-1 flex flex-col ">
+          <ScrollArea className="flex-1 p-4 md:block">
             {conversations
               .find((conv) => conv.id === currentConversation)
               ?.messages.map((message, index) => (
@@ -256,7 +276,7 @@ export default function AIAssistant() {
             <div ref={messagesEndRef} />
           </ScrollArea>
 
-          <div className="p-4 bg-gray-800 bg-opacity-50 hidden md:block">
+          <div className="p-4 bg-gray-800 bg-opacity-50  md:block">
             <form onSubmit={handleSubmit} className="flex space-x-2">
               <Input
                 value={input}
@@ -292,11 +312,11 @@ export default function AIAssistant() {
         </div>
 
         {/* Video Section */}
-        <div className="flex flex-col justify-center items-center md:w-1/2 bg-gray-800 md:bg-opacity-50">
+        <div className="flex flex-col justify-center items-center h-2/5 lg:h-full lg:w-1/2 bg-gray-800 md:bg-opacity-50">
           <div className="mb-4 text-lg font-semibold flex items-center">
             Talking Avatar
           </div>
-          <div className="relative w-[400px] h-[400px] bg-gray-700 rounded-lg overflow-hidden">
+          <div className="relative w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-gray-700 rounded-lg overflow-hidden">
             <Image
               src="/ava-img.png"
               alt="AI-Generated Avatar"
@@ -305,7 +325,7 @@ export default function AIAssistant() {
               className="rounded-lg"
             />
           </div>
-          <p className="mt-2 text-sm text-gray-300">
+          <p className="mt-2 text-sm text-gray-300 hidden md:block">
             This image represents an AI-generated visual response to your
             queries.
           </p>
