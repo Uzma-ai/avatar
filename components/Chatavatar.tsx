@@ -15,9 +15,6 @@ import {
   User,
   ChevronDown,
   Power,
-  FileType2,
-  Volume2 ,
-  MonitorCog,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -26,24 +23,21 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu";
 
 export default function ChatAssistant() {
 
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
   const [checked, setChecked] = useState(true);
+  const [voicechecked, setVoiceChecked] = useState(false);
 
 
   return (
-    <div className="relative flex h-screen overflow-hidden md:bg-primarycolor text-black">
+    <div className="relative flex h-screen overflow-hidden lg:bg-primarycolor text-black">
       <div className="flex items-center justify-center w-full h-full">
         {/* Avatar Section */}
         {checked ? (
-          <div className="hidden md:block relative w-3/12 h-full transition-all duration-300">
+          <div className="hidden lg:block relative w-3/12 h-full transition-all duration-300">
             <Image
               src="/avatar.png"
               alt="Avatar Image"
@@ -55,12 +49,12 @@ export default function ChatAssistant() {
         {/* Chat Section */}
         <div
           className={`${
-            checked ? "md:w-9/12" : "w-full"
+            checked ? "lg:w-9/12" : "w-full"
           } h-screen flex flex-col justify-between transition-all duration-300 relative`}
         >
           {/* Mobile Avatar Section */}
           {checked ? (
-            <div className="absolute inset-0 block md:hidden -z-10">
+            <div className="absolute inset-0 block lg:hidden -z-10">
               <Image
                 src="/avatar.png"
                 alt="Avatar Background"
@@ -72,7 +66,7 @@ export default function ChatAssistant() {
 
           {/* Navbar section */}
           <div className="w-full h-20 flex items-center justify-between p-2 md:p-6">
-            <div>
+            <div className="flex items-center gap-4">
               <DropdownMenu
                 open={isAvatarDropdownOpen}
                 onOpenChange={setIsAvatarDropdoenOpen}
@@ -140,28 +134,6 @@ export default function ChatAssistant() {
                     <span>Reset Password</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuSub>
-                    <DropdownMenuSubTrigger>
-                      <MonitorCog className="mr-2 h-4 w-4 text-secondarycolor" />
-                      Mode
-                    </DropdownMenuSubTrigger>
-                    <DropdownMenuPortal>
-                      <DropdownMenuSubContent>
-                        <DropdownMenuItem>
-                          {" "}
-                          <FileType2 className="mr-2 h-4 w-4 text-secondarycolor" />
-                          Text Mode
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                          {" "}
-                          <Volume2 className="mr-2 h-4 w-4 text-secondarycolor" />
-                          Audio Mode
-                        </DropdownMenuItem>
-                      </DropdownMenuSubContent>
-                    </DropdownMenuPortal>
-                  </DropdownMenuSub>
-                  <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <MessageSquare className="mr-2 h-4 w-4 text-secondarycolor" />
                     <span>Past Chats</span>
@@ -178,9 +150,46 @@ export default function ChatAssistant() {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+              <div className="flex flex-col items-center gap-1">
+                <h2
+                  className={`${
+                    checked ? "text-whitecolor lg:text-black" : "text-black"
+                  } text-md font-medium`}
+                >
+                  Voice Input
+                </h2>
+                <div className="flex items-center gap-2">
+                  <Label
+                    htmlFor="voice-mode"
+                    className="text-sm text-muted-foreground"
+                  >
+                    Text
+                  </Label>
+                  <Switch
+                    id="voice-mode"
+                    checked={voicechecked}
+                    onCheckedChange={setVoiceChecked}
+                    className="h-6 w-10 data-[state=checked]:bg-secondarycolor"
+                  >
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full shadow-sm transition-transform duration-100 translate-x-0.5 data-[state=checked]:translate-x-6">
+                      <Power className="h-3 w-3 text-black data-[state=checked]:text-[#5182E3]]" />
+                    </div>
+                  </Switch>
+                  <Label
+                    htmlFor="voice-mode"
+                    className="text-sm text-muted-foreground"
+                  >
+                    Voice
+                  </Label>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <h2 className="text-md font-medium text-whitecolor md:text-black">
+            <div className="flex flex-col items-center gap-1">
+              <h2
+                className={`${
+                  checked ? "text-whitecolor lg:text-black" : "text-black"
+                } text-md font-medium`}
+              >
                 Avatar
               </h2>
               <div className="flex items-center gap-2">
@@ -211,9 +220,9 @@ export default function ChatAssistant() {
           </div>
 
           {/* Chat Area */}
-          <div className="w-full h-1/2 md:h-[calc(100vh-80px)] px-2 md:px-6">
+          <div className="w-full h-1/2 lg:h-[calc(100vh-80px)] px-2 lg:px-6">
             <div className="relative z-10 h-full flex flex-col">
-              <ChatComponent />
+              <ChatComponent voicechecked={voicechecked} />
             </div>
           </div>
         </div>

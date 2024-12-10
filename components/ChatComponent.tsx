@@ -1,16 +1,11 @@
 "use client";
 
-import React, { useState,useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { io, Socket } from "socket.io-client";
-import axios from "axios";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import {
-  SendHorizontal,
-  Mic,
-  Square,
-} from "lucide-react";
+import { SendHorizontal, Mic, Square } from "lucide-react";
 
 interface Message {
   text: string;
@@ -18,35 +13,25 @@ interface Message {
   audioURL?: string;
 }
 
-type Conversation = {
-  id: number;
-  title: string;
-  messages: Message[];
-};
+interface ChatComponentProps {
+  voicechecked: boolean;
+}
 
-const ChatComponent: React.FC = () => {
+const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [, setIsConnected] = useState<boolean>(false);
   const [userInput, setUserInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
-  const [conversations, setConversations] = useState<Conversation[]>([
-      {
-        id: 1,
-        title: "Welcome Chat",
-        messages: [
-          { sender: "bot", text: "Hello! How can I assist you today?" },
-        ],
-      },
-    ]);
-    const [currentConversation] = useState(1);
-  const [input, setInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
-  const [audioURL, setAudioURL] = useState<string>("");
+  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
+    null
+  );
+  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
+  const [pendingAudio, setPendingAudio] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const mediaRecorder = useRef<MediaRecorder | null>(null);
 
   useEffect(() => {
-    const socketConnection: Socket = io("http://localhost:5000");
+    const socketConnection: Socket = io("http://localhost:8000");
 
     socketConnection.on("connect", () => {
       console.log("WebSocket connection established");
@@ -59,10 +44,12 @@ const ChatComponent: React.FC = () => {
     });
 
     socketConnection.on("response", (data: { response: string }) => {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: data.response, sender: "bot" },
-      ]);
+      const botMessage: Message = {
+        text: data.response,
+        sender: "bot",
+      };
+
+      setMessages((prevMessages) => [...prevMessages, botMessage]);
     });
 
     setSocket(socketConnection);
@@ -72,118 +59,102 @@ const ChatComponent: React.FC = () => {
     };
   }, []);
 
-  // Function to handle translation
-  const translateText = async (text: string, targetLang: string) => {
-    try {
-      const response = await axios.post("https://libretranslate.de/translate", {
-        q: text,
-        source: "auto", // Automatically detects the source language
-        target: targetLang,
-        format: "text",
-      });
-      return response.data.translatedText;
-    } catch (error) {
-      console.error("Error translating text:", error);
-      return text; // Return original text if translation fails
-    }
-  };
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-  const handleSendMessage = async () => {
-    if (socket && userInput.trim()) {
-      const translatedInput = await translateText(userInput, "en"); // Translate to English
-
-      socket.emit("user_input", { input: translatedInput });
-
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { text: userInput, sender: "user" },
-      ]);
-      setUserInput("");
-    }
-  };
-
-    useEffect(() => {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }, [conversations]);
-
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      if (input.trim() || audioURL) {
-        const newMessage: Message = audioURL
-          ? { sender: "user", text: "Audio message", audioURL }
-          : { sender: "user", text: input };
-
-        const updatedConversations = conversations.map((conv) => {
-          if (conv.id === currentConversation) {
-            return {
-              ...conv,
-              messages: [...conv.messages, newMessage],
-            };
-          }
-          return conv;
-        });
-        setConversations(updatedConversations);
-        setInput("");
-        setAudioURL("");
-
-        // Simulate AI response
-        setTimeout(() => {
-          const aiResponse: Message = {
-            sender: "bot",
-            text: "I received your message. How can I help further?",
-          };
-          const updatedWithAiResponse = updatedConversations.map((conv) => {
-            if (conv.id === currentConversation) {
-              return {
-                ...conv,
-                messages: [...conv.messages, aiResponse],
-              };
-            }
-            return conv;
-          });
-          setConversations(updatedWithAiResponse);
-        }, 1000);
-      }
-  };
-  
   const startRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-      });
-      mediaRecorder.current = new MediaRecorder(stream);
-      mediaRecorder.current.start();
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const recorder = new MediaRecorder(stream);
 
-      const audioChunks: BlobPart[] = [];
-      mediaRecorder.current.addEventListener(
-        "dataavailable",
-        (event: BlobEvent) => {
-          audioChunks.push(event.data);
-        }
-      );
+    recorder.ondataavailable = (event) => {
+      setAudioChunks((prev) => [...prev, event.data]);
+    };
 
-      mediaRecorder.current.addEventListener("stop", () => {
-        const audioBlob = new Blob(audioChunks, { type: "audio/wav" });
-        const audioUrl = URL.createObjectURL(audioBlob);
-        setAudioURL(audioUrl);
-      });
+    recorder.onstop = () => {
+      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
 
-      setIsRecording(true);
-    } catch (error) {
-      console.error("Error accessing microphone:", error);
-    }
+      // Ensure the Blob is valid and playable
+      console.log("Audio Blob size:", audioBlob.size);
+      console.log("Audio Blob type:", audioBlob.type);
+
+      // Create a URL for playback
+      const audioURL = URL.createObjectURL(audioBlob);
+
+      // Save the recorded audio URL for preview
+      setPendingAudio(audioURL);
+
+      // Clear the chunks to prepare for the next recording
+      setAudioChunks([]);
+    };
+
+    recorder.start();
+    setMediaRecorder(recorder);
+    setIsRecording(true);
   };
 
   const stopRecording = () => {
-    if (mediaRecorder.current && mediaRecorder.current.state !== "inactive") {
-      mediaRecorder.current.stop();
-      setIsRecording(false);
+    if (mediaRecorder) {
+      mediaRecorder.stop();
+    }
+    setIsRecording(false);
+  };
+
+  const sendAudioToBackend = async (audioBlob: Blob) => {
+    const formData = new FormData();
+    formData.append("audio", audioBlob);
+
+    try {
+      const response = await fetch("http://localhost:8000/process-audio", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to process audio");
+      }
+
+      console.log("Audio successfully sent to the backend");
+    } catch (error) {
+      console.error("Error sending audio to backend:", error);
+    }
+  };
+
+  const handleSendAudio = () => {
+    if (pendingAudio) {
+      // Add the recorded audio to the chat
+      const newMessage: Message = {
+        text: "",
+        sender: "user",
+        audioURL: pendingAudio,
+      };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+
+      // Convert audio URL to a Blob for sending to the backend
+      fetch(pendingAudio)
+        .then((res) => res.blob())
+        .then((audioBlob) => sendAudioToBackend(audioBlob))
+        .catch((error) =>
+          console.error("Error converting audio URL to Blob:", error)
+        );
+
+      setPendingAudio(null); // Clear the pending audio
+    }
+  };
+
+  const handleSendMessage = () => {
+    if (socket && userInput.trim()) {
+      socket.emit("user_input", { input: userInput });
+
+      const newMessage: Message = { text: userInput, sender: "user" };
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+      setUserInput("");
     }
   };
 
   return (
     <>
-      <ScrollArea className="flex-1 p-4 md:block  md:border-x-2 md:border-mediumgray">
+      <ScrollArea className="flex-1 p-4 md:block md:border-x-2 md:border-mediumgray">
         <div>
           {messages.map((msg, index) => (
             <div
@@ -198,7 +169,8 @@ const ChatComponent: React.FC = () => {
                 } max-w-[80%]`}
               >
                 {msg.audioURL ? (
-                  <audio controls src={msg.audioURL} className="max-w-full">
+                  <audio controls className="w-full">
+                    <source src={msg.audioURL} type="audio/wav" />
                     Your browser does not support the audio element.
                   </audio>
                 ) : (
@@ -207,11 +179,38 @@ const ChatComponent: React.FC = () => {
               </div>
             </div>
           ))}
+          {pendingAudio && (
+            <div className="mb-4 text-right">
+              <div className="inline-block p-3 rounded-lg bg-lightgray max-w-[80%]">
+                <audio
+                  controls
+                  className="w-full"
+                  onError={(e) => {
+                    const nativeEvent = e.nativeEvent;
+                    console.error("Audio playback error:", nativeEvent);
+                  }}
+                >
+                  <source src={pendingAudio} type="audio/webm" />
+                  Your browser does not support the audio element.
+                </audio>
+                <Button
+                  onClick={handleSendAudio}
+                  className="mt-2 bg-secondarycolor w-full"
+                >
+                  Send Audio
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
+        <div ref={messagesEndRef} />
       </ScrollArea>
       <div className="p-4 md:block">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSendMessage();
+          }}
           className="flex space-x-2 items-center md:gap-5 md:pr-10"
         >
           <Input
@@ -221,23 +220,26 @@ const ChatComponent: React.FC = () => {
             placeholder="Type your message..."
             className="flex-1 bg-inputbackground text-black h-10 md:h-14 rounded-full border-none px-6 focus:!border-none focus:!ring-0 focus:!outline-none"
           />
-          {!isRecording ? (
-            <Button
-              className="bg-secondarycolor rounded-full w-10 h-10"
-              type="button"
-              onClick={startRecording}
-            >
-              <Mic className="h-4 w-4" />
-            </Button>
-          ) : (
-            <Button
-              className="bg-secondarycolor rounded-full w-10 h-10"
-              type="button"
-              onClick={stopRecording}
-              variant="destructive"
-            >
-              <Square className="h-4 w-4" />
-            </Button>
+          {voicechecked && (
+            <div>
+              {!isRecording ? (
+                <Button
+                  className="bg-secondarycolor rounded-full w-10 h-10"
+                  type="button"
+                  onClick={startRecording}
+                >
+                  <Mic className="h-4 w-4" />
+                </Button>
+              ) : (
+                <Button
+                  className="bg-secondarycolor rounded-full w-10 h-10"
+                  type="button"
+                  onClick={stopRecording}
+                >
+                  <Square className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           )}
           <Button
             onClick={handleSendMessage}
@@ -247,13 +249,6 @@ const ChatComponent: React.FC = () => {
             <SendHorizontal className="h-4 w-4" />
           </Button>
         </form>
-        {audioURL && (
-          <div className="mt-2">
-            <audio controls src={audioURL} className="max-w-full">
-              Your browser does not support the audio element.
-            </audio>
-          </div>
-        )}
       </div>
     </>
   );
