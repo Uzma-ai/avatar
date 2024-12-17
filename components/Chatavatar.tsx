@@ -7,11 +7,11 @@ import { Label } from "@/components/ui/label";
 import ChatComponent from "@/components/ChatComponent";
 import {
   CircleUserRound,
-  History,
-  Lock,
+  ShoppingBag,
+  Users,
   MessageSquare,
-  Shield,
-  Upload,
+  ShoppingCart,
+  MessageCircleQuestion,
   User,
   ChevronDown,
   Power,
@@ -34,10 +34,10 @@ export default function ChatAssistant() {
 
   return (
     <div className="relative flex h-screen overflow-hidden lg:bg-primarycolor text-black">
-      <div className="flex items-center justify-center w-full h-full">
+      <div className="md:flex md:items-center md:justify-center w-full h-full">
         {/* Avatar Section */}
         {checked ? (
-          <div className="hidden lg:block relative w-3/12 h-full transition-all duration-300">
+          <div className="hidden lg:block relative w-1/3 h-full transition-all duration-300">
             <Image
               src="/avatar.png"
               alt="Avatar Image"
@@ -49,7 +49,7 @@ export default function ChatAssistant() {
         {/* Chat Section */}
         <div
           className={`${
-            checked ? "lg:w-9/12" : "w-full"
+            checked ? "lg:w-2/3 md:w-1/2" : "w-full"
           } h-screen flex flex-col justify-between transition-all duration-300 relative`}
         >
           {/* Mobile Avatar Section */}
@@ -111,7 +111,9 @@ export default function ChatAssistant() {
                       />
                       <AvatarFallback>H</AvatarFallback>
                     </Avatar>
-                    <span className="text-sm font-medium">Hannah</span>
+                    <span className="text-sm text-secondarycolor font-medium">
+                      Hannah
+                    </span>
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
@@ -120,33 +122,33 @@ export default function ChatAssistant() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <Shield className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Admin</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
                     <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
                     <span>Avatar</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <Lock className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Reset Password</span>
+                    <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Subscription Plan</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Users className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Public Avatar</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <MessageSquare className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Past Chats</span>
+                    <span>Content Settings</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <History className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Reset History</span>
+                    <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Shopping Preference</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <Upload className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Uploads</span>
+                    <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Contact Support</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -172,7 +174,7 @@ export default function ChatAssistant() {
                     className="h-6 w-10 data-[state=checked]:bg-secondarycolor"
                   >
                     <div className="flex h-5 w-5 items-center justify-center rounded-full shadow-sm transition-transform duration-100 translate-x-0.5 data-[state=checked]:translate-x-6">
-                      <Power className="h-3 w-3 text-black data-[state=checked]:text-[#5182E3]]" />
+                      <Power className="h-3 w-3 data-[state=checked]:text-secondarycolor" />
                     </div>
                   </Switch>
                   <Label
@@ -206,7 +208,7 @@ export default function ChatAssistant() {
                   className="h-6 w-10 data-[state=checked]:bg-secondarycolor"
                 >
                   <div className="flex h-5 w-5 items-center justify-center rounded-full shadow-sm transition-transform duration-100 translate-x-0.5 data-[state=checked]:translate-x-6">
-                    <Power className="h-3 w-3 text-black data-[state=checked]:text-[#5182E3]]" />
+                    <Power className="h-3 w-3 text-secondarycolor" />
                   </div>
                 </Switch>
                 <Label

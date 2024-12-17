@@ -217,7 +217,7 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
             type="text"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            placeholder="Type your message..."
+            placeholder="Ask Avatar..."
             className="flex-1 bg-inputbackground text-black h-10 md:h-14 rounded-full border-none px-6 focus:!border-none focus:!ring-0 focus:!outline-none"
           />
           {voicechecked && (
