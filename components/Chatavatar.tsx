@@ -9,7 +9,7 @@ import {
   CircleUserRound,
   ShoppingBag,
   Users,
-  MessageSquare,
+  Settings,
   ShoppingCart,
   MessageCircleQuestion,
   User,
@@ -122,13 +122,13 @@ export default function ChatAssistant() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Avatar</span>
+                    <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Subscription Plan</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Subscription Plan</span>
+                    <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>My Avatar</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
@@ -137,18 +137,18 @@ export default function ChatAssistant() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <MessageSquare className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Content Settings</span>
+                    <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Shopping</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Shopping Preference</span>
+                    <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Settings</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Contact Support</span>
+                    <span>Support</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
