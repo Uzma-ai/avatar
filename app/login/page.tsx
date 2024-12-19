@@ -4,10 +4,10 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { useState } from "react";
+import { useState} from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon} from "lucide-react";
 import {
   Form,
   FormControl,
@@ -15,6 +15,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+
 
 const formSchema = z.object({
   emailOrUsername: z
@@ -30,6 +31,7 @@ const formSchema = z.object({
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
+  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -45,7 +47,7 @@ export default function Login() {
 
   return (
     <>
-      <div className="relative flex h-screen overflow-hidden lg:bg-primarycolor text-black">
+      <div className="relative flex h-screen overflow-hidden text-black">
         <div className="flex items-center justify-center w-full h-full">
           <div className="hidden lg:block relative w-1/3 h-full transition-all duration-300">
             <Image
@@ -57,13 +59,21 @@ export default function Login() {
           </div>
 
           {/* Login Section */}
-          <div className="lg:w-2/3 w-full h-screen flex items-center justify-center transition-all duration-300 bg-primarycolor">
-            <div className="w-full px-4 md:w-3/4 h-4/6 space-y-8 xl:px-12 ">
+          <div className="lg:w-2/3 relative w-full h-screen flex items-center justify-center transition-all duration-300  bg-black/50 sm:bg-primarycolor">
+            <div className="absolute inset-0 block lg:hidden -z-10">
+              <Image
+                src="/avatar.png"
+                alt="Avatar Background"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="w-full px-4 md:w-3/4 space-y-8 xl:px-12 ">
               <div className="text-center">
-                <h1 className="text-secondarycolor text-2xl md:text-4xl font-medium tracking-wide">
-                  Welcome to Avatar
+                <h1 className="text-whitecolor sm:text-black text-2xl md:text-4xl font-medium tracking-wide">
+                  Welcome to <span className="text-secondarycolor">Avatar</span>
                 </h1>
-                <p className="text-xs sm:text-base mt-2">
+                <p className="text-xs sm:text-base text-whitecolor sm:text-black mt-2">
                   Your personalized AI companion is ready to assist you. Log in
                   to begin the conversation!
                 </p>
@@ -82,13 +92,13 @@ export default function Login() {
                         <FormItem>
                           <FormControl>
                             <fieldset className="border border-gray-300 py-0.5 px-1.5 rounded-md">
-                              <legend className="text-sm font-medium">
+                              <legend className="text-sm text-whitecolor sm:text-black font-medium">
                                 Email or Username
                               </legend>
                               <Input
                                 type="email"
                                 placeholder="Please enter email address or username"
-                                className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none"
+                                className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
                                 {...field}
                               />
                             </fieldset>
@@ -106,29 +116,26 @@ export default function Login() {
                         <FormItem>
                           <FormControl>
                             <fieldset className="border border-gray-300 py-0.5 px-1.5 rounded-md">
-                              <legend className="text-sm font-medium">
+                              <legend className="text-sm font-medium text-whitecolor sm:text-black">
                                 Password
                               </legend>
                               <div className="relative">
                                 <Input
                                   type={showPassword ? "text" : "password"}
                                   placeholder="Please enter password"
-                                  className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none"
+                                  className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
                                   {...field}
                                 />
-                                <Button
-                                  type="button"
-                                  variant="ghost"
-                                  size="icon"
-                                  className="absolute right-2 top-1/2 -translate-y-1/2 h-9 w-9"
+                                <span
+                                  className="absolute right-2 top-1/2 -translate-y-1/2"
                                   onClick={() => setShowPassword(!showPassword)}
                                 >
                                   {showPassword ? (
-                                    <EyeOffIcon className="h-4 w-4" />
+                                    <EyeOffIcon className="h-4 w-4 text-whitecolor sm:text-black" />
                                   ) : (
-                                    <EyeIcon className="h-4 w-4" />
+                                    <EyeIcon className="h-4 w-4 text-whitecolor sm:text-black" />
                                   )}
-                                </Button>
+                                </span>
                               </div>
                             </fieldset>
                           </FormControl>
@@ -147,7 +154,7 @@ export default function Login() {
                 </Form>
 
                 <div className="text-center">
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-whitecolor sm:text-gray-600">
                     Don&apos;t have an account?{" "}
                     <a href="#" className="text-secondarycolor hover:underline">
                       Sign up
@@ -188,6 +195,14 @@ export default function Login() {
                       className="w-7 h-8 mr-2"
                     />
                     Continue With Apple
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full py-6"
+                    onClick={() => console.log("Email login")}
+                  >
+                    <img src="/mail.png" alt="Mail" className="w-8 h-8 mr-2" />
+                    Continue With Company Email
                   </Button>
                 </div>
               </div>
