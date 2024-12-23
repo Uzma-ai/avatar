@@ -24,6 +24,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 export default function ChatAssistant() {
 
@@ -39,7 +40,7 @@ export default function ChatAssistant() {
         {checked ? (
           <div className="hidden lg:block relative w-1/3 h-full transition-all duration-300">
             <Image
-              src="/avatar.png"
+              src="/background.jpeg"
               alt="Avatar Image"
               fill
               className="object-cover"
@@ -56,7 +57,7 @@ export default function ChatAssistant() {
           {checked ? (
             <div className="absolute inset-0 block lg:hidden -z-10">
               <Image
-                src="/avatar.png"
+                src="/background.jpeg"
                 alt="Avatar Background"
                 fill
                 className="object-cover"
@@ -97,7 +98,7 @@ export default function ChatAssistant() {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="w-[200px]"
+                  className="w-[200px] bg-lightWhite rounded-2xl"
                   align="start"
                   alignOffset={-8}
                   sideOffset={5}
@@ -123,7 +124,7 @@ export default function ChatAssistant() {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Subscription Plan</span>
+                    <span>Subscription</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
@@ -131,10 +132,12 @@ export default function ChatAssistant() {
                     <span>My Avatar</span>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <Users className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Public Avatar</span>
-                  </DropdownMenuItem>
+                  <Link href="/avatars">
+                    <DropdownMenuItem>
+                      <Users className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>Public Avatar</span>
+                    </DropdownMenuItem>
+                  </Link>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
