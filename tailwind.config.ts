@@ -13,9 +13,12 @@ const config: Config = {
 			primarycolor: "#F3F3F3",
 			secondarycolor: "#5D8BE5",
 			inputbackground: "#E9EEF6",
+			mediumWhite: "#FFFFFF4D",
+			lightWhite:"#ffffff92",
 			lightgray: "#e1ecee",
 			mediumgray: "#D4D4D4",
-			whitecolor:"#fefefe",
+			whitecolor: "#fefefe",
+			iconBackground:"#E9EEF680",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

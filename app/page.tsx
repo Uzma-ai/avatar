@@ -1,308 +1,214 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
 import Image from "next/image";
-import { CameraPreview } from "@/components/camera-preview";
-import { VideoRecorder } from "@/components/video-recorder";
-import Link from "next/link";
-import { ChevronLeft, Camera, RotateCcw, Mic } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import Link from "next/link";
 
-export default function Home() {
-  const [step, setStep] = useState<
-    "intro" | "camera" | "video" | "voice" | "manual-login"
-  >("intro");
-  // const [, setCapturedImage] = useState<string | null>(null);
-  const [, setCapturedVideo] = useState<string | null>(null);
-  // const [, setIsCapturing] = useState(false);
-  // const videoRef = useRef<HTMLVideoElement>(null);
+const formSchema = z.object({
+  emailOrUsername: z
+    .string()
+    .min(1, "Email or username is required")
+    .max(100, "Email or username is too long"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(100, "Password is too long"),
+});
 
-  const transitionVariants = {
-    initial: { opacity: 0, y: 50 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -50 },
-  };
+export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
 
-  // const capturePhoto = () => {
-  //   setIsCapturing(true);
-  //   setTimeout(() => {
-  //     if (videoRef.current) {
-  //       const canvas = document.createElement("canvas");
-  //       canvas.width = videoRef.current.videoWidth;
-  //       canvas.height = videoRef.current.videoHeight;
-  //       const ctx = canvas.getContext("2d");
-  //       if (ctx) {
-  //         ctx.drawImage(videoRef.current, 0, 0);
-  //         const imageData = canvas.toDataURL("image/jpeg");
-  //         handlePhotoCapture(imageData);
-  //       }
-  //     }
-  //     setIsCapturing(false);
-  //   }, 3000);
-  // };
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      emailOrUsername: "",
+      password: "",
+    },
+  });
 
-  // const handlePhotoCapture = (image: string) => {
-  //   setCapturedImage(image);
-  //   setStep("video");
-  // };
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    // Handle form submission here
+    console.log(values);
+  }
 
   return (
     <>
-      <div className="w-full h-screen overflow-hidden bg-[url('/background.jpeg')] bg-center bg-cover">
-        <div className="flex items-center justify-center h-full w-full bg-black/50">
-          
-          {/* Intro Popup */}
-          {step === "intro" && (
-            <motion.div
-              variants={transitionVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              className="flex items-center h-full w-full justify-center"
-            >
-              <div className="w-[90%] sm:w-[400px] md:w-[500px] rounded-lg bg-white/30 p-4 sm:p-6 md:p-8 backdrop-blur-sm">
-                <div className="flex flex-col items-center gap-6">
-                  {/* Avatar Logo */}
-                  <div className="text-center">
-                    <Image
-                      src="/avatar-logo.png"
-                      alt="Logo"
-                      width={150}
-                      height={150}
-                    />
-                  </div>
+      <div className="relative flex h-screen overflow-hidden text-black">
+        <div className="flex items-center justify-center w-full h-full">
+          <div className="hidden lg:block relative w-1/3 h-full transition-all duration-300">
+            <Image
+              src="/avatar.png"
+              alt="Avatar Image"
+              fill
+              className="object-cover"
+            />
+          </div>
 
-                  {/* Content */}
-                  <div className="text-center">
-                    <h1 className="mb-1 text-lg font-semibold text-whitecolor">
-                      Let&apos;s get started
-                    </h1>
-                    <p className="mb-5 text-sm font-light text-whitecolor">
-                      Follow these steps to create your avatar.
-                    </p>
-
-                    {/* Steps */}
-                    <div className="space-y-2 text-sm text-white">
-                      <div className="flex items-center justify-center gap-2">
-                        <span className="px-2 py-0.5">1.</span>
-                        Take a Picture.
-                      </div>
-                      <div className="flex items-center justify-center gap-2">
-                        <span className="px-2 py-0.5">2.</span>
-                        Record a Short Video.
-                      </div>
-                      <div className="flex items-center justify-center gap-2">
-                        <span className="px-2 py-0.5">3.</span>
-                        Provide a Voice Sample.
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Button */}
-                  <button
-                    onClick={() => setStep("camera")}
-                    className="w-full rounded-sm bg-secondarycolor px-4 py-2.5 text-sm font-normal text-whitecolor transition-color"
+          {/* Login Section */}
+          <div className="lg:w-2/3 relative w-full h-screen flex items-center justify-center transition-all duration-300  bg-black/50 sm:bg-primarycolor">
+            <div className="absolute inset-0 block lg:hidden -z-10">
+              <Image
+                src="/avatar.png"
+                alt="Avatar Background"
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="w-full px-4 md:w-3/4 space-y-8 xl:px-12 ">
+              <div className="text-center">
+                <h1 className="text-whitecolor sm:text-black text-2xl md:text-4xl font-medium tracking-wide">
+                  Welcome to <span className="text-secondarycolor">Avatar</span>
+                </h1>
+                <p className="text-xs sm:text-base text-whitecolor sm:text-black mt-2">
+                  Your personalized AI companion is ready to assist you. Log in
+                  to begin the conversation!
+                </p>
+              </div>
+              <div className="px-2 xl:px-12 flex flex-col gap-5">
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-4"
                   >
-                    Get Started
-                  </button>
+                    {/* Email or Username Field */}
+                    <FormField
+                      control={form.control}
+                      name="emailOrUsername"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <fieldset className="border border-gray-300 py-0.5 px-1.5 rounded-md">
+                              <legend className="text-sm text-whitecolor sm:text-black font-medium">
+                                Email or Username
+                              </legend>
+                              <Input
+                                type="email"
+                                placeholder="Please enter email address or username"
+                                className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
+                                {...field}
+                              />
+                            </fieldset>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    {/* Password Field */}
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <fieldset className="border border-gray-300 py-0.5 px-1.5 rounded-md">
+                              <legend className="text-sm font-medium text-whitecolor sm:text-black">
+                                Password
+                              </legend>
+                              <div className="relative">
+                                <Input
+                                  type={showPassword ? "text" : "password"}
+                                  placeholder="Please enter password"
+                                  className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
+                                  {...field}
+                                />
+                                <span
+                                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                                  onClick={() => setShowPassword(!showPassword)}
+                                >
+                                  {showPassword ? (
+                                    <EyeOffIcon className="h-4 w-4 text-whitecolor sm:text-black" />
+                                  ) : (
+                                    <EyeIcon className="h-4 w-4 text-whitecolor sm:text-black" />
+                                  )}
+                                </span>
+                              </div>
+                            </fieldset>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <Button
+                      type="submit"
+                      className="w-full bg-secondarycolor hover:bg-secondarycolor py-6"
+                    >
+                      <Link href="/chat" className="w-full">Login</Link>
+                    </Button>
+                  </form>
+                </Form>
+
+                <div className="text-center">
+                  <p className="text-sm text-whitecolor sm:text-gray-600">
+                    Don&apos;t have an account?{" "}
+                    <Link
+                      className="text-secondarycolor hover:underline"
+                      href="/signup"
+                    >
+                      Sign up
+                    </Link>
+                  </p>
+                </div>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-secondarycolor" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="bg-white px-2 text-gray-500">or</span>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <Button
+                    variant="outline"
+                    className="w-full py-6"
+                    onClick={() => console.log("Google login")}
+                  >
+                    <img
+                      src="/google.png"
+                      alt="Google"
+                      className="w-8 h-8 mr-2"
+                    />
+                    Continue With Google
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full py-6"
+                    onClick={() => console.log("Apple login")}
+                  >
+                    <img
+                      src="/apple.png"
+                      alt="Apple"
+                      className="w-7 h-8 mr-2"
+                    />
+                    Continue With Apple
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="w-full py-6"
+                    onClick={() => console.log("Email login")}
+                  >
+                    <img src="/mail.png" alt="Mail" className="w-8 h-8 mr-2" />
+                    Continue With Company Email
+                  </Button>
                 </div>
               </div>
-            </motion.div>
-          )}
-
-          {/* Picture Popup */}
-          {step === "camera" && (
-            <div className="w-full h-full flex items-center justify-center">
-              <button
-                onClick={() => setStep("intro")}
-                className="absolute left-10 sm:left-20 top-10 text-whitecolor bg-secondarycolor rounded-full w-8 h-8 flex items-center justify-center hover:opacity-80"
-                aria-label="Go back"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <Link href="/login">
-                <button className="absolute right-10 sm:right-20 top-10 text-lg underline text-whitecolor hover:underline">
-                  Skip
-                </button>
-              </Link>
-
-              <motion.div
-                variants={transitionVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                className="w-[90%] sm:w-[400px] md:w-[500px] rounded-lg bg-white/30 p-4 sm:p-6 md:px-8 md:py-4 backdrop-blur-sm flex items-center justify-center"
-              >
-                <div className="text-center flex flex-col items-center justify-center">
-                  <h2 className="mb-1 text-xl font-semibold text-whitecolor">
-                    Capture Picture
-                  </h2>
-                  <p className="mb-6 text-sm text-whitecolor font-light">
-                    Take a live photo or upload a clear photo of you
-                  </p>
-                  <div className="aspect-[4/3] w-3/4 overflow-hidden rounded-lg bg-[#1F1F1F]">
-                    <CameraPreview />
-                  </div>
-                  <button className="mt-4 mb-2 text-sm text-whitecolor underline">
-                    <label
-                      htmlFor="upload"
-                      className="text-sm text-whitecolor underline cursor-pointer"
-                    >
-                      Upload from device
-                    </label>
-                    <Input id="upload" type="file" className="hidden" />
-                  </button>
-                  <div className="flex items-center gap-x-6 mt-3">
-                    <button className="w-32 sm:w-40 md:w-56 py-2 text-whitecolor text-xs sm:text-sm bg-transparent border rounded flex items-center justify-center gap-3">
-                      <RotateCcw size={20} />
-                      Retake
-                    </button>
-                    <button
-                      onClick={() => setStep("video")}
-                      className="w-32 sm:w-40 md:w-56 py-2 text-whitecolor text-xs sm:text-sm bg-secondarycolor rounded flex items-center justify-center gap-3"
-                    >
-                      <Camera size={20} />
-                      Take Picture
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
             </div>
-          )}
-
-          {/* Video Popup */}
-          {step === "video" && (
-            <div className="flex items-center justify-center">
-              <button
-                onClick={() => setStep("camera")}
-                className="absolute z-10 left-5 top-1 sm:left-20 sm:top-10 text-whitecolor bg-secondarycolor rounded-full w-8 h-8 flex items-center justify-center hover:opacity-80"
-                aria-label="Go back"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <Link href="/login">
-                <button className="absolute z-10 right-5 sm:right-20 top-1 sm:top-10 text-lg underline text-whitecolor hover:underline">
-                  Skip
-                </button>
-              </Link>
-              <motion.div
-                variants={transitionVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                className="w-[90%] sm:w-[400px] md:w-[500px] rounded-lg bg-white/30 p-4 sm:p-6 md:p-8 backdrop-blur-sm "
-              >
-                <div className="text-center flex flex-col items-center justify-center">
-                  <h2 className="mb-2 text-xl font-medium text-white">
-                    Record a Video
-                  </h2>
-                  <div className="aspect-[4/3] w-3/4 overflow-hidden rounded-lg bg-[#1F1F1F]">
-                    <VideoRecorder onRecordingComplete={setCapturedVideo} />
-                  </div>
-                  <div className="mt-3 space-y-2 text-left text-xs">
-                    <h3 className="text-center text-sm font-medium text-white">
-                      Instructions
-                    </h3>
-                    <ol className="list-decimal space-y-2 pl-5 text-whitecolor font-light">
-                      <li>
-                        Stand or sit in a well-lit environment. Ensure your
-                        entire face and upper body are clearly visible.
-                      </li>
-                      <li>
-                        Start by looking straight into the camera. Hold this
-                        position for 3-5 seconds.
-                      </li>
-                      <li>
-                        Slowly turn to your left or right until your back is
-                        facing the camera. Continue rotating until you&apos;re back
-                        to facing the camera again.
-                      </li>
-                      <li>
-                        Smile naturally and hold it for a moment. Briefly show a
-                        neutral (serious) expression.
-                      </li>
-                      <li>
-                        Say, &quot;Hi, I&apos;m [Your Name], and I&apos;m ready to create my
-                        avatar!&quot; Ensure you speak clearly and audibly.
-                      </li>
-                      <li>
-                        Move slowly and naturally to ensure we capture accurate
-                        details.
-                      </li>
-                    </ol>
-                  </div>
-                  <div className="mt-6 flex gap-4">
-                    <button
-                      onClick={() => setCapturedVideo(null)}
-                      className="w-36 sm:w-40 md:w-56 py-2 text-whitecolor text-xs lg:text-sm bg-transparent border rounded flex items-center justify-center gap-3"
-                    >
-                      <RotateCcw size={20} />
-                      Retake
-                    </button>
-                    <button
-                      onClick={() => setStep("voice")}
-                      className="w-36 sm:w-40 md:w-56 py-2 text-whitecolor text-xs lg:text-sm bg-secondarycolor rounded flex items-center justify-center gap-2 px-3"
-                    >
-                      <Camera size={20} />
-                      Take Video (5 seconds)
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          )}
-
-          {/* Voice Popup */}
-          {step === "voice" && (
-            <div className="flex items-center justify-center">
-              <button
-                onClick={() => setStep("video")}
-                className="absolute left-10 sm:left-20 top-10 text-whitecolor bg-secondarycolor rounded-full w-8 h-8 flex items-center justify-center hover:opacity-80"
-                aria-label="Go back"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <Link href="/login">
-                <button className="absolute right-10 sm:right-20 top-10 text-lg underline text-whitecolor hover:underline">
-                  Skip
-                </button>
-              </Link>
-              <motion.div
-                variants={transitionVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-                className="w-[90%] sm:w-[400px] md:w-[500px] rounded-lg bg-white/30 p-4 sm:p-6 md:p-8 backdrop-blur-sm flex items-center justify-center"
-              >
-                <div className="mt-1 text-center flex flex-col items-center justify-center">
-                  <h2 className="text-xl mb-3 font-semibold text-whitecolor">
-                    Record Your Voice
-                  </h2>
-                  <p className="text-sm mb-3 text-whitecolor">
-                    Speak a short phrase clearly to train your avatar&#8217;s voice.
-                  </p>
-                  <p className="text-sm mb-3 text-whitecolor">
-                    Example Prompt: “Hi, I&#8217;m here to assist you!”
-                  </p>
-                  <div className="h-32 w-32 sm:h-40 sm:w-40 overflow-hidden flex items-center justify-center rounded-full bg-gradient-to-b from-[#5182E3] via-[#5182E3] to-[#FFFFFF]">
-                    <Mic className="text-whitecolor w-10 h-10 md:w-20 md:h-20" />
-                  </div>
-                  <div className="flex items-center gap-x-6 mt-4">
-                    <button className="w-28 sm:w-40 md:w-56 py-2 text-whitecolor text-sm bg-transparent border rounded flex items-center justify-center gap-3">
-                      <RotateCcw size={20} />
-                      Re-record
-                    </button>
-                    <Link href="/chat">
-                      <button className="w-28 sm:w-40 md:w-56 py-2 text-whitecolor text-sm bg-secondarycolor rounded flex items-center justify-center gap-3">
-                        Finish
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          )}
+          </div>
         </div>
       </div>
     </>
