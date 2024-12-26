@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import ChatComponent from "@/components/ChatComponent";
 import { CustomToggle } from "@/components/ui/custom-toogle";
@@ -15,7 +14,6 @@ import {
   MessageCircleQuestion,
   User,
   ChevronDown,
-  Power,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
