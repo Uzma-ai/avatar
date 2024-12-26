@@ -25,10 +25,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
+import Link from "next/link";
 
 interface Profile {
   id: number;
   name: string;
+  channel: string;
   description: string;
   imageUrl: string;
 }
@@ -37,31 +39,29 @@ const profiles: Profile[] = [
   {
     id: 1,
     name: "Avatar 1",
-    description: "Lawyer",
-    imageUrl: "/lawyer.png",
+    channel: "Education",
+    description: "Analyst",
+    imageUrl: "/background.jpeg",
   },
   {
     id: 2,
     name: "Avatar 2",
-    description: "Business Analyst",
-    imageUrl: "/background.jpeg",
-  },
-  {
-    id: 3,
-    name: "Avatar 3",
-    description: "Doctor",
-    imageUrl: "/avatar-3.jpeg",
-  },
-  {
-    id: 4,
-    name: "Avatar 4",
+    channel: "Education",
     description: "Teacher",
     imageUrl: "/teacher.jpeg",
   },
   {
-    id: 5,
-    name: "Avatar 5",
-    description: "Psychiatrist",
+    id: 3,
+    name: "Avatar 3",
+    channel: "Medical",
+    description: "Doctor",
+    imageUrl: "/doctor.jpeg",
+  },
+  {
+    id: 4,
+    name: "Avatar 4",
+    channel: "Law",
+    description: "Lawyer",
     imageUrl: "/Psychiatrist.jpeg",
   },
 ];
@@ -70,7 +70,7 @@ export default function Avatars() {
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
   return (
     <div className="w-full h-screen overflow-hidden relative">
-      <div className="absolute w-full h-20 flex items-center justify-between p-2 md:p-6 z-10">
+      <div className="absolute w-full h-20 flex items-center justify-between p-2 md:p-6 z-10 ">
         <div className="flex items-center gap-4">
           <DropdownMenu
             open={isAvatarDropdownOpen}
@@ -102,7 +102,7 @@ export default function Avatars() {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-[200px] bg-lightWhite rounded-2xl"
+              className="w-[200px] bg-lightWhite rounded-2xl border-none"
               align="start"
               alignOffset={-8}
               sideOffset={5}
@@ -169,22 +169,25 @@ export default function Avatars() {
               <img
                 src={profile.imageUrl}
                 alt={profile.name}
-                className="max-h-full w-full object-cover"
+                className="h-full w-full object-cover"
               />
+              <div className="absolute inset-0 bg-black opacity-30"></div>
             </div>
 
             {/* Action buttons */}
             <div className="absolute right-5 top-[60%] lg:right-10 lg:top-2/3 -translate-y-1/2 flex flex-col gap-4">
-              <div className="flex items-center gap-5">
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="h-12 w-12 rounded-full bg-iconBackground hover:bg-gray-500/70"
-                >
-                  <UserRound className="h-8 w-8 text-black" />
-                </Button>
-                <span className="hidden lg:block text-whitecolor">Ask</span>
-              </div>
+              <Link href="/chat">
+                <div className="flex items-center gap-5">
+                  <Button
+                    variant="secondary"
+                    size="icon"
+                    className="h-12 w-12 rounded-full bg-iconBackground hover:bg-gray-500/70"
+                  >
+                    <UserRound className="h-8 w-8 text-black" />
+                  </Button>
+                  <span className="hidden lg:block text-whitecolor">Ask</span>
+                </div>
+              </Link>
               <div className="flex items-center gap-5">
                 <Button
                   variant="secondary"
@@ -229,11 +232,14 @@ export default function Avatars() {
 
             {/* Profile info */}
             <div className="w-full absolute bottom-8 justify-center flex items-center px-6 lg:px-0">
-              <div className="flex items-center justify-between w-full lg:w-1/4 bg-mediumWhite p-4 text-white rounded-lg">
-                <h2 className="text-sm xl:text-base font-medium">
-                  Name: {profile.name}
+              <div className="flex items-center justify-between w-full lg:w-1/3 bg-mediumWhite p-4 text-white rounded-lg">
+                <h2 className="text-xs xl:text-base font-medium">
+                  {profile.name}
                 </h2>
-                <p className="text-sm xl:text-base font-medium">
+                <p className="text-xs xl:text-base font-medium">
+                  Channel: {profile.channel}
+                </p>
+                <p className="text-xs xl:text-base font-medium">
                   Description: {profile.description}
                 </p>
               </div>

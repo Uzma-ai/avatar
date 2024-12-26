@@ -134,10 +134,10 @@ export default function Signup() {
                 className="w-[90%] sm:w-[400px] md:w-[500px] rounded-lg bg-mediumWhite p-4 sm:p-6 md:px-8 md:py-4 backdrop-blur-sm flex items-center justify-center"
               >
                 <div className="text-center flex flex-col items-center justify-center">
-                  <h2 className="mb-1 text-xl font-semibold text-whitecolor">
+                  <h2 className="mb-1 text-base md:text-xl font-semibold text-whitecolor">
                     Capture Picture
                   </h2>
-                  <p className="mb-6 text-sm text-whitecolor font-light">
+                  <p className="mb-6 text-xs md:text-sm text-whitecolor font-light">
                     Take a live photo or upload a clear photo of you
                   </p>
                   <div className="aspect-[4/3] w-3/4 overflow-hidden rounded-lg bg-[#1F1F1F]">
@@ -175,13 +175,13 @@ export default function Signup() {
             <div className="flex items-center justify-center">
               <button
                 onClick={() => setStep("camera")}
-                className="absolute z-10 left-5 top-1 sm:left-20 sm:top-10 text-whitecolor bg-secondarycolor rounded-full w-8 h-8 flex items-center justify-center hover:opacity-80"
+                className="absolute z-10 left-5 top-5 sm:left-20 sm:top-10 text-whitecolor bg-secondarycolor rounded-full w-8 h-8 flex items-center justify-center hover:opacity-80"
                 aria-label="Go back"
               >
                 <ChevronLeft className="h-4 w-4" />
               </button>
               <Link href="/">
-                <button className="absolute z-10 right-5 sm:right-20 top-1 sm:top-10 text-lg underline text-whitecolor hover:underline">
+                <button className="absolute z-10 right-5 sm:right-20 top-5 sm:top-10 text-lg underline text-whitecolor hover:underline">
                   Skip
                 </button>
               </Link>
@@ -193,7 +193,7 @@ export default function Signup() {
                 className="w-[90%] sm:w-[400px] md:w-[500px] rounded-lg bg-mediumWhite p-4 sm:p-6 md:p-8 backdrop-blur-sm "
               >
                 <div className="text-center flex flex-col items-center justify-center">
-                  <h2 className="mb-2 text-xl font-medium text-white">
+                  <h2 className="mb-2 text-base md:text-xl font-medium text-white">
                     Record a Video
                   </h2>
                   <div className="aspect-[4/3] w-3/4 overflow-hidden rounded-lg bg-[#1F1F1F]">
@@ -205,30 +205,20 @@ export default function Signup() {
                     </h3>
                     <ol className="list-decimal space-y-2 pl-5 text-whitecolor font-light">
                       <li>
-                        Stand or sit in a well-lit environment. Ensure your
-                        entire face and upper body are clearly visible.
+                        Make sure you are in a well-lit area, with your face and
+                        upper body clearly visible.
                       </li>
                       <li>
-                        Start by looking straight into the camera. Hold this
-                        position for 3-5 seconds.
+                        Look directly at the camera and hold the position for
+                        3–5 seconds.
                       </li>
                       <li>
-                        Slowly turn to your left or right until your back is
-                        facing the camera. Continue rotating until you&apos;re
-                        back to facing the camera again.
-                      </li>
-                      <li>
-                        Smile naturally and hold it for a moment. Briefly show a
+                        Smile naturally for a moment, then briefly show a
                         neutral (serious) expression.
                       </li>
                       <li>
-                        Say, &quot;Hi, I&apos;m [Your Name], and I&apos;m ready
-                        to create my avatar!&quot; Ensure you speak clearly and
-                        audibly.
-                      </li>
-                      <li>
-                        Move slowly and naturally to ensure we capture accurate
-                        details.
+                        Say clearly, “Hi, I’m [Your Name], and I’m ready to
+                        create my avatar!” Ensure you speak clearly and audibly.
                       </li>
                     </ol>
                   </div>
@@ -276,19 +266,19 @@ export default function Signup() {
                 className="w-[90%] sm:w-[400px] md:w-[500px] rounded-lg bg-white/30 p-4 sm:p-6 md:p-8 backdrop-blur-sm flex items-center justify-center"
               >
                 <div className="mt-1 text-center flex flex-col items-center justify-center relative">
-                  <h2 className="text-xl mb-3 font-semibold text-whitecolor">
+                  <h2 className="text-base md:text-xl mb-3 font-semibold text-whitecolor">
                     Read Below
                   </h2>
-                  <p className="text-sm text-whitecolor">
+                  <p className="text-xs md:text-sm text-whitecolor">
                     Speak a short phrase clearly to train your avatar&#8217;s
                     voice.
                   </p>
-                  <p className="text-sm mb-3 text-whitecolor">
+                  <p className="text-xs md:text-sm mb-3 text-whitecolor px-5 mt-2.5">
                     Example Prompt: Hello, my name is [Your Name]. I’m excited
                     to create my avatar. Let’s get started with this amazing
                     journey together!
                   </p>
-                  <div className="group h-32 w-32 sm:h-40 sm:w-40 overflow-hidden flex items-center justify-center rounded-full bg-gradient-to-b from-[#5182E3] via-[#5182E3] to-[#FFFFFF]">
+                  <div className="group h-28 w-28 sm:h-40 sm:w-40 overflow-hidden flex items-center justify-center rounded-full bg-gradient-to-b from-[#5182E3] via-[#5182E3] to-[#FFFFFF]">
                     <Mic className="text-whitecolor w-10 h-10 md:w-20 md:h-20" />
                     {/* Tooltip */}
                     <div className="absolute top-44 left-2/3 mb-2 hidden group-hover:flex flex-row-reverse items-center ">

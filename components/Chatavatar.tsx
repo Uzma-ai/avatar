@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import ChatComponent from "@/components/ChatComponent";
+import { CustomToggle } from "@/components/ui/custom-toogle";
 import {
   CircleUserRound,
   ShoppingBag,
@@ -98,7 +99,7 @@ export default function ChatAssistant() {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="w-[200px] bg-lightWhite rounded-2xl"
+                  className="w-[200px] bg-white rounded-2xl"
                   align="start"
                   alignOffset={-8}
                   sideOffset={5}
@@ -170,16 +171,12 @@ export default function ChatAssistant() {
                   >
                     Text
                   </Label>
-                  <Switch
+                  <CustomToggle
                     id="voice-mode"
+                    iconType="input"
                     checked={voicechecked}
                     onCheckedChange={setVoiceChecked}
-                    className="h-6 w-10 data-[state=checked]:bg-secondarycolor"
-                  >
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full shadow-sm transition-transform duration-100 translate-x-0.5 data-[state=checked]:translate-x-6">
-                      <Power className="h-3 w-3 data-[state=checked]:text-secondarycolor" />
-                    </div>
-                  </Switch>
+                  />
                   <Label
                     htmlFor="voice-mode"
                     className="text-sm text-muted-foreground"
@@ -204,16 +201,12 @@ export default function ChatAssistant() {
                 >
                   Off
                 </Label>
-                <Switch
+                <CustomToggle
                   id="avatar-mode"
+                  iconType="power"
                   checked={checked}
                   onCheckedChange={setChecked}
-                  className="h-6 w-10 data-[state=checked]:bg-secondarycolor"
-                >
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full shadow-sm transition-transform duration-100 translate-x-0.5 data-[state=checked]:translate-x-6">
-                    <Power className="h-3 w-3 text-secondarycolor" />
-                  </div>
-                </Switch>
+                />
                 <Label
                   htmlFor="avatar-mode"
                   className="text-sm text-muted-foreground"
