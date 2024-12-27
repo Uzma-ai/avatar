@@ -12,9 +12,12 @@ const config: Config = {
 		  colors: {
 			primarycolor: "#F3F3F3",
 			secondarycolor: "#5D8BE5",
+			legendText:'#F7F7F7',
 			inputbackground: "#E9EEF6",
+			blackcolor: "#1F1F1F",
 			mediumWhite: "#FFFFFF4D",
-			lightWhite:"#ffffff92",
+			lightWhite: "#ffffff92",
+			blurwhite:"#FFFFFF99",
 			lightgray: "#e1ecee",
 			mediumgray: "#D4D4D4",
 			whitecolor: "#fefefe",
@@ -67,7 +70,10 @@ const config: Config = {
 		  },
 		fontFamily: {
         figtree: ['Figtree', 'sans-serif'],
-      },
+		  },
+		  backgroundImage: {
+			 'primary-gradient': 'linear-gradient(171.9deg, #5182E3 0%, #FFFFFF 136.83%)',
+		}
   	}
   },
   plugins: [require("tailwindcss-animate")],

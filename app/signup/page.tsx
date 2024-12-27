@@ -278,11 +278,11 @@ export default function Signup() {
                     to create my avatar. Let’s get started with this amazing
                     journey together!
                   </p>
-                  <div className="group h-28 w-28 sm:h-40 sm:w-40 overflow-hidden flex items-center justify-center rounded-full bg-gradient-to-b from-[#5182E3] via-[#5182E3] to-[#FFFFFF]">
+                  <div className="group h-28 w-28 sm:h-40 sm:w-40 overflow-hidden flex items-center justify-center rounded-full bg-primary-gradient">
                     <Mic className="text-whitecolor w-10 h-10 md:w-20 md:h-20" />
                     {/* Tooltip */}
                     <div className="absolute top-44 left-2/3 mb-2 hidden group-hover:flex flex-row-reverse items-center ">
-                      <div className="bg-gray-600 text-white text-xs px-3 py-2 rounded-sm shadow-lg">
+                      <div className="bg-mediumWhite text-white text-xs px-3 py-2 rounded-sm shadow-lg">
                         Click to record
                       </div>
                     </div>
