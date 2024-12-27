@@ -91,13 +91,13 @@ export default function Login() {
                         <FormItem>
                           <FormControl>
                             <fieldset className="border border-gray-300 py-0.5 px-1.5 rounded-md">
-                              <legend className="text-sm text-whitecolor sm:text-black font-medium">
-                                Email or Username
+                              <legend className="text-xs text-legendText sm:text-black font-medium">
+                                Email/Username
                               </legend>
                               <Input
                                 type="email"
                                 placeholder="Please enter email address or username"
-                                className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
+                                className="pb-2.5 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
                                 {...field}
                               />
                             </fieldset>
@@ -115,18 +115,18 @@ export default function Login() {
                         <FormItem>
                           <FormControl>
                             <fieldset className="border border-gray-300 py-0.5 px-1.5 rounded-md">
-                              <legend className="text-sm font-medium text-whitecolor sm:text-black">
+                              <legend className="text-xs font-medium text-legendText sm:text-black">
                                 Password
                               </legend>
                               <div className="relative">
                                 <Input
                                   type={showPassword ? "text" : "password"}
                                   placeholder="Please enter password"
-                                  className="py-4 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
+                                  className="pb-2.5 border-none focus:!border-none focus:!ring-0 focus:!outline-none shadow-none placeholder:text-whitecolor text-whitecolor sm:placeholder:text-gray-500 sm:text-black"
                                   {...field}
                                 />
                                 <span
-                                  className="absolute right-2 top-1/2 -translate-y-1/2"
+                                  className="absolute right-2 top-2"
                                   onClick={() => setShowPassword(!showPassword)}
                                 >
                                   {showPassword ? (
@@ -146,7 +146,9 @@ export default function Login() {
                       type="submit"
                       className="w-full bg-secondarycolor hover:bg-secondarycolor py-6"
                     >
-                      <Link href="/chat" className="w-full">Login</Link>
+                      <Link href="/chat" className="w-full">
+                        Login
+                      </Link>
                     </Button>
                   </form>
                 </Form>
@@ -165,14 +167,13 @@ export default function Login() {
 
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-secondarycolor" />
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="bg-white px-2 text-gray-500">or</span>
+                    <div className="w-1/2 border-t border-[#5182E399]" />
+                    <span className="px-6 text-legendText sm:text-blackcolor">or</span>
+                    <div className="w-1/2 border-t border-[#5182E399]" />
                   </div>
                 </div>
 
-                <div className="space-y-3">
+                <div className="space-y-4 mt-1">
                   <Button
                     variant="outline"
                     className="w-full py-6"

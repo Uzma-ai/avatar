@@ -73,7 +73,7 @@ export default function ChatAssistant() {
               >
                 <DropdownMenuTrigger asChild>
                   <button
-                    className="flex items-center gap-2 rounded-full bg-whitecolor p-1 shadow-sm hover:bg-gray-100/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="flex items-center gap-2 rounded-full bg-mediumWhite p-1 pr-3 shadow-sm hover:bg-gray-100/50 focus:!outline-none"
                     aria-label="User menu"
                   >
                     <Avatar className="h-8 w-8">
@@ -85,7 +85,7 @@ export default function ChatAssistant() {
                       <AvatarFallback>H</AvatarFallback>
                     </Avatar>
                     <ChevronDown
-                      className={`h-4 w-4 text-gray-500 transition-transform ${
+                      className={`h-4 w-4 text-blackcolor transition-transform ${
                         isAvatarDropdownOpen ? "rotate-180" : ""
                       }`}
                     />
@@ -97,9 +97,9 @@ export default function ChatAssistant() {
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="w-[200px] bg-white rounded-2xl"
+                  className="w-[200px] bg-blurwhite rounded-2xl "
                   align="start"
-                  alignOffset={-8}
+                  alignOffset={1}
                   sideOffset={5}
                 >
                   <div className="flex items-center gap-2 p-2 mb-1">
@@ -111,7 +111,7 @@ export default function ChatAssistant() {
                       />
                       <AvatarFallback>H</AvatarFallback>
                     </Avatar>
-                    <span className="text-sm text-secondarycolor font-medium">
+                    <span className="text-sm text-secondarycolor font-bold">
                       Hannah
                     </span>
                   </div>

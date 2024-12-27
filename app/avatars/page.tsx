@@ -78,7 +78,7 @@ export default function Avatars() {
           >
             <DropdownMenuTrigger asChild>
               <button
-                className="flex items-center gap-2 rounded-full bg-mediumWhite  p-1 shadow-sm hover:bg-gray-100/50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="flex items-center gap-2 rounded-full bg-mediumWhite p-1 pr-3 shadow-sm hover:bg-gray-100/50 focus:!outline-none focus:ring-0"
                 aria-label="User menu"
               >
                 <Avatar className="h-8 w-8">
@@ -90,7 +90,7 @@ export default function Avatars() {
                   <AvatarFallback>H</AvatarFallback>
                 </Avatar>
                 <ChevronDown
-                  className={`h-4 w-4 text-gray-500 transition-transform ${
+                  className={`h-4 w-4 text-blackcolor transition-transform ${
                     isAvatarDropdownOpen ? "rotate-180" : ""
                   }`}
                 />
@@ -116,7 +116,7 @@ export default function Avatars() {
                   />
                   <AvatarFallback>H</AvatarFallback>
                 </Avatar>
-                <span className="text-sm text-secondarycolor font-medium">
+                <span className="text-sm text-secondarycolor font-bold">
                   Hannah
                 </span>
               </div>
