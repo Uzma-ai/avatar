@@ -26,12 +26,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { useAvatar } from "@/context/AvatarContext";
+import { motion } from 'framer-motion'
 
 export default function ChatAssistant() {
 
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
   const [checked, setChecked] = useState(true);
   const [voicechecked, setVoiceChecked] = useState(false);
+  const { selectedAvatar } = useAvatar();
 
 
   return (
@@ -39,14 +42,20 @@ export default function ChatAssistant() {
       <div className="md:flex md:items-center md:justify-center w-full h-full">
         {/* Avatar Section */}
         {checked ? (
-          <div className="hidden lg:block relative w-1/3 h-full transition-all duration-300">
+          <motion.div
+            className="hidden lg:block relative w-1/3 h-full transition-all duration-300"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <Image
-              src="/background.jpeg"
+              src={selectedAvatar}
               alt="Avatar Image"
               fill
               className="object-cover"
             />
-          </div>
+          </motion.div>
         ) : null}
         {/* Chat Section */}
         <div
@@ -58,7 +67,7 @@ export default function ChatAssistant() {
           {checked ? (
             <div className="absolute inset-0 block lg:hidden -z-10">
               <Image
-                src="/background.jpeg"
+                src={selectedAvatar}
                 alt="Avatar Background"
                 fill
                 className="object-cover"
