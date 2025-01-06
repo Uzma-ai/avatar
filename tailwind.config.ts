@@ -24,6 +24,7 @@ const config: Config = {
 			iconBackground:"#E9EEF680",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
+			dropdownlightgray:'#D8D8D84D',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
