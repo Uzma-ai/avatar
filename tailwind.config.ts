@@ -21,7 +21,8 @@ const config: Config = {
 			lightgray: "#e1ecee",
 			mediumgray: "#D4D4D4",
 			whitecolor: "#fefefe",
-			iconBackground:"#E9EEF680",
+			iconBackground: "#E9EEF680",
+			dropdownBackground:"#D8D8D84C",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
