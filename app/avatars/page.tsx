@@ -102,7 +102,7 @@ export default function Avatars() {
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-[200px] bg-lightWhite rounded-2xl border-none"
+              className="w-[200px] bg-dropdownlightgray rounded-2xl border-none"
               align="start"
               alignOffset={-8}
               sideOffset={5}
