@@ -49,7 +49,7 @@ export default function Signup() {
 
   return (
     <>
-      <div className="w-full h-screen overflow-hidden bg-[url('/background-2.png')] bg-center bg-cover">
+      <div className="w-full h-screen overflow-hidden bg-[url('/Avatar-bg.png')] bg-center bg-cover">
         <div className="flex items-center justify-center h-full w-full bg-black/50">
           {/* Intro Popup */}
           {step === "intro" && (

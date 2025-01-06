@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import ChatComponent from "@/components/ChatComponent";
+
+
 import { CustomToggle } from "@/components/ui/custom-toogle";
 import {
   CircleUserRound,
@@ -126,9 +128,13 @@ export default function ChatAssistant() {
                   </div>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
+                    <Link href="/profile" legacyBehavior>
+                    <a className="flex items-center">
                     <User className="mr-2 h-4 w-4 text-secondarycolor" />
                     <span>User Profile</span>
-                  </DropdownMenuItem>
+                    </a>
+                    </Link>
+                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
