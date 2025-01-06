@@ -8,7 +8,6 @@ import {
   ShoppingCart,
   MessageCircleQuestion,
   User,
-  ChevronDown,
   Pencil,
   Plus,
   X,
