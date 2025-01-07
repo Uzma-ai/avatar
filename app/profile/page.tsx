@@ -12,6 +12,7 @@ import {
   Plus,
   X,
 } from "lucide-react";
+import Image from "next/image";
 
 const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState("basicInfo"); // State to toggle sections
@@ -19,6 +20,7 @@ const ProfilePage = () => {
   const [isEditing, setIsEditing] = useState(false); // State to track if editing mode is active
   const [shoppingPreferences, setShoppingPreferences] = useState(["Books", "Fashion", "Electronics", "Groceries"]);
   const [interests, setInterests] = useState(["Sports", "Music", "Technology"]);
+
 
   interface SidebarItem {
     item: string;
@@ -48,58 +50,88 @@ const ProfilePage = () => {
       {/* Sidebar */}
       <aside className="w-1/6 bg-white shadow-lg p-5">
         <div className="mb-8">
-          <img src="/Avatar4.png" alt="Logo" className="w-2/4 ml-4" />
+          <Image src="/Avatar4.png" alt="Logo" width={70} height={70} />
         </div>
         <nav>
           <ul className="space-y-6">
             <li>
               <div className="mt-2 rounded-md overflow-hidden">
-                <a href="#" className="flex items-center bg-secondarycolor p-2" onClick={() => handleSidebarClick("Profile")}>
+                <a
+                  href="#"
+                  className="flex items-center bg-secondarycolor p-2"
+                  onClick={() => handleSidebarClick("Profile")}
+                >
                   <User className="mr-2 h-6 w-6 text-white" />
                   <span className="text-white">Profile</span>
                 </a>
                 <div className="p-2 bg-blue-100">
-                  <a href="#" className="text-black" onClick={() => handleSidebarClick("Personal Information")}>
+                  <a
+                    href="#"
+                    className="text-black"
+                    onClick={() => handleSidebarClick("Personal Information")}
+                  >
                     Personal Information
                   </a>
-                  <div className="text-black mt-2">
-                    Create Avatar
-                  </div>
+                  <div className="text-black mt-2">Create Avatar</div>
                 </div>
               </div>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Subscription")}>
+              <a
+                href="#"
+                className="flex items-center"
+                onClick={() => handleSidebarClick("Subscription")}
+              >
                 <ShoppingCart className="mr-2 h-6 w-6 text-black" />
                 <span>Subscription</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("My Avatar")}>
+              <a
+                href="#"
+                className="flex items-center"
+                onClick={() => handleSidebarClick("My Avatar")}
+              >
                 <CircleUserRound className="mr-2 h-6 w-6 text-black" />
                 <span>My Avatar</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Public Avatar")}>
+              <a
+                href="#"
+                className="flex items-center"
+                onClick={() => handleSidebarClick("Public Avatar")}
+              >
                 <Users className="mr-2 h-6 w-6 text-black" />
                 <span>Public Avatar</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Shopping")}>
+              <a
+                href="#"
+                className="flex items-center"
+                onClick={() => handleSidebarClick("Shopping")}
+              >
                 <ShoppingBag className="mr-2 h-6 w-6 text-black" />
                 <span>Shopping</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Settings")}>
+              <a
+                href="#"
+                className="flex items-center"
+                onClick={() => handleSidebarClick("Settings")}
+              >
                 <Settings className="mr-2 h-6 w-6 text-black" />
                 <span>Settings</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Support")}>
+              <a
+                href="#"
+                className="flex items-center"
+                onClick={() => handleSidebarClick("Support")}
+              >
                 <MessageCircleQuestion className="mr-2 h-6 w-6 text-black" />
                 <span>Support</span>
               </a>
@@ -117,10 +149,14 @@ const ProfilePage = () => {
               <span>Profile</span>
             </h2>
             <div className="text-black ml-4">
-              Profile &gt; <span className="text-black ">{selectedSidebarItem}</span>
+              Profile &gt;{" "}
+              <span className="text-black ">{selectedSidebarItem}</span>
             </div>
           </div>
-          <button className="px-4 py-2 bg-white text-black rounded-md flex items-center border border-black" onClick={handleEditClick}>
+          <button
+            className="px-4 py-2 bg-white text-black rounded-md flex items-center border border-black"
+            onClick={handleEditClick}
+          >
             <Pencil className="mr-2 h-4 w-4" />
             Edit
           </button>
@@ -130,9 +166,7 @@ const ProfilePage = () => {
           <div className="flex space-x-4 mb-8">
             <button
               className={`px-4 py-2 rounded-md font-semibold relative ${
-                activeSection === "basicInfo"
-                  ? "text-black"
-                  : "text-gray-500"
+                activeSection === "basicInfo" ? "text-black" : "text-gray-500"
               }`}
               onClick={() => setActiveSection("basicInfo")}
             >
@@ -143,9 +177,7 @@ const ProfilePage = () => {
             </button>
             <button
               className={`px-4 py-2 rounded-md font-semibold relative ${
-                activeSection === "moreDetails"
-                  ? "text-black"
-                  : "text-gray-500"
+                activeSection === "moreDetails" ? "text-black" : "text-gray-500"
               }`}
               onClick={() => setActiveSection("moreDetails")}
             >
@@ -158,7 +190,9 @@ const ProfilePage = () => {
 
           <div className="mb-8 p-4 bg-blue-100 rounded-md">
             <h3 className="text-lg font-semibold">
-              {activeSection === "basicInfo" ? "Basic Information" : "More Details"}
+              {activeSection === "basicInfo"
+                ? "Basic Information"
+                : "More Details"}
             </h3>
           </div>
 
@@ -204,16 +238,12 @@ const ProfilePage = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
-                  City
-                </label>
+                <label className="block text-sm font-medium mb-1">City</label>
                 <input type="text" className="w-full border rounded-md p-2" />
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
-                  State
-                </label>
+                <label className="block text-sm font-medium mb-1">State</label>
                 <input type="text" className="w-full border rounded-md p-2" />
               </div>
 
@@ -241,9 +271,7 @@ const ProfilePage = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium mb-1">
-                  Age
-                </label>
+                <label className="block text-sm font-medium mb-1">Age</label>
                 <input type="text" className="w-full border rounded-md p-2" />
               </div>
 
@@ -256,7 +284,10 @@ const ProfilePage = () => {
                       </label>
                       <div className="flex space-x-2">
                         {shoppingPreferences.map((item) => (
-                          <span key={item} className="px-2 py-1 bg-gray-200 rounded-md flex items-center">
+                          <span
+                            key={item}
+                            className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
+                          >
                             {item}
                           </span>
                         ))}
@@ -268,7 +299,10 @@ const ProfilePage = () => {
                       </label>
                       <div className="flex space-x-2">
                         {interests.map((item) => (
-                          <span key={item} className="px-2 py-1 bg-gray-200 rounded-md flex items-center">
+                          <span
+                            key={item}
+                            className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
+                          >
                             {item}
                           </span>
                         ))}
@@ -284,30 +318,69 @@ const ProfilePage = () => {
                     <label className="block text-lg font-bold mb-1">
                       Shopping Preferences:
                     </label>
-                    <label className="block text-lg font-bold mb-1" style={{ marginLeft: '34%' }}>
+                    <label
+                      className="block text-lg font-bold mb-1"
+                      style={{ marginLeft: "34%" }}
+                    >
                       Interests:
                     </label>
                   </div>
                   <div className="col-span-2 flex items-center space-x-4">
                     <div className="flex space-x-2">
-                      <button type="button" className="px-2 py-1 bg-secondarycolor text-white rounded-md flex items-center" onClick={() => handleAddItem(shoppingPreferences, setShoppingPreferences)}>
+                      <button
+                        type="button"
+                        className="px-2 py-1 bg-secondarycolor text-white rounded-md flex items-center"
+                        onClick={() =>
+                          handleAddItem(
+                            shoppingPreferences,
+                            setShoppingPreferences
+                          )
+                        }
+                      >
                         Add <Plus className="ml-1 h-4 w-4" />
                       </button>
                       {shoppingPreferences.slice(0, 3).map((item) => (
-                        <span key={item} className="px-2 py-1 bg-gray-200 rounded-md flex items-center">
+                        <span
+                          key={item}
+                          className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
+                        >
                           {item}
-                          <X className="ml-2 h-4 w-4 cursor-pointer" onClick={() => handleRemoveItem(shoppingPreferences, setShoppingPreferences, item)} />
+                          <X
+                            className="ml-2 h-4 w-4 cursor-pointer"
+                            onClick={() =>
+                              handleRemoveItem(
+                                shoppingPreferences,
+                                setShoppingPreferences,
+                                item
+                              )
+                            }
+                          />
                         </span>
                       ))}
                     </div>
-                    <div className="flex space-x-2" style={{ marginLeft: '16%' }}>
-                      <button type="button" className="px-2 py-1 bg-secondarycolor  text-white rounded-md flex items-center" onClick={() => handleAddItem(interests, setInterests)}>
+                    <div
+                      className="flex space-x-2"
+                      style={{ marginLeft: "16%" }}
+                    >
+                      <button
+                        type="button"
+                        className="px-2 py-1 bg-secondarycolor  text-white rounded-md flex items-center"
+                        onClick={() => handleAddItem(interests, setInterests)}
+                      >
                         Add <Plus className="ml-1 h-4 w-4" />
                       </button>
                       {interests.slice(0, 3).map((item) => (
-                        <span key={item} className="px-2 py-1 bg-gray-200 rounded-md flex items-center">
+                        <span
+                          key={item}
+                          className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
+                        >
                           {item}
-                          <X className="ml-2 h-4 w-4 cursor-pointer" onClick={() => handleRemoveItem(interests, setInterests, item)} />
+                          <X
+                            className="ml-2 h-4 w-4 cursor-pointer"
+                            onClick={() =>
+                              handleRemoveItem(interests, setInterests, item)
+                            }
+                          />
                         </span>
                       ))}
                     </div>
@@ -315,41 +388,71 @@ const ProfilePage = () => {
                   <div className="col-span-2 flex items-center space-x-4">
                     <div className="flex space-x-2">
                       {shoppingPreferences.slice(3).map((item) => (
-                        <span key={item} className="px-2 py-1 bg-gray-200 rounded-md flex items-center">
+                        <span
+                          key={item}
+                          className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
+                        >
                           {item}
-                          <X className="ml-2 h-4 w-4 cursor-pointer" onClick={() => handleRemoveItem(shoppingPreferences, setShoppingPreferences, item)} />
+                          <X
+                            className="ml-2 h-4 w-4 cursor-pointer"
+                            onClick={() =>
+                              handleRemoveItem(
+                                shoppingPreferences,
+                                setShoppingPreferences,
+                                item
+                              )
+                            }
+                          />
                         </span>
                       ))}
                     </div>
-                    <div className="flex space-x-2" style={{ marginLeft: '10%' }}>
+                    <div
+                      className="flex space-x-2"
+                      style={{ marginLeft: "10%" }}
+                    >
                       {interests.slice(3).map((item) => (
-                        <span key={item} className="px-2 py-1 bg-gray-200 rounded-md flex items-center">
+                        <span
+                          key={item}
+                          className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
+                        >
                           {item}
-                          <X className="ml-2 h-4 w-4 cursor-pointer" onClick={() => handleRemoveItem(interests, setInterests, item)} />
+                          <X
+                            className="ml-2 h-4 w-4 cursor-pointer"
+                            onClick={() =>
+                              handleRemoveItem(interests, setInterests, item)
+                            }
+                          />
                         </span>
                       ))}
                     </div>
                   </div>
                   <div>
-                <label className="block text-sm font-medium mb-1">
-                  
-                </label>
-                <input type="text" className="w-full border rounded-md p-2" placeholder="Add categories" />
-              </div>
+                    <label className="block text-sm font-medium mb-1"></label>
+                    <input
+                      type="text"
+                      className="w-full border rounded-md p-2"
+                      placeholder="Add categories"
+                    />
+                  </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-1">
-                  
-                </label>
-                <input type="text" className="w-full border rounded-md p-2" placeholder="Add interests" />
-              </div>
-                
+                  <div>
+                    <label className="block text-sm font-medium mb-1"></label>
+                    <input
+                      type="text"
+                      className="w-full border rounded-md p-2"
+                      placeholder="Add interests"
+                    />
+                  </div>
                 </>
               )}
               {isEditing && (
                 <div className="col-span-2 flex justify-end space-x-4 mt-8">
-                  <button className="px-6 py-2 bg-white border border-secondarycolor text-secondarycolor rounded-md">Discard</button>
-                  <button className="px-4 py-2 bg-secondarycolor text-white rounded-md">Save Changes</button>
+                  <button className="px-6 py-2 bg-white border border-secondarycolor text-secondarycolor rounded-md">
+                    Discard
+                  </button>
+                  <button className="px-4 py-2 bg-secondarycolor text-white rounded-md">
+                    Save Changes
+                  </button>
                 </div>
               )}
             </form>
@@ -359,19 +462,27 @@ const ProfilePage = () => {
             <form className="grid grid-cols-2 gap-6">
               {/* More Details Form */}
               <div>
-                <label className="block text-sm font-medium mb-1">Ethnicity</label>
+                <label className="block text-sm font-medium mb-1">
+                  Ethnicity
+                </label>
                 <input type="text" className="w-full border rounded-md p-2" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Religion</label>
+                <label className="block text-sm font-medium mb-1">
+                  Religion
+                </label>
                 <input type="text" className="w-full border rounded-md p-2" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Highest Qualification</label>
+                <label className="block text-sm font-medium mb-1">
+                  Highest Qualification
+                </label>
                 <input type="text" className="w-full border rounded-md p-2" />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">Income Group</label>
+                <label className="block text-sm font-medium mb-1">
+                  Income Group
+                </label>
                 <input type="text" className="w-full border rounded-md p-2" />
               </div>
               <div>
@@ -389,8 +500,12 @@ const ProfilePage = () => {
 
               {isEditing && (
                 <div className="col-span-2 flex justify-end space-x-4 mt-8">
-                  <button className="px-6 py-2 bg-white border border-secondarycolor text-secondarycolor rounded-md">Discard</button>
-                  <button className="px-4 py-2 bg-secondarycolor text-white rounded-md">Save Changes</button>
+                  <button className="px-6 py-2 bg-white border border-secondarycolor text-secondarycolor rounded-md">
+                    Discard
+                  </button>
+                  <button className="px-4 py-2 bg-secondarycolor text-white rounded-md">
+                    Save Changes
+                  </button>
                 </div>
               )}
             </form>

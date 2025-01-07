@@ -85,3 +85,26 @@
 .scroll::-webkit-scrollbar {
  display: none;
 }
+
+    .custom-radio {
+      @apply hidden;
+    }
+  
+    .custom-radio+label {
+      @apply relative flex items-center cursor-pointer;
+      padding-left: 28px;
+    }
+  
+    .custom-radio+label::before {
+      content: "";
+      @apply absolute left-0 w-6 h-6 border-2 rounded-full border-gray-400;
+    }
+  
+    .custom-radio:checked+label::before {
+      @apply border-pink-500;
+    }
+  
+    .custom-radio:checked+label::after {
+      content: "";
+      @apply absolute left-1 w-4 h-4 bg-pink-500 rounded-full;
+    }

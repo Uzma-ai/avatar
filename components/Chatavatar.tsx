@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState} from "react";
 import { Label } from "@/components/ui/label";
 import ChatComponent from "@/components/ChatComponent";
-
-
 import { CustomToggle } from "@/components/ui/custom-toogle";
 import {
   CircleUserRound,
@@ -27,15 +25,41 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
 import { useAvatar } from "@/context/AvatarContext";
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
+import Profilepopup from "@/components/Profilepopup";
+import Subscriptionpopup from "@/components/Subscriptionpopup";
+import Supportpopup from "@/components/Supportpopup";
+import Settingpopup from "@/components/Settingpopup";
 
 export default function ChatAssistant() {
-
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
   const [checked, setChecked] = useState(true);
   const [voicechecked, setVoiceChecked] = useState(false);
   const { selectedAvatar } = useAvatar();
+  const [isMobileProfileOpen, setIsMobileProfileOpen] =
+    useState<boolean>(false);
+  const [isMobileSubscriptionOpen, setIsMobileSubscriptionOpen] =
+    useState<boolean>(false);
+  const [isMobileSupportOpen, setIsMobileSupportOpen] =
+    useState<boolean>(false);
+  const [isMobileSettingOpen, setIsMobileSettingOpen] =
+    useState<boolean>(false);
 
+  const toggleProfilePopup = () => {
+    setIsMobileProfileOpen(!isMobileProfileOpen);
+  };
+
+  const toggleSubscriptionPopup = () => {
+    setIsMobileSubscriptionOpen(!isMobileSubscriptionOpen);
+  };
+
+  const toggleSupportPopup = () => {
+    setIsMobileSupportOpen(!isMobileSupportOpen);
+  };
+
+  const toggleSettingPopup = () => {
+    setIsMobileSettingOpen(!isMobileSettingOpen);
+  };
 
   return (
     <div className="relative flex h-screen overflow-hidden lg:bg-primarycolor text-black">
@@ -77,7 +101,7 @@ export default function ChatAssistant() {
 
           {/* Navbar section */}
           <div className="w-full h-20 flex items-center justify-between p-2 md:p-6">
-            <div className="flex items-center gap-4">
+            <div className="flex items-start gap-4">
               <DropdownMenu
                 open={isAvatarDropdownOpen}
                 onOpenChange={setIsAvatarDropdoenOpen}
@@ -126,46 +150,122 @@ export default function ChatAssistant() {
                       Hannah
                     </span>
                   </div>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
-                    <Link href="/profile" legacyBehavior>
-                    <a className="flex items-center">
-                    <User className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>User Profile</span>
-                    </a>
+                    {/* Mobile: Show Popup */}
+                    <div
+                      onClick={toggleProfilePopup}
+                      className="block md:hidden"
+                    >
+                      <button
+                        className="flex items-center gap-2"
+                        onClick={toggleProfilePopup}
+                      >
+                        <User className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>User Profile</span>
+                      </button>
+                    </div>
+
+                    {/* Desktop: Navigate with Link */}
+                    <Link
+                      href="/profile"
+                      className="hidden md:flex items-center gap-2"
+                    >
+                      <User className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>User Profile</span>
                     </Link>
-                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem>
-                    <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Subscription</span>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
+                  <DropdownMenuItem>
+                    {/* Mobile: Show Popup */}
+                    <div
+                      onClick={toggleSubscriptionPopup}
+                      className="block md:hidden"
+                    >
+                      <button
+                        className="flex items-center gap-2"
+                        onClick={toggleSubscriptionPopup}
+                      >
+                        <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>Subscription</span>
+                      </button>
+                    </div>
+
+                    {/* Desktop: Navigate with Link */}
+                    <Link
+                      href="/subscription"
+                      className="hidden md:flex items-center gap-2"
+                    >
+                      <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>Subscription</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
                     <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
                     <span>My Avatar</span>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <Link href="/avatars">
                     <DropdownMenuItem>
                       <Users className="mr-2 h-4 w-4 text-secondarycolor" />
                       <span>Public Avatar</span>
                     </DropdownMenuItem>
                   </Link>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
                     <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
                     <span>Shopping</span>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
-                    <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Settings</span>
+                    {/* Mobile: Show Popup */}
+                    <div
+                      onClick={toggleSettingPopup}
+                      className="block md:hidden"
+                    >
+                      <button
+                        className="flex items-center gap-2"
+                        onClick={toggleSettingPopup}
+                      >
+                        <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>Settings</span>
+                      </button>
+                    </div>
+
+                    {/* Desktop: Navigate with Link */}
+                    <Link
+                      href="/support"
+                      className="hidden md:flex items-center gap-2"
+                    >
+                      <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>Settings</span>
+                    </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
-                    <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Support</span>
+                    {/* Mobile: Show Popup */}
+                    <div
+                      onClick={toggleSupportPopup}
+                      className="block md:hidden"
+                    >
+                      <button
+                        className="flex items-center gap-2"
+                        onClick={toggleSupportPopup}
+                      >
+                        <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>Support</span>
+                      </button>
+                    </div>
+
+                    {/* Desktop: Navigate with Link */}
+                    <Link
+                      href="/support"
+                      className="hidden md:flex items-center gap-2"
+                    >
+                      <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>Support</span>
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -237,6 +337,27 @@ export default function ChatAssistant() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Mobile CMS View */}
+      <div className="flex items-center justify-center h-screen md:hidden">
+        {isMobileProfileOpen && (
+          <Profilepopup setIsMobileProfileOpen={setIsMobileProfileOpen} />
+        )}
+
+        {isMobileSubscriptionOpen && (
+          <Subscriptionpopup
+            setIsMobileSubscriptionOpen={setIsMobileSubscriptionOpen}
+          />
+        )}
+
+        {isMobileSupportOpen && (
+          <Supportpopup setIsMobileSupportOpen={setIsMobileSupportOpen} />
+        )}
+
+        {isMobileSettingOpen && (
+          <Settingpopup setIsMobileSettingOpen={setIsMobileSettingOpen} />
+        )}
       </div>
     </div>
   );
