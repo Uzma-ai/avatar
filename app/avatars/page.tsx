@@ -27,6 +27,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { useAvatar } from "@/context/AvatarContext";
 import { motion } from "framer-motion";
+import Profilepopup from "@/components/Profilepopup";
+import Subscriptionpopup from "@/components/Subscriptionpopup";
+import Supportpopup from "@/components/Supportpopup";
+import Settingpopup from "@/components/Settingpopup";
 
 interface Profile {
   id: number;
@@ -64,6 +68,31 @@ export default function Avatars() {
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
   const { changeAvatar } = useAvatar();
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobileProfileOpen, setIsMobileProfileOpen] =
+    useState<boolean>(false);
+  const [isMobileSubscriptionOpen, setIsMobileSubscriptionOpen] =
+    useState<boolean>(false);
+  const [isMobileSupportOpen, setIsMobileSupportOpen] =
+    useState<boolean>(false);
+  const [isMobileSettingOpen, setIsMobileSettingOpen] =
+    useState<boolean>(false);
+
+  const toggleProfilePopup = () => {
+    setIsMobileProfileOpen(!isMobileProfileOpen);
+  };
+
+  const toggleSubscriptionPopup = () => {
+    setIsMobileSubscriptionOpen(!isMobileSubscriptionOpen);
+  };
+
+  const toggleSupportPopup = () => {
+    setIsMobileSupportOpen(!isMobileSupportOpen);
+  };
+
+  const toggleSettingPopup = () => {
+    setIsMobileSettingOpen(!isMobileSettingOpen);
+  };
+
   
 
   return (
@@ -118,40 +147,111 @@ export default function Avatars() {
                   Hannah
                 </span>
               </div>
-              <DropdownMenuSeparator className="bg-dropdownBackground" />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <User className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>User Profile</span>
+                {/* Mobile: Show Popup */}
+                <div onClick={toggleProfilePopup} className="block md:hidden">
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleProfilePopup}
+                  >
+                    <User className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>User Profile</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/profile"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <User className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>User Profile</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-dropdownBackground" />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>Subscription</span>
+                {/* Mobile: Show Popup */}
+                <div
+                  onClick={toggleSubscriptionPopup}
+                  className="block md:hidden"
+                >
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleSubscriptionPopup}
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Subscription</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/subscription"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>Subscription</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-dropdownBackground" />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
                 <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
                 <span>My Avatar</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-dropdownBackground" />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
                 <Users className="mr-2 h-4 w-4 text-secondarycolor" />
                 <span>Public Avatar</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-dropdownBackground" />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
                 <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
                 <span>Shopping</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-dropdownBackground" />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>Settings</span>
+                {/* Mobile: Show Popup */}
+                <div onClick={toggleSettingPopup} className="block md:hidden">
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleSettingPopup}
+                  >
+                    <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Settings</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/support"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>Settings</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-dropdownBackground" />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>Support</span>
+                {/* Mobile: Show Popup */}
+                <div onClick={toggleSupportPopup} className="block md:hidden">
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleSupportPopup}
+                  >
+                    <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Support</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/support"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>Support</span>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -191,7 +291,6 @@ export default function Avatars() {
                   onClick={() => {
                     setIsAnimating(true);
                     changeAvatar(profile.imageUrl);
-                    
                   }}
                 >
                   <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
@@ -269,6 +368,27 @@ export default function Avatars() {
             </div>
           </motion.section>
         ))}
+      </div>
+
+      {/* Mobile CMS View */}
+      <div className="flex items-center justify-center h-screen md:hidden">
+        {isMobileProfileOpen && (
+          <Profilepopup setIsMobileProfileOpen={setIsMobileProfileOpen} />
+        )}
+
+        {isMobileSubscriptionOpen && (
+          <Subscriptionpopup
+            setIsMobileSubscriptionOpen={setIsMobileSubscriptionOpen}
+          />
+        )}
+
+        {isMobileSupportOpen && (
+          <Supportpopup setIsMobileSupportOpen={setIsMobileSupportOpen} />
+        )}
+
+        {isMobileSettingOpen && (
+          <Settingpopup setIsMobileSettingOpen={setIsMobileSettingOpen} />
+        )}
       </div>
     </div>
   );
