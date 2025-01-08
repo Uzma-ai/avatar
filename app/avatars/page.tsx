@@ -16,7 +16,6 @@ import {
   UserRound,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,6 +25,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import Link from "next/link";
+import { useAvatar } from "@/context/AvatarContext";
+import { motion } from "framer-motion";
+import Profilepopup from "@/components/Profilepopup";
+import Subscriptionpopup from "@/components/Subscriptionpopup";
+import Supportpopup from "@/components/Supportpopup";
+import Settingpopup from "@/components/Settingpopup";
 
 interface Profile {
   id: number;
@@ -39,35 +44,57 @@ const profiles: Profile[] = [
   {
     id: 1,
     name: "Avatar 1",
-    channel: "Education",
-    description: "Analyst",
-    imageUrl: "/background.jpeg",
+    channel: "Law",
+    description: "Lawyer",
+    imageUrl: "/Psychiatrist.jpeg",
   },
   {
     id: 2,
     name: "Avatar 2",
-    channel: "Education",
-    description: "Teacher",
-    imageUrl: "/teacher.jpeg",
-  },
-  {
-    id: 3,
-    name: "Avatar 3",
     channel: "Medical",
     description: "Doctor",
     imageUrl: "/doctor.jpeg",
   },
   {
-    id: 4,
-    name: "Avatar 4",
-    channel: "Law",
-    description: "Lawyer",
-    imageUrl: "/Psychiatrist.jpeg",
+    id: 3,
+    name: "Avatar 3",
+    channel: "Education",
+    description: "Teacher",
+    imageUrl: "/teacher.jpeg",
   },
 ];
 
 export default function Avatars() {
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
+  const { changeAvatar } = useAvatar();
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobileProfileOpen, setIsMobileProfileOpen] =
+    useState<boolean>(false);
+  const [isMobileSubscriptionOpen, setIsMobileSubscriptionOpen] =
+    useState<boolean>(false);
+  const [isMobileSupportOpen, setIsMobileSupportOpen] =
+    useState<boolean>(false);
+  const [isMobileSettingOpen, setIsMobileSettingOpen] =
+    useState<boolean>(false);
+
+  const toggleProfilePopup = () => {
+    setIsMobileProfileOpen(!isMobileProfileOpen);
+  };
+
+  const toggleSubscriptionPopup = () => {
+    setIsMobileSubscriptionOpen(!isMobileSubscriptionOpen);
+  };
+
+  const toggleSupportPopup = () => {
+    setIsMobileSupportOpen(!isMobileSupportOpen);
+  };
+
+  const toggleSettingPopup = () => {
+    setIsMobileSettingOpen(!isMobileSettingOpen);
+  };
+
+  
+
   return (
     <div className="w-full h-screen overflow-hidden relative">
       <div className="absolute w-full h-20 flex items-center justify-between p-2 md:p-6 z-10 ">
@@ -104,7 +131,7 @@ export default function Avatars() {
             <DropdownMenuContent
               className="w-[200px] bg-dropdownlightgray rounded-2xl border-none"
               align="start"
-              alignOffset={-8}
+              alignOffset={1}
               sideOffset={5}
             >
               <div className="flex items-center gap-2 p-2 mb-1">
@@ -120,40 +147,111 @@ export default function Avatars() {
                   Hannah
                 </span>
               </div>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <User className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>User Profile</span>
+                {/* Mobile: Show Popup */}
+                <div onClick={toggleProfilePopup} className="block md:hidden">
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleProfilePopup}
+                  >
+                    <User className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>User Profile</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/profile"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <User className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>User Profile</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>Subscription</span>
+                {/* Mobile: Show Popup */}
+                <div
+                  onClick={toggleSubscriptionPopup}
+                  className="block md:hidden"
+                >
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleSubscriptionPopup}
+                  >
+                    <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Subscription</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/subscription"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>Subscription</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
                 <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
                 <span>My Avatar</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
                 <Users className="mr-2 h-4 w-4 text-secondarycolor" />
                 <span>Public Avatar</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
                 <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
                 <span>Shopping</span>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>Settings</span>
+                {/* Mobile: Show Popup */}
+                <div onClick={toggleSettingPopup} className="block md:hidden">
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleSettingPopup}
+                  >
+                    <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Settings</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/support"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>Settings</span>
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuSeparator />
+              <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>Support</span>
+                {/* Mobile: Show Popup */}
+                <div onClick={toggleSupportPopup} className="block md:hidden">
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleSupportPopup}
+                  >
+                    <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Support</span>
+                  </button>
+                </div>
+
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/support"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>Support</span>
+                </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -161,91 +259,136 @@ export default function Avatars() {
       </div>
       <div className="h-screen w-full overflow-y-scroll scroll snap-y snap-mandatory">
         {profiles.map((profile) => (
-          <section
+          <motion.section
             key={profile.id}
             className="relative h-screen w-full snap-start snap-always"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
           >
             <div className="absolute inset-0 flex items-center justify-center">
-              <img
+              <motion.img
                 src={profile.imageUrl}
                 alt={profile.name}
                 className="h-full w-full object-cover"
+                initial={{ opacity: 1, scaleX: 1 }}
+                animate={{
+                  opacity: isAnimating ? 0 : 1,
+                  scaleX: isAnimating ? 0.5 : 1,
+                }}
+                exit={{ opacity: 0, scaleX: 0 }}
+                transition={{ duration: 2, ease: "easeOut" }}
               />
               <div className="absolute inset-0 bg-black opacity-30"></div>
             </div>
 
             {/* Action buttons */}
-            <div className="absolute right-5 top-[60%] lg:right-10 lg:top-2/3 -translate-y-1/2 flex flex-col gap-4">
+            <div className="absolute right-5 top-[60%] lg:right-10 lg:top-2/3 -translate-y-1/2 flex flex-col gap-6">
               <Link href="/chat">
-                <div className="flex items-center gap-5">
-                  <Button
-                    variant="secondary"
-                    size="icon"
-                    className="h-12 w-12 rounded-full bg-iconBackground hover:bg-gray-500/70"
-                  >
-                    <UserRound className="h-8 w-8 text-black" />
-                  </Button>
+                <div
+                  className="relative flex items-center gap-5"
+                  onClick={() => {
+                    setIsAnimating(true);
+                    changeAvatar(profile.imageUrl);
+                  }}
+                >
+                  <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+                    <UserRound size={22} className="text-black" />
+
+                    {/* Tooltip */}
+                    <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                      Ask
+                    </div>
+                  </span>
+
+                  {/* Text visible on larger screens */}
                   <span className="hidden lg:block text-whitecolor">Ask</span>
                 </div>
               </Link>
-              <div className="flex items-center gap-5">
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="h-12 w-12 rounded-full bg-iconBackground hover:bg-gray-500/70"
-                >
-                  <ThumbsUp className="h-8 w-8 text-black" />
-                </Button>
+              <div className="relative flex items-center gap-5">
+                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+                  <ThumbsUp size={22} className="text-black" />
+
+                  {/* Tooltip */}
+                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                    Like
+                  </div>
+                </span>
                 <span className="text-whitecolor hidden lg:block">Like</span>
               </div>
-              <div className="flex items-center gap-5">
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="h-12 w-12 rounded-full bg-iconBackground hover:bg-gray-500/70"
-                >
-                  <MessageCircle className="h-8 w-8 text-black" />
-                </Button>
+              <div className="relative flex items-center gap-5">
+                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+                  <MessageCircle size={22} className="text-black" />
+
+                  {/* Tooltip */}
+                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                    Comment
+                  </div>
+                </span>
                 <span className="text-whitecolor hidden lg:block">Comment</span>
               </div>
-              <div className="flex items-center gap-5">
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="h-12 w-12 rounded-full bg-iconBackground hover:bg-gray-500/70"
-                >
-                  <Share2 className="h-8 w-8 text-black" />
-                </Button>
+              <div className="relative flex items-center gap-5">
+                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+                  <Share2 size={22} className="text-black" />
+
+                  {/* Tooltip */}
+                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                    Share
+                  </div>
+                </span>
                 <span className="text-whitecolor hidden lg:block">Share</span>
               </div>
-              <div className="flex items-center gap-5">
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="h-12 w-12 rounded-full bg-iconBackground hover:bg-gray-500/70"
-                >
-                  <MoreHorizontal className="h-8 w-8 text-black" />
-                </Button>
+              <div className="relative flex items-center gap-5">
+                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+                  <MoreHorizontal size={22} className="text-black" />
+
+                  {/* Tooltip */}
+                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                    More
+                  </div>
+                </span>
                 <span className="text-whitecolor hidden lg:block">More</span>
               </div>
             </div>
 
             {/* Profile info */}
-            <div className="w-full absolute bottom-8 justify-center flex items-center px-6 lg:px-0">
+            <div className="w-full absolute bottom-3 justify-center flex items-center px-6 lg:px-0">
               <div className="flex items-center justify-between w-full lg:w-1/3 bg-mediumWhite p-4 text-white rounded-lg">
-                <h2 className="text-xs xl:text-base font-medium">
-                  {profile.name}
+                <h2 className="text-xs xl:text-base font-normal">
+                  Channel: {profile.channel}
                 </h2>
                 <p className="text-xs xl:text-base font-medium">
-                  Channel: {profile.channel}
+                  {profile.name}
                 </p>
-                <p className="text-xs xl:text-base font-medium">
+                <p className="text-xs xl:text-base font-normal">
                   Description: {profile.description}
                 </p>
               </div>
             </div>
-          </section>
+          </motion.section>
         ))}
+      </div>
+
+      {/* Mobile CMS View */}
+      <div className="flex items-center justify-center h-screen md:hidden">
+        {isMobileProfileOpen && (
+          <Profilepopup setIsMobileProfileOpen={setIsMobileProfileOpen} />
+        )}
+
+        {isMobileSubscriptionOpen && (
+          <Subscriptionpopup
+            setIsMobileSubscriptionOpen={setIsMobileSubscriptionOpen}
+          />
+        )}
+
+        {isMobileSupportOpen && (
+          <Supportpopup setIsMobileSupportOpen={setIsMobileSupportOpen} />
+        )}
+
+        {isMobileSettingOpen && (
+          <Settingpopup setIsMobileSettingOpen={setIsMobileSettingOpen} />
+        )}
       </div>
     </div>
   );
