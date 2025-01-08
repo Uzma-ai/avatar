@@ -12,7 +12,7 @@ import {
   Pencil,
   Plus,
   X,
-  Contact,
+  
 } from "lucide-react";
 
 const ProfilePage = () => {
