@@ -202,8 +202,10 @@ export default function ChatAssistant() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
-                    <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>My Avatar</span>
+                    <Link href="/chat" className="flex items-center gap-2">
+                      <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>My Avatar</span>
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <Link href="/avatars">

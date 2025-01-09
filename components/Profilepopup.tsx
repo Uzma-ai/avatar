@@ -31,14 +31,20 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
     setFormData({ ...formData, [name]: value });
   };
 
-  const openCamera = async () => {
-    try {
-      await navigator.mediaDevices.getUserMedia({ video: true });
-      alert("Camera opened successfully!");
-    } catch (err) {
-      console.error("Error accessing the camera", err);
-      alert("Failed to access the camera.");
-    }
+  const openCamera = () => {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*"; // Only allows image capture
+    input.capture = "environment"; // Use "user" for front camera, "environment" for rear camera
+
+    input.onchange = (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
+        alert(`Photo selected: ${file.name}`);
+      }
+    };
+
+    input.click();
   };
 
   const handleButtonClick = () => {
@@ -113,6 +119,8 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 value={formData.email}
                 onChange={handleChange}
                 className="block w-full text-right shadow-sm outline-none"
+                required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               />
             ) : (
               <p className="text-mediumgray2 font-medium text-sm">
@@ -129,6 +137,14 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 value={formData.phone}
                 onChange={handleChange}
                 className="block w-full text-right shadow-sm outline-none"
+                onInput={(e) => {
+                  e.currentTarget.value = e.currentTarget.value.replace(
+                    /[^0-9]/g,
+                    ""
+                  );
+                }}
+                pattern="[0-9]*"
+                required
               />
             ) : (
               <p className="text-mediumgray2 font-medium text-sm">
