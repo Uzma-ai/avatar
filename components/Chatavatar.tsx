@@ -67,7 +67,7 @@ export default function ChatAssistant() {
         {/* Avatar Section */}
         {checked ? (
           <motion.div
-            className="hidden lg:block relative w-1/3 h-full transition-all duration-300"
+            className="hidden md:block relative md:w-2/5 lg:w-1/3 h-full transition-all duration-300"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
@@ -84,12 +84,12 @@ export default function ChatAssistant() {
         {/* Chat Section */}
         <div
           className={`${
-            checked ? "lg:w-2/3 md:w-1/2" : "w-full"
+            checked ? "lg:w-2/3 md:w-3/5" : "w-full"
           } h-screen flex flex-col justify-between transition-all duration-300 relative`}
         >
           {/* Mobile Avatar Section */}
           {checked ? (
-            <div className="absolute inset-0 block lg:hidden -z-10">
+            <div className="absolute inset-0 block md:hidden -z-10">
               <Image
                 src={selectedAvatar}
                 alt="Avatar Background"
@@ -101,7 +101,7 @@ export default function ChatAssistant() {
 
           {/* Navbar section */}
           <div className="w-full h-20 flex items-center justify-between p-2 md:p-6">
-            <div className="flex items-start gap-4">
+            <div className="flex items-end gap-4">
               <DropdownMenu
                 open={isAvatarDropdownOpen}
                 onOpenChange={setIsAvatarDropdoenOpen}
@@ -274,7 +274,7 @@ export default function ChatAssistant() {
               <div className="flex flex-col items-center gap-1">
                 <h2
                   className={`${
-                    checked ? "text-whitecolor lg:text-black" : "text-black"
+                    checked ? "text-whitecolor md:text-black" : "text-black"
                   } text-md font-medium`}
                 >
                   Voice Input
@@ -304,7 +304,7 @@ export default function ChatAssistant() {
             <div className="flex flex-col items-center gap-1">
               <h2
                 className={`${
-                  checked ? "text-whitecolor lg:text-black" : "text-black"
+                  checked ? "text-whitecolor md:text-black" : "text-black"
                 } text-md font-medium`}
               >
                 Avatar
