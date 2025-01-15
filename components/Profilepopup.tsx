@@ -4,6 +4,7 @@ import { Switch } from "@/components/ui/switch";
 import { Pencil, Camera, Upload, Mic } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import Image from "next/image";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 interface ProfilePopupProps {
   setIsMobileProfileOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -240,43 +241,30 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
           {/* Face Modal Checkbox */}
           <div>
             <label className="text-sm font-normal">Face model resolution</label>
-            <div className="flex items-center gap-6 pt-2">
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-1"
-                  name="face-modal"
-                  className="accent-secondarycolor scale-125"
-                />
-                <label htmlFor="option-1" className="text-sm font-normal pb-1">
-                  256
-                </label>
-              </div>
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-2"
-                  name="face-modal"
-                  className="accent-secondarycolor scale-125"
-                />
-                <label htmlFor="option-2" className="text-sm font-normal pb-1">
-                  512
-                </label>
-              </div>
+            <div>
+              <RadioGroup className="flex items-center gap-6 pt-2">
+                <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+                  <RadioGroupItem value="256" id="256" />
+                  <label htmlFor="option-1" className="text-sm font-normal">
+                    256
+                  </label>
+                </div>
+                <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+                  <RadioGroupItem value="512" id="512" />
+                  <label htmlFor="option-2" className="text-sm font-normal">
+                    512
+                  </label>
+                </div>
+              </RadioGroup>
             </div>
           </div>
 
           {/* Preprocess Checkbox */}
           <div>
             <label className="text-sm font-normal">Preprocess</label>
-            <div className="flex items-center gap-6 pt-2 flex-wrap">
+            <RadioGroup className="flex items-center gap-6 pt-2 flex-wrap">
               <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-1"
-                  name="option"
-                  className="accent-secondarycolor scale-125"
-                />
+                <RadioGroupItem value="crop" id="crop" />
                 <label
                   htmlFor="option-1"
                   className="text-xs font-normal pb-0.5"
@@ -285,12 +273,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 </label>
               </div>
               <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-2"
-                  name="option"
-                  className="accent-secondarycolor scale-125"
-                />
+                <RadioGroupItem value="resize" id="resize" />
                 <label
                   htmlFor="option-2"
                   className="text-xs font-normal pb-0.5"
@@ -299,12 +282,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 </label>
               </div>
               <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-3"
-                  name="option"
-                  className="accent-secondarycolor scale-125"
-                />
+                <RadioGroupItem value="full" id="full" />
                 <label
                   htmlFor="option-3"
                   className="text-xs font-normal pb-0.5"
@@ -313,12 +291,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 </label>
               </div>
               <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-4"
-                  name="option"
-                  className="accent-secondarycolor scale-125"
-                />
+                <RadioGroupItem value="extcrop" id="extcrop" />
                 <label
                   htmlFor="option-4"
                   className="text-xs font-normal pb-0.5"
@@ -327,12 +300,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 </label>
               </div>
               <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-5"
-                  name="option"
-                  className="accent-secondarycolor scale-125"
-                />
+                <RadioGroupItem value="extfull" id="extfull" />
                 <label
                   htmlFor="option-5"
                   className="text-xs font-normal pb-0.5"
@@ -340,36 +308,26 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                   Extfull
                 </label>
               </div>
-            </div>
+            </RadioGroup>
           </div>
 
           {/* Face Render Checkbox */}
           <div>
             <label className="text-sm font-normal">Face render</label>
-            <div className="flex items-center gap-6 pt-2">
+            <RadioGroup className="flex items-center gap-6 pt-2">
               <div className="w-32 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-1"
-                  name="face-render"
-                  className="accent-secondarycolor scale-125"
-                />
+                <RadioGroupItem value="video" id="video" />
                 <label htmlFor="option-1" className="text-sm font-normal pb-1">
                   Face vid to vid
                 </label>
               </div>
               <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <input
-                  type="radio"
-                  id="option-2"
-                  name="face-render"
-                  className="accent-secondarycolor scale-125"
-                />
+                <RadioGroupItem value="render" id="render" />
                 <label htmlFor="option-2" className="text-sm font-normal pb-1">
                   Pi render
                 </label>
               </div>
-            </div>
+            </RadioGroup>
           </div>
 
           <div className="space-y-5">
