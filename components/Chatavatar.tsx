@@ -30,6 +30,7 @@ import Profilepopup from "@/components/Profilepopup";
 import Subscriptionpopup from "@/components/Subscriptionpopup";
 import Supportpopup from "@/components/Supportpopup";
 import Settingpopup from "@/components/Settingpopup";
+import Shoppingpopup from "@/components/Shoppingpopup";
 
 export default function ChatAssistant() {
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
@@ -43,6 +44,8 @@ export default function ChatAssistant() {
   const [isMobileSupportOpen, setIsMobileSupportOpen] =
     useState<boolean>(false);
   const [isMobileSettingOpen, setIsMobileSettingOpen] =
+    useState<boolean>(false);
+  const [isMobileShoppingOpen, setIsMobileShoppingOpen] =
     useState<boolean>(false);
 
   const toggleProfilePopup = () => {
@@ -59,6 +62,10 @@ export default function ChatAssistant() {
 
   const toggleSettingPopup = () => {
     setIsMobileSettingOpen(!isMobileSettingOpen);
+  };
+
+  const toggleShoopingPopup = () => {
+    setIsMobileShoppingOpen(!isMobileShoppingOpen);
   };
 
   return (
@@ -216,8 +223,28 @@ export default function ChatAssistant() {
                   </Link>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
-                    <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Shopping</span>
+                    {/* Mobile: Show Popup */}
+                    <div
+                      onClick={toggleShoopingPopup}
+                      className="block md:hidden"
+                    >
+                      <button
+                        className="flex items-center gap-2"
+                        onClick={toggleShoopingPopup}
+                      >
+                        <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>Shopping</span>
+                      </button>
+                    </div>
+
+                    {/* Desktop: Navigate with Link */}
+                    <Link
+                      href="/shooping"
+                      className="hidden md:flex items-center gap-2"
+                    >
+                      <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>Shopping</span>
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
@@ -275,14 +302,14 @@ export default function ChatAssistant() {
                 <h2
                   className={`${
                     checked ? "text-whitecolor md:text-black" : "text-black"
-                  } text-md font-medium`}
+                  } text-sm md:text-base font-medium`}
                 >
                   Voice Input
                 </h2>
                 <div className="flex items-center gap-2">
                   <Label
                     htmlFor="voice-mode"
-                    className="text-sm text-muted-foreground"
+                    className="text-xs md:text-sm text-muted-foreground"
                   >
                     Text
                   </Label>
@@ -294,7 +321,7 @@ export default function ChatAssistant() {
                   />
                   <Label
                     htmlFor="voice-mode"
-                    className="text-sm text-muted-foreground"
+                    className="text-xs md:text-sm text-muted-foreground"
                   >
                     Voice
                   </Label>
@@ -305,14 +332,14 @@ export default function ChatAssistant() {
               <h2
                 className={`${
                   checked ? "text-whitecolor md:text-black" : "text-black"
-                } text-md font-medium`}
+                } text-sm md:text-base font-medium`}
               >
                 Avatar
               </h2>
               <div className="flex items-center gap-2">
                 <Label
                   htmlFor="avatar-mode"
-                  className="text-sm text-muted-foreground"
+                  className="text-xs md:text-sm text-muted-foreground"
                 >
                   Off
                 </Label>
@@ -324,7 +351,7 @@ export default function ChatAssistant() {
                 />
                 <Label
                   htmlFor="avatar-mode"
-                  className="text-sm text-muted-foreground"
+                  className="text-xs md:text-sm text-muted-foreground"
                 >
                   On
                 </Label>
@@ -359,6 +386,10 @@ export default function ChatAssistant() {
 
         {isMobileSettingOpen && (
           <Settingpopup setIsMobileSettingOpen={setIsMobileSettingOpen} />
+        )}
+
+        {isMobileShoppingOpen && (
+          <Shoppingpopup setIsMobileShoppingOpen={setIsMobileShoppingOpen} />
         )}
       </div>
     </div>

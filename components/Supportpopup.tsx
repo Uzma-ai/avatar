@@ -147,25 +147,10 @@ const Supportpopup: React.FC<SupportPopupProps> = ({ setIsMobileSupportOpen }) =
                   <span className="text-xs font-normal">Telegram</span>
                 </Link>
               </button>
-              <button>
-                <Link
-                  href="https://facebook.com"
-                  passHref
-                  className="flex flex-col items-center gap-1"
-                >
-                  <Image
-                    src="/facebook.svg"
-                    alt="Facebook"
-                    width={40}
-                    height={40}
-                  />
-                  <span className="text-xs font-normal">Facebook</span>
-                </Link>
-              </button>
               <button className="flex flex-col items-center gap-1">
                 <Image
-                  src="/facebook.svg"
-                  alt="Whatsapp"
+                  src="/support-chart.svg"
+                  alt="Support"
                   width={40}
                   height={40}
                 />
