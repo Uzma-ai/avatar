@@ -57,6 +57,7 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
     },
   ]);
   const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState(false); 
 
   const handleAddCategory = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim()) {
@@ -73,17 +74,22 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        popupRef.current &&
-        !popupRef.current.contains(event.target as Node)
-      ) {
-        setIsMobileShoppingOpen(false);
-      }
+        if (
+          popupRef.current &&
+          !popupRef.current.contains(event.target as Node) &&
+          !document
+            .querySelector(".dialog-content")
+            ?.contains(event.target as Node)
+        ) {
+          setIsDialogOpen(false);
+          setEditingAddress(null);
+          setIsMobileShoppingOpen(false);
+        }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [setIsMobileShoppingOpen]);
+  }, [setIsMobileShoppingOpen , isDialogOpen]);
 
    const handleAddAddress = () => {
      const newAddress: Address = {
@@ -93,10 +99,13 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
      };
      setAddresses([...addresses, newAddress]);
      setEditingAddress(newAddress);
+     setIsDialogOpen(true);
+     
    };
 
    const handleEditAddress = (address: Address) => {
      setEditingAddress(address);
+     setIsDialogOpen(true);
    };
 
    const handleSaveAddress = (editedAddress: Address) => {
@@ -106,11 +115,13 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
        )
      );
      setEditingAddress(null);
+     setIsDialogOpen(false);
    };
 
    const handleRemoveAddress = (id: string) => {
      setAddresses(addresses.filter((addr) => addr.id !== id));
-   };
+  };
+  
 
   const wishlistItems: ShoppingItem[] = [
     {
@@ -158,7 +169,7 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[38rem] overflow-y-auto scroll"
+        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[40rem] overflow-y-auto scroll"
       >
         <div className="border-b border-secondarycolor pb-4 flex items-center">
           <div>
@@ -358,9 +369,13 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
 
       <Dialog
         open={!!editingAddress}
-        onOpenChange={() => setEditingAddress(null)}
+        onOpenChange={(isOpen) => {
+          if (!isOpen) {
+            setEditingAddress(null);
+          }
+        }}
       >
-        <DialogContent>
+        <DialogContent className="dialog-content">
           <DialogHeader>
             <DialogTitle>
               {editingAddress?.id ? "Edit Address" : "Add Address"}
@@ -384,7 +399,7 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
                       type: e.target.value as "Home" | "Work",
                     })
                   }
-                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+                  className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-mediumgray2 focus:!outline-none focus:!ring-0 sm:text-sm rounded-md"
                 >
                   <option value="Home">Home</option>
                   <option value="Work">Work</option>
@@ -407,11 +422,12 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
                       details: e.target.value.split("\n"),
                     })
                   }
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full border border-mediumgray2 rounded-md shadow-sm py-2 px-3 focus:!outline-none focus:!ring-0 sm:text-sm"
                 />
               </div>
               <div className="flex justify-end space-x-2">
                 <Button
+                  className="border border-secondarycolor text-secondarycolor"
                   variant="outline"
                   onClick={() => setEditingAddress(null)}
                 >

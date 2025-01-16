@@ -9,27 +9,27 @@ const config: Config = {
   ],
   theme: {
   	extend: {
-		  colors: {
-			primarycolor: "#F3F3F3",
-			secondarycolor: "#5D8BE5",
-			legendText:'#F7F7F7',
-			inputbackground: "#E9EEF6",
-			blackcolor: "#1F1F1F",
-			mediumWhite: "#FFFFFF4D",
-			lightWhite: "#ffffff92",
-			blurwhite:"#FFFFFF99",
-			lightgray: "#e1ecee",
-			textMedium:"#A1A1A1",
-			mediumgray: "#D4D4D4",
-			mediumgray2: "#929292",
-			mediumgray3:"#D9D9D9",
-			whitecolor: "#fefefe",
-			iconBackground: "#E9EEF680",
-			dropdownBackground: "#D8D8D84C",
-			borderColor1:"#79747E",
+  		colors: {
+  			primarycolor: '#F3F3F3',
+  			secondarycolor: '#5D8BE5',
+  			legendText: '#F7F7F7',
+  			inputbackground: '#E9EEF6',
+  			blackcolor: '#1F1F1F',
+  			mediumWhite: '#FFFFFF4D',
+  			lightWhite: '#ffffff92',
+  			blurwhite: '#FFFFFF99',
+  			lightgray: '#e1ecee',
+  			textMedium: '#A1A1A1',
+  			mediumgray: '#D4D4D4',
+  			mediumgray2: '#929292',
+  			mediumgray3: '#D9D9D9',
+  			whitecolor: '#fefefe',
+  			iconBackground: '#E9EEF680',
+  			dropdownBackground: '#D8D8D84C',
+  			borderColor1: '#79747E',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-			dropdownlightgray:'#D8D8D84D',
+  			dropdownlightgray: '#D8D8D84D',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
@@ -73,13 +73,38 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-		  },
-		fontFamily: {
-        figtree: ['Figtree', 'sans-serif'],
-		  },
-		  backgroundImage: {
-			 'primary-gradient': 'linear-gradient(171.9deg, #5182E3 0%, #FFFFFF 136.83%)',
-		}
+  		},
+  		fontFamily: {
+  			figtree: [
+  				'Figtree',
+  				'sans-serif'
+  			]
+  		},
+  		backgroundImage: {
+  			'primary-gradient': 'linear-gradient(171.9deg, #5182E3 0%, #FFFFFF 136.83%)'
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
+  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],
