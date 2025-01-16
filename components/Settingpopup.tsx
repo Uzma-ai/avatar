@@ -24,6 +24,8 @@ const Settingpopup: React.FC<SettingPopupProps> = ({
     emailNotification: false,
     voiceNotification: false,
     pushNotification: false,
+    promotionalUpdates: false,
+    importantAlerts:false,
   });
   const [isChanged, setIsChanged] = useState(false);
 
@@ -53,7 +55,7 @@ const Settingpopup: React.FC<SettingPopupProps> = ({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[35rem] overflow-y-auto scroll"
+        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[35.5rem] overflow-y-auto scroll"
         onClick={handlePopupClick}
       >
         <div className="border-b border-secondarycolor pb-4">
@@ -93,7 +95,7 @@ const Settingpopup: React.FC<SettingPopupProps> = ({
               onChange={(e) => handleInputChange("currency", e.target.value)}
             />
           </div>
-          <div className="space-y-4 pt-3">
+          <div className="space-y-2 pt-3">
             <span className="font-semibold text-sm">Manage Notification</span>
             <div className="flex items-center justify-between">
               <span className="text-sm font-normal">Email Notification</span>
@@ -119,6 +121,27 @@ const Settingpopup: React.FC<SettingPopupProps> = ({
                 checked={formData.pushNotification}
                 onCheckedChange={(checked) =>
                   handleInputChange("pushNotification", checked)
+                }
+              />
+            </div>
+          </div>
+          <div className="space-y-2 pt-1.5">
+            <span className="font-semibold text-sm">Notification Type</span>
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-normal">Promotional Updates</span>
+              <Switch
+                checked={formData.promotionalUpdates}
+                onCheckedChange={(checked) =>
+                  handleInputChange("promotionalUpdates", checked)
+                }
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-normal">Important Alerts</span>
+              <Switch
+                checked={formData.importantAlerts}
+                onCheckedChange={(checked) =>
+                  handleInputChange("importantAlerts", checked)
                 }
               />
             </div>

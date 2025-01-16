@@ -80,7 +80,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[22rem] w-full relative h-[38rem] overflow-y-auto scroll"
+        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[22rem] w-full relative h-[40rem] overflow-y-auto scroll"
       >
         <div className="flex items-center justify-between border-b border-secondarycolor pb-4">
           <h1 className="text-lg font-semibold">Personal Information</h1>
@@ -262,8 +262,8 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
           {/* Preprocess Checkbox */}
           <div>
             <label className="text-sm font-normal">Preprocess</label>
-            <RadioGroup className="flex items-center gap-6 pt-2 flex-wrap">
-              <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+            <RadioGroup className="flex items-center gap-3 pt-2 flex-wrap">
+              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
                 <RadioGroupItem value="crop" id="crop" />
                 <label
                   htmlFor="option-1"
@@ -272,7 +272,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                   Crop
                 </label>
               </div>
-              <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
                 <RadioGroupItem value="resize" id="resize" />
                 <label
                   htmlFor="option-2"
@@ -281,7 +281,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                   Resize
                 </label>
               </div>
-              <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
                 <RadioGroupItem value="full" id="full" />
                 <label
                   htmlFor="option-3"
@@ -290,7 +290,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                   Full
                 </label>
               </div>
-              <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
                 <RadioGroupItem value="extcrop" id="extcrop" />
                 <label
                   htmlFor="option-4"
@@ -299,7 +299,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                   Extcrop
                 </label>
               </div>
-              <div className="w-20 px-4 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
                 <RadioGroupItem value="extfull" id="extfull" />
                 <label
                   htmlFor="option-5"
