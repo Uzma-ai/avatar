@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import ContactNumber from '@/components/ContactNumber'
+import ContactNumber from '@/components/ContactNumber';
 import {
   CircleUserRound,
   ShoppingBag,
@@ -12,21 +12,17 @@ import {
   Pencil,
   Plus,
   X,
-  
 } from "lucide-react";
 
 const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState("basicInfo"); // State to toggle sections
-  const [selectedSidebarItem, setSelectedSidebarItem] = useState("Profile"); // State to track selected sidebar item
+  const [selectedSidebarItem, setSelectedSidebarItem] = useState<"Personal Information" | "Create Avatar" | "Dashboard" | "Content" | "Public Avatar" | "Shopping" | "Settings" | "Support">("Dashboard"); // State to track selected sidebar item
   const [isEditing, setIsEditing] = useState(false); // State to track if editing mode is active
   const [shoppingPreferences, setShoppingPreferences] = useState(["Books", "Fashion", "Electronics", "Groceries"]);
   const [interests, setInterests] = useState(["Sports", "Music", "Technology"]);
 
-  interface SidebarItem {
-    item: string;
-  }
-
-  const handleSidebarClick = (item: SidebarItem['item']): void => {
+  
+  const handleSidebarClick = (item: "Personal Information" | "Create Avatar" | "Dashboard" | "Content" | "Public Avatar" | "Shopping" | "Settings" | "Support"): void => {
     setSelectedSidebarItem(item);
   };
 
@@ -44,26 +40,20 @@ const ProfilePage = () => {
       setList([...list, newItem]);
     }
   };
-  
 
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
       <aside className="w-1/6 bg-white shadow-lg p-5 relative">
         <div className="absolute left-0 top-0 flex flex-col items-center">
-          
-        
-          {selectedSidebarItem === "Profile" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '12rem' }}></div>}
-         
           {selectedSidebarItem === "Personal Information" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '14rem' }}></div>}
           {selectedSidebarItem === "Create Avatar" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '16rem' }}></div>}
-          {selectedSidebarItem === "Subscription" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '20rem' }}></div>}
-          {selectedSidebarItem === "My Avatar" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '22rem' }}></div>}
-          {selectedSidebarItem === "Public Avatar" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '25rem' }}></div>}
-          {selectedSidebarItem === "Shopping" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '29rem' }}></div>}
-          {selectedSidebarItem === "Settings" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '31rem' }}></div>}
-          {selectedSidebarItem === "Support" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '34rem' }}></div>}
-           
+          {selectedSidebarItem === "Dashboard" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '15.5rem' }}></div>}
+          {selectedSidebarItem === "Content" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '18rem' }}></div>}
+          {selectedSidebarItem === "Public Avatar" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '21rem' }}></div>}
+          {selectedSidebarItem === "Shopping" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '24rem' }}></div>}
+          {selectedSidebarItem === "Settings" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '27rem' }}></div>}
+          {selectedSidebarItem === "Support" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '30rem' }}></div>}
         </div>
         <div className="mb-8">
           <img src="/Avatar4.png" alt="Logo" className="w-2/4 ml-4" />
@@ -72,60 +62,61 @@ const ProfilePage = () => {
           <ul className="space-y-6">
             <li>
               <div className="mt-2 rounded-md overflow-hidden relative">
-                <a href="#" className="flex items-center bg-secondarycolor p-2" onClick={() => handleSidebarClick("Profile")}>
-                  {selectedSidebarItem === "Profile" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
-                  <User className="mr-2 h-6 w-6 text-white" />
-                  <span className="text-white">Profile</span>
+                <a
+                  href="/dashboard"
+                  className={`flex items-center p-2 ${["Personal Information", "Create Avatar"].includes(selectedSidebarItem) ? "bg-secondarycolor text-white" : "bg-white text-black"}`}
+                  onClick={() => handleSidebarClick("Dashboard")}
+                >
+                  {["Personal Information", "Create Avatar"].includes(selectedSidebarItem) && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
+                  <User className={`mr-2 h-6 w-6 ${["Personal Information", "Create Avatar"].includes(selectedSidebarItem) ? "text-white" : "text-black"}`} />
+                  <span>Dashboard</span>
                 </a>
-                <div className="p-2 bg-blue-100">
-                  <a href="#" className="text-black flex items-center" onClick={() => handleSidebarClick("Personal Information")}>
-                    {selectedSidebarItem === "Personal Information" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
-                    Personal Information
-                  </a>
-                  <div className="text-black mt-2">
-                    Create Avatar
+                {["Personal Information", "Create Avatar"].includes(selectedSidebarItem) && (
+                  <div className="p-2 bg-blue-100">
+                    <a href="#" className="text-black flex items-center" onClick={() => handleSidebarClick("Personal Information")}>
+                      {["Personal Information"].includes(selectedSidebarItem) && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
+                      Personal Information
+                    </a>
+                    <a href="#" className="text-black mt-2 flex items-center" onClick={() => handleSidebarClick("Create Avatar")}>
+                      {selectedSidebarItem === "Create Avatar" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
+                      Create Avatar
+                    </a>
                   </div>
-                </div>
+                )}
               </div>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Subscription")}>
-                {selectedSidebarItem === "Subscription" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
+              <a href="/dashboard" className="flex items-center" onClick={() => handleSidebarClick("Dashboard")}>
                 <ShoppingCart className="mr-2 h-6 w-6 text-black" />
-                <span>Subscription</span>
+                <span>Dashboard</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("My Avatar")}>
-                {selectedSidebarItem === "My Avatar" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
+              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Content")}>
                 <CircleUserRound className="mr-2 h-6 w-6 text-black" />
-                <span>My Avatar</span>
+                <span>Content</span>
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Public Avatar")}>
-                {selectedSidebarItem === "Public Avatar" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
+              <a href="/public-cms-sidebar-test" className="flex items-center" onClick={() => handleSidebarClick("Public Avatar")}>
                 <Users className="mr-2 h-6 w-6 text-black" />
                 <span>Public Avatar</span>
               </a>
             </li>
             <li>
               <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Shopping")}>
-                {selectedSidebarItem === "Shopping" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
                 <ShoppingBag className="mr-2 h-6 w-6 text-black" />
                 <span>Shopping</span>
               </a>
             </li>
             <li>
               <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Settings")}>
-                {selectedSidebarItem === "Settings" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
                 <Settings className="mr-2 h-6 w-6 text-black" />
                 <span>Settings</span>
               </a>
             </li>
             <li>
-              <a href="#" className={`flex items-center ${selectedSidebarItem === "Support" ? "font-bold" : ""}`} onClick={() => handleSidebarClick("Support")}>
-                {selectedSidebarItem === "Support" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
+              <a href="#" className={`flex items-center $`} onClick={() => handleSidebarClick("Support")}>
                 <MessageCircleQuestion className="mr-2 h-6 w-6 text-black" />
                 <span>Support</span>
               </a>
@@ -136,15 +127,14 @@ const ProfilePage = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-8 overflow-auto scrollbar-none bg-white">
-        
         <div className="flex justify-between items-center mb-4 p-4 rounded-md sticky top-0 bg-white z-10">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
               <User className="mr-2 h-6 w-6 text-black" />
-              <span>Profile</span>
+              <span>Dashboard</span>
             </h2>
             <div className="text-black ml-4">
-              Profile &gt; <span className="text-black ">{selectedSidebarItem}</span>
+              Dashboard &gt; <span className="text-black ">{selectedSidebarItem}</span>
             </div>
           </div>
           <button className="px-4 py-2 bg-white text-black rounded-md flex items-center border border-black" onClick={handleEditClick}>
@@ -354,19 +344,14 @@ const ProfilePage = () => {
                       </div>
                     </div>
                     <div>
-                  <label className="block text-sm font-medium mb-1">
-                    
-                  </label>
-                  <input type="text" className="w-full border rounded-md p-2" placeholder="Add categories" />
-                </div>
+                      <label className="block text-sm font-medium mb-1"></label>
+                      <input type="text" className="w-full border rounded-md p-2" placeholder="Add categories" />
+                    </div>
 
-                <div>
-                  <label className="block text-sm font-medium mb-1">
-                    
-                  </label>
-                  <input type="text" className="w-full border rounded-md p-2" placeholder="Add interests" />
-                </div>
-                  
+                    <div>
+                      <label className="block text-sm font-medium mb-1"></label>
+                      <input type="text" className="w-full border rounded-md p-2" placeholder="Add interests" />
+                    </div>
                   </>
                 )}
                 {isEditing && (
