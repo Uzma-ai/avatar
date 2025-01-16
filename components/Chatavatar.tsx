@@ -264,7 +264,7 @@ export default function ChatAssistant() {
 
                     {/* Desktop: Navigate with Link */}
                     <Link
-                      href="/support"
+                      href="/settings"
                       className="hidden md:flex items-center gap-2"
                     >
                       <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
