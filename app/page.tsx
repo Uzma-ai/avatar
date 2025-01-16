@@ -61,7 +61,7 @@ export default function Login() {
           <div className="lg:w-2/3 relative w-full h-screen flex items-center justify-center transition-all duration-300  bg-black/50 sm:bg-primarycolor">
             <div className="absolute inset-0 block lg:hidden -z-10">
               <Image
-                src="/avatar.png"
+                src="/Avatar-bg.png"
                 alt="Avatar Background"
                 fill
                 className="object-cover"

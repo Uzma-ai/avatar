@@ -23,15 +23,10 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
   const [userInput, setUserInput] = useState<string>("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isRecording, setIsRecording] = useState(false);
-  const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(
-    null
-  );
-  const [audioChunks, setAudioChunks] = useState<Blob[]>([]);
-  const [pendingAudio, setPendingAudio] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const socketConnection: Socket = io("http://localhost:8000");
+    const socketConnection: Socket = io("http://localhost:5050");
 
     socketConnection.on("connect", () => {
       console.log("WebSocket connection established");
@@ -50,6 +45,11 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
       };
 
       setMessages((prevMessages) => [...prevMessages, botMessage]);
+
+      const utterance = new SpeechSynthesisUtterance(data.response);
+      utterance.lang = "en-US"; // Set the language for speech synthesis
+      window.speechSynthesis.speak(utterance);
+
     });
 
     setSocket(socketConnection);
@@ -63,84 +63,6 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const startRecording = async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    const recorder = new MediaRecorder(stream);
-
-    recorder.ondataavailable = (event) => {
-      setAudioChunks((prev) => [...prev, event.data]);
-    };
-
-    recorder.onstop = () => {
-      const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
-
-      // Ensure the Blob is valid and playable
-      console.log("Audio Blob size:", audioBlob.size);
-      console.log("Audio Blob type:", audioBlob.type);
-
-      // Create a URL for playback
-      const audioURL = URL.createObjectURL(audioBlob);
-
-      // Save the recorded audio URL for preview
-      setPendingAudio(audioURL);
-
-      // Clear the chunks to prepare for the next recording
-      setAudioChunks([]);
-    };
-
-    recorder.start();
-    setMediaRecorder(recorder);
-    setIsRecording(true);
-  };
-
-  const stopRecording = () => {
-    if (mediaRecorder) {
-      mediaRecorder.stop();
-    }
-    setIsRecording(false);
-  };
-
-  const sendAudioToBackend = async (audioBlob: Blob) => {
-    const formData = new FormData();
-    formData.append("audio", audioBlob);
-
-    try {
-      const response = await fetch("http://localhost:8000/process-audio", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to process audio");
-      }
-
-      console.log("Audio successfully sent to the backend");
-    } catch (error) {
-      console.error("Error sending audio to backend:", error);
-    }
-  };
-
-  const handleSendAudio = () => {
-    if (pendingAudio) {
-      // Add the recorded audio to the chat
-      const newMessage: Message = {
-        text: "",
-        sender: "user",
-        audioURL: pendingAudio,
-      };
-      setMessages((prevMessages) => [...prevMessages, newMessage]);
-
-      // Convert audio URL to a Blob for sending to the backend
-      fetch(pendingAudio)
-        .then((res) => res.blob())
-        .then((audioBlob) => sendAudioToBackend(audioBlob))
-        .catch((error) =>
-          console.error("Error converting audio URL to Blob:", error)
-        );
-
-      setPendingAudio(null); // Clear the pending audio
-    }
-  };
 
   const handleSendMessage = () => {
     if (socket && userInput.trim()) {
@@ -179,29 +101,6 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
               </div>
             </div>
           ))}
-          {pendingAudio && (
-            <div className="mb-4 text-right">
-              <div className="inline-block p-3 rounded-lg bg-lightgray max-w-[80%]">
-                <audio
-                  controls
-                  className="w-full"
-                  onError={(e) => {
-                    const nativeEvent = e.nativeEvent;
-                    console.error("Audio playback error:", nativeEvent);
-                  }}
-                >
-                  <source src={pendingAudio} type="audio/webm" />
-                  Your browser does not support the audio element.
-                </audio>
-                <Button
-                  onClick={handleSendAudio}
-                  className="mt-2 bg-secondarycolor w-full"
-                >
-                  Send Audio
-                </Button>
-              </div>
-            </div>
-          )}
         </div>
         <div ref={messagesEndRef} />
       </ScrollArea>
@@ -226,7 +125,9 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
                 <Button
                   className="bg-secondarycolor rounded-full w-10 h-10"
                   type="button"
-                  onClick={startRecording}
+                  onClick={() => {
+                    setIsRecording(true);
+                  }}
                 >
                   <Mic className="h-4 w-4" />
                 </Button>
@@ -234,7 +135,9 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
                 <Button
                   className="bg-secondarycolor rounded-full w-10 h-10"
                   type="button"
-                  onClick={stopRecording}
+                  onClick={() => {
+                    setIsRecording(false);
+                  }}
                 >
                   <Square className="h-4 w-4" />
                 </Button>

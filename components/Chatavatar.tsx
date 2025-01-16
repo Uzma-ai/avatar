@@ -30,6 +30,7 @@ import Profilepopup from "@/components/Profilepopup";
 import Subscriptionpopup from "@/components/Subscriptionpopup";
 import Supportpopup from "@/components/Supportpopup";
 import Settingpopup from "@/components/Settingpopup";
+import Shoppingpopup from "@/components/Shoppingpopup";
 
 export default function ChatAssistant() {
   const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
@@ -43,6 +44,8 @@ export default function ChatAssistant() {
   const [isMobileSupportOpen, setIsMobileSupportOpen] =
     useState<boolean>(false);
   const [isMobileSettingOpen, setIsMobileSettingOpen] =
+    useState<boolean>(false);
+  const [isMobileShoppingOpen, setIsMobileShoppingOpen] =
     useState<boolean>(false);
 
   const toggleProfilePopup = () => {
@@ -61,13 +64,17 @@ export default function ChatAssistant() {
     setIsMobileSettingOpen(!isMobileSettingOpen);
   };
 
+  const toggleShoopingPopup = () => {
+    setIsMobileShoppingOpen(!isMobileShoppingOpen);
+  };
+
   return (
     <div className="relative flex h-screen overflow-hidden lg:bg-primarycolor text-black">
       <div className="md:flex md:items-center md:justify-center w-full h-full">
         {/* Avatar Section */}
         {checked ? (
           <motion.div
-            className="hidden lg:block relative w-1/3 h-full transition-all duration-300"
+            className="hidden md:block relative md:w-2/5 lg:w-1/3 h-full transition-all duration-300"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
@@ -84,12 +91,12 @@ export default function ChatAssistant() {
         {/* Chat Section */}
         <div
           className={`${
-            checked ? "lg:w-2/3 md:w-1/2" : "w-full"
+            checked ? "lg:w-2/3 md:w-3/5" : "w-full"
           } h-screen flex flex-col justify-between transition-all duration-300 relative`}
         >
           {/* Mobile Avatar Section */}
           {checked ? (
-            <div className="absolute inset-0 block lg:hidden -z-10">
+            <div className="absolute inset-0 block md:hidden -z-10">
               <Image
                 src={selectedAvatar}
                 alt="Avatar Background"
@@ -101,7 +108,7 @@ export default function ChatAssistant() {
 
           {/* Navbar section */}
           <div className="w-full h-20 flex items-center justify-between p-2 md:p-6">
-            <div className="flex items-start gap-4">
+            <div className="flex items-end gap-4">
               <DropdownMenu
                 open={isAvatarDropdownOpen}
                 onOpenChange={setIsAvatarDropdoenOpen}
@@ -202,8 +209,10 @@ export default function ChatAssistant() {
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
-                    <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>My Avatar</span>
+                    <Link href="/chat" className="flex items-center gap-2">
+                      <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>My Avatar</span>
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <Link href="/avatars">
@@ -214,8 +223,28 @@ export default function ChatAssistant() {
                   </Link>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
-                    <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
-                    <span>Shopping</span>
+                    {/* Mobile: Show Popup */}
+                    <div
+                      onClick={toggleShoopingPopup}
+                      className="block md:hidden"
+                    >
+                      <button
+                        className="flex items-center gap-2"
+                        onClick={toggleShoopingPopup}
+                      >
+                        <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>Shopping</span>
+                      </button>
+                    </div>
+
+                    {/* Desktop: Navigate with Link */}
+                    <Link
+                      href="/shooping"
+                      className="hidden md:flex items-center gap-2"
+                    >
+                      <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                      <span>Shopping</span>
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                   <DropdownMenuItem>
@@ -272,15 +301,15 @@ export default function ChatAssistant() {
               <div className="flex flex-col items-center gap-1">
                 <h2
                   className={`${
-                    checked ? "text-whitecolor lg:text-black" : "text-black"
-                  } text-md font-medium`}
+                    checked ? "text-whitecolor md:text-black" : "text-black"
+                  } text-sm md:text-base font-medium`}
                 >
                   Voice Input
                 </h2>
                 <div className="flex items-center gap-2">
                   <Label
                     htmlFor="voice-mode"
-                    className="text-sm text-muted-foreground"
+                    className="text-xs md:text-sm text-muted-foreground"
                   >
                     Text
                   </Label>
@@ -292,7 +321,7 @@ export default function ChatAssistant() {
                   />
                   <Label
                     htmlFor="voice-mode"
-                    className="text-sm text-muted-foreground"
+                    className="text-xs md:text-sm text-muted-foreground"
                   >
                     Voice
                   </Label>
@@ -302,15 +331,15 @@ export default function ChatAssistant() {
             <div className="flex flex-col items-center gap-1">
               <h2
                 className={`${
-                  checked ? "text-whitecolor lg:text-black" : "text-black"
-                } text-md font-medium`}
+                  checked ? "text-whitecolor md:text-black" : "text-black"
+                } text-sm md:text-base font-medium`}
               >
                 Avatar
               </h2>
               <div className="flex items-center gap-2">
                 <Label
                   htmlFor="avatar-mode"
-                  className="text-sm text-muted-foreground"
+                  className="text-xs md:text-sm text-muted-foreground"
                 >
                   Off
                 </Label>
@@ -322,7 +351,7 @@ export default function ChatAssistant() {
                 />
                 <Label
                   htmlFor="avatar-mode"
-                  className="text-sm text-muted-foreground"
+                  className="text-xs md:text-sm text-muted-foreground"
                 >
                   On
                 </Label>
@@ -357,6 +386,10 @@ export default function ChatAssistant() {
 
         {isMobileSettingOpen && (
           <Settingpopup setIsMobileSettingOpen={setIsMobileSettingOpen} />
+        )}
+
+        {isMobileShoppingOpen && (
+          <Shoppingpopup setIsMobileShoppingOpen={setIsMobileShoppingOpen} />
         )}
       </div>
     </div>

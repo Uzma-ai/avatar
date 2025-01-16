@@ -19,6 +19,7 @@ const config: Config = {
 			lightWhite: "#ffffff92",
 			blurwhite:"#FFFFFF99",
 			lightgray: "#e1ecee",
+			textMedium:"#A1A1A1",
 			mediumgray: "#D4D4D4",
 			mediumgray2: "#929292",
 			mediumgray3:"#D9D9D9",

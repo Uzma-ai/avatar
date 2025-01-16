@@ -196,8 +196,10 @@ export default function Avatars() {
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-                <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>My Avatar</span>
+                <Link href="/chat" className="flex items-center gap-2">
+                  <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>My Avatar</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
@@ -284,71 +286,71 @@ export default function Avatars() {
             </div>
 
             {/* Action buttons */}
-            <div className="absolute right-5 top-[60%] lg:right-10 lg:top-2/3 -translate-y-1/2 flex flex-col gap-6">
+            <div className="absolute right-5 top-[64%] lg:right-10 lg:top-2/3 -translate-y-1/2 flex flex-col gap-4">
               <Link href="/chat">
                 <div
-                  className="relative flex items-center gap-5"
+                  className="relative flex flex-col items-center gap-1"
                   onClick={() => {
                     setIsAnimating(true);
                     changeAvatar(profile.imageUrl);
                   }}
                 >
-                  <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+                  <span className="relative group h-10 w-10 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
                     <UserRound size={22} className="text-black" />
 
                     {/* Tooltip */}
-                    <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                    {/* <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
                       Ask
-                    </div>
+                    </div> */}
                   </span>
 
                   {/* Text visible on larger screens */}
-                  <span className="hidden lg:block text-whitecolor">Ask</span>
+                  <span className="text-whitecolor text-sm">Ask</span>
                 </div>
               </Link>
-              <div className="relative flex items-center gap-5">
-                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+              <div className="relative flex flex-col items-center gap-1">
+                <span className="relative group h-10 w-10 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
                   <ThumbsUp size={22} className="text-black" />
 
                   {/* Tooltip */}
-                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                  {/* <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
                     Like
-                  </div>
+                  </div> */}
                 </span>
-                <span className="text-whitecolor hidden lg:block">Like</span>
+                <span className="text-whitecolor text-sm">Like</span>
               </div>
-              <div className="relative flex items-center gap-5">
-                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+              <div className="relative flex flex-col items-center gap-1">
+                <span className="relative group h-10 w-10 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
                   <MessageCircle size={22} className="text-black" />
 
                   {/* Tooltip */}
-                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                  {/* <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
                     Comment
-                  </div>
+                  </div> */}
                 </span>
-                <span className="text-whitecolor hidden lg:block">Comment</span>
+                <span className="text-whitecolor text-sm">Comment</span>
               </div>
-              <div className="relative flex items-center gap-5">
-                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+              <div className="relative flex flex-col items-center gap-1">
+                <span className="relative group h-10 w-10 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
                   <Share2 size={22} className="text-black" />
 
                   {/* Tooltip */}
-                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                  {/* <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
                     Share
-                  </div>
+                  </div> */}
                 </span>
-                <span className="text-whitecolor hidden lg:block">Share</span>
+                <span className="text-whitecolor text-sm">Share</span>
               </div>
-              <div className="relative flex items-center gap-5">
-                <span className="relative group h-12 w-12 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
+              <div className="relative flex flex-col items-center gap-1">
+                <span className="relative group h-10 w-10 rounded-full flex items-center justify-center bg-iconBackground hover:bg-gray-500/70">
                   <MoreHorizontal size={22} className="text-black" />
 
                   {/* Tooltip */}
-                  <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
+                  {/* <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-iconBackground text-white text-sm px-2 py-1 rounded opacity-0 group-hover:opacity-100 lg:hidden">
                     More
-                  </div>
+                  </div> */}
                 </span>
-                <span className="text-whitecolor hidden lg:block">More</span>
+                <span className="text-whitecolor text-sm">More</span>
               </div>
             </div>
 
