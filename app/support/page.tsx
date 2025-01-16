@@ -41,10 +41,7 @@ const SupportPage = () => {
     setIsThankYouPopupOpen(true);
   };
 
-  const handleCloseThankYouPopup = () => {
-    setIsThankYouPopupOpen(false);
-  };
-
+ 
   return (
     <div className="relative flex h-screen bg-gray-100">
       <CmsSidebar isOpen={true} />
@@ -75,7 +72,7 @@ const SupportPage = () => {
                   <Mail className="mr-2 h-6 w-6 text-secondarycolor" />
                   <span>Email Support</span>
                 </h2>
-                <p className="text-gray-400 text-sm">Send us a detailed email, and we'll get back to you within 24 hours.</p>
+                <p className="text-gray-400 text-sm">Send us a detailed email, and we&apos;ll get back to you within 24 hours.</p>
               </div>
               <button className="bg-secondarycolor text-white py-2 px-14 rounded-md">Contact by Email</button>
             </div>

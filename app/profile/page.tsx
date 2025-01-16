@@ -21,10 +21,7 @@ const ProfilePage = () => {
   const [shoppingPreferences, setShoppingPreferences] = useState(["Books", "Fashion", "Electronics", "Groceries"]);
   const [interests, setInterests] = useState(["Sports", "Music", "Technology"]);
 
-  interface SidebarItem {
-    item: string;
-  }
-
+  
   const handleSidebarClick = (item: "Personal Information" | "Create Avatar" | "Dashboard" | "Content" | "Public Avatar" | "Shopping" | "Settings" | "Support"): void => {
     setSelectedSidebarItem(item);
   };

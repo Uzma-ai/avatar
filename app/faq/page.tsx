@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { RiQuestionnaireLine, RiSearchLine } from "react-icons/ri";
 import {
   DropdownMenu,
@@ -25,7 +25,7 @@ import { MdOutlineQuestionAnswer } from "react-icons/md";
 import Link from "next/link";
 
 const FAQPage: React.FC = () => {
-  const [faqs, setFaqs] = useState([]);
+ 
   const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
   const [isGeneralQuestionsOpen, setIsGeneralQuestionsOpen] = useState(false);
   const [isAccountSubscriptionOpen, setIsAccountSubscriptionOpen] = useState(false);
@@ -113,7 +113,7 @@ const FAQPage: React.FC = () => {
               <ArrowLeft className="h-4 w-4 text-blackcolor" />
             </button>
             
-            
+
           </Link>
           <DropdownMenu
             open={isAvatarDropdownOpen}
@@ -293,7 +293,7 @@ const FAQPage: React.FC = () => {
             <div className="p-4 ">
               <div className="mb-4">
                 <h3 className="font-semibold">Q: How do I create an account?</h3>
-                <p className="text-base">A: Click on "Sign Up" and follow the registration process by entering your details.</p>
+                <p className="text-base">A: Click on &quot;Sign Up&quot; and follow the registration process by entering your details.</p>
               </div>
               <div>
                 <h3 className="font-semibold">Q: How do I upgrade to a premium subscription?</h3>
@@ -316,7 +316,7 @@ const FAQPage: React.FC = () => {
               </div>
               <div>
                 <h3 className="font-semibold">Q: How can I edit my avatar?</h3>
-                <p className="text-base">A: Go to the My Avatar section and "Edit Avatar".</p>
+                <p className="text-base">A: Go to the My Avatar section and &quot;Edit Avatar&quot;.</p>
               </div>
             </div>
           )}
@@ -330,7 +330,7 @@ const FAQPage: React.FC = () => {
           {isTroubleshootingOpen && (
             <div className="p-4 ">
               <div className="mb-4">
-                <h3 className="font-semibold">Q: My avatar isn't syncing with my profile.What should I do?</h3>
+                <h3 className="font-semibold">Q: My avatar isn&apos;t syncing with my profile.What should I do?</h3>
                 <p className="text-base">A: Ensure your account is verified. If the problem persists, contact support.</p>
               </div>
               <div>
@@ -387,7 +387,7 @@ const FAQPage: React.FC = () => {
                   <Mail className=" h-6 w-6 text-secondarycolor mt-1" />
                   <span>Email Support</span>
                 </h2>
-                <p className="text-gray-400 text-sm ml-24 mt-1">Send us a detailed email, and we'll get back to you within 24 hours.</p>
+                <p className="text-gray-400 text-sm ml-24 mt-1">Send us a detailed email, and we&apos;ll get back to you within 24 hours.</p>
               </div>
               <button className="bg-secondarycolor text-white py-2 px-24 rounded-md ml-40 mb-6 mt[-2]">Contact by Email</button>
             </div>

@@ -7,7 +7,7 @@ import {
   Settings,
   ShoppingCart,
   MessageCircleQuestion,
-  User,
+  
 } from "lucide-react";
 
 interface PublicCmsSidebarProps {

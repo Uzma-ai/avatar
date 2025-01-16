@@ -157,7 +157,7 @@ const SubscriptionPage = () => {
               {isPremiumSelected && (
                 <div className="w-1/2 flex flex-col items-center justify-center">
                   <div className="flex items-center justify-center">
-                    <h2 className="text-xl font-semibold text-black mr-64 mt-4">You're a Premium Member!</h2>
+                    <h2 className="text-xl font-semibold text-black mr-64 mt-4">You&apos;re a Premium Member!</h2>
                   </div>
                   <div>
                     <p className="text-gray-600 mt-2 mr-40">Thank you for being part of our premium family!</p>
