@@ -35,7 +35,7 @@ const Subscriptionpopup: React.FC<SubscriptionPopupProps> = ({ setIsMobileSubscr
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[38rem] overflow-y-auto scroll"
+        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[40rem] overflow-y-auto scroll"
       >
         <div className="border-b border-secondarycolor pb-4">
           <h1 className="text-lg font-semibold">Your Current Subscription</h1>
