@@ -27,32 +27,28 @@ const SubscriptionPage = () => {
   };
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-full bg-white">
       <CmsSidebar isOpen={true} />
-      <div className="flex-1 p-8 overflow-auto scrollbar-none bg-white">
-        <div className="flex justify-between items-center mb-4 p-4 rounded-md sticky top-0 bg-white z-10">
+      <div className="flex-1 h-full p-8 overflow-hidden">
+        <div className="flex justify-between items-center h-28 p-4 rounded-md">
           <div>
-            <h2 className="text-2xl font-semibold mb-4 flex items-center">
+            <h2 className="text-2xl font-bold mb-4 flex items-center">
               <ShoppingCart className="mr-2 h-6 w-6 text-black" />
               <span>Subscription</span>
             </h2>
-           
-            <div className="flex items-center text-black" style={{ width: '100%' }}>
-  <span>Subscription</span>
-  <button
-    className="px-10 py-2 bg-secondarycolor text-white rounded-md flex items-center"
-    style={{ marginLeft: 'auto' }}
-  >
-    <FaHeadset className="mr-2 h-4 w-4" />
-    Contact Support
-  </button>
-</div>
-
-          
-
+            <div className="text-black ml-4">
+              Subscription
+            </div>
           </div>
+          {isPremiumSelected && (
+            <button className="px-10 py-2 bg-secondarycolor text-white rounded-md flex items-center">
+              <FaHeadset className="mr-2 h-4 w-4" />
+              Contact Support
+            </button>
+          )}
         </div>
-        <div className="bg-gray-100 p-4">
+
+        <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
           <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
             <h1 className="text-2xl font-bold mb-2">Upgrade Your Experience</h1>
             <div className="flex justify-between items-center mb-6">
@@ -66,7 +62,6 @@ const SubscriptionPage = () => {
             <hr className="border-t-2 border-secondarycolor mb-6" />
 
             <div className="flex justify-between items-start mb-4">
-              {/* Current Plan Section */}
               {!isPremiumSelected && (
                 <div className="w-1/2 mr-4">
                   <div className="flex items-center">
@@ -101,12 +96,11 @@ const SubscriptionPage = () => {
                 </div>
               )}
 
-              {/* Premium Plan Section */}
               <div className={`w-1/2 border border-secondarycolor p-4 rounded-lg ${isPremiumSelected ? "mr-4" : ""}`} onClick={handlePremiumClick}>
-              <button className="flex items-center">
-              <TfiMedall className="w-8 h-8 text-secondarycolor mr-2" />
-              <h2 className="text-xl font-bold text-secondarycolor">Premium Plan</h2>
-            </button>
+                <button className="flex items-center">
+                  <TfiMedall className="w-8 h-8 text-secondarycolor mr-2" />
+                  <h2 className="text-xl font-bold text-secondarycolor">Premium Plan</h2>
+                </button>
 
                 <div className="mt-4">
                   <h3 className="text-lg font-semibold mb-2">Why Get Premium?</h3>
@@ -153,7 +147,6 @@ const SubscriptionPage = () => {
                 </div>
               </div>
 
-              {/* Thank You Message */}
               {isPremiumSelected && (
                 <div className="w-1/2 flex flex-col items-center justify-center">
                   <div className="flex items-center justify-center">
