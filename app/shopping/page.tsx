@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
 const ShoppingPage = () => {
-  const [isPremiumSelected, setIsPremiumSelected] = useState(false);
+  const [] = useState(false);
   const [categories, setCategories] = useState<string[]>(["Books"]);
   const [inputValue, setInputValue] = useState("");
   const [wishlistItems] = useState([
@@ -83,8 +83,8 @@ const ShoppingPage = () => {
         "Maharashtra",],
     },
   ]);
-  const [editingAddress, setEditingAddress] = useState<{ id: string; type: string; details: string[] } | null>(null);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [, setEditingAddress] = useState<{ id: string; type: string; details: string[] } | null>(null);
+  const [, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     const sidebarItem = document.querySelector('[data-sidebar-item="Shopping"]');
@@ -93,9 +93,6 @@ const ShoppingPage = () => {
     }
   }, []);
 
-  const handlePremiumClick = () => {
-    setIsPremiumSelected(true);
-  };
 
   const handleAddCategory = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim()) {
@@ -126,15 +123,6 @@ const ShoppingPage = () => {
     setIsDialogOpen(true);
   };
 
-  const handleSaveAddress = (editedAddress: { id: string; type: string; details: string[] }) => {
-    setAddresses(
-      addresses.map((addr) =>
-        addr.id === editedAddress.id ? editedAddress : addr
-      )
-    );
-    setEditingAddress(null);
-    setIsDialogOpen(false);
-  };
 
   const handleRemoveAddress = (id: string) => {
     setAddresses(addresses.filter((addr) => addr.id !== id));

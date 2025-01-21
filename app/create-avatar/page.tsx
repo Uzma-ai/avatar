@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect,useRef } from "react";
 import CmsSidebar from "@/components/cms-sidebar";
 import { Users, Pencil, Upload, Mic } from "lucide-react";
 import { FaPlay } from "react-icons/fa";
@@ -10,7 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const CreateAvatarPage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [, setIsPremiumSelected] = useState(false);
+  
 
   useEffect(() => {
     const sidebarItem = document.querySelector('[data-sidebar-item="Create-Avatar"]');
@@ -19,9 +19,7 @@ const CreateAvatarPage = () => {
     }
   }, []);
 
-  const handlePremiumClick = () => {
-    setIsPremiumSelected(true);
-  };
+ 
 
   const openCamera = () => {
     const input = document.createElement("input");
