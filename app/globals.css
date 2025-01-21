@@ -118,3 +118,21 @@
       content: "";
       @apply absolute left-1 w-4 h-4 bg-pink-500 rounded-full;
     }
+
+    html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.custom-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+
 import CmsSidebar from "@/components/cms-sidebar";
 import { MessageCircleQuestion, Mail, Image, Search,Pencil } from "lucide-react";
 import { FaHeadset } from "react-icons/fa6";
@@ -43,7 +44,7 @@ const SupportPage = () => {
 
  
   return (
-    <div className="relative flex h-screen bg-gray-100">
+    <div className="flex h-full bg-white">
       <CmsSidebar isOpen={true} />
       <div className={`flex-1 p-8 overflow-auto scrollbar-none bg-white ${isChatPopupOpen || isTicketPopupOpen || isThankYouPopupOpen ? 'opacity-50' : ''}`}>
         <div className="flex justify-between items-center mb-4 p-4 rounded-md sticky top-0 bg-white z-10">
@@ -57,7 +58,7 @@ const SupportPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-100 p-4">
+        <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
           <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
             <h1 className="text-xl font-semibold mb-2">Need Help with Your Avatar?</h1>
             <div className="mb-6">
@@ -72,7 +73,7 @@ const SupportPage = () => {
                   <Mail className="mr-2 h-6 w-6 text-secondarycolor" />
                   <span>Email Support</span>
                 </h2>
-                <p className="text-gray-400 text-sm">Send us a detailed email, and we&apos;ll get back to you within 24 hours.</p>
+                <p className="text-gray-400 text-sm">Send us a detailed email, and we&;ll get back to you within 24 hours.</p>
               </div>
               <button className="bg-secondarycolor text-white py-2 px-14 rounded-md">Contact by Email</button>
             </div>
@@ -157,7 +158,7 @@ const SupportPage = () => {
                 ></textarea>
               </div>
               <div className="col-span-2 flex justify-end space-x-4 mt-8">
-                <button type="submit" className="px-10 py-2 bg-gray-300 text-gray-400 rounded-md">Submit</button>
+                <button type="submit" className="px-10 py-2 bg-secondarycolor text-white rounded-md">Submit</button>
               </div>
             </form>
           </div>
