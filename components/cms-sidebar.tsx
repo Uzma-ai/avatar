@@ -26,11 +26,17 @@ const CmsSidebar: React.FC<CmsSidebarProps> = ({ isOpen }) => {
     const pathToItemMap: Record<string, typeof selectedSidebarItem> = {
       "/subscription": "Subscription",
       "/chat": "My Avatar",
+      "/shopping": "Shopping",
       "/settings": "Settings",
       "/support": "Support",
+      "/create-avatar": "Create Avatar",
     };
 
-    setSelectedSidebarItem(pathToItemMap[currentPath] || "Profile");
+    const selectedItem = pathToItemMap[currentPath] || "Profile";
+    setSelectedSidebarItem(selectedItem);
+    if (selectedItem === "Create Avatar" || selectedItem === "Personal Information") {
+      setIsProfileDropdownOpen(true);
+    }
   }, []);
 
   const handleSidebarClick = (
@@ -84,7 +90,8 @@ const CmsSidebar: React.FC<CmsSidebarProps> = ({ isOpen }) => {
                     Personal Information
                   </a>
                   <a
-                    href="#"
+                    href="/create-avatar"
+                    
                     className="text-black mt-2 flex items-center"
                     onClick={() => handleSidebarClick("Create Avatar")}
                   >
@@ -130,7 +137,7 @@ const CmsSidebar: React.FC<CmsSidebarProps> = ({ isOpen }) => {
           </li>
           <li>
             <a
-              href="#"
+              href="/shopping"
               className={`flex items-center p-2 ${selectedSidebarItem === "Shopping" ? "bg-secondarycolor text-white" : "bg-white text-black"}`}
               onClick={() => handleSidebarClick("Shopping")}
             >

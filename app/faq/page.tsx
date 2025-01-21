@@ -413,7 +413,7 @@ const FAQPage: React.FC = () => {
                 </h2>
                 <p className="text-gray-400 text-sm ml-48 mt-1">Connect with our support team in real-time.</p>
               </div>
-              <button className="bg-secondarycolor text-white py-2 px-32 rounded-md ml-44 mb-6">Start Chat</button>
+              <button className="bg-secondarycolor text-white py-2 px-32 rounded-md ml-44 mb-6" onClick={handleChatClick}>Start Chat</button>
             </div>
                        
         </div>

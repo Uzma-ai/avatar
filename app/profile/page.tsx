@@ -81,7 +81,7 @@ const ProfilePage = () => {
                       {selectedSidebarItem === "Personal Information" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
                       Personal Information
                     </a>
-                    <a href="#" className="text-black mt-2 flex items-center" onClick={() => handleSidebarClick("Create Avatar")}>
+                    <a href="/create-avatar" className="text-black mt-2 flex items-center" onClick={() => handleSidebarClick("Create Avatar")}>
                       {selectedSidebarItem === "Create Avatar" && <span className="mr-2 text-secondarycolor text-3xl">•</span>}
                       Create Avatar
                     </a>
@@ -108,7 +108,7 @@ const ProfilePage = () => {
               </a>
             </li>
             <li>
-              <a href="#" className="flex items-center" onClick={() => handleSidebarClick("Shopping")}>
+              <a href="/shopping" className="flex items-center" onClick={() => handleSidebarClick("Shopping")}>
                 <ShoppingBag className="mr-2 h-6 w-6 text-black" />
                 <span>Shopping</span>
               </a>

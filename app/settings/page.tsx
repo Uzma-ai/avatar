@@ -178,7 +178,7 @@ const SettingsPage = () => {
 
             <div className="col-span-2 flex justify-end space-x-4 mt-8">
               <button className="px-10 py-2 bg-white border border-secondarycolor text-secondarycolor rounded-md">Cancel</button>
-              <button className="px-4 py-2 bg-secondarycolor text-white rounded-md">Save Changes</button>
+              <button className="px-4 py-2 bg-neutral-300 text-neutral-400 rounded-md">Save Changes</button>
             </div>
           </div>
         </div>

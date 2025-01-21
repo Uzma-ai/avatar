@@ -208,8 +208,11 @@ export default function Avatars() {
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
+               <Link href="/shopping" className="flex items-center gap-2">
                 <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
                 <span>Shopping</span>
+                </Link>  
+
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
@@ -226,7 +229,7 @@ export default function Avatars() {
 
                 {/* Desktop: Navigate with Link */}
                 <Link
-                  href="/support"
+                  href="/settings"
                   className="hidden md:flex items-center gap-2"
                 >
                   <Settings className="mr-2 h-4 w-4 text-secondarycolor" />

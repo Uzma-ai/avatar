@@ -1,5 +1,4 @@
-import React from "react";
-import { useRef, useEffect, useState, KeyboardEvent } from "react";
+import React, { useRef, useEffect, useState, KeyboardEvent } from "react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { X, Home, Building2, Pencil, Trash2, ShoppingBag } from "lucide-react";
@@ -197,7 +196,7 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
                 <Badge
                   key={index}
                   variant="secondary"
-                  className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground"
+                  className={`flex items-center gap-1 rounded-md bg-inputbackground ${category === "Books" ? "w-24 h-10" : "w-20 h-8"}`}
                 >
                   {category}
                   <button
