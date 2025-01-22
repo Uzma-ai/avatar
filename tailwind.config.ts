@@ -11,7 +11,8 @@ const config: Config = {
   	extend: {
   		colors: {
   			primarycolor: '#F3F3F3',
-  			secondarycolor: '#5D8BE5',
+			secondarycolor: '#5D8BE5',
+			lightblue:'#D6E6FF',
   			legendText: '#F7F7F7',
   			inputbackground: '#E9EEF6',
   			blackcolor: '#1F1F1F',

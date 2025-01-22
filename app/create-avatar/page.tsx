@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect,useRef } from "react";
-import CmsSidebar from "@/components/cms-sidebar";
 import { Users, Pencil, Upload, Mic } from "lucide-react";
 import { FaPlay } from "react-icons/fa";
 import Image from 'next/image';
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import BrowserSidebar from "@/components/Browsersidebar";
 
 const CreateAvatarPage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -69,7 +69,7 @@ const CreateAvatarPage = () => {
 
   return (
     <div className="flex h-full bg-white">
-      <CmsSidebar isOpen={true} />
+     <BrowserSidebar/>
       <div className="flex-1 h-full p-8 overflow-hidden">
         <div className="flex justify-between items-center h-28 p-4 rounded-md">
           <div>
