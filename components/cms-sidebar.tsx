@@ -52,7 +52,7 @@ const CmsSidebar: React.FC<CmsSidebarProps> = ({ isOpen }) => {
 
   return (
     <aside className={`w-1/6 bg-white shadow-lg p-5 relative ${isOpen ? "block" : "hidden"}`}>
-      <div className="absolute left-0 top-0 flex flex-col items-center">
+      <div className="absolute left-0 top-0 flex flex-col items-start">
         {selectedSidebarItem === "Profile" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '12rem' }}></div>}
         {selectedSidebarItem === "Personal Information" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '14rem' }}></div>}
         {selectedSidebarItem === "Create Avatar" && <div className="h-8 w-1 bg-secondarycolor ml-2" style={{ marginTop: '16rem' }}></div>}

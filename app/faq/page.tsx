@@ -117,14 +117,13 @@ const FAQPage: React.FC = () => {
 
   return (
     <div className="flex h-full  bg-gray-100 overflow-auto">
-      <div className="w-1/4 p-4 ml-24 mt-6">
+      <div className="w-full py-4 px-10 mt-6">
         <div className="flex items-center gap-4">
           <Link href="/support">
-            <button className="flex items-center gap-4 items-start">
+            <button className="flex items-center gap-4">
               <ArrowLeft className="h-4 w-4 text-blackcolor" />
             </button>
             
-
           </Link>
           <DropdownMenu
             open={isAvatarDropdownOpen}
@@ -261,12 +260,12 @@ const FAQPage: React.FC = () => {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <h1 className="text-xl font-semibold flex items-center mt-2 ml-96 whitespace-nowrap">
+          <h1 className="text-xl font-semibold flex items-center mt-2 whitespace-nowrap">
             <RiQuestionnaireLine className="mr-2 h-6 w-6 text-black" />
             Frequently asked questions
           </h1>
         </div>
-        <div className="mt-10 flex items-center border border-slate-400 rounded-md w-[1280px] ml-4 mr-4">
+        <div className="mt-10 flex items-center border border-slate-400 rounded-md w-full">
           <input
             type="text"
             className="flex-grow px-4 py-2 text-black rounded-md"
@@ -276,7 +275,7 @@ const FAQPage: React.FC = () => {
             <RiSearchLine className="h-5 w-5" />
           </button>
         </div>
-        <div className="bg-white mt-4 ml-4 rounded-md w-[1280px]">
+        <div className="bg-white mt-4 rounded-md w-full">
           <div className="flex items-center justify-between p-4 cursor-pointer" onClick={handleGeneralQuestionsClick}>
             <h2 className="text-2xl font-bold whitespace-nowrap">General Questions</h2>
             <ChevronDown className={`h-5 w-5 transition-transform ${isGeneralQuestionsOpen ? "rotate-180" : ""}`} />
@@ -295,7 +294,7 @@ const FAQPage: React.FC = () => {
           )}
         </div>
 
-        <div className="bg-white mt-4 ml-4 rounded-md w-[1280px]">
+        <div className="bg-white mt-4 rounded-md w-full">
           <div className="flex items-center justify-between p-4 cursor-pointer" onClick={handleAccountSubscriptionClick}>
             <h2 className="text-2xl font-bold whitespace-nowrap">Account & Subscription</h2>
             <ChevronDown className={`h-5 w-5 transition-transform ${isAccountSubscriptionOpen ? "rotate-180" : ""}`} />
@@ -314,7 +313,7 @@ const FAQPage: React.FC = () => {
           )}
         </div>
 
-        <div className="bg-white mt-4 ml-4 rounded-md w-[1280px]">
+        <div className="bg-white mt-4 rounded-md w-full">
           <div className="flex items-center justify-between p-4 cursor-pointer" onClick={handleAvatarCreationClick}>
             <h2 className="text-2xl font-bold whitespace-nowrap">Avatar & Creation</h2>
             <ChevronDown className={`h-5 w-5 transition-transform ${isAvatarCreationOpen ? "rotate-180" : ""}`} />
@@ -333,7 +332,7 @@ const FAQPage: React.FC = () => {
           )}
         </div>
 
-        <div className="bg-white mt-4 ml-4 rounded-md w-[1280px]">
+        <div className="bg-white mt-4 rounded-md w-full">
           <div className="flex items-center justify-between p-4 cursor-pointer" onClick={handleTroubleshootingClick}>
             <h2 className="text-2xl font-bold whitespace-nowrap">Troubleshooting</h2>
             <ChevronDown className={`h-5 w-5 transition-transform ${isTroubleshootingOpen ? "rotate-180" : ""}`} />
@@ -352,7 +351,7 @@ const FAQPage: React.FC = () => {
           )}
         </div>
 
-        <div className="bg-white mt-4 ml-4 rounded-md w-[1280px]">
+        <div className="bg-white mt-4 rounded-md w-full">
           <div className="flex items-center justify-between p-4 cursor-pointer" onClick={handleBillingPaymentsClick}>
             <h2 className="text-2xl font-bold whitespace-nowrap">Billing & Payments</h2>
             <ChevronDown className={`h-5 w-5 transition-transform ${isBillingPaymentsOpen ? "rotate-180" : ""}`} />
@@ -371,7 +370,7 @@ const FAQPage: React.FC = () => {
           )}
         </div>
 
-        <div className="bg-white mt-4 ml-4 rounded-md w-[1280px] mb-10">
+        <div className="bg-white mt-4 rounded-md w-full mb-10">
           <div className="flex items-center justify-between p-4 cursor-pointer" onClick={handleSupportContactClick}>
             <h2 className="text-2xl font-bold whitespace-nowrap">Support & Contact</h2>
             <ChevronDown className={`h-5 w-5 transition-transform ${isSupportContactOpen ? "rotate-180" : ""}`} />

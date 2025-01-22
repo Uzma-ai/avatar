@@ -38,19 +38,18 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
       setIsConnected(false);
     });
 
-    socketConnection.on("response", (data: { response: string }) => {
-      const botMessage: Message = {
-        text: data.response,
-        sender: "bot",
-      };
+    socketConnection.on(
+      "response",
+      (data: { response: string; language: string }) => {
+        const botMessage: Message = {
+          text: data.response,
+          sender: "bot",
+        };
 
-      setMessages((prevMessages) => [...prevMessages, botMessage]);
-
-      const utterance = new SpeechSynthesisUtterance(data.response);
-      utterance.lang = "en-US"; // Set the language for speech synthesis
-      window.speechSynthesis.speak(utterance);
-
-    });
+        setMessages((prevMessages) => [...prevMessages, botMessage]);
+          speakText(data.response, data.language);
+      }
+    );
 
     setSocket(socketConnection);
 
@@ -62,6 +61,16 @@ const ChatComponent: React.FC<ChatComponentProps> = ({ voicechecked }) => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const speakText = (text: string, language: string) => {
+    if ("speechSynthesis" in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = language; // Set the language for TTS
+      window.speechSynthesis.speak(utterance);
+    } else {
+      console.error("Text-to-Speech is not supported in this browser.");
+    }
+  };
 
 
   const handleSendMessage = () => {

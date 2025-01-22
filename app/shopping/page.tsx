@@ -1,6 +1,5 @@
 "use client";
 import React, { useEffect, useState, KeyboardEvent } from "react";
-import CmsSidebar from "@/components/cms-sidebar";
 import { ShoppingBag, X, Home, Building2, Pencil, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import BrowserSidebar from "@/components/Browsersidebar";
 
 const ShoppingPage = () => {
   const [] = useState(false);
@@ -130,7 +130,7 @@ const ShoppingPage = () => {
 
   return (
     <div className="flex h-full bg-white">
-      <CmsSidebar isOpen={true} />
+      <BrowserSidebar/>
       <div className="flex-1 h-full p-8 overflow-hidden">
         <div className="flex justify-between items-center h-28 p-4 rounded-md">
           <div>
