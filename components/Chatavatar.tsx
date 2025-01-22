@@ -239,7 +239,7 @@ export default function ChatAssistant() {
 
                     {/* Desktop: Navigate with Link */}
                     <Link
-                      href="/shooping"
+                      href="/shopping"
                       className="hidden md:flex items-center gap-2"
                     >
                       <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
