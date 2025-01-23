@@ -1,8 +1,8 @@
 "use client";
-import React, { useEffect,useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Users, Pencil, Upload, Mic } from "lucide-react";
 import { FaPlay } from "react-icons/fa";
-import Image from 'next/image';
+import Image from "next/image";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -10,16 +10,19 @@ import BrowserSidebar from "@/components/Browsersidebar";
 
 const CreateAvatarPage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
+  const [selectedModalValue, setSelectedModalValue] = useState<string>("256");
+  const [selectedPreprocessValue, setSelectedPreprocessValue] =
+    useState<string>("crop");
+  const [selectedFaceValue, setSelectedFaceValue] = useState<string>("video");
 
   useEffect(() => {
-    const sidebarItem = document.querySelector('[data-sidebar-item="Create-Avatar"]');
+    const sidebarItem = document.querySelector(
+      '[data-sidebar-item="Create-Avatar"]'
+    );
     if (sidebarItem) {
       (sidebarItem as HTMLElement).click();
     }
   }, []);
-
- 
 
   const openCamera = () => {
     const input = document.createElement("input");
@@ -69,17 +72,15 @@ const CreateAvatarPage = () => {
 
   return (
     <div className="flex h-full bg-white">
-     <BrowserSidebar/>
+      <BrowserSidebar />
       <div className="flex-1 h-full p-8 overflow-hidden">
         <div className="flex justify-between items-center h-28 p-4 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
-              < Users className="mr-2 h-6 w-6 text-black" />
+              <Users className="mr-2 h-6 w-6 text-black" />
               <span>Profile</span>
             </h2>
-            <div className="text-black ml-4">
-              Profile &gt; Create Avatar
-            </div>
+            <div className="text-black ml-4">Profile &gt; Create Avatar</div>
           </div>
           <button className="px-4 py-2 border border-black text-black rounded-md flex items-center">
             <Pencil className="mr-2 h-4 w-4" />
@@ -91,12 +92,14 @@ const CreateAvatarPage = () => {
           <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
             <div className="flex">
               <div className="w-1/2 max-w-[40%] border border-neutral-100 rounded-lg p-4">
-                <h1 className="text-2xl font-bold mb-2">Personalize Your Experience</h1>
+                <h1 className="text-2xl font-bold mb-2">
+                  Personalize Your Experience
+                </h1>
                 <div className="flex justify-between items-center mb-6">
                   <p className="text-gray-600">
                     Choose how you want to create your avatar. You can click a
-                    picture, upload an existing photo, and add your voice to make it
-                    uniquely yours!
+                    picture, upload an existing photo, and add your voice to
+                    make it uniquely yours!
                   </p>
                 </div>
                 <hr className="border-t-2 border-secondarycolor mb-6" />
@@ -118,7 +121,9 @@ const CreateAvatarPage = () => {
                       onClick={handleButtonClick}
                     >
                       <Upload />
-                      <span className="font-normal text-sm">Upload a Photo</span>
+                      <span className="font-normal text-sm">
+                        Upload a Photo
+                      </span>
                     </button>
                     <input
                       type="file"
@@ -134,7 +139,9 @@ const CreateAvatarPage = () => {
                       onClick={handleVoiceRecord}
                     >
                       <Mic />
-                      <span className="font-normal text-sm">Record your voice</span>
+                      <span className="font-normal text-sm">
+                        Record your voice
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -168,27 +175,55 @@ const CreateAvatarPage = () => {
                   <Slider defaultValue={[40]} max={100} step={1} />
                 </div>
                 <div className="w-1/2 space-y-5">
-                  <label className="text-sm font-normal">Expression Scale</label>
+                  <label className="text-sm font-normal">
+                    Expression Scale
+                  </label>
                   <Slider defaultValue={[50]} max={100} step={1} />
                 </div>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm font-normal">Eye Blink</span>
-                <Switch style={{ marginRight: '87%' }} />
+                <Switch style={{ marginRight: "87%" }} />
               </div>
               <div className="flex space-x-4">
                 <div className="w-1/2 space-y-5">
-                  <label className="text-sm font-normal">Face model resolution</label>
-                  <RadioGroup className="flex items-center gap-6 pt-2">
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="256" id="256" />
-                      <label htmlFor="option-1" className="text-sm font-normal">
+                  <label className="text-sm font-normal">
+                    Face model resolution
+                  </label>
+                  <RadioGroup
+                    className="flex items-center gap-6 pt-2"
+                    value={selectedModalValue}
+                    onValueChange={(value) => setSelectedModalValue(value)}
+                  >
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedModalValue === "256"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="256"
+                        id="256"
+                        onClick={() => setSelectedModalValue("256")}
+                      />
+                      <label htmlFor="256" className="text-sm font-normal">
                         256
                       </label>
                     </div>
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="512" id="512" />
-                      <label htmlFor="option-2" className="text-sm font-normal">
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedModalValue === "512"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="512"
+                        id="512"
+                        onClick={() => setSelectedModalValue("512")}
+                      />
+                      <label htmlFor="512" className="text-sm font-normal">
                         512
                       </label>
                     </div>
@@ -196,49 +231,101 @@ const CreateAvatarPage = () => {
                 </div>
                 <div className="w-1/2 space-y-5">
                   <label className="text-sm font-normal">Preprocess</label>
-                  <RadioGroup className="flex items-center gap-3 pt-2 flex-wrap">
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="crop" id="crop" />
+                  <RadioGroup
+                    className="flex items-center gap-3 pt-2 flex-wrap"
+                    value={selectedPreprocessValue}
+                    onValueChange={(value) => setSelectedPreprocessValue(value)}
+                  >
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedPreprocessValue === "crop"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="crop"
+                        id="crop"
+                        onClick={() => setSelectedPreprocessValue("crop")}
+                      />
                       <label
-                        htmlFor="option-1"
+                        htmlFor="crop"
                         className="text-xs font-normal pb-0.5"
                       >
                         Crop
                       </label>
                     </div>
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="resize" id="resize" />
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedPreprocessValue === "resize"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="resize"
+                        id="resize"
+                        onClick={() => setSelectedPreprocessValue("resize")}
+                      />
                       <label
-                        htmlFor="option-2"
+                        htmlFor="resize"
                         className="text-xs font-normal pb-0.5"
                       >
                         Resize
                       </label>
                     </div>
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="full" id="full" />
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedPreprocessValue === "full"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="full"
+                        id="full"
+                        onClick={() => setSelectedPreprocessValue("full")}
+                      />
                       <label
-                        htmlFor="option-3"
+                        htmlFor="full"
                         className="text-xs font-normal pb-0.5"
                       >
                         Full
                       </label>
                     </div>
-                  </RadioGroup>
-                  <RadioGroup className="flex items-center gap-3 pt-2 flex-wrap">
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="extcrop" id="extcrop" />
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedPreprocessValue === "extcrop"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="extcrop"
+                        id="extcrop"
+                        onClick={() => setSelectedPreprocessValue("extcrop")}
+                      />
                       <label
-                        htmlFor="option-4"
+                        htmlFor="extcrop"
                         className="text-xs font-normal pb-0.5"
                       >
                         Extcrop
                       </label>
                     </div>
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="extfull" id="extfull" />
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedPreprocessValue === "extfull"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="extfull"
+                        id="extfull"
+                        onClick={() => setSelectedPreprocessValue("extfull")}
+                      />
                       <label
-                        htmlFor="option-5"
+                        htmlFor="extfull"
                         className="text-xs font-normal pb-0.5"
                       >
                         Extfull
@@ -250,16 +337,40 @@ const CreateAvatarPage = () => {
               <div className="flex space-x-4">
                 <div className="w-1/2 space-y-5">
                   <label className="text-sm font-normal">Face render</label>
-                  <RadioGroup className="flex items-center gap-6 pt-2">
-                    <div className="w-36 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="Face vid to vid" id="Face vid to vid" />
-                      <label htmlFor="option-1" className="text-sm font-normal">
-                       Face vid to vid
+                  <RadioGroup
+                    className="flex items-center gap-6 pt-2"
+                    value={selectedFaceValue}
+                    onValueChange={(value) => setSelectedFaceValue(value)}
+                  >
+                    <div
+                      className={`w-32 h-10 border ${
+                        selectedFaceValue === "video"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="video"
+                        id="video"
+                        onClick={() => setSelectedFaceValue("video")}
+                      />
+                      <label htmlFor="video" className="text-sm font-normal">
+                        Face vid to vid
                       </label>
                     </div>
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="512" id="512" />
-                      <label htmlFor="option-2" className="text-sm font-normal">
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedFaceValue === "render"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="render"
+                        id="render"
+                        onClick={() => setSelectedFaceValue("render")}
+                      />
+                      <label htmlFor="render" className="text-sm font-normal">
                         Pi render
                       </label>
                     </div>
@@ -277,7 +388,8 @@ const CreateAvatarPage = () => {
                   <div>
                     <span className="text-sm font-normal">Still Mode</span>
                     <p className="text-xs font-light text-mediumgray2">
-                      (Fewer head motion, works with preprocess &quot;Full&quot;)
+                      (Fewer head motion, works with preprocess
+                      &quot;Full&quot;)
                     </p>
                   </div>
                   <Switch className="ml-4" />

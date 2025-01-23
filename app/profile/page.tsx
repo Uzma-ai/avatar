@@ -13,7 +13,7 @@ const ProfilePage = () => {
   const [activeSection, setActiveSection] = useState("basicInfo"); // State to toggle sections
   const [selectedSidebarItem, setSelectedSidebarItem] = useState<"Profile" | "Personal Information" | "Create Avatar" | "Subscription" | "My Avatar" | "Public Avatar" | "Shopping" | "Settings" | "Support">("Profile"); // State to track selected sidebar item
   const [isEditing, setIsEditing] = useState(false); // State to track if editing mode is active
-  const [shoppingPreferences, setShoppingPreferences] = useState(["Books", "Fashion", "Electronics", "Groceries"]);
+  const [shoppingPreferences, setShoppingPreferences] = useState(["Books", "Fashion", "Electronics"]);
   const [interests, setInterests] = useState(["Sports", "Music", "Technology"]);
 
   useEffect(() => {
@@ -217,19 +217,11 @@ const ProfilePage = () => {
 
                 {isEditing && (
                   <>
-                    <div className="col-span-2 flex items-center space-x-4">
+                    <div className="flex flex-col gap-4">
                       <label className="block text-lg font-bold mb-1">
                         Shopping Preferences:
                       </label>
-                      <label
-                        className="block text-lg font-bold mb-1"
-                        style={{ marginLeft: "34%" }}
-                      >
-                        Interests:
-                      </label>
-                    </div>
-                    <div className="col-span-2 flex items-center space-x-4">
-                      <div className="flex space-x-2">
+                      <div className="flex space-x-2 flex-wrap gap-2">
                         <button
                           type="button"
                           className="px-2 py-1 bg-secondarycolor text-white rounded-md flex items-center"
@@ -261,10 +253,42 @@ const ProfilePage = () => {
                           </span>
                         ))}
                       </div>
-                      <div
-                        className="flex space-x-2"
-                        style={{ marginLeft: "16%" }}
+                      <div className="flex space-x-2">
+                        {shoppingPreferences.slice(3).map((item) => (
+                          <span
+                            key={item}
+                            className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
+                          >
+                            {item}
+                            <X
+                              className="ml-2 h-4 w-4 cursor-pointer"
+                              onClick={() =>
+                                handleRemoveItem(
+                                  shoppingPreferences,
+                                  setShoppingPreferences,
+                                  item
+                                )
+                              }
+                            />
+                          </span>
+                        ))}
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1"></label>
+                        <input
+                          type="text"
+                          className="w-full border rounded-md p-2"
+                          placeholder="Add categories"
+                        />
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <label
+                        className="block text-lg font-bold mb-1"
                       >
+                        Interests:
+                      </label>
+                      <div className="flex space-x-2 flex-wrap gap-2">
                         <button
                           type="button"
                           className="px-2 py-1 bg-secondarycolor text-white rounded-md flex items-center"
@@ -287,32 +311,7 @@ const ProfilePage = () => {
                           </span>
                         ))}
                       </div>
-                    </div>
-                    <div className="col-span-2 flex items-center space-x-4">
                       <div className="flex space-x-2">
-                        {shoppingPreferences.slice(3).map((item) => (
-                          <span
-                            key={item}
-                            className="px-2 py-1 bg-gray-200 rounded-md flex items-center"
-                          >
-                            {item}
-                            <X
-                              className="ml-2 h-4 w-4 cursor-pointer"
-                              onClick={() =>
-                                handleRemoveItem(
-                                  shoppingPreferences,
-                                  setShoppingPreferences,
-                                  item
-                                )
-                              }
-                            />
-                          </span>
-                        ))}
-                      </div>
-                      <div
-                        className="flex space-x-2"
-                        style={{ marginLeft: "10%" }}
-                      >
                         {interests.slice(3).map((item) => (
                           <span
                             key={item}
@@ -328,22 +327,14 @@ const ProfilePage = () => {
                           </span>
                         ))}
                       </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1"></label>
-                      <input
-                        type="text"
-                        className="w-full border rounded-md p-2"
-                        placeholder="Add categories"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1"></label>
-                      <input
-                        type="text"
-                        className="w-full border rounded-md p-2"
-                        placeholder="Add interests"
-                      />
+                      <div>
+                        <label className="block text-sm font-medium mb-1"></label>
+                        <input
+                          type="text"
+                          className="w-full border rounded-md p-2"
+                          placeholder="Add interests"
+                        />
+                      </div>
                     </div>
                   </>
                 )}

@@ -17,6 +17,9 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const popupRef = useRef<HTMLDivElement | null>(null);
+  const [selectedModalValue, setSelectedModalValue] = useState<string>("256");
+  const [selectedPreprocessValue, setSelectedPreprocessValue] = useState<string>("crop");
+  const [selectedFaceValue, setSelectedFaceValue] = useState<string>("video");
   const [formData, setFormData] = useState({
     name: "Gaurav Yadav",
     email: "gaurav.yadav@aibuzz.net",
@@ -242,16 +245,40 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
           <div>
             <label className="text-sm font-normal">Face model resolution</label>
             <div>
-              <RadioGroup className="flex items-center gap-6 pt-2">
-                <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                  <RadioGroupItem value="256" id="256" />
-                  <label htmlFor="option-1" className="text-sm font-normal">
+              <RadioGroup
+                className="flex items-center gap-6 pt-2"
+                value={selectedModalValue}
+                onValueChange={(value) => setSelectedModalValue(value)}
+              >
+                <div
+                  className={`w-24 h-10 border ${
+                    selectedModalValue === "256"
+                      ? "border-secondarycolor"
+                      : "border-inputbackground"
+                  } rounded-md flex items-center justify-center gap-2`}
+                >
+                  <RadioGroupItem
+                    value="256"
+                    id="256"
+                    onClick={() => setSelectedModalValue("256")}
+                  />
+                  <label htmlFor="256" className="text-sm font-normal">
                     256
                   </label>
                 </div>
-                <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                  <RadioGroupItem value="512" id="512" />
-                  <label htmlFor="option-2" className="text-sm font-normal">
+                <div
+                  className={`w-24 h-10 border ${
+                    selectedModalValue === "512"
+                      ? "border-secondarycolor"
+                      : "border-inputbackground"
+                  } rounded-md flex items-center justify-center gap-2`}
+                >
+                  <RadioGroupItem
+                    value="512"
+                    id="512"
+                    onClick={() => setSelectedModalValue("512")}
+                  />
+                  <label htmlFor="512" className="text-sm font-normal">
                     512
                   </label>
                 </div>
@@ -262,49 +289,88 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
           {/* Preprocess Checkbox */}
           <div>
             <label className="text-sm font-normal">Preprocess</label>
-            <RadioGroup className="flex items-center gap-3 pt-2 flex-wrap">
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <RadioGroupItem value="crop" id="crop" />
-                <label
-                  htmlFor="option-1"
-                  className="text-xs font-normal pb-0.5"
-                >
+            <RadioGroup
+              className="flex items-center gap-3 pt-2 flex-wrap"
+              value={selectedPreprocessValue}
+              onValueChange={(value) => setSelectedPreprocessValue(value)}
+            >
+              <div
+                className={`w-24 h-10 border ${
+                  selectedPreprocessValue === "crop"
+                    ? "border-secondarycolor"
+                    : "border-inputbackground"
+                } rounded-md flex items-center justify-center gap-2`}
+              >
+                <RadioGroupItem
+                  value="crop"
+                  id="crop"
+                  onClick={() => setSelectedPreprocessValue("crop")}
+                />
+                <label htmlFor="crop" className="text-xs font-normal pb-0.5">
                   Crop
                 </label>
               </div>
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <RadioGroupItem value="resize" id="resize" />
-                <label
-                  htmlFor="option-2"
-                  className="text-xs font-normal pb-0.5"
-                >
+              <div
+                className={`w-24 h-10 border ${
+                  selectedPreprocessValue === "resize"
+                    ? "border-secondarycolor"
+                    : "border-inputbackground"
+                } rounded-md flex items-center justify-center gap-2`}
+              >
+                <RadioGroupItem
+                  value="resize"
+                  id="resize"
+                  onClick={() => setSelectedPreprocessValue("resize")}
+                />
+                <label htmlFor="resize" className="text-xs font-normal pb-0.5">
                   Resize
                 </label>
               </div>
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <RadioGroupItem value="full" id="full" />
-                <label
-                  htmlFor="option-3"
-                  className="text-xs font-normal pb-0.5"
-                >
+              <div
+                className={`w-24 h-10 border ${
+                  selectedPreprocessValue === "full"
+                    ? "border-secondarycolor"
+                    : "border-inputbackground"
+                } rounded-md flex items-center justify-center gap-2`}
+              >
+                <RadioGroupItem
+                  value="full"
+                  id="full"
+                  onClick={() => setSelectedPreprocessValue("full")}
+                />
+                <label htmlFor="full" className="text-xs font-normal pb-0.5">
                   Full
                 </label>
               </div>
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <RadioGroupItem value="extcrop" id="extcrop" />
-                <label
-                  htmlFor="option-4"
-                  className="text-xs font-normal pb-0.5"
-                >
+              <div
+                className={`w-24 h-10 border ${
+                  selectedPreprocessValue === "extcrop"
+                    ? "border-secondarycolor"
+                    : "border-inputbackground"
+                } rounded-md flex items-center justify-center gap-2`}
+              >
+                <RadioGroupItem
+                  value="extcrop"
+                  id="extcrop"
+                  onClick={() => setSelectedPreprocessValue("extcrop")}
+                />
+                <label htmlFor="extcrop" className="text-xs font-normal pb-0.5">
                   Extcrop
                 </label>
               </div>
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <RadioGroupItem value="extfull" id="extfull" />
-                <label
-                  htmlFor="option-5"
-                  className="text-xs font-normal pb-0.5"
-                >
+              <div
+                className={`w-24 h-10 border ${
+                  selectedPreprocessValue === "extfull"
+                    ? "border-secondarycolor"
+                    : "border-inputbackground"
+                } rounded-md flex items-center justify-center gap-2`}
+              >
+                <RadioGroupItem
+                  value="extfull"
+                  id="extfull"
+                  onClick={() => setSelectedPreprocessValue("extfull")}
+                />
+                <label htmlFor="extfull" className="text-xs font-normal pb-0.5">
                   Extfull
                 </label>
               </div>
@@ -314,16 +380,40 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
           {/* Face Render Checkbox */}
           <div>
             <label className="text-sm font-normal">Face render</label>
-            <RadioGroup className="flex items-center gap-6 pt-2">
-              <div className="w-32 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <RadioGroupItem value="video" id="video" />
-                <label htmlFor="option-1" className="text-sm font-normal pb-1">
+            <RadioGroup
+              className="flex items-center gap-6 pt-2"
+              value={selectedFaceValue}
+              onValueChange={(value) => setSelectedFaceValue(value)}
+            >
+              <div
+                className={`w-32 h-10 border ${
+                  selectedFaceValue === "video"
+                    ? "border-secondarycolor"
+                    : "border-inputbackground"
+                } rounded-md flex items-center justify-center gap-2`}
+              >
+                <RadioGroupItem
+                  value="video"
+                  id="video"
+                  onClick={() => setSelectedFaceValue("video")}
+                />
+                <label htmlFor="video" className="text-sm font-normal">
                   Face vid to vid
                 </label>
               </div>
-              <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                <RadioGroupItem value="render" id="render" />
-                <label htmlFor="option-2" className="text-sm font-normal pb-1">
+              <div
+                className={`w-24 h-10 border ${
+                  selectedFaceValue === "render"
+                    ? "border-secondarycolor"
+                    : "border-inputbackground"
+                } rounded-md flex items-center justify-center gap-2`}
+              >
+                <RadioGroupItem
+                  value="render"
+                  id="render"
+                  onClick={() => setSelectedFaceValue("render")}
+                />
+                <label htmlFor="render" className="text-sm font-normal">
                   Pi render
                 </label>
               </div>
