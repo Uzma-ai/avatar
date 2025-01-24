@@ -8,9 +8,23 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import BrowserSidebar from "@/components/Browsersidebar";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
+interface ProductImage {
+  src: string;
+  alt: string;
+}
 
 const ShoppingPage = () => {
-  const [] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  interface Product {
+    name: string;
+    category: string;
+    price: number;
+    image: string;
+  }
+  
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [categories, setCategories] = useState<string[]>(["Books"]);
   const [inputValue, setInputValue] = useState("");
   const [wishlistItems] = useState([
@@ -63,6 +77,7 @@ const ShoppingPage = () => {
       image: "/nike-shoes.png",
     },
   ]);
+  const [selectedImage, setSelectedImage] = useState(0);
   const [addresses, setAddresses] = useState([
     {
       id: "1",
@@ -84,7 +99,6 @@ const ShoppingPage = () => {
     },
   ]);
   const [, setEditingAddress] = useState<{ id: string; type: string; details: string[] } | null>(null);
-  const [, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     const sidebarItem = document.querySelector('[data-sidebar-item="Shopping"]');
@@ -92,7 +106,6 @@ const ShoppingPage = () => {
       (sidebarItem as HTMLElement).click();
     }
   }, []);
-
 
   const handleAddCategory = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim()) {
@@ -123,10 +136,34 @@ const ShoppingPage = () => {
     setIsDialogOpen(true);
   };
 
-
   const handleRemoveAddress = (id: string) => {
     setAddresses(addresses.filter((addr) => addr.id !== id));
   };
+
+  const handleWishlistItemClick = (item: any) => {
+    setSelectedProduct(item);
+    setIsDialogOpen(true);
+  };
+
+  
+  const images: ProductImage[] = [
+    {
+      src: "/Nike-Jordan-Sideview.svg",
+      alt: "Air Jordan 1 Low Side View",
+    },
+    {
+      src: "/Nike-Jordan-Zoomview.svg",
+      alt: "Air Jordan 1 Low Zoom View",
+    },
+    {
+      src: "/Nike-Jordan-Backview.svg",
+      alt: "Air Jordan 1 Low Back View",
+    },
+    {
+      src: "/Nike-Jordan-Frontview.svg",
+      alt: "Air Jordan 1 Low Front View",
+    },
+  ]
 
   return (
     <div className="flex h-full bg-white">
@@ -136,8 +173,7 @@ const ShoppingPage = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
               <ShoppingBag className="mr-2 h-6 w-6 text-black" />
-              <span>Shopping</span>
-            </h2>
+              <span>Shopping</span></h2>
             <div className="text-black ml-4">Shopping</div>
           </div>
           <button className="px-6 py-2 border border-black text-black rounded-md flex items-center">
@@ -193,7 +229,7 @@ const ShoppingPage = () => {
             </div>
             <div className="space-y-2 mt-3 h-60 overflow-y-auto custom-scrollbar mr-2" >
               {wishlistItems.map((item, index) => (
-                <div key={index} className="flex items-center justify-between">
+                <div key={index} className="flex items-center justify-between cursor-pointer" onClick={() => handleWishlistItemClick(item)}>
                   <div className="flex items-center jus gap-3">
                     <div className="h-14 w-14 rounded-lg overflow-hidden">
                       <Image
@@ -330,6 +366,94 @@ const ShoppingPage = () => {
          
         </div>
       </div>
+
+      {selectedProduct && (
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogContent className="sm:max-w-[700px] rounded-2xl bg-neutral-400 border border-neutral-400">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold text-white mt-">Product details</DialogTitle>
+            </DialogHeader>
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="flex gap-4">
+                <div className="flex flex-col gap-2 mt-20">
+                  {images.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImage(index)}
+                      className={`relative min-w-[48px] overflow-hidden border ${
+                        selectedImage === index ? "transform scale-110" : ""
+                      }`}
+                    >
+                      <Image
+                        src={image.src || "/placeholder.svg"}
+                        alt={image.alt}
+                        width={48}
+                        height={48}
+                        className="aspect-square object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+                <div className="overflow-hidden  border bg-white w-[400px] h-[250px] mt-20">
+                  <Image
+                    src={images[selectedImage].src || "/placeholder.svg"}
+                    alt={images[selectedImage].alt}
+                    width={400}
+                    height={400}
+                    className="aspect-square object-cover"
+                  />
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h2 className="text-2xl font-bold tracking-tight text-secondarycolor">Air Jordan 1 Low</h2>
+                  <p className="text-sm text-muted-foreground mt-2 text-white">
+                    Shift your game into high gear with the lightest Luka yet. Designed to help you create space through
+                     acceleration, the Luka 3 features full-length Cushlon 3.0 foam for a smooth heel-to-toe transition.
+                  </p>
+                </div>
+                <div className="space-y-1">
+                  <div className="flex items-center text-sm text-white">
+                    <span className="w-32 flex items-center">
+                      <span className="w-1 h-1 bg-white rounded-full mr-2"></span>
+                      Colour Shown:
+                    </span>
+                    <span>Black/White/Red</span>
+                  </div>
+                  <div className="flex items-center text-sm text-white">
+                    <span className="w-32 flex items-center">
+                      <span className="w-1 h-1 bg-white rounded-full mr-2"></span>
+                      Style:
+                    </span>
+                    <span>FO1285-003</span>
+                  </div>
+                  <div className="flex items-center text-sm text-white">
+                    <span className="w-32 flex items-center">
+                      <span className="w-1 h-1 bg-white rounded-full mr-2"></span>
+                      Country/Region:
+                    </span>
+                    <span>Vietnam</span>
+                  </div>
+                </div>
+                <div>
+                  <div className="text-lg font-semibold text-white">MRP: {selectedProduct.price}$</div>
+                  <div className="text-sm text-muted-foreground text-white">Inclusive of all taxes</div>
+                  <div className="text-sm text-muted-foreground text-white">(Also includes all applicable duties)</div>
+                </div>
+                <div className="space-y-4">
+                  <div>
+                    <div className="text-sm font-medium mb-2 text-white">Size Selected</div>
+                    <Button variant="outline" className="w-20 bg-neutral-400 text-white">
+                      8UK
+                    </Button>
+                  </div>
+                  <Button className="w-full bg-secondarycolor text-white">Add to cart</Button>
+                </div>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

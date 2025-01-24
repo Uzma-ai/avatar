@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect,useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Users, Pencil, Upload, Mic } from "lucide-react";
 import { FaPlay } from "react-icons/fa";
 import Image from 'next/image';
@@ -10,7 +10,6 @@ import BrowserSidebar from "@/components/Browsersidebar";
 
 const CreateAvatarPage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  
 
   useEffect(() => {
     const sidebarItem = document.querySelector('[data-sidebar-item="Create-Avatar"]');
@@ -18,8 +17,6 @@ const CreateAvatarPage = () => {
       (sidebarItem as HTMLElement).click();
     }
   }, []);
-
- 
 
   const openCamera = () => {
     const input = document.createElement("input");
@@ -69,12 +66,12 @@ const CreateAvatarPage = () => {
 
   return (
     <div className="flex h-full bg-white">
-     <BrowserSidebar/>
-      <div className="flex-1 h-full p-8 overflow-hidden">
+      <BrowserSidebar />
+      <div className="flex-1 h-full p-4 md:p-8 overflow-hidden">
         <div className="flex justify-between items-center h-28 p-4 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
-              < Users className="mr-2 h-6 w-6 text-black" />
+              <Users className="mr-2 h-6 w-6 text-black" />
               <span>Profile</span>
             </h2>
             <div className="text-black ml-4">
@@ -88,9 +85,9 @@ const CreateAvatarPage = () => {
         </div>
 
         <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
-            <div className="flex">
-              <div className="w-1/2 max-w-[40%] border border-neutral-100 rounded-lg p-4">
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-8 max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full md:w-1/2 max-w-full md:max-w-[40%] border border-neutral-100 rounded-lg p-4">
                 <h1 className="text-2xl font-bold mb-2">Personalize Your Experience</h1>
                 <div className="flex justify-between items-center mb-6">
                   <p className="text-gray-600">
@@ -139,7 +136,7 @@ const CreateAvatarPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-3/5 h-128 rounded-lg relative overflow-hidden px-2 ml-10">
+              <div className="w-full md:w-3/5 h-128 rounded-lg relative overflow-hidden px-2 mt-4 md:mt-0 md:ml-10">
                 <Image
                   src="/background.jpeg"
                   alt="avatar"
@@ -162,12 +159,12 @@ const CreateAvatarPage = () => {
 
             <div className="pt-6 space-y-6">
               <h1 className="text-lg font-semibold">Advance Modification</h1>
-              <div className="flex space-x-4">
-                <div className="w-1/2 space-y-5">
+              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Pose Style</label>
                   <Slider defaultValue={[40]} max={100} step={1} />
                 </div>
-                <div className="w-1/2 space-y-5">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Expression Scale</label>
                   <Slider defaultValue={[50]} max={100} step={1} />
                 </div>
@@ -176,8 +173,8 @@ const CreateAvatarPage = () => {
                 <span className="text-sm font-normal">Eye Blink</span>
                 <Switch style={{ marginRight: '87%' }} />
               </div>
-              <div className="flex space-x-4">
-                <div className="w-1/2 space-y-5">
+              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Face model resolution</label>
                   <RadioGroup className="flex items-center gap-6 pt-2">
                     <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
@@ -194,7 +191,7 @@ const CreateAvatarPage = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="w-1/2 space-y-5">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Preprocess</label>
                   <RadioGroup className="flex items-center gap-3 pt-2 flex-wrap">
                     <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
@@ -247,14 +244,14 @@ const CreateAvatarPage = () => {
                   </RadioGroup>
                 </div>
               </div>
-              <div className="flex space-x-4">
-                <div className="w-1/2 space-y-5">
+              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Face render</label>
                   <RadioGroup className="flex items-center gap-6 pt-2">
                     <div className="w-36 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
                       <RadioGroupItem value="Face vid to vid" id="Face vid to vid" />
                       <label htmlFor="option-1" className="text-sm font-normal">
-                       Face vid to vid
+                        Face vid to vid
                       </label>
                     </div>
                     <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
@@ -265,15 +262,15 @@ const CreateAvatarPage = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="w-1/2 space-y-5">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">
                     Batch size in generation
                   </label>
                   <Slider defaultValue={[20]} max={100} step={1} />
                 </div>
               </div>
-              <div className="flex items-center justify-between">
-                <div className="w-1/2 flex items-center">
+              <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+                <div className="w-full md:w-1/2 flex items-center">
                   <div>
                     <span className="text-sm font-normal">Still Mode</span>
                     <p className="text-xs font-light text-mediumgray2">
@@ -282,7 +279,7 @@ const CreateAvatarPage = () => {
                   </div>
                   <Switch className="ml-4" />
                 </div>
-                <div className="w-1/2 flex items-center">
+                <div className="w-full md:w-1/2 flex items-center">
                   <div>
                     <span className="text-sm font-normal">GFPGAN</span>
                     <p className="text-xs font-light text-mediumgray2">

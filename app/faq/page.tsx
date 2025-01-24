@@ -389,61 +389,56 @@ const FAQPage: React.FC = () => {
           )}
         </div>
         
-        <div className=" flex items-center justify-between gap-10">
-        <div className="bg-white mt-1 ml-4 rounded-md ">
-        <div className="mb-6  items-center justify-between w-[610px]">
-              
-                <h2 className="text-base font-semibold flex items-center justify-center mt-2">
-                  <Mail className=" h-6 w-6 text-secondarycolor mt-1" />
-                  <span>Email Support</span>
-                </h2>
-                <p className="text-gray-400 text-sm ml-24 mt-1">Send us a detailed email, and well get back to you within 24 hours.</p>
-              </div>
-              <button className="bg-secondarycolor text-white py-2 px-24 rounded-md ml-40 mb-6 mt[-2]">Contact by Email</button>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-10">
+          <div className="bg-white mt-1 ml-4 rounded-md w-full md:w-[48%]">
+            <div className="mb-6 items-center justify-between">
+              <h2 className="text-base font-semibold flex items-center justify-center mt-2">
+                <Mail className="h-6 w-6 text-secondarycolor mt-1" />
+                <span>Email Support</span>
+              </h2>
+              <p className="text-gray-400 text-sm text-center mt-1 px-4 md:px-0">Send us a detailed email, and well get back to you within 24 hours.</p>
             </div>
+            <button className="bg-secondarycolor text-white py-2 px-24 rounded-md mx-auto mb-6 block">Contact by Email</button>
+          </div>
 
-            
-            <div className="bg-white mt-1 ml-4 rounded-md ">
-        <div className="mb-6  items-center justify-between w-[610px]">
-              
-                <h2 className="text-base font-semibold flex items-center justify-center mt-2">
-                  <MdOutlineQuestionAnswer className=" h-6 w-6 text-secondarycolor mt-1" />
-                  <span>Chat Support</span>
-                </h2>
-                <p className="text-gray-400 text-sm ml-48 mt-1">Connect with our support team in real-time.</p>
-              </div>
-              <button className="bg-secondarycolor text-white py-2 px-32 rounded-md ml-44 mb-6" onClick={handleChatClick}>Start Chat</button>
+          <div className="bg-white mt-1 ml-4 rounded-md w-full md:w-[48%]">
+            <div className="mb-6 items-center justify-between">
+              <h2 className="text-base font-semibold flex items-center justify-center mt-2">
+                <MdOutlineQuestionAnswer className="h-6 w-6 text-secondarycolor mt-1" />
+                <span>Chat Support</span>
+              </h2>
+              <p className="text-gray-400 text-sm text-center mt-1 px-4 md:px-0">Connect with our support team in real-time.</p>
             </div>
-                       
+            <button className="bg-secondarycolor text-white py-2 px-32 rounded-md mx-auto mb-6 block" onClick={handleChatClick}>Start Chat</button>
+          </div>
         </div>
         {isChatPopupOpen && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                  <div className="bg-gray-300 p-6 rounded-md shadow-md w-96 h-36">
-                    <div className="flex justify-between items-center mb-4">
-                      <h2 className="text-lg font-semibold">Start the chat with</h2>
-                      <button onClick={handleCloseChatPopup} className="text-gray-500 hover:text-gray-700">&times;</button>
-                    </div>
-                    <hr className="border-t-2 border-secondarycolor mb-4" />
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex flex-col items-center">
-                        <FaWhatsapp className="h-6 w-6 text-green-500" />
-                        <span>WhatsApp</span>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <FaTelegramPlane className="h-6 w-6 text-blue-500" />
-                        <span>Telegram</span>
-                      </div>
-                      <div className="flex flex-col items-center">
-                        <MdOutlineQuestionAnswer className="h-6 w-6 text-black" />
-                        <span>Support Chat</span>
-                      </div>
-                    </div>
-                  </div>
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-gray-300 p-6 rounded-md shadow-md w-96 h-36">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-lg font-semibold">Start the chat with</h2>
+                <button onClick={handleCloseChatPopup} className="text-white hover:text-gray-700">&times;</button>
+              </div>
+              <hr className="border-t-2 border-secondarycolor mb-4" />
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex flex-col items-center">
+                  <FaWhatsapp className="h-6 w-6 text-green-500" />
+                  <span>WhatsApp</span>
                 </div>
-              )}
+                <div className="flex flex-col items-center">
+                  <FaTelegramPlane className="h-6 w-6 text-blue-500" />
+                  <span>Telegram</span>
+                </div>
+                <div className="flex flex-col items-center">
+                  <MdOutlineQuestionAnswer className="h-6 w-6 text-black" />
+                  <span>Support Chat</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-      </div>
-   
+    </div>
   );
 };
  
