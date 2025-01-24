@@ -160,7 +160,7 @@ const SupportPage = () => {
                 <div className="flex-1">
                   <select
                     id="issue-type"
-                    className="w-full border border-secondarycolor rounded-md p-2 text-gray-500"
+                    className="w-full border border-borderColor1 rounded-md px-2 h-14 text-gray-500"
                     defaultValue=""
                   >
                     <option value="" disabled hidden>
@@ -172,7 +172,7 @@ const SupportPage = () => {
                   </select>
                 </div>
                 <div className="flex-1">
-                  <div className="w-full h-9 border-dashed border-2 border-secondarycolor rounded-md flex items-center justify-center gap-4">
+                  <div className="w-full h-14 border-dashed border-2  border-secondarycolor rounded-md flex items-center justify-center gap-4">
                     <input type="file" className="hidden" id="upload-image" />
                     <label
                       htmlFor="upload-image"
