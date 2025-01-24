@@ -31,6 +31,7 @@ import Profilepopup from "@/components/Profilepopup";
 import Subscriptionpopup from "@/components/Subscriptionpopup";
 import Supportpopup from "@/components/Supportpopup";
 import Settingpopup from "@/components/Settingpopup";
+import Shoppingpopup from "@/components/Shoppingpopup";
 
 interface Profile {
   id: number;
@@ -76,6 +77,8 @@ export default function Avatars() {
     useState<boolean>(false);
   const [isMobileSettingOpen, setIsMobileSettingOpen] =
     useState<boolean>(false);
+    const [isMobileShoppingOpen, setIsMobileShoppingOpen] =
+      useState<boolean>(false);
 
   const toggleProfilePopup = () => {
     setIsMobileProfileOpen(!isMobileProfileOpen);
@@ -92,6 +95,10 @@ export default function Avatars() {
   const toggleSettingPopup = () => {
     setIsMobileSettingOpen(!isMobileSettingOpen);
   };
+
+    const toggleShoopingPopup = () => {
+      setIsMobileShoppingOpen(!isMobileShoppingOpen);
+    };
 
   
 
@@ -208,11 +215,25 @@ export default function Avatars() {
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
-               <Link href="/shopping" className="flex items-center gap-2">
-                <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
-                <span>Shopping</span>
-                </Link>  
+                {/* Mobile: Show Popup */}
+                <div onClick={toggleShoopingPopup} className="block md:hidden">
+                  <button
+                    className="flex items-center gap-2"
+                    onClick={toggleShoopingPopup}
+                  >
+                    <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                    <span>Shopping</span>
+                  </button>
+                </div>
 
+                {/* Desktop: Navigate with Link */}
+                <Link
+                  href="/shopping"
+                  className="hidden md:flex items-center gap-2"
+                >
+                  <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                  <span>Shopping</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-dropdownBackground opacity-30" />
               <DropdownMenuItem>
@@ -289,7 +310,7 @@ export default function Avatars() {
             </div>
 
             {/* Action buttons */}
-            <div className="absolute right-5 top-[64%] lg:right-10 lg:top-2/3 -translate-y-1/2 flex flex-col gap-4">
+            <div className="absolute right-5 bottom-20 lg:right-10  flex flex-col gap-4">
               <Link href="/chat">
                 <div
                   className="relative flex flex-col items-center gap-1"
@@ -393,6 +414,10 @@ export default function Avatars() {
 
         {isMobileSettingOpen && (
           <Settingpopup setIsMobileSettingOpen={setIsMobileSettingOpen} />
+        )}
+
+        {isMobileShoppingOpen && (
+          <Shoppingpopup setIsMobileShoppingOpen={setIsMobileShoppingOpen} />
         )}
       </div>
     </div>

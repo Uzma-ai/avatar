@@ -160,7 +160,7 @@ const SupportPage = () => {
                 <div className="flex-1">
                   <select
                     id="issue-type"
-                    className="w-full border border-secondarycolor rounded-md p-2 text-gray-500"
+                    className="w-full border border-borderColor1 rounded-md px-2 h-14 text-gray-500"
                     defaultValue=""
                   >
                     <option value="" disabled hidden>
@@ -172,7 +172,7 @@ const SupportPage = () => {
                   </select>
                 </div>
                 <div className="flex-1">
-                  <div className="w-full h-9 border-dashed border-2 border-secondarycolor rounded-md flex items-center justify-center gap-4">
+                  <div className="w-full h-14 border-dashed border-2  border-secondarycolor rounded-md flex items-center justify-center gap-4">
                     <input type="file" className="hidden" id="upload-image" />
                     <label
                       htmlFor="upload-image"
@@ -219,13 +219,13 @@ const SupportPage = () => {
               <h2 className="text-lg font-semibold">Start the chat with</h2>
               <button
                 onClick={handleCloseChatPopup}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-white text-2xl"
               >
                 &times;
               </button>
             </div>
             <hr className="border-t-2 border-secondarycolor mb-4" />
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4 px-10 py-2">
               <div className="flex flex-col items-center">
                 <FaWhatsapp className="h-6 w-6 text-green-500" />
                 <span>WhatsApp</span>

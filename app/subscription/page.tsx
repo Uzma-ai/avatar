@@ -52,10 +52,10 @@ const SubscriptionPage = () => {
           <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
             <h1 className="md:text-xl lg:text-2xl font-bold mb-2">Upgrade Your Experience</h1>
             <div className="flex justify-between items-center mb-6">
-              <p className="text-gray-600 md:text-sm lg:text-base">
+              <p className="text-gray-600 md:text-xs lg:text-base">
                 Explore the best features tailored for you.
               </p>
-              <p className="text-black md:text-sm lg:text-base">
+              <p className="text-black md:text-xs lg:text-base">
                 Contact Support for <a href="#" className="text-secondarycolor font-semibold">Business Plans</a>
               </p>
             </div>
