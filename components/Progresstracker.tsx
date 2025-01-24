@@ -18,24 +18,25 @@ export function ProgressTracker({ steps }: ProgressTrackerProps) {
         <div key={index} className="flex flex-col items-center">
           <div
             className={cn(
-              "z-10 flex h-3 w-3 rounded-full",
-              step.status === "completed" && "bg-secondarycolor",
-              step.status === "current" && "bg-secondarycolor",
-              step.status === "upcoming" && "bg-mediumgray2"
+              "z-10 flex h-4 w-4 items-center justify-center rounded-full border-2",
+              step.status === "completed" &&
+                "border-secondarycolor bg-secondarycolor",
+              step.status === "current" &&
+                "border-secondarycolor bg-secondarycolor",
+              step.status === "upcoming" && "border-mediumgray2 bg-mediumgray2"
             )}
-          />
-          <span className="mt-2 text-[9px] text-white font-semibold">
+          ></div>
+          <span className="mt-2 text-center text-[10px] text-white max-w-[80px]">
             {step.label}
           </span>
         </div>
       ))}
-      <div className="absolute top-1.5 z-0 h-[2.5px] w-full px-3 bg-mediumgray2">
+      <div className="absolute top-1.5 left-7 z-0 h-[3.5px] w-[calc(100%-45px)] bg-mediumgray2">
         <div
-          className="h-full bg-secondarycolor transition-all duration-500"
+          className="h-full bg-blue-500 transition-all duration-500"
           style={{
             width: `${
-              ((steps.filter((step) => step.status === "completed").length -
-                1) /
+              (steps.filter((step) => step.status === "completed").length /
                 (steps.length - 1)) *
               100
             }%`,

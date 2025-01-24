@@ -213,19 +213,19 @@ const SupportPage = () => {
         </div>
       </div>
       {isChatPopupOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-gray-300 p-6 rounded-md shadow-md w-96 h-36">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <div className="bg-mediumWhite p-6 rounded-md shadow-md w-[27rem] h-[11rem] backdrop-blur-sm">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Start the chat with</h2>
               <button
                 onClick={handleCloseChatPopup}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-white text-2xl"
               >
                 &times;
               </button>
             </div>
             <hr className="border-t-2 border-secondarycolor mb-4" />
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-4 px-10 py-2">
               <div className="flex flex-col items-center">
                 <FaWhatsapp className="h-6 w-6 text-green-500" />
                 <span>WhatsApp</span>

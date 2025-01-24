@@ -310,7 +310,7 @@ export default function Avatars() {
             </div>
 
             {/* Action buttons */}
-            <div className="absolute right-5 top-[60%] lg:right-10 lg:top-2/3 -translate-y-1/2 flex flex-col gap-4">
+            <div className="absolute right-5 bottom-20 lg:right-10  flex flex-col gap-4">
               <Link href="/chat">
                 <div
                   className="relative flex flex-col items-center gap-1"

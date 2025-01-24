@@ -52,7 +52,7 @@ const Supportpopup: React.FC<SupportPopupProps> = ({ setIsMobileSupportOpen }) =
      return () => document.removeEventListener("mousedown", handleClickOutside);
    }, [setIsMobileSupportOpen, isDrawerOpen]);
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10 px-2">
       {isFAQOpen ? (
         <div
           ref={popupRef}
@@ -237,28 +237,28 @@ const Supportpopup: React.FC<SupportPopupProps> = ({ setIsMobileSupportOpen }) =
             </Accordion>
           </div>
           <div className="mt-2 flex items-center gap-2">
-            <div className="w-40 h-44 bg-white rounded-lg py-4 px-2 space-y-4 flex flex-col items-center">
+            <div className="max-w-44 h-40 bg-white rounded-lg py-4 px-2 space-y-3 flex flex-col items-center">
               <div className="flex items-center justify-center gap-2">
-                <Mail className="text-secondarycolor" />
-                <h1 className="font-semibold text-sm">Email Support</h1>
+                <Mail size={20} className="text-secondarycolor" />
+                <h1 className="font-semibold text-xs">Email Support</h1>
               </div>
-              <p className="text-xs font-normal text-mediumgray2 text-center">
+              <p className="text-[10px] font-normal text-mediumgray2 text-center">
                 Send us a detailed email, and we’ll get back to you within 24
                 hours.
               </p>
-              <button className="bg-secondarycolor text-white w-32 py-3 rounded-md text-sm">
+              <button className="bg-secondarycolor text-white w-32 py-3 rounded-md text-xs">
                 Contact by Email
               </button>
             </div>
-            <div className="w-40 h-44 bg-white rounded-lg py-4 px-2 space-y-4 flex flex-col items-center">
+            <div className="max-w-44 h-40 bg-white rounded-lg py-4 px-2 space-y-5 flex flex-col items-center">
               <div className="flex items-center justify-center gap-2">
-                <MessagesSquare className="text-secondarycolor" />
-                <h1 className="font-semibold text-sm">Chat Support</h1>
+                <MessagesSquare size={20} className="text-secondarycolor" />
+                <h1 className="font-semibold text-xs">Chat Support</h1>
               </div>
-              <p className="text-xs font-normal text-mediumgray2 text-center">
+              <p className="text-[10px] font-normal text-mediumgray2 text-center">
                 Connect with our support team in real-time.
               </p>
-              <button className="bg-secondarycolor text-white w-32 py-3 rounded-md text-sm">
+              <button className="bg-secondarycolor text-white w-32 py-3 rounded-md text-xs ">
                 Start Chat
               </button>
             </div>
@@ -336,7 +336,7 @@ const Supportpopup: React.FC<SupportPopupProps> = ({ setIsMobileSupportOpen }) =
             </div>
           </div>
           <DrawerContent>
-            <div className="mx-auto px-4 py-4 h-44 w-full max-w-md md:hidden">
+            <div className="mx-auto px-4 py-4 h-auto w-full max-w-md md:hidden">
               <div className="border-b border-secondarycolor pb-4 flex items-center justify-between">
                 <h1 className="text-lg font-semibold">Start the chat with</h1>
                 <Info />

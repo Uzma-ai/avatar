@@ -41,9 +41,8 @@ const BrowserSidebar = () => {
                 : ""
             }`}
           >
-            <Link
-              href="/profile"
-              className={`flex items-center gap-3 px-2 py-2.5 ${
+            <div
+              className={`flex items-center gap-3 cursor-pointer py-2.5 ${
                 isActive("/profile") || isActive("/create-avatar")
                   ? "bg-secondarycolor text-white"
                   : "text-blackcolor"
@@ -66,7 +65,7 @@ const BrowserSidebar = () => {
               >
                 Profile
               </span>
-            </Link>
+            </div>
 
             {/* Dropdown */}
             <ul
