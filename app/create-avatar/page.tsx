@@ -73,7 +73,7 @@ const CreateAvatarPage = () => {
   return (
     <div className="flex h-full bg-white">
       <BrowserSidebar />
-      <div className="flex-1 h-full p-8 overflow-hidden">
+      <div className="flex-1 h-full px-6 overflow-hidden">
         <div className="flex justify-between items-center h-28 p-4 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
@@ -92,11 +92,11 @@ const CreateAvatarPage = () => {
           <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
             <div className="flex">
               <div className="w-1/2 max-w-[40%] border border-neutral-100 rounded-lg p-4">
-                <h1 className="text-2xl font-bold mb-2">
+                <h1 className="text-lg lg:text-2xl font-bold mb-2">
                   Personalize Your Experience
                 </h1>
                 <div className="flex justify-between items-center mb-6">
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm lg:text-base">
                     Choose how you want to create your avatar. You can click a
                     picture, upload an existing photo, and add your voice to
                     make it uniquely yours!
@@ -181,9 +181,9 @@ const CreateAvatarPage = () => {
                   <Slider defaultValue={[50]} max={100} step={1} />
                 </div>
               </div>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between w-40">
                 <span className="text-sm font-normal">Eye Blink</span>
-                <Switch style={{ marginRight: "87%" }} />
+                <Switch />
               </div>
               <div className="flex space-x-4">
                 <div className="w-1/2 space-y-5">
@@ -334,7 +334,7 @@ const CreateAvatarPage = () => {
                   </RadioGroup>
                 </div>
               </div>
-              <div className="flex space-x-4">
+              <div className="flex items-start space-x-4">
                 <div className="w-1/2 space-y-5">
                   <label className="text-sm font-normal">Face render</label>
                   <RadioGroup
@@ -376,7 +376,7 @@ const CreateAvatarPage = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="w-1/2 space-y-5">
+                <div className="w-1/2 space-y-10">
                   <label className="text-sm font-normal">
                     Batch size in generation
                   </label>
@@ -384,7 +384,7 @@ const CreateAvatarPage = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <div className="w-1/2 flex items-center">
+                <div className="w-1/2 flex items-center gap-5 px-2">
                   <div>
                     <span className="text-sm font-normal">Still Mode</span>
                     <p className="text-xs font-light text-mediumgray2">
@@ -392,16 +392,16 @@ const CreateAvatarPage = () => {
                       &quot;Full&quot;)
                     </p>
                   </div>
-                  <Switch className="ml-4" />
+                  <Switch />
                 </div>
-                <div className="w-1/2 flex items-center">
+                <div className="w-1/2 flex items-center gap-5 px-2">
                   <div>
                     <span className="text-sm font-normal">GFPGAN</span>
                     <p className="text-xs font-light text-mediumgray2">
                       as face enhancer
                     </p>
                   </div>
-                  <Switch className="ml-4" />
+                  <Switch/>
                 </div>
               </div>
               <div className="flex items-center justify-end">

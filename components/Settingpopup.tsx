@@ -52,10 +52,10 @@ const Settingpopup: React.FC<SettingPopupProps> = ({
     event.stopPropagation();
   };
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10 px-2">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[35.5rem] overflow-y-auto scroll"
+        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[22rem] w-full relative h-[35.5rem] overflow-y-auto scroll"
         onClick={handlePopupClick}
       >
         <div className="border-b border-secondarycolor pb-4">

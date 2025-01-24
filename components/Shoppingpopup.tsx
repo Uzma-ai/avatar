@@ -15,6 +15,7 @@ import {
 import { useRouter } from "next/navigation";
 import { ProgressTracker } from "@/components/Progresstracker";
 import { AddressDialog } from "@/components/Addressdialog";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface ShoppingPopupProps {
   setIsMobileShoppingOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -65,6 +66,8 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
   ]);
   const [editingAddress, setEditingAddress] = useState<Address | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false); 
+  const [selectedImage, setSelectedImage] = React.useState(0);
+
    const steps = [
      { label: "Shipped", status: "completed" as const },
      { label: "In Transit", status: "completed" as const },
@@ -141,23 +144,23 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
     {
       name: "Nike Jordan",
       category: "Nike Sneakers",
-      price: 200,
+      price: 300,
       image:
-        "/nike-shoes.png",
+        "/nike.svg",
     },
     {
       name: "Nike Jordan",
       category: "Nike Sneakers",
-      price: 200,
+      price: 400,
       image:
-        "/nike-shoes.png",
+        "/nike.svg",
     },
     {
       name: "Nike Jordan",
       category: "Nike Sneakers",
-      price: 200,
+      price: 500,
       image:
-        "/nike-shoes.png",
+        "/nike.svg",
     },
   ];
 
@@ -178,6 +181,34 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
     },
   ];
 
+  const product = {
+    name: "Air Jordan 1 Low",
+    description:
+      "Shift your game into high gear with the lightest Luka yet. Designed to help you create space through acceleration, the Luka 3 features full-length Cushlon 3.0 foam for a smooth heel-to-toe transition.",
+    price: 200,
+    color: "Black/White/Red",
+    style: "FQ1285-003",
+    origin: "Vietnam",
+    images: [
+      {
+        src: "/main-view.svg",
+        alt: "Air Jordan 1 Low - Main View",
+      },
+      {
+        src: "/front-view.svg",
+        alt: "Air Jordan 1 Low - Front View",
+      },
+      {
+        src: "bottom-view.svg",
+        alt: "Air Jordan 1 Low - Bottom View",
+      },
+      {
+        src: "top-view.svg",
+        alt: "Air Jordan 1 Low - Top View",
+      },
+    ],
+  };
+
    const handlePurchaseItemClick = (item: ShoppingItem) => {
      setSelectedPurchaseItem(item);
   };
@@ -195,10 +226,10 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
    };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10 px-2">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[24rem] w-full relative h-[40rem] overflow-y-auto scroll"
+        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[22rem] w-full relative h-[40rem] overflow-y-auto scroll"
       >
         <div className="border-b border-secondarycolor pb-4 flex items-center">
           <div>
@@ -286,106 +317,122 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
                 </div>
               ))}
               {selectedWishlistItem && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
-                  <div className="bg-mediumWhite rounded-lg p-4 max-w-sm w-full h-[41rem] backdrop-blur-sm text-white">
-                    <div className="flex items-center justify-between">
-                      <h1 className="font-bold text-lg">Product Details</h1>
-                      <button
-                        onClick={closeProductPopup}
-                        className="text-gray-600 hover:text-black"
-                      >
-                        ✖
-                      </button>
-                    </div>
-                    <div className="space-y-6 mt-4">
-                      <div className="space-y-4">
-                        <h3 className="font-semibold text-sm">
-                          Order Tracking
-                        </h3>
-                        <div className="px-3">
-                          <ProgressTracker steps={steps} />
-                        </div>
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-2"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-mediumWhite rounded-lg p-4 max-w-[22rem] w-full h-[41rem] backdrop-blur-sm text-white overflow-y-scroll"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h1 className="font-bold text-lg">Product Details</h1>
+                        <button
+                          onClick={closeProductPopup}
+                          className="text-white"
+                        >
+                          ✖
+                        </button>
                       </div>
-                      <div className="space-y-1">
-                        <h3 className="font-semibold text-sm">
-                          Default Address
-                        </h3>
-                        <div className="flex items-center gap-3 py-2">
-                          <div className="w-12 h-12 rounded-md bg-inputbackground flex items-center justify-center">
-                            <Home color="black" className="h-5 w-5" />
+                      <div className="flex flex-col">
+                        <div className="flex items-start justify-between px-1 mt-6 ">
+                          {/* Thumbnail Gallery */}
+                          <div className="flex flex-col py-2 px-2 gap-2">
+                            {product.images.map((image, index) => (
+                              <button
+                                key={index}
+                                onClick={() => setSelectedImage(index)}
+                                className={`w-9 h-9 rounded-lg overflow-hidden border transition-colors ${
+                                  selectedImage === index
+                                    ? "border-secondarycolor"
+                                    : "border-transparent"
+                                }`}
+                              >
+                                <img
+                                  src={image.src || "/placeholder.svg"}
+                                  alt={image.alt}
+                                  className="w-full h-full object-cover"
+                                />
+                              </button>
+                            ))}
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between">
-                              <span className="font-semibold text-sm">
-                                Home
-                              </span>
-                              <AddressDialog
-                                currentAddress={orderAddress}
-                                onAddressChange={setOrderAddress}
+                          {/* Main Image */}
+                          <AnimatePresence mode="wait">
+                            <motion.div
+                              key={selectedImage}
+                              initial={{ opacity: 0 }}
+                              animate={{ opacity: 1 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                              className="h-[15rem] w-[15rem]"
+                            >
+                              <img
+                                src={
+                                  product.images[selectedImage].src ||
+                                  "/placeholder.svg"
+                                }
+                                alt={product.images[selectedImage].alt}
+                                className="w-full h-full object-contain rounded-md"
                               />
+                            </motion.div>
+                          </AnimatePresence>
+                        </div>
+                        {/* Main Content */}
+                        <div className="flex-1">
+                          {/* Product Details */}
+                          <div className="py-6 px-3 space-y-1">
+                            <h2 className="text-2xl font-bold text-secondarycolor">
+                              {product.name}
+                            </h2>
+                            <p className="text-white font-semibold text-xs">
+                              {product.description}
+                            </p>
+
+                            <ul className="list-disc text-xs text-white px-6">
+                              <li>Colour Shown: {product.color}</li>
+                              <li>Style: {product.style}</li>
+                              <li>
+                                Country/Region of Origin: {product.origin}
+                              </li>
+                            </ul>
+
+                            <div className="pt-2">
+                              <div className="text-lg font-semibold">
+                                MRP: {product.price}$
+                              </div>
+                              <div className="text-xs text-white">
+                                Inclusive of all taxes
+                                <br />
+                                (Also includes all applicable duties)
+                              </div>
+                            </div>
+
+                            <div className="space-y-4 pt-2">
+                              <div>
+                                <div className="text-xs font-medium mb-2">
+                                  Size Selected
+                                </div>
+                                <button className="h-8 px-7 text-xs rounded border">
+                                  8UK
+                                </button>
+                              </div>
+
+                              <button className="w-full h-12 bg-secondarycolor text-white rounded-md transition-colors">
+                                Add to cart
+                              </button>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="space-y-5">
-                      <h3 className="font-semibold text-sm mt-2">
-                        Order details
-                      </h3>
-                      <div className="space-y-2">
-                        <div>
-                          <div className="text-[9px] font-semibold">
-                            PAYMENT METHOD
-                          </div>
-                          <div className="mt-1 bg-white text-blackcolor px-3 py-2 rounded-lg font-semibold text-sm">
-                            Amazon pay ICICI bank credit card
-                            <p className="text-[9px] text-mediumgray2">
-                              *3425 VISA | Gaurav Yadav
-                            </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between pt-1 text-sm font-semibold">
-                          <div>Order ID</div>
-                          <div>ID12345574324324</div>
-                        </div>
-                        <div className="flex items-center justify-between text-sm font-semibold">
-                          <div>Total Amount</div>
-                          <div className="text-lg">$243</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="space-y-5">
-                      <h3 className="font-semibold text-sm mt-3">Items</h3>
-                      <div className="flex gap-4">
-                        <div className="h-32 w-32 rounded-lg overflow-hidden">
-                          <Image
-                            src={selectedWishlistItem.image}
-                            alt={selectedWishlistItem.name}
-                            width={120}
-                            height={120}
-                            className="object-cover"
-                          />
-                        </div>
-                        <div>
-                          <h1 className="font-normal text-sm">
-                            {selectedWishlistItem.name}
-                          </h1>
-                          <p className="text-lg font-semibold">
-                            {selectedWishlistItem.price}$
-                          </p>
-                          <p className="text-xs font-normal">
-                            Colour: Black/White/Red
-                            <br />
-                            Style: FQ1285-003
-                          </p>
-                          <div className="mt-2 border border-white rounded-md w-20 px-3 py-1.5 text-sm flex items-center justify-center">
-                            8UK
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
               )}
             </div>
           </div>
@@ -426,106 +473,119 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
                 </div>
               ))}
               {selectedPurchaseItem && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 ">
-                  <div className="bg-mediumWhite rounded-lg p-4 max-w-sm w-full h-[41rem] backdrop-blur-sm text-white">
-                    <div className="flex items-center justify-between">
-                      <h1 className="font-bold text-lg">Order Details</h1>
-                      <button
-                        onClick={closeOrderPopup}
-                        className="text-gray-600 hover:text-black"
-                      >
-                        ✖
-                      </button>
-                    </div>
-                    <div className="space-y-6 mt-4">
-                      <div className="space-y-4">
-                        <h3 className="font-semibold text-sm">
-                          Order Tracking
-                        </h3>
-                        <div className="px-3">
-                          <ProgressTracker steps={steps} />
-                        </div>
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-2"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-mediumWhite rounded-lg p-4 max-w-[22rem] w-full h-[41rem] backdrop-blur-sm text-white"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h1 className="font-bold text-lg">Order Details</h1>
+                        <button
+                          onClick={closeOrderPopup}
+                          className="text-gray-600 hover:text-black"
+                        >
+                          ✖
+                        </button>
                       </div>
-                      <div className="space-y-1">
-                        <h3 className="font-semibold text-sm">
-                          Default Address
-                        </h3>
-                        <div className="flex items-center gap-3 py-2">
-                          <div className="w-12 h-12 rounded-md bg-inputbackground flex items-center justify-center">
-                            <Home color="black" className="h-5 w-5" />
+                      <div className="space-y-6 mt-4">
+                        <div className="space-y-4">
+                          <h3 className="font-semibold text-sm">
+                            Order Tracking
+                          </h3>
+                          <div className="px-3">
+                            <ProgressTracker steps={steps} />
                           </div>
-                          <div className="flex-1">
-                            <div className="flex items-center justify-between">
-                              <span className="font-semibold text-sm">
-                                Home
-                              </span>
-                              <AddressDialog
-                                currentAddress={orderAddress}
-                                onAddressChange={setOrderAddress}
-                              />
+                        </div>
+                        <div className="space-y-1">
+                          <h3 className="font-semibold text-sm">
+                            Default Address
+                          </h3>
+                          <div className="flex items-center gap-3 py-2">
+                            <div className="w-12 h-12 rounded-md bg-inputbackground flex items-center justify-center">
+                              <Home color="black" className="h-5 w-5" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between">
+                                <span className="font-semibold text-sm">
+                                  Home
+                                </span>
+                                <AddressDialog
+                                  currentAddress={orderAddress}
+                                  onAddressChange={setOrderAddress}
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="space-y-5">
-                      <h3 className="font-semibold text-sm mt-2">
-                        Order details
-                      </h3>
-                      <div className="space-y-2">
-                        <div>
-                          <div className="text-[9px] font-semibold">
-                            PAYMENT METHOD
+                      <div className="space-y-5">
+                        <h3 className="font-semibold text-sm mt-2">
+                          Order details
+                        </h3>
+                        <div className="space-y-2">
+                          <div>
+                            <div className="text-[9px] font-semibold">
+                              PAYMENT METHOD
+                            </div>
+                            <div className="mt-1 bg-white text-blackcolor px-3 py-2 rounded-lg font-semibold text-sm">
+                              Amazon pay ICICI bank credit card
+                              <p className="text-[9px] text-mediumgray2">
+                                *3425 VISA | Gaurav Yadav
+                              </p>
+                            </div>
                           </div>
-                          <div className="mt-1 bg-white text-blackcolor px-3 py-2 rounded-lg font-semibold text-sm">
-                            Amazon pay ICICI bank credit card
-                            <p className="text-[9px] text-mediumgray2">
-                              *3425 VISA | Gaurav Yadav
+                          <div className="flex items-center justify-between pt-1 text-sm font-semibold">
+                            <div>Order ID</div>
+                            <div>ID12345574324324</div>
+                          </div>
+                          <div className="flex items-center justify-between text-sm font-semibold">
+                            <div>Total Amount</div>
+                            <div className="text-lg">$243</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-5">
+                        <h3 className="font-semibold text-sm mt-3">Items</h3>
+                        <div className="flex gap-4">
+                          <div className="h-32 w-32 rounded-lg overflow-hidden">
+                            <Image
+                              src={selectedPurchaseItem.image}
+                              alt={selectedPurchaseItem.name}
+                              width={120}
+                              height={120}
+                              className="object-cover"
+                            />
+                          </div>
+                          <div>
+                            <h1 className="font-normal text-sm">
+                              {selectedPurchaseItem.name}
+                            </h1>
+                            <p className="text-lg font-semibold">
+                              {selectedPurchaseItem.price}$
                             </p>
-                          </div>
-                        </div>
-                        <div className="flex items-center justify-between pt-1 text-sm font-semibold">
-                          <div>Order ID</div>
-                          <div>ID12345574324324</div>
-                        </div>
-                        <div className="flex items-center justify-between text-sm font-semibold">
-                          <div>Total Amount</div>
-                          <div className="text-lg">$243</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="space-y-5">
-                      <h3 className="font-semibold text-sm mt-3">Items</h3>
-                      <div className="flex gap-4">
-                        <div className="h-32 w-32 rounded-lg overflow-hidden">
-                          <Image
-                            src={selectedPurchaseItem.image}
-                            alt={selectedPurchaseItem.name}
-                            width={120}
-                            height={120}
-                            className="object-cover"
-                          />
-                        </div>
-                        <div>
-                          <h1 className="font-normal text-sm">
-                            {selectedPurchaseItem.name}
-                          </h1>
-                          <p className="text-lg font-semibold">
-                            {selectedPurchaseItem.price}$
-                          </p>
-                          <p className="text-xs font-normal">
-                            Colour: Black/White/Red
-                            <br />
-                            Style: FQ1285-003
-                          </p>
-                          <div className="mt-2 border border-white rounded-md w-20 px-3 py-1.5 text-sm flex items-center justify-center">
-                            8UK
+                            <p className="text-xs font-normal">
+                              Colour: Black/White/Red
+                              <br />
+                              Style: FQ1285-003
+                            </p>
+                            <div className="mt-2 border border-white rounded-md w-20 px-3 py-1.5 text-sm flex items-center justify-center">
+                              8UK
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
               )}
             </div>
           </div>
@@ -600,6 +660,7 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
             <Button
               variant="outline"
               className="flex-1 border border-secondarycolor text-secondarycolor h-12"
+              onClick={()=>  setIsMobileShoppingOpen(false) }
             >
               Cancel
             </Button>
