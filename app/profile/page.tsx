@@ -20,9 +20,6 @@ const ProfilePage = () => {
     setSelectedSidebarItem("Personal Information");
   }, []);
 
-  // const handleSidebarClick = (item: "Profile" | "Personal Information" | "Create Avatar" | "Subscription" | "My Avatar" | "Public Avatar" | "Shopping" | "Settings" | "Support"): void => {
-  //   setSelectedSidebarItem(item);
-  // };
 
   const handleEditClick = (): void => {
     setIsEditing(!isEditing);
@@ -45,7 +42,7 @@ const ProfilePage = () => {
 
       {/* Main Content */}
       <main className="flex-1 h-full px-6 overflow-hidden">
-        <div className="flex justify-between items-center h-28 p-4 rounded-md">
+        <div className="flex justify-between items-center h-28 py-4 px-7 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
               <User className="mr-2 h-6 w-6 text-black" />
@@ -67,8 +64,8 @@ const ProfilePage = () => {
           </button>
         </div>
 
-        <div className="bg-gray-100 px-4 pt-10 pb-14 h-[calc(100vh-112px)] overflow-y-auto scroll">
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
+        <div className="bg-gray-100 px-7 pt-7 pb-14 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-white rounded-lg shadow-md p-8 mx-auto">
             <div className="flex space-x-4 mb-8">
               <button
                 className={`px-4 py-2 rounded-md font-semibold relative ${

@@ -25,196 +25,132 @@ const BrowserSidebar = () => {
 
   return (
     <aside className="md:w-44 lg:w-60 bg-white h-screen">
-      <div className="md:p-2 lg:p-4">
+      <div className="md:p-2 lg:py-4 lg:px-2">
         {/* Logo */}
-        <div className="flex items-center justify-start mb-8 px-3">
+        <div className="flex items-center justify-start mb-8 px-5">
           <Image src="/Avatar4.png" alt="Logo" width={70} height={70} />
         </div>
 
         {/* Menu */}
         <ul className="space-y-3">
           {/* Profile */}
-          <li
-            className={`rounded-sm overflow-hidden ${
-              isActive("/profile") || isActive("/create-avatar")
-                ? "bg-lightblue"
-                : ""
-            }`}
-          >
-            <div
-              className={`flex items-center gap-3 cursor-pointer py-2.5 ${
-                isActive("/profile") || isActive("/create-avatar")
-                  ? "bg-secondarycolor text-white"
-                  : "text-blackcolor"
-              }`}
-              onClick={toggleDropdown} // Toggle dropdown on click
-            >
-              <User
-                className={`w-5 h-5 ${
+          <li className={`overflow-hidden flex items-start gap-2`}>
+            {isActive("/profile") || isActive("/create-avatar") ? (
+              <div className="bg-secondarycolor w-[3px] h-10 rounded-lg mt-0.5"></div>
+            ) : (
+              <div className="w-[3px] h-10 mt-0.5"></div>
+            )}
+            <div className="w-full">
+              <div
+                className={`flex items-center gap-3 cursor-pointer py-2.5 w-full rounded-t-md ${
                   isActive("/profile") || isActive("/create-avatar")
-                    ? "text-white"
+                    ? "bg-secondarycolor text-white"
                     : "text-blackcolor"
-                } ml-3`}
-              />
-              <span
-                className={`font-normal md:text-base lg:text-lg ${
+                } ${isDropdownVisible ? "rounded-b-none" : "rounded-md"}`}
+                onClick={toggleDropdown} // Toggle dropdown on click
+              >
+                <User
+                  className={`w-5 h-5 ${
+                    isActive("/profile") || isActive("/create-avatar")
+                      ? "text-white"
+                      : "text-blackcolor"
+                  } ml-3`}
+                />
+                <span
+                  className={`font-normal md:text-base lg:text-lg ${
+                    isActive("/profile") || isActive("/create-avatar")
+                      ? "text-white"
+                      : "text-blackcolor"
+                  }`}
+                >
+                  Profile
+                </span>
+              </div>
+
+              {/* Dropdown */}
+              <ul
+                className={`space-y-1 ${isDropdownVisible ? "" : "hidden"} ${
                   isActive("/profile") || isActive("/create-avatar")
-                    ? "text-white"
-                    : "text-blackcolor"
+                    ? "bg-lightblue"
+                    : ""
                 }`}
               >
-                Profile
-              </span>
-            </div>
-
-            {/* Dropdown */}
-            <ul
-              className={`ml-3 mt-2 space-y-1 ${
-                isDropdownVisible ? "" : "hidden"
-              }`}
-            >
-              <li>
-                <Link
-                  href="/profile"
-                  className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                    isActive("/profile") && !isActive("/create-avatar")
-                      ? "text-blackcolor font-normal"
-                      : "text-blackcolor font-normal"
-                  }`}
-                >
-                  <span
-                    className={`w-2 h-2 ${
+                <li>
+                  <Link
+                    href="/profile"
+                    className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
                       isActive("/profile") && !isActive("/create-avatar")
-                        ? "bg-secondarycolor"
-                        : ""
-                    } rounded-full mr-3`}
-                  ></span>
-                  Personal Information
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/create-avatar"
-                  className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                    isActive("/create-avatar")
-                      ? "text-blackcolor font-normal"
-                      : "text-blackcolor font-normal"
-                  }`}
-                >
-                  <span
-                    className={`w-2 h-2 ${
-                      isActive("/create-avatar") ? "bg-secondarycolor" : ""
-                    } rounded-full mr-3`}
-                  ></span>
-                  Create Avatar
-                </Link>
-              </li>
-            </ul>
+                        ? "text-blackcolor font-normal"
+                        : "text-blackcolor font-normal"
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 ${
+                        isActive("/profile") && !isActive("/create-avatar")
+                          ? "bg-secondarycolor"
+                          : ""
+                      } rounded-full mr-3`}
+                    ></span>
+                    Personal Information
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/create-avatar"
+                    className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
+                      isActive("/create-avatar")
+                        ? "text-blackcolor font-normal"
+                        : "text-blackcolor font-normal"
+                    }`}
+                  >
+                    <span
+                      className={`w-2 h-2 ${
+                        isActive("/create-avatar") ? "bg-secondarycolor" : ""
+                      } rounded-full mr-3`}
+                    ></span>
+                    Create Avatar
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </li>
 
           {/* Other sections */}
-          <li>
-            <Link
-              href="/subscription"
-              className={`flex items-center p-2 md:text-base lg:text-lg rounded-md font-normal ${
-                isActive("/subscription")
-                  ? "text-white bg-secondarycolor"
-                  : "text-blackcolor"
-              }`}
-            >
-              <ShoppingCart
-                className={`w-5 h-5 ${
-                  isActive("/subscription") ? "text-white" : "text-blackcolor"
+          {[
+            {
+              path: "/subscription",
+              label: "Subscription",
+              icon: ShoppingCart,
+            },
+            { path: "/chat", label: "My Avatar", icon: UserCircle },
+            { path: "/avatars", label: "Public Avatar", icon: Users },
+            { path: "/shopping", label: "Shopping", icon: ShoppingCart },
+            { path: "/settings", label: "Settings", icon: Settings },
+            { path: "/support", label: "Support", icon: HelpCircle },
+          ].map(({ path, label, icon: Icon }) => (
+            <li key={path} className="flex gap-2 items-center">
+              {isActive(path) ? (
+                <div className="bg-secondarycolor w-[3px] h-10 rounded-lg"></div>
+              ) : (
+                <div className="w-[3px] h-10"></div>
+              )}
+              <Link
+                href={path}
+                className={`flex items-center p-2 md:text-base lg:text-lg rounded-md font-normal w-full ${
+                  isActive(path)
+                    ? "text-white bg-secondarycolor"
+                    : "text-blackcolor"
                 }`}
-              />
-              <span className="ml-3">Subscription</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/chat"
-              className={`flex items-center p-2 md:text-base lg:text-lg rounded-md font-normal ${
-                isActive("/my-avatar")
-                  ? "text-white bg-secondarycolor"
-                  : "text-blackcolor"
-              }`}
-            >
-              <UserCircle
-                className={`w-5 h-5 ${
-                  isActive("/my-avatar") ? "text-white" : "text-blackcolor"
-                }`}
-              />
-              <span className="ml-3">My Avatar</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/avatars"
-              className={`flex items-center p-2 md:text-base lg:text-lg rounded-md font-normal ${
-                isActive("/public-avatar")
-                  ? "text-white bg-secondarycolor"
-                  : "text-blackcolor"
-              }`}
-            >
-              <Users
-                className={`w-5 h-5 ${
-                  isActive("/public-avatar") ? "text-white" : "text-blackcolor"
-                }`}
-              />
-              <span className="ml-3">Public Avatar</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/shopping"
-              className={`flex items-center p-2 md:text-base lg:text-lg rounded-md font-normal ${
-                isActive("/shopping")
-                  ? "text-white bg-secondarycolor"
-                  : "text-blackcolor"
-              }`}
-            >
-              <ShoppingCart
-                className={`w-5 h-5 ${
-                  isActive("/shopping") ? "text-white" : "text-blackcolor"
-                }`}
-              />
-              <span className="ml-3">Shopping</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/settings"
-              className={`flex items-center p-2 md:text-base lg:text-lg rounded-md font-normal ${
-                isActive("/settings")
-                  ? "text-white bg-secondarycolor"
-                  : "text-blackcolor"
-              }`}
-            >
-              <Settings
-                className={`w-5 h-5 ${
-                  isActive("/settings") ? "text-white" : "text-blackcolor"
-                }`}
-              />
-              <span className="ml-3">Settings</span>
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/support"
-              className={`flex items-center p-2 md:text-base lg:text-lg rounded-md font-normal ${
-                isActive("/support")
-                  ? "text-white bg-secondarycolor"
-                  : "text-blackcolor"
-              }`}
-            >
-              <HelpCircle
-                className={`w-5 h-5 ${
-                  isActive("/support") ? "text-white" : "text-blackcolor"
-                }`}
-              />
-              <span className="ml-3">Support</span>
-            </Link>
-          </li>
+              >
+                <Icon
+                  className={`w-5 h-5 ${
+                    isActive(path) ? "text-white" : "text-blackcolor"
+                  }`}
+                />
+                <span className="ml-3">{label}</span>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </aside>

@@ -254,7 +254,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                   className={`w-24 h-10 border ${
                     selectedModalValue === "256"
                       ? "border-secondarycolor"
-                      : "border-inputbackground"
+                      : "border-borderColor2"
                   } rounded-md flex items-center justify-center gap-2`}
                 >
                   <RadioGroupItem
@@ -270,7 +270,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                   className={`w-24 h-10 border ${
                     selectedModalValue === "512"
                       ? "border-secondarycolor"
-                      : "border-inputbackground"
+                      : "border-borderColor2"
                   } rounded-md flex items-center justify-center gap-2`}
                 >
                   <RadioGroupItem
@@ -298,7 +298,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 className={`w-24 h-10 border ${
                   selectedPreprocessValue === "crop"
                     ? "border-secondarycolor"
-                    : "border-inputbackground"
+                    : "border-borderColor2"
                 } rounded-md flex items-center justify-center gap-2`}
               >
                 <RadioGroupItem
@@ -314,7 +314,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 className={`w-24 h-10 border ${
                   selectedPreprocessValue === "resize"
                     ? "border-secondarycolor"
-                    : "border-inputbackground"
+                    : "border-borderColor2"
                 } rounded-md flex items-center justify-center gap-2`}
               >
                 <RadioGroupItem
@@ -330,7 +330,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 className={`w-24 h-10 border ${
                   selectedPreprocessValue === "full"
                     ? "border-secondarycolor"
-                    : "border-inputbackground"
+                    : "border-borderColor2"
                 } rounded-md flex items-center justify-center gap-2`}
               >
                 <RadioGroupItem
@@ -346,7 +346,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 className={`w-24 h-10 border ${
                   selectedPreprocessValue === "extcrop"
                     ? "border-secondarycolor"
-                    : "border-inputbackground"
+                    : "border-borderColor2"
                 } rounded-md flex items-center justify-center gap-2`}
               >
                 <RadioGroupItem
@@ -362,7 +362,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 className={`w-24 h-10 border ${
                   selectedPreprocessValue === "extfull"
                     ? "border-secondarycolor"
-                    : "border-inputbackground"
+                    : "border-borderColor2"
                 } rounded-md flex items-center justify-center gap-2`}
               >
                 <RadioGroupItem
@@ -389,7 +389,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 className={`w-32 h-10 border ${
                   selectedFaceValue === "video"
                     ? "border-secondarycolor"
-                    : "border-inputbackground"
+                    : "border-borderColor2"
                 } rounded-md flex items-center justify-center gap-2`}
               >
                 <RadioGroupItem
@@ -405,7 +405,7 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
                 className={`w-24 h-10 border ${
                   selectedFaceValue === "render"
                     ? "border-secondarycolor"
-                    : "border-inputbackground"
+                    : "border-borderColor2"
                 } rounded-md flex items-center justify-center gap-2`}
               >
                 <RadioGroupItem

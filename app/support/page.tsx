@@ -1,6 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { MessageCircleQuestion, Mail, Image, Search,Pencil } from "lucide-react";
+import {
+  MessageCircleQuestion,
+  Mail,
+  Image,
+  Search,
+  Pencil,
+  ChevronDown,
+} from "lucide-react";
 import { FaHeadset } from "react-icons/fa6";
 import { MdOutlineQuestionAnswer } from "react-icons/md";
 import { RiQuestionnaireLine } from "react-icons/ri";
@@ -52,7 +59,7 @@ const SupportPage = () => {
             : ""
         }`}
       >
-        <div className="flex justify-between items-center mb-4 p-4 rounded-md sticky top-0 bg-white z-10">
+        <div className="flex justify-between items-center mb-4 py-4 px-7 rounded-md sticky top-0 bg-white z-10">
           <div>
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <MessageCircleQuestion className="mr-2 h-6 w-6 text-black" />
@@ -63,8 +70,8 @@ const SupportPage = () => {
             </div>
           </div>
         </div>
-        <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
+        <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-white rounded-lg shadow-md p-8 mx-auto">
             <h1 className="text-xl font-semibold mb-2">
               Need Help with Your Avatar?
             </h1>
@@ -121,7 +128,7 @@ const SupportPage = () => {
                 Call us
               </button>
             </div>
-            <div className="mb-6 flex items-center justify-between">
+            <div className="mb-4 flex items-center justify-between">
               <div className="flex flex-col w-1/2">
                 <h2 className="text-base font-semibold flex items-center">
                   <RiQuestionnaireLine className="mr-2 h-6 w-6 text-secondarycolor" />
@@ -140,27 +147,23 @@ const SupportPage = () => {
                 </button>
               </div>
             </div>
-            <div className="mb-6 flex items-center justify-between">
-              <div className="flex flex-col w-1/2">
-                <h2 className="text-base lg:text-lg font-semibold mb-4">
+            <div className="flex items-center justify-between">
+                <h2 className="text-base lg:text-lg font-semibold">
                   Track or Report an Issue
                 </h2>
-              </div>
-              <div className="flex flex-col items-center">
                 <button
-                  className="text-secondarycolor py-2 px-4 ml-20 underline"
+                  className="text-secondarycolor py-2 px-4 underline"
                   onClick={handleTicketClick}
                 >
                   Ticket History
                 </button>
-              </div>
             </div>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="flex space-x-4">
-                <div className="flex-1">
+                <div className="flex-1 relative">
                   <select
                     id="issue-type"
-                    className="w-full border border-borderColor1 rounded-md px-2 h-14 text-gray-500"
+                    className="w-full border border-borderColor1 rounded-md pl-4 h-14 text-gray-500 appearance-none"
                     defaultValue=""
                   >
                     <option value="" disabled hidden>
@@ -170,6 +173,9 @@ const SupportPage = () => {
                     <option value="billing">Billing Issue</option>
                     <option value="general">General Inquiry</option>
                   </select>
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <ChevronDown  size={20}/>
+                  </span>
                 </div>
                 <div className="flex-1">
                   <div className="w-full h-14 border-dashed border-2  border-secondarycolor rounded-md flex items-center justify-center gap-4">
