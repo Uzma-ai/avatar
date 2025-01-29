@@ -596,27 +596,27 @@ const FAQPage: React.FC = () => {
         </div>
         {isChatPopupOpen && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-gray-300 p-6 rounded-md shadow-md w-96 h-36">
-              <div className="flex justify-between items-center mb-4">
+            <div className="bg-mediumWhite p-6 rounded-md shadow-md w-96 h-40">
+              <div className="flex justify-between items-center mb-2">
                 <h2 className="text-lg font-semibold">Start the chat with</h2>
                 <button
                   onClick={handleCloseChatPopup}
-                  className="text-gray-500 hover:text-gray-700"
+                  className="text-white text-2xl"
                 >
                   &times;
                 </button>
               </div>
               <hr className="border-t-2 border-secondarycolor mb-4" />
               <div className="flex items-center justify-between mb-4">
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center gap-2">
                   <FaWhatsapp className="h-6 w-6 text-green-500" />
                   <span>WhatsApp</span>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center gap-2">
                   <FaTelegramPlane className="h-6 w-6 text-blue-500" />
                   <span>Telegram</span>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center gap-2">
                   <MdOutlineQuestionAnswer className="h-6 w-6 text-black" />
                   <span>Support Chat</span>
                 </div>

@@ -170,8 +170,8 @@ const ProfilePage = () => {
                     <option>Other</option>
                   </select>
                 </div>
-                <div className="flex items-center justify-between w-full">
-                  <div className="w-1/2">
+                <div className="flex flex-col lg:flex-row items-center justify-between w-full">
+                  <div className="w-full lg:w-1/2">
                     <label className="block text-sm font-medium mb-1">
                       Personality Type
                     </label>

@@ -1,6 +1,5 @@
 "use client";
 import React, {useState} from "react";
-import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BrowserSidebar from "@/components/Browsersidebar";
 import { ShoppingBag,  } from "lucide-react";
@@ -8,6 +7,7 @@ import { useRouter } from "next/navigation";
 import {Home, Pencil } from "lucide-react"
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import Image from "next/image";
 
 interface Address {
     type: string;
@@ -83,7 +83,7 @@ const PaymentSuccessCMSPage: React.FC = () => {
             <div className="flex flex-col items-center py-4 px-3">
               <div className="my-8">
                 <div className="h-16 w-16 rounded-full bg-green-500 flex items-center justify-center">
-                  <Check className="h-8 w-8 text-white" />
+                   <Image src="/payment-success.gif" alt="success" width={70} height={70}/>
                 </div>
               </div>
               <h2 className="text-2xl font-semibold mb-2 text-center">
