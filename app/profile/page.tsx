@@ -41,7 +41,7 @@ const ProfilePage = () => {
       <BrowserSidebar />
 
       {/* Main Content */}
-      <main className="flex-1 h-full px-6 overflow-hidden">
+      <main className="flex-1 h-full px-2 overflow-hidden">
         <div className="flex justify-between items-center h-28 py-4 px-7 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">

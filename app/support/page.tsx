@@ -53,13 +53,13 @@ const SupportPage = () => {
     <div className="flex h-full bg-white">
       <BrowserSidebar />
       <div
-        className={`flex-1 px-6 overflow-auto scrollbar-none bg-white ${
+        className={`flex-1 px-2 overflow-auto scrollbar-none bg-white ${
           isChatPopupOpen || isTicketPopupOpen || isThankYouPopupOpen
             ? "opacity-50"
             : ""
         }`}
       >
-        <div className="flex justify-between items-center mb-4 py-4 px-7 rounded-md sticky top-0 bg-white z-10">
+        <div className="flex justify-between items-center h-28 py-4 px-7 rounded-md">
           <div>
             <h2 className="text-2xl font-semibold mb-4 flex items-center">
               <MessageCircleQuestion className="mr-2 h-6 w-6 text-black" />
@@ -148,15 +148,15 @@ const SupportPage = () => {
               </div>
             </div>
             <div className="flex items-center justify-between">
-                <h2 className="text-base lg:text-lg font-semibold">
-                  Track or Report an Issue
-                </h2>
-                <button
-                  className="text-secondarycolor py-2 px-4 underline"
-                  onClick={handleTicketClick}
-                >
-                  Ticket History
-                </button>
+              <h2 className="text-base lg:text-lg font-semibold">
+                Track or Report an Issue
+              </h2>
+              <button
+                className="text-secondarycolor py-2 px-4 underline"
+                onClick={handleTicketClick}
+              >
+                Ticket History
+              </button>
             </div>
             <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="flex space-x-4">
@@ -174,7 +174,7 @@ const SupportPage = () => {
                     <option value="general">General Inquiry</option>
                   </select>
                   <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <ChevronDown  size={20}/>
+                    <ChevronDown size={20} />
                   </span>
                 </div>
                 <div className="flex-1">
@@ -249,7 +249,7 @@ const SupportPage = () => {
         </div>
       )}
       {isTicketPopupOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 px-4">
           <div className="bg-neutral-400 p-6 rounded-md shadow-md w-[50rem]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-white">
