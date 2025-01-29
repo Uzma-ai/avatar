@@ -1,22 +1,40 @@
 "use client";
+import React, {useState } from "react";
+import { ShoppingBag, Search } from "lucide-react";
 
-import { useState } from "react";
-import { MoveLeft, Search, ShoppingCart } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import BrowserSidebar from "@/components/Browsersidebar";
 import Image from "next/image";
-import type { CartItem, WishlistItem } from "@/types/cart";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-export default function Cart() {
-    const router = useRouter();
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+  } from "@/components/ui/select";
+
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  color: string;
+  style: string;
+  size: string;
+  image: string;
+}
+
+interface WishlistItem {
+  id: string;
+  name: string;
+  type: string;
+  price: number;
+  image: string;
+}
+
+const CartCMSPage: React.FC = () => {
+  
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: "1",
@@ -34,21 +52,21 @@ export default function Cart() {
       id: "2",
       name: "Nike Jordan",
       type: "Nike Sneakers",
-      price: 400,
+      price: 200,
       image: "/nike.svg",
     },
     {
       id: "3",
       name: "Nike Jordan",
       type: "Nike Sneakers",
-      price: 500,
+      price: 200,
       image: "/nike.svg",
     },
     {
       id: "4",
       name: "Nike Jordan",
       type: "Nike Sneakers",
-      price: 300,
+      price: 200,
       image: "/nike.svg",
     },
   ]);
@@ -98,46 +116,33 @@ export default function Cart() {
     setCartItems(cartItems.filter((item) => item.id !== itemId));
   };
 
-    return (
-      <>
-        <div className="max-w-3xl mx-auto bg-primarycolor min-h-screen md:hidden">
-          {/* Header */}
-          <header className="p-4">
-            <div className="flex items-center justify-center relative border-b pb-4 border-secondarycolor">
-              <span className="absolute left-0" onClick={() => router.back()}>
-                <MoveLeft className="h-7 w-7" />
-              </span>
+  return (
+    <div className="flex h-full bg-white">
+      <BrowserSidebar />
+      <div className="flex-1 h-full px-6 overflow-hidden">
+        <div className="flex justify-between items-center h-28 p-4 rounded-md">
+          <div>
+            <h2 className="text-2xl font-bold mb-4 flex items-center">
+              <ShoppingBag className="mr-2 h-6 w-6 text-black" />
+              <span>Cart</span>
+            </h2>
+            <div className="text-black ml-4">Shopping &gt; Cart</div>
+          </div>
+        </div>
 
-              <div className="flex items-center justify-center gap-1">
-                <ShoppingCart />
-                <h1 className="text-lg font-semibold">Cart</h1>
-              </div>
-            </div>
-          </header>
-
-          <div className="px-4 space-y-4">
-            {/* Proceed to buy button */}
-            <Button
-              className="w-full bg-secondarycolor text-white h-12"
-              onClick={() => router.push("/cart/payment-method")}
-            >
-              Proceed to buy ({cartItems.length} item
-              {cartItems.length !== 1 ? "s" : ""})
-            </Button>
-
-            {/* Search bar */}
-            <div className="relative">
-              <Input
-                type="search"
+        <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
+            <div className="relative mb-4">
+              <input
+                type="text"
+                className="w-full px-4 py-2 border border-borderColor1 rounded-md"
                 placeholder="Search items in cart"
-                className="w-full pl-4 pr-10 py-5 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0"
               />
-              <Search className="absolute right-3 top-2.5 h-5 w-5 text-gray-400" />
+              <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-borderColor1 h-4 w-4" />
             </div>
-
-            {/* Items section */}
-            {cartItems.length > 0 && (
-              <div>
+            
+            <div className="flex flex-col lg:flex-row justify-between mt-10">
+              <div className="rounded-lg border border-lightblue w-full lg:max-w-[75%] p-1 mb-6 lg:mb-0">
                 <h2 className="font-semibold text-base mb-4">Items</h2>
                 {cartItems.map((item) => (
                   <div key={item.id} className="bg-white p-4 rounded-lg">
@@ -177,21 +182,21 @@ export default function Cart() {
                     <div className="flex gap-2 mt-4">
                       <Button
                         variant="outline"
-                        className="flex-1 border border-secondarycolor text-secondarycolor py-5"
+                        className="flex-1 border border-secondarycolor text-secondarycolor py-2 "
                         onClick={() => moveToWishlist(item)}
                       >
                         Move to wishlist
                       </Button>
                       <Button
                         variant="outline"
-                        className="flex-1 border-secondarycolor text-secondarycolor py-5"
+                        className="flex-1 border-secondarycolor text-secondarycolor py-2 px-6 "
                         onClick={() => deleteFromCart(item.id)}
                       >
                         Delete
                       </Button>
                       <Button
                         variant="outline"
-                        className="flex-1 border-secondarycolor text-secondarycolor py-5"
+                        className="flex-1 border-secondarycolor text-secondarycolor py-2 px-6 "
                       >
                         Share
                       </Button>
@@ -199,37 +204,50 @@ export default function Cart() {
                   </div>
                 ))}
               </div>
-            )}
+              {/* Order summary */}
+              {cartItems.length > 0 && (
+                <div className="space-y-2 mt-1 rounded-lg border border-lightblue w-full lg:max-w-[24%] p-2">
+                  <div className="flex justify-between">
+                    <span className="text-blackcolor text-sm font-normal">
+                      Items:
+                    </span>
+                    <span className="text-blackcolor text-sm font-semibold">
+                      ${subtotal.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-blackcolor text-sm font-normal">
+                      Delivery:
+                    </span>
+                    <span className="text-blackcolor text-sm font-semibold">
+                      ${delivery.toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between font-semibold text-lg py-2">
+                    <span>Order Total</span>
+                    <span className="">${total.toFixed(2)}</span>
+                  </div>
+                  <div className="mt-4 lg:mt-6">
+                   
 
-            {/* Order summary */}
-            {cartItems.length > 0 && (
-              <div className="space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-blackcolor text-sm font-normal">
-                    Items:
-                  </span>
-                  <span className="text-blackcolor text-sm font-semibold">
-                    ${subtotal.toFixed(2)}
-                  </span>
+                    <Link href="/payment-method-cms">
+                   <Button 
+                    variant="outline"
+                   className="w-full bg-secondarycolor text-white py-2 hover:bg-secondarycolor hover:text-white">
+                    Proceed to buy (1 item)
+                     
+                    </Button>
+                   </Link>
+                  </div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-blackcolor text-sm font-normal">
-                    Delivery:
-                  </span>
-                  <span className="text-blackcolor text-sm font-semibold">
-                    ${delivery.toFixed(2)}
-                  </span>
-                </div>
-                <div className="flex justify-between font-semibold text-lg py-2 border-b border-secondarycolor">
-                  <span>Order Total</span>
-                  <span>${total.toFixed(2)}</span>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
+
+            <hr className="border-t-1 border-secondarycolor mb-5 mt-6" />
 
             {/* Wishlist */}
             {wishlistItems.length > 0 && (
-              <div>
+              <div className="mt-6">
                 <div className="flex justify-between items-center mb-4">
                   <h2 className="font-semibold text-base">Wishlist</h2>
                   <Button
@@ -283,7 +301,9 @@ export default function Cart() {
             )}
           </div>
         </div>
-      </>
-    );
-}
- 
+      </div>
+    </div>
+  );
+};
+
+export default CartCMSPage;

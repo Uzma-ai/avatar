@@ -9,25 +9,43 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import BrowserSidebar from "@/components/Browsersidebar";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { motion, AnimatePresence } from "framer-motion";
+import { AddressDialog } from "@/components/Addressdialog";
+import { ProgressTracker } from "@/components/Progresstracker";
+
 
 interface ProductImage {
   src: string;
   alt: string;
 }
 
+interface ShoppingItem {
+  name: string;
+  category: string;
+  price: number;
+  image: string;
+}
+
+interface Product {
+  name: string;
+  category: string;
+  price: number;
+  image: string;
+}
+
 const ShoppingPage = () => {
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  interface Product {
-    name: string;
-    category: string;
-    price: number;
-    image: string;
-  }
   
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+    const [selectedPurchaseItem, setSelectedPurchaseItem] = useState<ShoppingItem | null>(null);
+     const [selectedWishlistItem, setSelectedWishlistItem] =
+       useState<ShoppingItem | null>(null);
+     const [orderAddress, setOrderAddress] = useState(
+       "123 Main St, Apt 4B, New York, NY 10001"
+     );
+  const [, setIsDialogOpen] = useState(false);
+  
   const [categories, setCategories] = useState<string[]>(["Books"]);
   const [inputValue, setInputValue] = useState("");
-  const [wishlistItems] = useState([
+  const [wishlistItems] = useState<Product[]>([
     {
       name: "Nike Jordan",
       category: "Nike Sneakers",
@@ -79,6 +97,7 @@ const ShoppingPage = () => {
   ]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [addresses, setAddresses] = useState([
+    
     {
       id: "1",
       type: "Home",
@@ -140,10 +159,7 @@ const ShoppingPage = () => {
     setAddresses(addresses.filter((addr) => addr.id !== id));
   };
 
-  const handleWishlistItemClick = (item: any) => {
-    setSelectedProduct(item);
-    setIsDialogOpen(true);
-  };
+ 
 
   
   const images: ProductImage[] = [
@@ -165,6 +181,63 @@ const ShoppingPage = () => {
     },
   ]
 
+  const pastPurchases: ShoppingItem[] = [
+    {
+      name: "Nike Jordan",
+      category: "Nike Sneakers",
+      price: 200,
+      image:
+        "/nike.svg",
+    },
+    {
+      name: "Nike Jordan",
+      category: "Nike Sneakers",
+      price: 300,
+      image:
+        "/nike.svg",
+    },
+    {
+      name: "Nike Jordan",
+      category: "Nike Sneakers",
+      price: 200,
+      image:
+        "/nike.svg",
+    },
+    {
+      name: "Nike Jordan",
+      category: "Nike Sneakers",
+      price: 200,
+      image:
+        "/nike.svg",
+    },
+  ];
+
+  const steps = [
+    { label: "Shipped", status: "completed" as const },
+    { label: "In Transit", status: "completed" as const },
+    { label: "Arrived at nearby Location", status: "current" as const },
+    { label: "Out for delivery", status: "upcoming" as const },
+    { label: "Delivered", status: "upcoming" as const },
+  ];
+
+  const handlePurchaseItemClick = (item: ShoppingItem) => {
+    setSelectedPurchaseItem(item);
+ };
+
+ const handleWishlistItemClick = (item: ShoppingItem) => {
+   setSelectedWishlistItem(item);
+   setIsDialogOpen(true);
+ };
+ 
+const closeProductPopup = () => {
+  setSelectedWishlistItem(null);
+  setIsDialogOpen(false);
+};
+
+  const closeOrderPopup = () => {
+    setSelectedPurchaseItem(null);
+  };
+
   return (
     <div className="flex h-full bg-white">
       <BrowserSidebar/>
@@ -176,10 +249,13 @@ const ShoppingPage = () => {
               <span>Shopping</span></h2>
             <div className="text-black ml-4">Shopping</div>
           </div>
+         
+        <Link href="/cart-cms">
           <button className="px-6 py-2 border border-black text-black rounded-md flex items-center">
             <ShoppingBag className="mr-2 h-4 w-4" />
             Cart
           </button>
+        </Link>
         </div>
 
         <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
@@ -326,8 +402,8 @@ const ShoppingPage = () => {
                     </Link>
                   </div>
                   <div className="space-y-2 mt-3 h-36 overflow-y-auto custom-scrollbar">
-                    {wishlistItems.map((item, index) => (
-                      <div key={index} className="flex items-center justify-between">
+                    {pastPurchases.map((item, index) => (
+                      <div key={index} className="flex items-center justify-between cursor-pointer" onClick={() => handlePurchaseItemClick(item)}>
                         <div className="flex items-center gap-3">
                           <div className="h-14 w-14 rounded-lg overflow-hidden">
                             <Image
@@ -348,6 +424,125 @@ const ShoppingPage = () => {
                         </div>
                       </div>
                     ))}
+
+{selectedPurchaseItem && (
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-2"
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-mediumWhite rounded-lg p-4 max-w-[30rem] w-full h-[40rem] backdrop-blur-sm text-white"
+                    >
+                      <div className="flex items-center justify-between">
+                        <h1 className="font-bold text-lg text-blackcolor">Order Details</h1>
+                        <button
+                          onClick={closeOrderPopup}
+                          className="text-gray-600 hover:text-black"
+                        >
+                          ✖
+                        </button>
+                      </div>
+                      <div className="space-y-6 mt-4">
+                        <div className="space-y-4">
+                          <h3 className="font-semibold text-sm text-blackcolor">
+                            Order Tracking
+                          </h3>
+                          <div className="px-3">
+                            <ProgressTracker steps={steps} />
+                          </div>
+                        </div>
+                        <div className="space-y-1">
+                          <div className="flex justify-between items-center">
+                            <h3 className="font-semibold text-sm text-blackcolor">
+                              Default Address
+                            </h3>
+                            <AddressDialog
+                              currentAddress={orderAddress}
+                              onAddressChange={setOrderAddress}
+                            />
+                          </div>
+                          <div className="flex items-center gap-3 py-2">
+                            <div className="w-12 h-12 rounded-md bg-inputbackground flex items-center justify-center">
+                              <Home color="black" className="h-5 w-5" />
+                            </div>
+                            <div className="flex-1">
+                              <span className="font-semibold text-sm text-blackcolor">
+                                Home
+                              </span>
+                             
+                            </div>
+                            
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div className="space-y-5">
+                        <h3 className="font-semibold text-sm mt-2 text-blackcolor">
+                          Order details
+                        </h3>
+                        <div className="space-y-2">
+                          <div>
+                            <div className="text-[9px] font-semibold text-blackcolor">
+                              PAYMENT METHOD
+                            </div>
+                            <div className="mt-1 bg-white text-blackcolor px-3 py-2 rounded-lg font-semibold text-sm text-blackcolor">
+                              Amazon pay ICICI bank credit card
+                              <p className="text-[9px] text-mediumgray2">
+                                *3425 VISA | Gaurav Yadav
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-center justify-between pt-1 text-sm font-semibold text-blackcolor">
+                            <div>Order ID</div>
+                            <div>ID12345574324324</div>
+                          </div>
+                          <div className="flex items-center justify-between text-sm font-semibold text-blackcolor">
+                            <div>Total Amount</div>
+                            <div className="text-lg">$243</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-5">
+                        <h3 className="font-semibold text-sm mt-3 text-blackcolor">Items</h3>
+                        <div className="flex gap-4">
+                          <div className="h-32 w-32 rounded-lg overflow-hidden ">
+                            <Image
+                              src={selectedPurchaseItem.image}
+                              alt={selectedPurchaseItem.name}
+                              width={120}
+                              height={120}
+                              className="object-cover"
+                            />
+                          </div>
+                          <div>
+                            <h1 className="font-normal text-sm text-blackcolor">
+                              {selectedPurchaseItem.name}
+                            </h1>
+                            <p className="text-lg font-semibold text-blackcolor">
+                              {selectedPurchaseItem.price}$
+                            </p>
+                            <p className="text-xs font-normal text-blackcolor">
+                              Colour: Black/White/Red
+                              <br />
+                              Style: FQ1285-003
+                            </p>
+                            <div className="mt-2 border border-blackcolor text-blackcolor rounded-md w-20 px-3 py-1.5 text-sm flex items-center justify-center">
+                              8UK
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
+              )}
                   </div>
                   <div className="flex justify-end mt-10">
                     <button className="mr-2 px-10 py-2 border border-secondarycolor text-secondarycolor rounded-md">
@@ -367,11 +562,13 @@ const ShoppingPage = () => {
         </div>
       </div>
 
-      {selectedProduct && (
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+     
+      {selectedWishlistItem && (
+        <Dialog open={!!selectedWishlistItem} onOpenChange={closeProductPopup}>
           <DialogContent className="sm:max-w-[700px] rounded-2xl bg-neutral-400 border border-neutral-400">
             <DialogHeader>
               <DialogTitle className="text-xl font-bold text-white mt-">Product details</DialogTitle>
+             
             </DialogHeader>
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="flex gap-4">
@@ -436,18 +633,18 @@ const ShoppingPage = () => {
                   </div>
                 </div>
                 <div>
-                  <div className="text-lg font-semibold text-white">MRP: {selectedProduct.price}$</div>
+                  <div className="text-lg font-semibold text-white">MRP:$</div>
                   <div className="text-sm text-muted-foreground text-white">Inclusive of all taxes</div>
                   <div className="text-sm text-muted-foreground text-white">(Also includes all applicable duties)</div>
                 </div>
                 <div className="space-y-4">
                   <div>
                     <div className="text-sm font-medium mb-2 text-white">Size Selected</div>
-                    <Button variant="outline" className="w-20 bg-neutral-400 text-white">
+                    <Button variant="outline" className="w-20 bg-neutral-400 text-white hover:bg-neutral-400 hover:text-white">
                       8UK
                     </Button>
                   </div>
-                  <Button className="w-full bg-secondarycolor text-white">Add to cart</Button>
+                  <Button className="w-full bg-secondarycolor text-white hover:bg-secondarycolor hover:text-white">Add to cart</Button>
                 </div>
               </div>
             </div>

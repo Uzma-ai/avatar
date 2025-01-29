@@ -244,7 +244,7 @@ const SupportPage = () => {
       )}
       {isTicketPopupOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-neutral-400 p-6 rounded-md shadow-md w-[50rem]">
+          <div className="bg-mediumWhite backdrop-blur-sm p-6 rounded-md shadow-md w-[50rem]">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold text-white">
                 Ticket History

@@ -26,7 +26,7 @@ export function ProgressTracker({ steps }: ProgressTrackerProps) {
               step.status === "upcoming" && "border-mediumgray2 bg-mediumgray2"
             )}
           ></div>
-          <span className="mt-2 text-center text-[10px] text-white max-w-[80px]">
+          <span className="mt-2 text-center text-[10px] text-blackcolor max-w-[80px]">
             {step.label}
           </span>
         </div>
