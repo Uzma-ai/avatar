@@ -241,8 +241,8 @@ const closeProductPopup = () => {
   return (
     <div className="flex h-full bg-white">
       <BrowserSidebar/>
-      <div className="flex-1 h-full px-6 overflow-hidden">
-        <div className="flex justify-between items-center h-28 p-4 rounded-md">
+      <div className="flex-1 h-full px-2 overflow-hidden">
+        <div className="flex justify-between items-center h-28 py-4 px-7 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
               <ShoppingBag className="mr-2 h-6 w-6 text-black" />
@@ -258,8 +258,8 @@ const closeProductPopup = () => {
         </Link>
         </div>
 
-        <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
+        <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-white rounded-lg shadow-md p-8 mx-auto">
             <h1 className="text-2xl font-bold mb-2">Shopping Preferences</h1>
             <p className="text-gray-600 mb-4">
              Manage your shopping preferences and history easily.

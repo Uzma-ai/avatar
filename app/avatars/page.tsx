@@ -14,6 +14,7 @@ import {
   Share2,
   MoreHorizontal,
   UserRound,
+  Search 
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -105,7 +106,7 @@ export default function Avatars() {
   return (
     <div className="w-full h-screen overflow-hidden relative">
       <div className="absolute w-full h-20 flex items-center justify-between p-2 md:p-6 z-10 ">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between gap-4 w-full pr-9">
           <DropdownMenu
             open={isAvatarDropdownOpen}
             onOpenChange={setIsAvatarDropdoenOpen}
@@ -281,6 +282,9 @@ export default function Avatars() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <div className="h-8 w-8 rounded-full flex items-center justify-center bg-iconBackground cursor-pointer">
+            <Search color="white" size={18} />
+          </div>
         </div>
       </div>
       <div className="h-screen w-full overflow-y-scroll scroll snap-y snap-mandatory">
