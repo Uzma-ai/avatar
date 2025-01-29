@@ -72,7 +72,7 @@ const CreateAvatarPage = () => {
   return (
     <div className="flex h-full bg-white">
       <BrowserSidebar />
-      <div className="flex-1 h-full p-4 md:p-8 overflow-hidden">
+      <div className="flex-1 h-full px-2 overflow-hidden">
         <div className="flex justify-between items-center h-28 p-4 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">

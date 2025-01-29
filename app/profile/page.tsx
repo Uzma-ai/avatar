@@ -41,7 +41,7 @@ const ProfilePage = () => {
       <BrowserSidebar />
 
       {/* Main Content */}
-      <main className="flex-1 h-full px-6 overflow-hidden">
+      <main className="flex-1 h-full px-2 overflow-hidden">
         <div className="flex justify-between items-center h-28 py-4 px-7 rounded-md">
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
@@ -170,9 +170,21 @@ const ProfilePage = () => {
                     <option>Other</option>
                   </select>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Age</label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                <div className="flex items-center justify-between w-full">
+                  <div className="w-1/2">
+                    <label className="block text-sm font-medium mb-1">
+                      Personality Type
+                    </label>
+                    <select className="w-full border rounded-md p-2">
+                      <option>ISTJ</option>
+                      <option>Option 2</option>
+                      <option>Option 3</option>
+                    </select>
+                  </div>
+                  <div className="text-xs text-blackcolor pt-5">
+                    <p>Do know your Type?</p>
+                    <span className="underline cursor-pointer">Click here to find out !</span>
+                  </div>
                 </div>
 
                 {!isEditing && (
@@ -280,9 +292,7 @@ const ProfilePage = () => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-4">
-                      <label
-                        className="block text-lg font-bold mb-1"
-                      >
+                      <label className="block text-lg font-bold mb-1">
                         Interests:
                       </label>
                       <div className="flex space-x-2 flex-wrap gap-2">

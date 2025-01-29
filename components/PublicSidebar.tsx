@@ -13,26 +13,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
-const BrowserSidebar = () => {
+const PublicSidebar = () => {
   const pathname = usePathname(); // Get current route path
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   // Helper function to check if the route is active
- const isActive = (path: string) => {
-   const relatedPaths: Record<string, string[]> = {
-     "/shopping": [
-       "/shopping",
-       "/cart-cms",
-       "/payment-method-cms",
-       "/payment-success-cms",
-     ],
-     "/profile": ["/profile", "/create-avatar"],
-   };
-
-   return relatedPaths[path]
-     ? relatedPaths[path].includes(pathname)
-     : pathname === path;
- };
+  const isActive = (path: string) => pathname === path;
 
   // Function to toggle the dropdown visibility
   const toggleDropdown = () => setIsDropdownVisible(!isDropdownVisible);
@@ -61,7 +47,7 @@ const BrowserSidebar = () => {
                     ? "bg-secondarycolor text-white"
                     : "text-blackcolor"
                 } ${isDropdownVisible ? "rounded-b-none" : "rounded-md"}`}
-                onClick={toggleDropdown} // Toggle dropdown on click
+                onClick={toggleDropdown}
               >
                 <User
                   className={`w-5 h-5 ${
@@ -77,7 +63,7 @@ const BrowserSidebar = () => {
                       : "text-blackcolor"
                   }`}
                 >
-                  Profile
+                  Dashboard
                 </span>
               </div>
 
@@ -132,15 +118,19 @@ const BrowserSidebar = () => {
           {/* Other sections */}
           {[
             {
-              path: "/subscription",
-              label: "Subscription",
+              path: "/content",
+              label: "Content",
               icon: ShoppingCart,
             },
-            { path: "/chat", label: "My Avatar", icon: UserCircle },
-            { path: "/avatars", label: "Public Avatar", icon: Users },
-            { path: "/shopping", label: "Shopping", icon: ShoppingCart },
-            { path: "/settings", label: "Settings", icon: Settings },
-            { path: "/support", label: "Support", icon: HelpCircle },
+            { path: "/revenue", label: "Revenue", icon: UserCircle },
+            { path: "/engagement", label: "Engagement", icon: Users },
+            { path: "/pricings", label: "Pricings", icon: ShoppingCart },
+            { path: "/reports", label: "Reports", icon: Settings },
+            {
+              path: "/global-trends",
+              label: "Global Trends",
+              icon: HelpCircle,
+            },
           ].map(({ path, label, icon: Icon }) => (
             <li key={path} className="flex gap-2 items-center">
               {isActive(path) ? (
@@ -171,4 +161,4 @@ const BrowserSidebar = () => {
   );
 };
 
-export default BrowserSidebar;
+export default PublicSidebar;

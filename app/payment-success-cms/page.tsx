@@ -53,7 +53,28 @@ const PaymentSuccessCMSPage: React.FC = () => {
               <ShoppingBag className="mr-2 h-6 w-6 text-black" />
               <span>Payment</span>
             </h2>
-            <div className="text-black ml-4">Shopping  &gt; Cart  &gt;  Payment</div>
+            <div className="text-black ml-4 flex items-center gap-3">
+              <span
+                onClick={() => router.push("/shopping")}
+                className="cursor-pointer"
+              >
+                Shopping
+              </span>
+              <span>&gt;</span>
+              <span
+                className="cursor-pointer"
+                onClick={() => router.push("/cart-cms")}
+              >
+                Cart
+              </span>
+              <span>&gt;</span>
+              <span
+                className="cursor-pointer"
+                onClick={() => router.push("/payment-method-cms ")}
+              >
+                Payment
+              </span>
+            </div>
           </div>
         </div>
 
@@ -65,9 +86,11 @@ const PaymentSuccessCMSPage: React.FC = () => {
                   <Check className="h-8 w-8 text-white" />
                 </div>
               </div>
-              <h2 className="text-2xl font-semibold mb-2 text-center">Payment Successful</h2>
+              <h2 className="text-2xl font-semibold mb-2 text-center">
+                Payment Successful
+              </h2>
             </div>
-            <div className="py-1 border-b border-secondarycolor">
+            <div className="py-1">
               <div className="flex justify-between items-start mb-3">
                 <h2 className="font-semibold text-sm">Default Address</h2>
                 {!isEditingAddress && (
@@ -168,25 +191,23 @@ const PaymentSuccessCMSPage: React.FC = () => {
                       {address.state}
                     </p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="h-8 w-8"
+                  <span
+                    className="h-8 w-8 cursor-pointer"
                     onClick={() => setIsEditingAddress(true)}
                   >
                     <Pencil className="h-4 w-4 text-secondarycolor mt-6" />
-                  </Button>
+                  </span>
                 </div>
               )}
             </div>
 
-            <div className="w-full p-4 space-y-1">
-              <h3 className="text-base font-semibold uppercase">Order details</h3>
+            <div className="w-full space-y-1">
+              <h3 className="text-sm font-semibold uppercase">Order details</h3>
 
-              <div className="space-y-2">
+              <div className="space-y-2 border-b border-skycolor py-3">
                 <div>
                   <p className="text-[9px] font-medium mb-1">PAYMENT METHOD</p>
-                  <div className="font-semibold text-base bg-white rounded-lg p-4 border border-lightblue rounded-md">
+                  <div className="font-semibold text-base bg-white p-4 border border-lightblue rounded-md">
                     Amazon pay ICICI bank credit card
                     <p className="text-xs font-semibold text-mediumgray2 py-1">
                       **3425 | Gaurav Yadav
@@ -208,21 +229,19 @@ const PaymentSuccessCMSPage: React.FC = () => {
                   <p className="font-semibold text-base">$243</p>
                 </div>
               </div>
-              <hr className="border-t-1 border-secondarycolor mb-5 mt-10" />
-              <div className="mt-10 text-center">
-              <Button
-                className="px-20 bg-secondarycolor text-white h-12 hover:bg-secondarycolor hover:text-white"
-                onClick={() => router.push("/shopping")}
-              >
-                Continue Shopping
-              </Button>
+              <div className="text-center">
+                <Button
+                  className="px-20 bg-secondarycolor text-white h-12 hover:bg-secondarycolor hover:text-white mt-3"
+                  onClick={() => router.push("/shopping")}
+                >
+                  Continue Shopping
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-   
   );
 };
 

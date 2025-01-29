@@ -1,11 +1,11 @@
 "use client";
 import React, {useState } from "react";
 import { ShoppingBag, Search } from "lucide-react";
-
 import BrowserSidebar from "@/components/Browsersidebar";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 import {
     Select,
@@ -34,7 +34,7 @@ interface WishlistItem {
 }
 
 const CartCMSPage: React.FC = () => {
-  
+   const router = useRouter();
   const [cartItems, setCartItems] = useState<CartItem[]>([
     {
       id: "1",
@@ -126,26 +126,40 @@ const CartCMSPage: React.FC = () => {
               <ShoppingBag className="mr-2 h-6 w-6 text-black" />
               <span>Cart</span>
             </h2>
-            <div className="text-black ml-4">Shopping &gt; Cart</div>
+            <div className="text-black ml-4 flex items-center gap-3">
+              <span
+                onClick={() => router.push("/shopping")}
+                className="cursor-pointer"
+              >
+                Shopping
+              </span>
+              <span>&gt;</span>
+              <span
+                className="cursor-pointer"
+                onClick={() => router.push("/cart-cms")}
+              >
+                Cart
+              </span>
+            </div>
           </div>
         </div>
 
         <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
           <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
-            <div className="relative mb-4">
+            <div className="relative pb-4">
               <input
                 type="text"
-                className="w-full px-4 py-2 border border-borderColor1 rounded-md"
+                className="w-full px-4 py-3 border border-borderColor1 rounded-md"
                 placeholder="Search items in cart"
               />
               <Search className="absolute right-3 top-1/2 transform -translate-y-1/2 text-borderColor1 h-4 w-4" />
             </div>
-            
-            <div className="flex flex-col lg:flex-row justify-between mt-10">
-              <div className="rounded-lg border border-lightblue w-full lg:max-w-[75%] p-1 mb-6 lg:mb-0">
-                <h2 className="font-semibold text-base mb-4">Items</h2>
+
+            <div className="flex flex-col lg:flex-row justify-between border-t border-skycolor pt-4">
+              <div className="rounded-lg border border-lightblue w-full lg:max-w-[75%] py-1 px-2 mb-6 lg:mb-0">
+                <h2 className="font-semibold text-base">Items</h2>
                 {cartItems.map((item) => (
-                  <div key={item.id} className="bg-white p-4 rounded-lg">
+                  <div key={item.id} className="bg-white py-2 rounded-lg">
                     <div className="flex gap-4">
                       <Image
                         src={item.image || "/placeholder.svg"}
@@ -182,21 +196,21 @@ const CartCMSPage: React.FC = () => {
                     <div className="flex gap-2 mt-4">
                       <Button
                         variant="outline"
-                        className="flex-1 border border-secondarycolor text-secondarycolor py-2 "
+                        className=" w-36 h-9 border border-secondarycolor text-secondarycolor "
                         onClick={() => moveToWishlist(item)}
                       >
                         Move to wishlist
                       </Button>
                       <Button
                         variant="outline"
-                        className="flex-1 border-secondarycolor text-secondarycolor py-2 px-6 "
+                        className=" w-36 h-9 border-secondarycolor text-secondarycolor px-6 "
                         onClick={() => deleteFromCart(item.id)}
                       >
                         Delete
                       </Button>
                       <Button
                         variant="outline"
-                        className="flex-1 border-secondarycolor text-secondarycolor py-2 px-6 "
+                        className=" w-36 h-9 border-secondarycolor text-secondarycolor px-6 "
                       >
                         Share
                       </Button>
@@ -206,38 +220,38 @@ const CartCMSPage: React.FC = () => {
               </div>
               {/* Order summary */}
               {cartItems.length > 0 && (
-                <div className="space-y-2 mt-1 rounded-lg border border-lightblue w-full lg:max-w-[24%] p-2">
-                  <div className="flex justify-between">
-                    <span className="text-blackcolor text-sm font-normal">
-                      Items:
-                    </span>
-                    <span className="text-blackcolor text-sm font-semibold">
-                      ${subtotal.toFixed(2)}
-                    </span>
+                <div className="space-y-1 mt-1 rounded-lg border border-lightblue w-full lg:max-w-[24%] p-2 flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between">
+                      <span className="text-blackcolor lg:text-xs xl:text-sm font-normal">
+                        Items:
+                      </span>
+                      <span className="text-blackcolor lg:text-xs xl:text-sm font-semibold">
+                        ${subtotal.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-blackcolor lg:text-xs xl:text-sm font-normal">
+                        Delivery:
+                      </span>
+                      <span className="text-blackcolor lg:text-xs xl:text-sm font-semibold">
+                        ${delivery.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="flex justify-between font-semibold lg:text-sm xl:text-lg py-1">
+                      <span>Order Total</span>
+                      <span className="">${total.toFixed(2)}</span>
+                    </div>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-blackcolor text-sm font-normal">
-                      Delivery:
-                    </span>
-                    <span className="text-blackcolor text-sm font-semibold">
-                      ${delivery.toFixed(2)}
-                    </span>
-                  </div>
-                  <div className="flex justify-between font-semibold text-lg py-2">
-                    <span>Order Total</span>
-                    <span className="">${total.toFixed(2)}</span>
-                  </div>
-                  <div className="mt-4 lg:mt-6">
-                   
-
+                  <div>
                     <Link href="/payment-method-cms">
-                   <Button 
-                    variant="outline"
-                   className="w-full bg-secondarycolor text-white py-2 hover:bg-secondarycolor hover:text-white">
-                    Proceed to buy (1 item)
-                     
-                    </Button>
-                   </Link>
+                      <Button
+                        variant="outline"
+                        className="w-full bg-secondarycolor text-xs xl:text-base text-white h-10 hover:bg-secondarycolor hover:text-white"
+                      >
+                        Proceed to buy (1 item)
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               )}
