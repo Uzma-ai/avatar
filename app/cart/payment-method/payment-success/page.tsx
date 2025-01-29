@@ -1,8 +1,9 @@
 "use client";
 
-import { MoveLeft, Check } from "lucide-react";
+import { MoveLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function PaymentSuccess() {
       const router = useRouter();
@@ -24,7 +25,7 @@ export default function PaymentSuccess() {
         <div className="py-4 px-3 flex flex-col items-center ">
           <div className="my-8">
             <div className="h-16 w-16 rounded-full bg-green-500 flex items-center justify-center">
-              <Check className="h-8 w-8 text-white" />
+              <Image src="/payment-success.gif" alt="success" width={70} height={70}/>
             </div>
           </div>
 

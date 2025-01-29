@@ -68,7 +68,7 @@ const BrowserSidebar = () => {
                     isActive("/profile") || isActive("/create-avatar")
                       ? "text-white"
                       : "text-blackcolor"
-                  } ml-3`}
+                  } ml-2`}
                 />
                 <span
                   className={`font-normal md:text-base lg:text-lg ${

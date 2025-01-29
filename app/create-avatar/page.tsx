@@ -77,7 +77,6 @@ const CreateAvatarPage = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
               <Users className="mr-2 h-6 w-6 text-black" />
-              <Users className="mr-2 h-6 w-6 text-black" />
               <span>Profile</span>
             </h2>
             <div className="text-black ml-4">Profile &gt; Create Avatar</div>
@@ -92,7 +91,9 @@ const CreateAvatarPage = () => {
           <div className="bg-white rounded-lg shadow-md p-4 md:p-8 max-w-6xl mx-auto">
             <div className="flex flex-col md:flex-row">
               <div className="w-full md:w-1/2 max-w-full md:max-w-[40%] border border-neutral-100 rounded-lg p-4">
-                <h1 className="text-2xl font-bold mb-2">Personalize Your Experience</h1>
+                <h1 className="text-2xl font-bold mb-2">
+                  Personalize Your Experience
+                </h1>
                 <div className="flex justify-between items-center mb-6">
                   <p className="text-gray-600 text-sm lg:text-base">
                     Choose how you want to create your avatar. You can click a
@@ -173,7 +174,9 @@ const CreateAvatarPage = () => {
                   <Slider defaultValue={[40]} max={100} step={1} />
                 </div>
                 <div className="w-full md:w-1/2 space-y-5">
-                  <label className="text-sm font-normal">Expression Scale</label>
+                  <label className="text-sm font-normal">
+                    Expression Scale
+                  </label>
                   <Slider defaultValue={[50]} max={100} step={1} />
                 </div>
               </div>
@@ -183,11 +186,23 @@ const CreateAvatarPage = () => {
               </div>
               <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
                 <div className="w-full md:w-1/2 space-y-5">
-                  <label className="text-sm font-normal">Face model resolution</label>
-                  <RadioGroup className="flex items-center gap-6 pt-2">
-                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+                  <label className="text-sm font-normal">
+                    Face model resolution
+                  </label>
+                  <RadioGroup
+                    className="flex items-center gap-6 pt-2"
+                    value={selectedModalValue}
+                    onValueChange={(value) => setSelectedModalValue(value)}
+                  >
+                    <div
+                      className={`w-24 h-10 border ${
+                        selectedModalValue === "256"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
                       <RadioGroupItem value="256" id="256" />
-                      <label htmlFor="option-1" className="text-sm font-normal">
+                      <label htmlFor="256" className="text-sm font-normal">
                         256
                       </label>
                     </div>
@@ -314,14 +329,27 @@ const CreateAvatarPage = () => {
                   </RadioGroup>
                 </div>
               </div>
-              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
-                <div className="w-full md:w-1/2 space-y-5">
+              <div className="flex flex-col md:flex-row space-y-1 md:space-y-0 md:space-x-4">
+                <div className="w-full md:w-1/2">
                   <label className="text-sm font-normal">Face render</label>
-                  <RadioGroup className="flex items-center gap-6 pt-2">
-                    <div className="w-36 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
-                      <RadioGroupItem value="Face vid to vid" id="Face vid to vid" />
+                  <RadioGroup
+                    className="flex items-center gap-3 pt-2 flex-wrap"
+                    value={selectedFaceValue}
+                    onValueChange={(value) => setSelectedFaceValue(value)}
+                  >
+                    <div
+                      className={`w-36 h-10 border ${
+                        selectedFaceValue === "Face vid to vid"
+                          ? "border-secondarycolor"
+                          : "border-inputbackground"
+                      } rounded-md flex items-center justify-center gap-2`}
+                    >
+                      <RadioGroupItem
+                        value="Face vid to vid"
+                        id="Face vid to vid"
+                      />
                       <label htmlFor="option-1" className="text-sm font-normal">
-                       Face vid to vid
+                        Face vid to vid
                       </label>
                     </div>
                     <div
@@ -350,7 +378,7 @@ const CreateAvatarPage = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <div className="w-1/2 flex items-center">
+                <div className="w-1/2 flex items-center justify-between gap-4 pr-2">
                   <div>
                     <span className="text-sm font-normal">Still Mode</span>
                     <p className="text-xs font-light text-mediumgray2">
@@ -360,14 +388,14 @@ const CreateAvatarPage = () => {
                   </div>
                   <Switch />
                 </div>
-                <div className="w-1/2 flex items-center">
+                <div className="w-1/2 flex items-center justify-between gap-4 pl-2">
                   <div>
                     <span className="text-sm font-normal">GFPGAN</span>
                     <p className="text-xs font-light text-mediumgray2">
                       as face enhancer
                     </p>
                   </div>
-                  <Switch/>
+                  <Switch />
                 </div>
               </div>
               <div className="flex items-center justify-end">
