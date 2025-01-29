@@ -10,7 +10,8 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			primarycolor: '#F3F3F3',
+			primarycolor: '#F3F3F3',
+			skycolor:"#5182E3",
 			secondarycolor: '#5D8BE5',
 			lightblue:'#D6E6FF',
   			legendText: '#F7F7F7',

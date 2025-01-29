@@ -18,7 +18,21 @@ const BrowserSidebar = () => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false); // State to manage dropdown visibility
 
   // Helper function to check if the route is active
-  const isActive = (path: string) => pathname === path;
+ const isActive = (path: string) => {
+   const relatedPaths: Record<string, string[]> = {
+     "/shopping": [
+       "/shopping",
+       "/cart-cms",
+       "/payment-method-cms",
+       "/payment-success-cms",
+     ],
+     "/profile": ["/profile", "/create-avatar"],
+   };
+
+   return relatedPaths[path]
+     ? relatedPaths[path].includes(pathname)
+     : pathname === path;
+ };
 
   // Function to toggle the dropdown visibility
   const toggleDropdown = () => setIsDropdownVisible(!isDropdownVisible);

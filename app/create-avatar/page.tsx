@@ -9,11 +9,10 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import BrowserSidebar from "@/components/Browsersidebar";
 
 const CreateAvatarPage = () => {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedPreprocessValue, setSelectedPreprocessValue] = useState<string>("crop");
   const [selectedModalValue, setSelectedModalValue] = useState<string>("256");
-  const [selectedPreprocessValue, setSelectedPreprocessValue] =
-    useState<string>("crop");
-  const [selectedFaceValue, setSelectedFaceValue] = useState<string>("video");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [selectedFaceValue, setSelectedFaceValue] = useState<string>("Face vid to vid");
 
   useEffect(() => {
     const sidebarItem = document.querySelector(
@@ -78,6 +77,7 @@ const CreateAvatarPage = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4 flex items-center">
               <Users className="mr-2 h-6 w-6 text-black" />
+              <Users className="mr-2 h-6 w-6 text-black" />
               <span>Profile</span>
             </h2>
             <div className="text-black ml-4">Profile &gt; Create Avatar</div>
@@ -89,12 +89,10 @@ const CreateAvatarPage = () => {
         </div>
 
         <div className="bg-gray-100 p-4 h-[calc(100vh-112px)] overflow-y-auto scroll">
-          <div className="bg-white rounded-lg shadow-md p-8 max-w-6xl mx-auto">
-            <div className="flex">
-              <div className="w-1/2 max-w-[40%] border border-neutral-100 rounded-lg p-4">
-                <h1 className="text-lg lg:text-2xl font-bold mb-2">
-                  Personalize Your Experience
-                </h1>
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-8 max-w-6xl mx-auto">
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full md:w-1/2 max-w-full md:max-w-[40%] border border-neutral-100 rounded-lg p-4">
+                <h1 className="text-2xl font-bold mb-2">Personalize Your Experience</h1>
                 <div className="flex justify-between items-center mb-6">
                   <p className="text-gray-600 text-sm lg:text-base">
                     Choose how you want to create your avatar. You can click a
@@ -146,7 +144,7 @@ const CreateAvatarPage = () => {
                   </div>
                 </div>
               </div>
-              <div className="w-3/5 h-128 rounded-lg relative overflow-hidden px-2 ml-10">
+              <div className="w-full md:w-3/5 h-128 rounded-lg relative overflow-hidden px-2 mt-4 md:mt-0 md:ml-10">
                 <Image
                   src="/background.jpeg"
                   alt="avatar"
@@ -169,15 +167,13 @@ const CreateAvatarPage = () => {
 
             <div className="pt-6 space-y-6">
               <h1 className="text-lg font-semibold">Advance Modification</h1>
-              <div className="flex space-x-4">
-                <div className="w-1/2 space-y-5">
+              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Pose Style</label>
                   <Slider defaultValue={[40]} max={100} step={1} />
                 </div>
-                <div className="w-1/2 space-y-5">
-                  <label className="text-sm font-normal">
-                    Expression Scale
-                  </label>
+                <div className="w-full md:w-1/2 space-y-5">
+                  <label className="text-sm font-normal">Expression Scale</label>
                   <Slider defaultValue={[50]} max={100} step={1} />
                 </div>
               </div>
@@ -185,29 +181,13 @@ const CreateAvatarPage = () => {
                 <span className="text-sm font-normal">Eye Blink</span>
                 <Switch />
               </div>
-              <div className="flex space-x-4">
-                <div className="w-1/2 space-y-5">
-                  <label className="text-sm font-normal">
-                    Face model resolution
-                  </label>
-                  <RadioGroup
-                    className="flex items-center gap-6 pt-2"
-                    value={selectedModalValue}
-                    onValueChange={(value) => setSelectedModalValue(value)}
-                  >
-                    <div
-                      className={`w-24 h-10 border ${
-                        selectedModalValue === "256"
-                          ? "border-secondarycolor"
-                          : "border-inputbackground"
-                      } rounded-md flex items-center justify-center gap-2`}
-                    >
-                      <RadioGroupItem
-                        value="256"
-                        id="256"
-                        onClick={() => setSelectedModalValue("256")}
-                      />
-                      <label htmlFor="256" className="text-sm font-normal">
+              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="w-full md:w-1/2 space-y-5">
+                  <label className="text-sm font-normal">Face model resolution</label>
+                  <RadioGroup className="flex items-center gap-6 pt-2">
+                    <div className="w-24 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+                      <RadioGroupItem value="256" id="256" />
+                      <label htmlFor="option-1" className="text-sm font-normal">
                         256
                       </label>
                     </div>
@@ -229,7 +209,7 @@ const CreateAvatarPage = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="w-1/2 space-y-5">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Preprocess</label>
                   <RadioGroup
                     className="flex items-center gap-3 pt-2 flex-wrap"
@@ -334,28 +314,14 @@ const CreateAvatarPage = () => {
                   </RadioGroup>
                 </div>
               </div>
-              <div className="flex items-start space-x-4">
-                <div className="w-1/2 space-y-5">
+              <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <div className="w-full md:w-1/2 space-y-5">
                   <label className="text-sm font-normal">Face render</label>
-                  <RadioGroup
-                    className="flex items-center gap-6 pt-2"
-                    value={selectedFaceValue}
-                    onValueChange={(value) => setSelectedFaceValue(value)}
-                  >
-                    <div
-                      className={`w-32 h-10 border ${
-                        selectedFaceValue === "video"
-                          ? "border-secondarycolor"
-                          : "border-inputbackground"
-                      } rounded-md flex items-center justify-center gap-2`}
-                    >
-                      <RadioGroupItem
-                        value="video"
-                        id="video"
-                        onClick={() => setSelectedFaceValue("video")}
-                      />
-                      <label htmlFor="video" className="text-sm font-normal">
-                        Face vid to vid
+                  <RadioGroup className="flex items-center gap-6 pt-2">
+                    <div className="w-36 h-10 border border-secondarycolor rounded flex items-center justify-center gap-2">
+                      <RadioGroupItem value="Face vid to vid" id="Face vid to vid" />
+                      <label htmlFor="option-1" className="text-sm font-normal">
+                       Face vid to vid
                       </label>
                     </div>
                     <div
@@ -376,7 +342,7 @@ const CreateAvatarPage = () => {
                     </div>
                   </RadioGroup>
                 </div>
-                <div className="w-1/2 space-y-10">
+                <div className="w-1/2 space-y-5">
                   <label className="text-sm font-normal">
                     Batch size in generation
                   </label>
@@ -384,7 +350,7 @@ const CreateAvatarPage = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <div className="w-1/2 flex items-center gap-5 px-2">
+                <div className="w-1/2 flex items-center">
                   <div>
                     <span className="text-sm font-normal">Still Mode</span>
                     <p className="text-xs font-light text-mediumgray2">
@@ -394,7 +360,7 @@ const CreateAvatarPage = () => {
                   </div>
                   <Switch />
                 </div>
-                <div className="w-1/2 flex items-center gap-5 px-2">
+                <div className="w-1/2 flex items-center">
                   <div>
                     <span className="text-sm font-normal">GFPGAN</span>
                     <p className="text-xs font-light text-mediumgray2">

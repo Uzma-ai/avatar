@@ -219,8 +219,8 @@ const SupportPage = () => {
         </div>
       </div>
       {isChatPopupOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-          <div className="bg-mediumWhite p-6 rounded-md shadow-md w-[27rem] h-[11rem] backdrop-blur-sm">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50 ">
+          <div className="bg-mediumWhite p-6 rounded-md shadow-md w-96 h-36 backdrop-blur-sm">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-lg font-semibold">Start the chat with</h2>
               <button
