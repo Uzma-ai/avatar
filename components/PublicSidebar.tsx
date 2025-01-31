@@ -40,7 +40,9 @@ const PublicSidebar = () => {
               className="object-center"
             />
           </div>
-          <span className="text-sm font-semibold text-blackcolor">User Name</span>
+          <span className="text-sm font-semibold text-blackcolor">
+            User Name
+          </span>
         </div>
 
         {/* list */}
@@ -71,8 +73,8 @@ const PublicSidebar = () => {
 
           <li className={`overflow-hidden flex items-start gap-2`}>
             {isActive("/content") ||
-            isActive("/management") ||
-            isActive("/scheduling") ||
+            isActive("/content-management") ||
+            isActive("/content-scheduling") ||
             isActive("/channel-management") ? (
               <div className="bg-secondarycolor w-[3px] h-10 rounded-lg mt-0.5"></div>
             ) : (
@@ -82,8 +84,8 @@ const PublicSidebar = () => {
               <div
                 className={`flex items-center gap-3 cursor-pointer py-2.5 w-full rounded-t-md ${
                   isActive("/content") ||
-                  isActive("/management") ||
-                  isActive("/scheduling") ||
+                  isActive("/content-management") ||
+                  isActive("/content-scheduling") ||
                   isActive("/channel-management")
                     ? "bg-secondarycolor text-white"
                     : "text-blackcolor"
@@ -93,8 +95,8 @@ const PublicSidebar = () => {
                 <ShoppingCart
                   className={`w-5 h-5 ${
                     isActive("/content") ||
-                    isActive("/management") ||
-                    isActive("/scheduling") ||
+                    isActive("/content-management") ||
+                    isActive("/content-scheduling") ||
                     isActive("/channel-management")
                       ? "text-white"
                       : "text-blackcolor"
@@ -103,8 +105,8 @@ const PublicSidebar = () => {
                 <span
                   className={`font-normal md:text-base lg:text-lg ${
                     isActive("/content") ||
-                    isActive("/management") ||
-                    isActive("/scheduling") ||
+                    isActive("/content-management") ||
+                    isActive("/content-scheduling") ||
                     isActive("/channel-management")
                       ? "text-white"
                       : "text-blackcolor"
@@ -118,8 +120,8 @@ const PublicSidebar = () => {
               <ul
                 className={`space-y-1 ${isDropdownVisible ? "" : "hidden"} ${
                   isActive("/content") ||
-                  isActive("/management") ||
-                  isActive("/scheduling") ||
+                  isActive("/content-management") ||
+                  isActive("/content-scheduling") ||
                   isActive("/channel-management")
                     ? "bg-lightblue"
                     : ""
@@ -127,22 +129,16 @@ const PublicSidebar = () => {
               >
                 <li>
                   <Link
-                    href="/management"
+                    href="/content-management"
                     className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                      isActive("/content") ||
-                      isActive("/management") ||
-                      isActive("/scheduling") ||
-                      isActive("/channel-management")
+                      isActive("/content") || isActive("/content-management")
                         ? "text-blackcolor font-normal"
                         : "text-blackcolor font-normal"
                     }`}
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/content") ||
-                        isActive("/management") ||
-                        isActive("/scheduling") ||
-                        isActive("/channel-management")
+                        isActive("/content") || isActive("/content-management")
                           ? "bg-secondarycolor"
                           : ""
                       } rounded-full mr-3`}
@@ -152,22 +148,16 @@ const PublicSidebar = () => {
                 </li>
                 <li>
                   <Link
-                    href="/scheduling"
+                    href="/content-scheduling"
                     className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                      isActive("/content") ||
-                      isActive("/management") ||
-                      isActive("/scheduling") ||
-                      isActive("/channel-management")
+                      isActive("/content") || isActive("/content-scheduling")
                         ? "text-blackcolor font-normal"
                         : "text-blackcolor font-normal"
                     }`}
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/content") ||
-                        isActive("/management") ||
-                        isActive("/scheduling") ||
-                        isActive("/channel-management")
+                        isActive("/content") || isActive("/content-scheduling")
                           ? "bg-secondarycolor"
                           : ""
                       } rounded-full mr-3`}
@@ -179,20 +169,14 @@ const PublicSidebar = () => {
                   <Link
                     href="/channel-management"
                     className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                      isActive("/content") ||
-                      isActive("/management") ||
-                      isActive("/scheduling") ||
-                      isActive("/channel-management")
+                      isActive("/content") || isActive("/channel-management")
                         ? "text-blackcolor font-normal"
                         : "text-blackcolor font-normal"
                     }`}
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/content") ||
-                        isActive("/management") ||
-                        isActive("/scheduling") ||
-                        isActive("/channel-management")
+                        isActive("/content") || isActive("/channel-management")
                           ? "bg-secondarycolor"
                           : ""
                       } rounded-full mr-3`}
