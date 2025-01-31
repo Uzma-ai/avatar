@@ -35,6 +35,8 @@ const config: Config = {
   			foreground: 'hsl(var(--foreground))',
 			dropdownlightgray: '#D8D8D84D',
 			success:"#56C466",
+			lightGreen:'#56C466',
+			red:'#FE5353',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
