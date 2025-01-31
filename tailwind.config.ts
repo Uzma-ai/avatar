@@ -15,7 +15,8 @@ const config: Config = {
 			secondarycolor: '#5D8BE5',
 			lightblue:'#D6E6FF',
   			legendText: '#F7F7F7',
-  			inputbackground: '#E9EEF6',
+			inputbackground: '#E9EEF6',
+			mediumblack:"#282828",
   			blackcolor: '#1F1F1F',
   			mediumWhite: '#FFFFFF4D',
   			lightWhite: '#ffffff92',
@@ -32,7 +33,8 @@ const config: Config = {
 			borderColor2:"#E9EEF6",
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
-  			dropdownlightgray: '#D8D8D84D',
+			dropdownlightgray: '#D8D8D84D',
+			success:"#56C466",
   			card: {
   				DEFAULT: 'hsl(var(--card))',
   				foreground: 'hsl(var(--card-foreground))'
