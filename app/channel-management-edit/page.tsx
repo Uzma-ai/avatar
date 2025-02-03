@@ -2,11 +2,11 @@
 import { useState, KeyboardEvent } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User, Pencil,X,ArrowUpDown } from "lucide-react";
+import { User,X} from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { Calendar } from "@/components/ui/calendar";
+
 export default function ChannelManagement() {
   const router = useRouter();
 
@@ -26,24 +26,12 @@ export default function ChannelManagement() {
         setCategories(categories.filter((c) => c !== category));
       };
 
-      const [showDropdown, setShowDropdown] = useState<string | null>(null);
-      const [showCalendar, setShowCalendar] = useState<string | null>(null);
-      const [date, setDate] = useState<Date | undefined>(new Date());
+     
+     
     
-      const toggleDropdown = (dropdown: string) => {
-        setShowDropdown(showDropdown === dropdown ? null : dropdown);
-        if (showDropdown === dropdown) {
-          setShowCalendar(null);
-        }
-      };
+     
     
-      const handleOptionClick = (dropdown: string, option: string) => {
-        if (option === "Custom Dates") {
-          setShowCalendar(dropdown);
-        } else {
-          setShowCalendar(null);
-        }
-      };
+     
     
     
 
