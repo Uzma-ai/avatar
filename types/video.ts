@@ -11,6 +11,7 @@ export interface Video {
   publishDate: string
   thumbnail: string
   status: "published" | "draft"
+  videoUrl: string | undefined
 }
 
 export interface VideoFormData {

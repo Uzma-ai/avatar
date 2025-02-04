@@ -16,6 +16,7 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
+import { VideoPlayerModal } from "@/components/public-cms-components/video-player";
 
 
 type SortOption = "date" | "views" | "likes" | "comments";
@@ -25,41 +26,49 @@ const videoData = [
     title: "Delicious Pasta Recipe",
     thumbnail: "/food-list.png",
     category: "Food",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Top 10 Coding Tips",
     thumbnail: "/food-list.png",
     category: "Education",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Traveling to Japan",
     thumbnail: "/food-list.png",
     category: "Travel",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Best Workout Routines",
     thumbnail: "/food-list.png",
     category: "Fitness",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "How to Bake a Cake",
     thumbnail: "/food-list.png",
     category: "Food",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Mastering React.js",
     thumbnail: "/food-list.png",
     category: "Technology",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Exploring Space",
     thumbnail: "/food-list.png",
     category: "Science",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Yoga for Beginners",
     thumbnail: "/food-list.png",
     category: "Wellness",
+    videoUrl: "/videos/pasta.mp4",
   },
 ];
 
@@ -77,6 +86,10 @@ export function ShedulingVideoList() {
     videoTitle: "",
   });
 
+  // State for the video modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+
   useEffect(() => {
     const generatedVideos: Video[] = videoData.map((video, index) => ({
       id: `video-${index + 1}`,
@@ -92,10 +105,17 @@ export function ShedulingVideoList() {
       ).toISOString(),
       thumbnail: video.thumbnail,
       status: "published",
+      videoUrl: video.videoUrl,
     }));
 
     setVideos(generatedVideos);
   }, []);
+
+    const handleThumbnailClick = (video: Video) => {
+      setSelectedVideo(video);
+      setModalOpen(true);
+    };
+
 
   const filteredAndSortedVideos = useMemo(() => {
     let result = videos;
@@ -231,7 +251,10 @@ export function ShedulingVideoList() {
               <TableRow key={video.id} className="border-none">
                 <TableCell className="w-[100px]">
                   {/* Thumbnail Image */}
-                  <div className="w-40 h-24 rounded-lg overflow-hidden">
+                  <div
+                    className="w-40 h-24 rounded-lg overflow-hidden"
+                    onClick={() => handleThumbnailClick(video)}
+                  >
                     <img
                       src={video.thumbnail || "/placeholder.svg"}
                       alt={video.title}
@@ -276,7 +299,13 @@ export function ShedulingVideoList() {
                 <TableCell className="">
                   {/* Action Buttons - Stack on small screens */}
                   <div className="flex items-center justify-center">
-                    <Image src="/auto.svg" alt="Auto" width={30} height={30} className="cursor-pointer" />
+                    <Image
+                      src="/auto.svg"
+                      alt="Auto"
+                      width={30}
+                      height={30}
+                      className="cursor-pointer"
+                    />
                     <Button variant="ghost" size="sm">
                       <CalendarClock className="w-4 h-4" />
                     </Button>
@@ -294,6 +323,13 @@ export function ShedulingVideoList() {
             ))}
           </TableBody>
         </Table>
+
+        {/* Video Modal */}
+        <VideoPlayerModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          video={selectedVideo}
+        />
       </div>
       {filteredAndSortedVideos.length === 0 && (
         <p className="text-center text-muted-foreground mt-8">

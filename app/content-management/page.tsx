@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { User, Pencil, Upload, X, CheckCircle2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -59,22 +59,18 @@ export default function ContentManagement() {
     setUploadSuccess(false);
 
     // Simulate file upload progress
-    const interval = setInterval(() => {
-      setUploadProgress((prev) => {
-        if (prev === null || prev >= 100) {
-          clearInterval(interval);
-          return prev;
-        }
-        return prev + 10;
-      });
-    }, 500);
+    let progress = 0;
 
-    // Simulate upload completion
-    setTimeout(() => {
-      clearInterval(interval);
-      setUploadProgress(100);
-      setUploadSuccess(true);
-    }, 5000);
+    const interval = setInterval(() => {
+      progress += 10;
+      setUploadProgress(progress);
+      if (progress >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setUploadSuccess(true); // Ensure this runs properly
+        }, 500);
+      }
+    }, 500);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -90,6 +86,10 @@ export default function ContentManagement() {
     };
     console.log("Form submitted:", data);
   };
+
+  useEffect(() => {
+    console.log("Upload Success:", uploadSuccess);
+  }, [uploadSuccess]);
 
   return (
     <>
@@ -119,7 +119,7 @@ export default function ContentManagement() {
                     Management
                   </span>
                 </div>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center justify-center gap-5">
                   <button className="w-[5.8rem] h-10 rounded-md border border-black flex items-center justify-center gap-2">
                     <Pencil />
                     Filter
@@ -156,9 +156,19 @@ export default function ContentManagement() {
                   {!selectedFile ? (
                     <>
                       <div className="flex items-center justify-center gap-2 py-11">
-                        <Upload className="w-5 h-5" />
+                        {uploadSuccess ? (
+                          <CheckCircle2 className="w-5 h-5 text-green-500" />
+                        ) : uploadError ? (
+                          <X className="w-5 h-5 text-red-500" />
+                        ) : (
+                          <Upload className="w-5 h-5" />
+                        )}
                         <p className="text-sm font-normal">
-                          Drag and drop your video here or click to upload
+                          {uploadSuccess
+                            ? "Video uploaded successfully"
+                            : uploadError
+                            ? "Upload failed, try again"
+                            : "Drag and drop your video here or click to upload"}
                         </p>
                         <Input
                           type="file"
