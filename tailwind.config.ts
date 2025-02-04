@@ -89,7 +89,8 @@ const config: Config = {
   			]
   		},
   		backgroundImage: {
-  			'primary-gradient': 'linear-gradient(171.9deg, #5182E3 0%, #FFFFFF 136.83%)'
+				'primary-gradient': 'linear-gradient(171.9deg, #5182E3 0%, #FFFFFF 136.83%)',
+				 'custom-gradient': 'linear-gradient(to right, #5182E3, #7A9FE8, #c0d4ff)',
   		},
   		keyframes: {
   			'accordion-down': {

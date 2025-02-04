@@ -1,5 +1,5 @@
 "use client";
-import { useState, KeyboardEvent } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
 import { User, Pencil,X,ArrowUpDown } from "lucide-react";
@@ -8,12 +8,14 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
+import BarChart from "@/components/BarChart";
 
 export default function ChannelManagement() {
   const router = useRouter();
 
   const [categories, setCategories] = useState<string[]>(["Books"]);
-    const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState("");
+   const [image, setImage] = useState<string | null>(null);
 
     const handleAddCategory = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && inputValue.trim()) {
@@ -47,6 +49,12 @@ export default function ChannelManagement() {
         }
       };
     
+   useEffect(() => {
+     const storedImage = localStorage.getItem("channelImage");
+     if (storedImage) {
+       setImage(storedImage);
+     }
+   }, []);
     
 
   return (
@@ -72,7 +80,7 @@ export default function ChannelManagement() {
                   <span>&gt;</span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => router.push("/content-management")}
+                    onClick={() => router.push("/channel-management")}
                   >
                     Channel Management
                   </span>
@@ -96,70 +104,102 @@ export default function ChannelManagement() {
                       <Pencil className="h-4 w-4" />
                     </Link>
                   </button>
-                  
                 </div>
               </div>
-              <div className="flex items-center mt-6">
-                <div className="relative w-32 h-32 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-36 lg:h-36">
-                  <Image
-                    src="/background.jpeg"
-                    alt="avatar"
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-full"
-                  />
+              <div className="flex flex-col xl:flex-row items-center mt-6 gap-2">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-24 h-24 rounded-full overflow-hidden">
+                    <Image
+                      src={image || "/background.jpeg"}
+                      alt="avatar"
+                      className="object-cover w-full h-full"
+                      width={96}
+                      height={96}
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-black">
+                      UX Avatars
+                    </h3>
+                    <p className="text-base text-mediumgray2 mr-6">
+                      12.2M subscribers 146 videos
+                    </p>
+                  </div>
                 </div>
-                <div className="ml-6">
-                  <h3 className="text-2xl font-bold text-black">UX Avatars</h3>
-                  <p className="text-base text-mediumgray2 mr-6">12.2M subscribers 146 videos</p>
-                </div>
-
-                <div className="flex flex-wrap gap-4 hidden sm:flex">
-                  <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-5 rounded-2xl shadow-lg flex-1 min-w-[250px] h-40 relative">
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex-1 bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white px-5 py-4 rounded-2xl shadow-lg min-w-[15rem] h-40 space-y-5">
                     <h3 className="text-lg font-semibold">Total Views</h3>
-                    <p className="text-3xl font-bold mt-4">22.5M</p>
-                    <p className="text-sm mt-4">Aggregate Views of all Videos</p>
+                    <p className="text-3xl font-bold">22.5M</p>
+                    <p className="text-xs">Aggregate Views of all Videos</p>
                   </div>
 
-                  <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-5 rounded-3xl shadow-lg flex-1 min-w-[250px] h-40 relative">
+                  <div className="flex-1 bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white px-5 py-4 rounded-2xl shadow-lg min-w-[15rem] h-40 space-y-5">
                     <h3 className="text-lg font-semibold">Total Likes</h3>
-                    <p className="text-3xl font-bold mt-4">15M</p>
-                    <p className="text-sm mt-4">Aggregate Likes of all Videos</p> 
+                    <p className="text-3xl font-bold">15M</p>
+                    <p className="text-xs">Aggregate Likes of all Videos</p>
                   </div>
 
-                  <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-5 rounded-3xl shadow-lg flex-1 min-w-[250px] h-40 relative">
+                  <div className="flex-1 bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white px-5 py-4 rounded-2xl shadow-lg min-w-[15rem] h-40 space-y-5">
                     <h3 className="text-lg font-semibold">Earnings</h3>
-                    <p className="text-3xl font-bold mt-4">15M</p>
-                    <p className="text-sm mt-4">Aggregate Likes of all Videos</p>
+                    <p className="text-3xl font-bold">15M</p>
+                    <p className="text-xs">Aggregate Likes of all Videos</p>
                   </div>
                 </div>
               </div>
-             
 
-            <div className="mt-6">
-                <h4 className="text-lg font-semibold ">Description:</h4>
-                <p className="text-lg text-charcoalBlack mt-2 font-normal">
-                  Welcome to <span className=" font-semibold"> UX Avatars,</span> your go-to channel for exploring the intersection of creativity,user experience, and Innovation! 
+              <div className="mt-6 px-2">
+                <h4 className="text-base font-semibold ">Description:</h4>
+                <p className="text-base text-charcoalBlack mt-2 font-normal">
+                  Welcome to{" "}
+                  <span className=" font-semibold"> UX Avatars,</span> your
+                  go-to channel for exploring the intersection of
+                  creativity,user experience, and Innovation!
                 </p>
-                <p className="text-lg text-charcoalBlack mt-2 font-normal">
-                Our channel is dedicated to:
+                <p className="text-base text-charcoalBlack mt-2 font-normal">
+                  Our channel is dedicated to:
                 </p>
-                <ul className="list-disc list-inside mt-2 text-charcoalBlack text-lg">
-                    <li className="mt-1"><span className=" font-semibold"> Showcasing Avatars:</span> Dive into a world of interacting and visually stunning avatars designed to elevate digital experiences.</li>
-                    <li className="mt-1"><span className=" font-semibold"> Educational Content:</span> Learn the principles of user eccentric-design and discover how avatars enhance engagement across various platforms.</li>
-                    <li className="mt-1"><span className=" font-semibold"> Inspiration & Trends:</span> Stay ahead with the latest trends in UX,UI, and virtual avatar technology.</li>
-                    <li className="mt-1"><span className=" font-semibold"> Interactive Demos:</span> Experience how avatars can transform interactions in business, gaming, and social media. </li>
-                    
+                <ul className="list-disc list-inside mt-2 text-charcoalBlack text-base">
+                  <li className="mt-1">
+                    <span className=" font-semibold"> Showcasing Avatars:</span>{" "}
+                    Dive into a world of interacting and visually stunning
+                    avatars designed to elevate digital experiences.
+                  </li>
+                  <li className="mt-1">
+                    <span className=" font-semibold">
+                      {" "}
+                      Educational Content:
+                    </span>{" "}
+                    Learn the principles of user eccentric-design and discover
+                    how avatars enhance engagement across various platforms.
+                  </li>
+                  <li className="mt-1">
+                    <span className=" font-semibold">
+                      {" "}
+                      Inspiration & Trends:
+                    </span>{" "}
+                    Stay ahead with the latest trends in UX,UI, and virtual
+                    avatar technology.
+                  </li>
+                  <li className="mt-1">
+                    <span className=" font-semibold"> Interactive Demos:</span>{" "}
+                    Experience how avatars can transform interactions in
+                    business, gaming, and social media.{" "}
+                  </li>
                 </ul>
-            </div>
-            <hr className="border-t-2 border-secondarycolor mb-6 mt-6" />
+              </div>
+              <hr className="border-t border-secondarycolor mb-6 mt-6" />
 
-            <div className="mt-6">
-            <p className="text-base text-charcoalBlack mt-2 font-normal">
-                 <span className=" font-semibold text-lg text-black"> Added Categories</span> (Please add minimum 5 categories for proper channel management)
-            </p>
+              <div className="mt-6 border-b border-secondarycolor pb-6">
+                <p className="text-sm text-charcoalBlack mt-2 font-normal">
+                  <span className=" font-semibold text-base text-black">
+                    {" "}
+                    Added Categories
+                  </span>{" "}
+                  (Please add minimum 5 categories for proper channel
+                  management)
+                </p>
 
-            <div className="flex flex-wrap gap-2 my-3">
+                <div className="flex flex-wrap gap-2 my-3">
                   {categories.map((category, index) => (
                     <Badge
                       key={index}
@@ -179,22 +219,26 @@ export default function ChannelManagement() {
                     </Badge>
                   ))}
                 </div>
-                <h1 className="text-lg font-semibold mt-4">Add Categories</h1>
+                <h1 className="text-base font-semibold py-2">Add Categories</h1>
                 <Input
-                  placeholder="Categories"
-                  className="w-full py-2 border border-borderColor1 outline-none focus:!outline-none focus:ring-0"
+                  placeholder="Add Categories"
+                  className="w-full py-5 border border-borderColor1 outline-none focus:!outline-none focus:ring-0"
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleAddCategory}
                 />
-               
-            </div>
+              </div>
 
-            <div className="flex items-center justify-between mt-10">
-                  <h1 className="font-semibold text-lg">
+              <div>
+                <div className="flex items-center justify-between mt-5">
+                  <h1 className="font-semibold text-base">
                     Content Performance (Graph)
                   </h1>
-                  <div className={`relative z-30 ${showDropdown === "filter1" ? "hidden" : ""}`}>
+                  <div
+                    className={`relative z-30 ${
+                      showDropdown === "filter1" ? "hidden" : ""
+                    }`}
+                  >
                     <button
                       className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
                       onClick={() => toggleDropdown("filter2")}
@@ -207,20 +251,32 @@ export default function ChannelManagement() {
                         <ul className="text-center">
                           <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleOptionClick("filter2", "Custom Dates")}
+                            onClick={() =>
+                              handleOptionClick("filter2", "Custom Dates")
+                            }
                           >
                             Custom Dates
                           </li>
                           <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">7 days</li>
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                            7 days
+                          </li>
                           <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 month</li>
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                            1 month
+                          </li>
                           <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">3 months</li>
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                            3 months
+                          </li>
                           <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">6 months</li>
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                            6 months
+                          </li>
                           <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 year</li>
+                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                            1 year
+                          </li>
                         </ul>
                         {showCalendar === "filter2" && (
                           <div className="absolute top-0 right-48 mt-2 bg-gray-300 rounded-md z-40">
@@ -236,148 +292,247 @@ export default function ChannelManagement() {
                     )}
                   </div>
                 </div>
+                <BarChart />
+              </div>
 
-                <div className="flex items-center justify-between mt-10">
-                  <h1 className="font-semibold text-lg">
-                    Metrics Table:
-                  </h1>
-                  <div className={`relative z-30 ${showDropdown === "filter1" || showDropdown === "filter2" ? "hidden" : ""}`}>
-                    <button
-                      className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
-                      onClick={() => toggleDropdown("filter3")}
-                    >
-                      Filter
-                      <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </button>
-                    {showDropdown === "filter3" && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-400 rounded-md shadow-lg z-40">
-                        <ul className="text-center">
-                          <li
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleOptionClick("filter3", "Custom Dates")}
-                          >
-                            Custom Dates
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">7 days</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 month</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">3 months</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">6 months</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 year</li>
-                        </ul>
-                        {showCalendar === "filter3" && (
-                          <div className="absolute top-0 right-48 mt-2 bg-gray-300 rounded-md z-40">
-                            <Calendar
-                              mode="single"
-                              selected={date}
-                              onSelect={setDate}
-                              className="rounded-md border"
-                            />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>   
-
-                 <div className="bg-white mt-5 rounded-lg border border-secondarycolor shadow-md px-4 py-3 mx-auto overflow-x-auto">
-                  <table className="w-full text-left border-collapse gap-1">
-                    <thead className="text-base font-semibold">
-                      <tr>
-                        <th className="px-4 py-2 text-center">Content Title</th>
-                        <th className="px-4 py-2 text-center">Impressions</th>
-                        <th className="px-4 py-2 text-center">Clicks</th>
-                        <th className="px-4 py-2 text-center">Engagement Rate</th>
-                        <th className="px-4 py-2 text-center">Earnings</th>
-                      </tr>
-                      <tr>
-                        <td colSpan={5}>
-                          <hr className="border-t-2 border-secondarycolor mb-5" />
-                        </td>
-                      </tr>
-                    </thead>
-                    <tbody className="space-x-4">
-                      <tr>
-                        <td className="px-4 py-2 text-center">Diwali Post</td>
-                        <td className="px-4 py-2 text-center">3546</td>
-                        <td className="px-4 py-2 text-center">7425</td>
-                        <td className="px-4 py-2 text-center">30%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$365</td>
-                      </tr>
-                      <tr className="">
-                        <td className="px-4 py-2 text-center">New Year</td>
-                        <td className="px-4 py-2 text-center">1202</td>
-                        <td className="px-4 py-2 text-center">3213</td>
-                        <td className="px-4 py-2 text-center">18%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$10</td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-center">Birthday Post</td>
-                        <td className="px-4 py-2 text-center">2102</td>
-                        <td className="px-4 py-2 text-center">4541</td>
-                        <td className="px-4 py-2 text-center">63%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$30</td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-center">Diwali Post</td>
-                        <td className="px-4 py-2 text-center">3546</td>
-                        <td className="px-4 py-2 text-center">7425</td>
-                        <td className="px-4 py-2 text-center">30%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$365</td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-center">Birthday Post</td>
-                        <td className="px-4 py-2 text-center">2102</td>
-                        <td className="px-4 py-2 text-center">4541</td>
-                        <td className="px-4 py-2 text-center">63%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$30</td>
-                      </tr>
-
-                      <tr className="">
-                        <td className="px-4 py-2 text-center">New Year</td>
-                        <td className="px-4 py-2 text-center">1202</td>
-                        <td className="px-4 py-2 text-center">3213</td>
-                        <td className="px-4 py-2 text-center">18%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$10</td>
-                      </tr>
-
-                      <tr>
-                        <td className="px-4 py-2 text-center">Birthday Post</td>
-                        <td className="px-4 py-2 text-center">2102</td>
-                        <td className="px-4 py-2 text-center">4541</td>
-                        <td className="px-4 py-2 text-center">63%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$30</td>
-                      </tr>
-
-                      <tr>
-                        <td className="px-4 py-2 text-center">Diwali Post</td>
-                        <td className="px-4 py-2 text-center">3546</td>
-                        <td className="px-4 py-2 text-center">7425</td>
-                        <td className="px-4 py-2 text-center">30%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$365</td>
-                      </tr>
-
-                      <tr className="">
-                        <td className="px-4 py-2 text-center">New Year</td>
-                        <td className="px-4 py-2 text-center">1202</td>
-                        <td className="px-4 py-2 text-center">3213</td>
-                        <td className="px-4 py-2 text-center">18%</td>
-                        <td className="px-4 py-2 text-lightGreen text-center">$10</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div> 
-                
-                <div className="justify-end mt-10 flex">
-                <button className="w-40 py-2 bg-neutral-300 text-neutral-400 rounded-md ml-auto">
-                      Save Changes
-                </button>
+              <div className="flex items-center justify-between mt-5">
+                <h1 className="font-semibold text-base">Metrics Table:</h1>
+                <div
+                  className={`relative z-30 ${
+                    showDropdown === "filter1" || showDropdown === "filter2"
+                      ? "hidden"
+                      : ""
+                  }`}
+                >
+                  <button
+                    className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
+                    onClick={() => toggleDropdown("filter3")}
+                  >
+                    Filter
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                  </button>
+                  {showDropdown === "filter3" && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-400 rounded-md shadow-lg z-40">
+                      <ul className="text-center">
+                        <li
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() =>
+                            handleOptionClick("filter3", "Custom Dates")
+                          }
+                        >
+                          Custom Dates
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          7 days
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 month
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          3 months
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          6 months
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 year
+                        </li>
+                      </ul>
+                      {showCalendar === "filter3" && (
+                        <div className="absolute top-0 right-48 mt-2 bg-gray-300 rounded-md z-40">
+                          <Calendar
+                            mode="single"
+                            selected={date}
+                            onSelect={setDate}
+                            className="rounded-md border"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
+              </div>
 
+              <div className="bg-white mt-5 rounded-lg border border-secondarycolor shadow-md px-4 py-3 mx-auto overflow-x-auto">
+                <table className="w-full text-left border-collapse gap-1">
+                  <thead className="text-base font-semibold">
+                    <tr>
+                      <th className="px-4 py-2 text-left font-semibold">
+                        Content Title
+                      </th>
+                      <th className="px-4 py-2 text-center font-semibold">
+                        Impressions
+                      </th>
+                      <th className="px-4 py-2 text-center font-semibold">
+                        Clicks
+                      </th>
+                      <th className="px-4 py-2 text-center font-semibold">
+                        Engagement Rate
+                      </th>
+                      <th className="px-4 py-2 text-center font-semibold">
+                        Earnings
+                      </th>
+                    </tr>
+                    <tr>
+                      <td colSpan={5}>
+                        <hr className="border-t border-secondarycolor mb-1" />
+                      </td>
+                    </tr>
+                  </thead>
+                  <tbody className="space-x-4">
+                    <tr>
+                      <td className="px-4 py-2 text-left font-normal">
+                        Diwali Post
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        3546
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        7425
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">30%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $365
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2 text-left font-normal">
+                        New Year
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        1202
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        3213
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">18%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $10
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2 text-left font-normal">
+                        Birthday Post
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        2102
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        4541
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">63%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $30
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2 text-left font-normal">
+                        Diwali Post
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        3546
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        7425
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">30%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $365
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="px-4 py-2 text-left font-normal">
+                        Birthday Post
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        2102
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        4541
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">63%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $30
+                      </td>
+                    </tr>
+
+                    <tr className="">
+                      <td className="px-4 py-2 text-left font-normal">
+                        New Year
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        1202
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        3213
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">18%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $10
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className="px-4 py-2 text-left font-normal">
+                        Birthday Post
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        2102
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        4541
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">63%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $30
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td className="px-4 py-2 text-left font-normal">
+                        Diwali Post
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        3546
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        7425
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">30%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $365
+                      </td>
+                    </tr>
+
+                    <tr className="">
+                      <td className="px-4 py-2 text-left font-normal">
+                        New Year
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        1202
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">
+                        3213
+                      </td>
+                      <td className="px-4 py-2 text-center font-normal">18%</td>
+                      <td className="px-4 py-2 text-lightGreen text-center font-normal">
+                        $10
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="justify-end mt-10 flex">
+                <button className="w-40 py-2 bg-neutral-300 text-neutral-400 rounded-md ml-auto">
+                  Save Changes
+                </button>
+              </div>
             </div>
           </div>
         </div>
