@@ -124,7 +124,8 @@ export default function Dashboard() {
                   <h1 className="font-semibold text-base">
                     Content Performance Graph
                   </h1>
-                  <div className={`relative z-30 ${showDropdown === "filter1" ? "hidden" : ""}`}>
+                  <div className={`relative ${showDropdown === "filter1" ? "z-10 opacity-50" : "z-30"}`}>
+
                     <button
                       className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
                       onClick={() => toggleDropdown("filter2")}
@@ -171,7 +172,7 @@ export default function Dashboard() {
                   <h1 className="font-semibold text-base">
                     Content Performance Table
                   </h1>
-                  <div className={`relative z-30 ${showDropdown === "filter1" || showDropdown === "filter2" ? "hidden" : ""}`}>
+                  <div className={`relative ${showDropdown === "filter2" ? "z-10 opacity-50" : "z-30"}`}>
                     <button
                       className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
                       onClick={() => toggleDropdown("filter3")}

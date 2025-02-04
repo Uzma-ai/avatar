@@ -27,13 +27,6 @@ export default function ChannelManagement() {
       };
 
      
-     
-    
-     
-    
-     
-    
-    
 
   return (
     <>
@@ -104,7 +97,7 @@ export default function ChannelManagement() {
 
             <div className="mt-6">
                 <h4 className="text-lg font-semibold ">Description:</h4>
-                <div className="border border-borderColor1 p-4 rounded-lg">
+                <div className="border border-borderColor1 p-2 rounded-lg ">
                 <p className="text-lg text-charcoalBlack mt-2 font-normal">
                   Welcome to <span className=" font-semibold"> UX Avatars,</span> your go-to channel for exploring the intersection of creativity,user experience, and Innovation! 
                 </p>
