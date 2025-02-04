@@ -1,17 +1,13 @@
-
 export interface Video {
   id: string
   title: string
   category: string
   times: number
   publish: string
-  views: number
   likes: number
-  comments: number
   publishDate: string
   thumbnail: string
   status: "published" | "draft"
-  videoUrl: string | undefined
 }
 
 export interface VideoFormData {
@@ -22,4 +18,3 @@ export interface VideoFormData {
   language: string
   region: string
 }
-

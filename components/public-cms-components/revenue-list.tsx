@@ -1,9 +1,15 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { Search, Trash2, CalendarClock, ArrowUpDown } from "lucide-react";
+import {
+  Search,
+  Trash2,
+  CalendarClock,
+  ArrowUpDown,
+  MoveUp,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { Video } from "@/types/video";
+import type { Video } from "@/types/boost-video";
 import { DeleteVideoDialog } from "./delete-video-dialog";
 import {
   Table,
@@ -13,11 +19,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
-import { VideoPlayerModal } from "@/components/public-cms-components/video-player";
-
 
 type SortOption = "date" | "views" | "likes" | "comments";
 
@@ -26,53 +35,45 @@ const videoData = [
     title: "Delicious Pasta Recipe",
     thumbnail: "/food-list.png",
     category: "Food",
-    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Top 10 Coding Tips",
     thumbnail: "/food-list.png",
     category: "Education",
-    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Traveling to Japan",
     thumbnail: "/food-list.png",
     category: "Travel",
-    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Best Workout Routines",
     thumbnail: "/food-list.png",
     category: "Fitness",
-    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "How to Bake a Cake",
     thumbnail: "/food-list.png",
     category: "Food",
-    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Mastering React.js",
     thumbnail: "/food-list.png",
     category: "Technology",
-    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Exploring Space",
     thumbnail: "/food-list.png",
     category: "Science",
-    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Yoga for Beginners",
     thumbnail: "/food-list.png",
     category: "Wellness",
-    videoUrl: "/videos/pasta.mp4",
   },
 ];
 
-export function ShedulingVideoList() {
+export function RevenueList() {
   const [searchQuery, setSearchQuery] = useState("");
   const [videos, setVideos] = useState<Video[]>([]);
   const [sortBy, setSortBy] = useState<SortOption>("date");
@@ -86,10 +87,6 @@ export function ShedulingVideoList() {
     videoTitle: "",
   });
 
-  // State for the video modal
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
-
   useEffect(() => {
     const generatedVideos: Video[] = videoData.map((video, index) => ({
       id: `video-${index + 1}`,
@@ -97,25 +94,16 @@ export function ShedulingVideoList() {
       category: video.category,
       times: Math.floor(Math.random() * 5) + 1,
       publish: "Published",
-      views: Math.floor(Math.random() * 1000),
       likes: Math.floor(Math.random() * 500),
-      comments: Math.floor(Math.random() * 100),
       publishDate: new Date(
         Date.now() - Math.floor(Math.random() * 10000000000)
       ).toISOString(),
       thumbnail: video.thumbnail,
       status: "published",
-      videoUrl: video.videoUrl,
     }));
 
     setVideos(generatedVideos);
   }, []);
-
-    const handleThumbnailClick = (video: Video) => {
-      setSelectedVideo(video);
-      setModalOpen(true);
-    };
-
 
   const filteredAndSortedVideos = useMemo(() => {
     let result = videos;
@@ -138,12 +126,8 @@ export function ShedulingVideoList() {
             new Date(b.publishDate).getTime() -
             new Date(a.publishDate).getTime()
           );
-        case "views":
-          return b.views - a.views;
         case "likes":
           return b.likes - a.likes;
-        case "comments":
-          return b.comments - a.comments;
         default:
           return 0;
       }
@@ -186,9 +170,9 @@ export function ShedulingVideoList() {
   };
 
   return (
-    <div className="w-full py-2">
+    <div className="w-full pb-2 pt-10">
       <div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-        <h2 className="text-lg font-semibold">Schedule Release</h2>
+        <h2 className="text-lg font-semibold">Boost Uploaded Video’s</h2>
         <div className="flex gap-4">
           <div className="relative ">
             <Search className="absolute right-2 top-4 h-4 w-4" />
@@ -230,19 +214,16 @@ export function ShedulingVideoList() {
                 Status
               </TableHead>
               <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
-                Impressions
-              </TableHead>
-              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
                 Likes
-              </TableHead>
-              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
-                Comments
               </TableHead>
               <TableHead className="w-[120px] text-blackcolor font-semibold text-center">
                 Date
               </TableHead>
               <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
                 Actions
+              </TableHead>
+              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
+                Boost
               </TableHead>
             </TableRow>
           </TableHeader>
@@ -251,10 +232,7 @@ export function ShedulingVideoList() {
               <TableRow key={video.id} className="border-none">
                 <TableCell className="w-[100px]">
                   {/* Thumbnail Image */}
-                  <div
-                    className="w-40 h-24 rounded-lg overflow-hidden"
-                    onClick={() => handleThumbnailClick(video)}
-                  >
+                  <div className="w-40 h-24 rounded-lg overflow-hidden">
                     <img
                       src={video.thumbnail || "/placeholder.svg"}
                       alt={video.title}
@@ -282,13 +260,7 @@ export function ShedulingVideoList() {
                   </span>
                 </TableCell>
                 <TableCell className="text-center">
-                  <span>{video.views}</span>
-                </TableCell>
-                <TableCell className="text-center">
                   <span>{video.likes}</span>
-                </TableCell>
-                <TableCell className="text-center">
-                  <span>{video.comments}</span>
                 </TableCell>
                 <TableCell className="text-center">
                   <span>
@@ -299,13 +271,6 @@ export function ShedulingVideoList() {
                 <TableCell className="">
                   {/* Action Buttons - Stack on small screens */}
                   <div className="flex items-center justify-center">
-                    <Image
-                      src="/auto.svg"
-                      alt="Auto"
-                      width={30}
-                      height={30}
-                      className="cursor-pointer"
-                    />
                     <Button variant="ghost" size="sm">
                       <CalendarClock className="w-4 h-4" />
                     </Button>
@@ -319,17 +284,16 @@ export function ShedulingVideoList() {
                     </Button>
                   </div>
                 </TableCell>
+                <TableCell className="text-center">
+                  <button className="w-24 h-11 rounded-md bg-skycolor text-whitecolor flex items-center justify-center gap-2">
+                    <MoveUp size={15} />
+                    Boost
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
-
-        {/* Video Modal */}
-        <VideoPlayerModal
-          isOpen={modalOpen}
-          onClose={() => setModalOpen(false)}
-          video={selectedVideo}
-        />
       </div>
       {filteredAndSortedVideos.length === 0 && (
         <p className="text-center text-muted-foreground mt-8">

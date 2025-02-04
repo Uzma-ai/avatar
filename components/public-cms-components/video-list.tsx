@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { VideoPlayerModal } from "@/components/public-cms-components/video-player";
 
 type SortOption = "date" | "views" | "likes" | "comments";
 
@@ -29,41 +30,49 @@ const videoData = [
     title: "Delicious Pasta Recipe",
     thumbnail: "/food-list.png",
     category: "Food",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Top 10 Coding Tips",
     thumbnail: "/food-list.png",
     category: "Education",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Traveling to Japan",
     thumbnail: "/food-list.png",
     category: "Travel",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Best Workout Routines",
     thumbnail: "/food-list.png",
     category: "Fitness",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "How to Bake a Cake",
     thumbnail: "/food-list.png",
     category: "Food",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Mastering React.js",
     thumbnail: "/food-list.png",
     category: "Technology",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Exploring Space",
     thumbnail: "/food-list.png",
     category: "Science",
+    videoUrl: "/videos/pasta.mp4",
   },
   {
     title: "Yoga for Beginners",
     thumbnail: "/food-list.png",
     category: "Wellness",
+    videoUrl: "/videos/pasta.mp4",
   },
 ];
 
@@ -81,25 +90,35 @@ export function VideoList() {
     videoTitle: "",
   });
 
-   useEffect(() => {
-     const generatedVideos: Video[] = videoData.map((video, index) => ({
-       id: `video-${index + 1}`,
-       title: video.title,
-       category: video.category,
-       times: Math.floor(Math.random() * 5) + 1,
-       publish: "Published",
-       views: Math.floor(Math.random() * 1000),
-       likes: Math.floor(Math.random() * 500),
-       comments: Math.floor(Math.random() * 100),
-       publishDate: new Date(
-         Date.now() - Math.floor(Math.random() * 10000000000)
-       ).toISOString(),
-       thumbnail: video.thumbnail,
-       status: "published",
-     }));
+  // State for the video modal
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
 
-     setVideos(generatedVideos);
-   }, []);
+  useEffect(() => {
+    const generatedVideos: Video[] = videoData.map((video, index) => ({
+      id: `video-${index + 1}`,
+      title: video.title,
+      category: video.category,
+      times: Math.floor(Math.random() * 5) + 1,
+      publish: "Published",
+      views: Math.floor(Math.random() * 1000),
+      likes: Math.floor(Math.random() * 500),
+      comments: Math.floor(Math.random() * 100),
+      publishDate: new Date(
+        Date.now() - Math.floor(Math.random() * 10000000000)
+      ).toISOString(),
+      thumbnail: video.thumbnail,
+      status: "published",
+      videoUrl: video.videoUrl,
+    }));
+
+    setVideos(generatedVideos);
+  }, []);
+
+  const handleThumbnailClick = (video: Video) => {
+    setSelectedVideo(video);
+    setModalOpen(true);
+  };
 
   const filteredAndSortedVideos = useMemo(() => {
     let result = videos;
@@ -229,7 +248,10 @@ export function VideoList() {
               <TableRow key={video.id} className="border-none">
                 <TableCell className="w-[100px]">
                   {/* Thumbnail Image */}
-                  <div className="w-40 h-24 rounded-lg overflow-hidden">
+                  <div
+                    className="w-40 h-24 rounded-lg overflow-hidden"
+                    onClick={() => handleThumbnailClick(video)}
+                  >
                     <img
                       src={video.thumbnail || "/placeholder.svg"}
                       alt={video.title}
@@ -291,6 +313,13 @@ export function VideoList() {
             ))}
           </TableBody>
         </Table>
+
+        {/* Video Modal */}
+        <VideoPlayerModal
+          isOpen={modalOpen}
+          onClose={() => setModalOpen(false)}
+          video={selectedVideo}
+        />
       </div>
       {filteredAndSortedVideos.length === 0 && (
         <p className="text-center text-muted-foreground mt-8">
