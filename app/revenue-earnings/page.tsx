@@ -9,6 +9,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
 import {
   Popover,
   PopoverContent,
@@ -39,19 +40,20 @@ export default function ReveneuEarnings() {
   const [showCalendar, setShowCalendar] = useState(false);
   const dropdownRef1 = useRef<HTMLDivElement>(null);
   const dropdownRef2 = useRef<HTMLDivElement>(null);
-    const calendarRef = useRef<HTMLDivElement>(null);
-    const [inputValue, setInputValue] = useState("");
-    const [selectedMethod, setSelectedMethod] = useState("credit-card");
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const [inputValue, setInputValue] = useState("");
+  const [selectedMethod, setSelectedMethod] = useState("credit-card");
 
-    const [withdrawPopup, setOpenWithdrawpopup] = useState(false)
+  const [withdrawPopup, setOpenWithdrawpopup] = useState(false);
+  const [isWithdrawalSuccessfullOpen, setIsWithdrawalSuccessfullOpen] = useState(false);
 
-    const handleWithdrawPopup = () => {
-        setOpenWithdrawpopup(!withdrawPopup);
-    }
+  const handleWithdrawPopup = () => {
+    setOpenWithdrawpopup(!withdrawPopup);
+  };
 
-    const closeWithdrawPopup = () => {
-        setOpenWithdrawpopup(false)
-    }
+  const closeWithdrawPopup = () => {
+    setOpenWithdrawpopup(false);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -72,6 +74,13 @@ export default function ReveneuEarnings() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    setOpenWithdrawpopup(false);
+    setIsWithdrawalSuccessfullOpen(true);
+  };
+
   return (
     <>
       <div className="flex h-screen">
@@ -445,6 +454,7 @@ export default function ReveneuEarnings() {
                       <div className="flex justify-center">
                         <Button
                           className="px-20 bg-secondarycolor text-white h-12 text-base hover:bg-secondarycolor hover:text-white"
+                          onClick={handleSubmit}
                         >
                           Continue
                         </Button>
@@ -457,6 +467,87 @@ export default function ReveneuEarnings() {
           )}
         </div>
       </div>
+      {isWithdrawalSuccessfullOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-mediumWhite p-4 rounded-lg max-w-[44rem] w-full h-[35rem] text-white backdrop-blur-sm flex flex-col items-start justify-center">
+            <div className="flex flex-col items-center py-4 px-3 w-full">
+         
+          <div className="w-full flex justify-end">
+            <button onClick={() => setIsWithdrawalSuccessfullOpen(false)} className="text-white">
+              ✖
+            </button>
+          </div>
+              <div className="my-8">
+                <div className="h-16 w-16 rounded-full bg-green-500 flex items-center justify-center">
+                  <Image
+                    src="/payment-success.gif"
+                    alt="success"
+                    width={70}
+                    height={70}
+                  />
+                </div>
+              </div>
+              <h2 className="text-2xl font-semibold mb-2 text-center">
+                Withdrawal Successful
+              </h2>
+            </div>
+
+            <div className="w-full">
+              <h2 className="text-base mb-2">Withdrawal details</h2>
+
+              <div className="space-y-3">
+                <div>
+                  <div className="py-2">
+                    <p className="text-xs font-medium">PAYMENT METHOD</p>
+                  </div>
+                  
+                    <div className="p-4 bg-white border border-lightblue rounded-md text-blackcolor">
+                      <div className="flex items-center gap-3 ">
+                        
+                        <div className="flex-1">
+                          <Label
+                            htmlFor="credit-card"
+                            className="font-semibold text-base"
+                          >
+                            Amazon pay ICICI bank credit card
+                          </Label>
+                          <p className="text-xs font-semibold text-mediumgray2 py-1">
+                            **3425 | Gaurav Yadav
+                          </p>
+                        </div>
+
+                      </div>
+                      
+                    </div>
+                 
+                </div>
+               
+                <div className="text-white text-sm mt-2 flex justify-between">
+                       <span className="mr-10 ">Order ID</span>
+                      <span className="ml-10 ">ID12345574324324</span>
+                 </div>
+
+                 <div className="text-white  mt-2 flex justify-between">
+                       <span className="mr-10 text-sm">Total Amount</span>
+                      <span className="ml-10 text-lg   font-semibold">$243</span>
+                 </div>
+
+                 <div className="flex justify-center">
+                        <Button
+                          className="px-32 bg-secondarycolor text-white h-12 text-base hover:bg-secondarycolor hover:text-white"
+                         
+                        >
+                          Done
+                        </Button>
+                      </div>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

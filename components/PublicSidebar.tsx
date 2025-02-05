@@ -77,6 +77,7 @@ const PublicSidebar = () => {
             {isActive("/content") ||
             isActive("/content-management") ||
             isActive("/content-scheduling") ||
+            isActive("/channel-management-edit") ||
             isActive("/channel-management") ? (
               <div className="bg-secondarycolor w-[3px] h-10 rounded-lg mt-0.5"></div>
             ) : (
@@ -88,6 +89,7 @@ const PublicSidebar = () => {
                   isActive("/content") ||
                   isActive("/content-management") ||
                   isActive("/content-scheduling") ||
+                  isActive("/channel-management-edit") ||
                   isActive("/channel-management")
                     ? "bg-secondarycolor text-white"
                     : "text-blackcolor"
@@ -101,6 +103,7 @@ const PublicSidebar = () => {
                     isActive("/content") ||
                     isActive("/content-management") ||
                     isActive("/content-scheduling") ||
+                    isActive("/channel-management-edit") ||
                     isActive("/channel-management")
                       ? "text-white"
                       : "text-blackcolor"
@@ -111,6 +114,7 @@ const PublicSidebar = () => {
                     isActive("/content") ||
                     isActive("/content-management") ||
                     isActive("/content-scheduling") ||
+                    isActive("/channel-management-edit") ||
                     isActive("/channel-management")
                       ? "text-white"
                       : "text-blackcolor"
@@ -128,6 +132,7 @@ const PublicSidebar = () => {
                   isActive("/content") ||
                   isActive("/content-management") ||
                   isActive("/content-scheduling") ||
+                  isActive("/channel-management-edit") ||
                   isActive("/channel-management")
                     ? "bg-lightblue  rounded-b-md"
                     : ""
@@ -175,14 +180,14 @@ const PublicSidebar = () => {
                   <Link
                     href="/channel-management"
                     className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                      isActive("/content") || isActive("/channel-management")
+                      isActive("/content") || isActive("/channel-management") || isActive("/channel-management-edit")
                         ? "text-blackcolor font-normal"
                         : "text-blackcolor font-normal"
                     }`}
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/content") || isActive("/channel-management")
+                        isActive("/content") || isActive("/channel-management") || isActive("/channel-management-edit")
                           ? "bg-secondarycolor"
                           : ""
                       } rounded-full mr-3`}
