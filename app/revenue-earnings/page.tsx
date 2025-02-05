@@ -478,14 +478,9 @@ export default function ReveneuEarnings() {
             </button>
           </div>
               <div className="my-8">
-                <div className="h-16 w-16 rounded-full bg-green-500 flex items-center justify-center">
-                  <Image
-                    src="/payment-success.gif"
-                    alt="success"
-                    width={70}
-                    height={70}
-                  />
-                </div>
+               <div className="h-16 w-16 rounded-full bg-green-500 flex items-center justify-center">
+                                  <Image src="/payment-success.gif" alt="success" width={70} height={70}/>
+                 </div>
               </div>
               <h2 className="text-2xl font-semibold mb-2 text-center">
                 Withdrawal Successful

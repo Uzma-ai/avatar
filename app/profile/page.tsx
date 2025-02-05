@@ -108,13 +108,13 @@ const ProfilePage = () => {
                   <label className="block text-sm font-medium mb-1">
                     First Name
                   </label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                  <input type="text" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Last Name
                   </label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                  <input type="text" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
@@ -122,7 +122,7 @@ const ProfilePage = () => {
                   </label>
                   <input
                     type="email"
-                    className="w-full border rounded-md p-2"
+                    className="w-full border border-borderColor1 rounded-md p-2 h-12"
                   />
                 </div>
                 <ContactNumber />
@@ -130,41 +130,51 @@ const ProfilePage = () => {
                   <label className="block text-sm font-medium mb-1">
                     Address
                   </label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                  <input type="text" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Pincode
                   </label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                  <input type="text" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">City</label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                  <input type="text" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     State
                   </label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                  <input type="text" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Country
                   </label>
-                  <input type="text" className="w-full border rounded-md p-2" />
+                  <input type="text" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">
-                    Date of Birth
-                  </label>
-                  <input type="date" className="w-full border rounded-md p-2" />
+                  
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                    <label className="block text-sm font-medium mb-1">
+                      Date of Birth
+                    </label>
+                    <input type="date" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
+                    </div>
+                    <div>
+                    <label className="block text-sm font-medium mb-1">Age</label>
+                    <input type="number" className="w-full border border-borderColor1 rounded-md p-2 h-12" />
+                    </div>
+                  </div>
+                  
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">
                     Gender
                   </label>
-                  <select className="w-full border rounded-md p-2">
+                  <select className="w-full border border-borderColor1 rounded-md p-2 h-12">
                     <option>Male</option>
                     <option>Female</option>
                     <option>Other</option>
@@ -175,7 +185,7 @@ const ProfilePage = () => {
                     <label className="block text-sm font-medium mb-1">
                       Personality Type
                     </label>
-                    <select className="w-full border rounded-md p-2">
+                    <select className="w-full border border-borderColor1 rounded-md p-2 h-12">
                       <option>ISTJ</option>
                       <option>Option 2</option>
                       <option>Option 3</option>
