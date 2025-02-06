@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Video } from "@/types/video";
+import Image from "next/image";
 
 interface VideoPlayerModalProps {
   isOpen: boolean;
@@ -23,9 +24,17 @@ export function VideoPlayerModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl bg-mediumWhite backdrop-blur-sm px-2 py-3 rounded-lg">
         <DialogHeader>
-          <DialogTitle>{video.title}</DialogTitle>
+          <div className="flex items-center gap-1">
+            <Image
+              src="/video-player.svg"
+              alt="video player"
+              width={20}
+              height={20}
+            />
+            <DialogTitle className="text-sm text-whitecolor font-light">{video.title}</DialogTitle>
+          </div>
         </DialogHeader>
         <div className="w-full aspect-video">
           <video controls className="w-full h-full">

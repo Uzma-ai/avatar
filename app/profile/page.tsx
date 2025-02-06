@@ -175,7 +175,7 @@ const ProfilePage = () => {
                     <label className="block text-sm font-medium mb-1">
                       Personality Type
                     </label>
-                    <select className="w-full border rounded-md p-2">
+                    <select className="w-full border border-borderColor1 rounded-md p-2">
                       <option>ISTJ</option>
                       <option>Option 2</option>
                       <option>Option 3</option>
