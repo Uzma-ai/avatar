@@ -93,15 +93,20 @@ export default function ChannelManagement() {
               </div>
               <div className="flex items-center justify-center mt-6">
                 <label htmlFor="imageUpload" className="cursor-pointer">
-                  <div className="w-28 h-28 rounded-full overflow-hidden">
-                    <Image
-                      src={image || "/background.jpeg"}
-                      alt="avatar"
-                      className="object-cover w-full h-full"
-                      width={112}
-                      height={112}
-                    />
-                  </div>
+               
+                <div className="w-28 h-28 rounded-full overflow-hidden relative flex items-center justify-center">
+                <Image
+               src={image || "/background.jpeg"}
+               alt="avatar"
+              className="object-cover w-full h-full"
+              width={112}
+              height={112}
+              />
+           <p className="absolute text-white text-sm font-semibold  bg-opacity-50 px-2 py-1 rounded-md">
+            Change Image
+           </p>
+          </div>
+
                 </label>
                 <input
                   id="imageUpload"

@@ -77,6 +77,7 @@ const PublicSidebar = () => {
             {isActive("/content") ||
             isActive("/content-management") ||
             isActive("/content-scheduling") ||
+            isActive("/channel-management-edit") ||
             isActive("/channel-management") ? (
               <div className="bg-secondarycolor w-[3px] h-10 rounded-lg mt-0.5"></div>
             ) : (
@@ -88,6 +89,7 @@ const PublicSidebar = () => {
                   isActive("/content") ||
                   isActive("/content-management") ||
                   isActive("/content-scheduling") ||
+                  isActive("/channel-management-edit") ||
                   isActive("/channel-management")
                     ? "bg-secondarycolor text-white"
                     : "text-blackcolor"
@@ -101,6 +103,7 @@ const PublicSidebar = () => {
                     isActive("/content") ||
                     isActive("/content-management") ||
                     isActive("/content-scheduling") ||
+                    isActive("/channel-management-edit") ||
                     isActive("/channel-management")
                       ? "text-white"
                       : "text-blackcolor"
@@ -111,6 +114,7 @@ const PublicSidebar = () => {
                     isActive("/content") ||
                     isActive("/content-management") ||
                     isActive("/content-scheduling") ||
+                    isActive("/channel-management-edit") ||
                     isActive("/channel-management")
                       ? "text-white"
                       : "text-blackcolor"
@@ -128,6 +132,7 @@ const PublicSidebar = () => {
                   isActive("/content") ||
                   isActive("/content-management") ||
                   isActive("/content-scheduling") ||
+                  isActive("/channel-management-edit") ||
                   isActive("/channel-management")
                     ? "bg-lightblue  rounded-b-md"
                     : ""
@@ -175,14 +180,14 @@ const PublicSidebar = () => {
                   <Link
                     href="/channel-management"
                     className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                      isActive("/content") || isActive("/channel-management")
+                      isActive("/content") || isActive("/channel-management") || isActive("/channel-management-edit")
                         ? "text-blackcolor font-normal"
                         : "text-blackcolor font-normal"
                     }`}
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/content") || isActive("/channel-management")
+                        isActive("/content") || isActive("/channel-management") || isActive("/channel-management-edit")
                           ? "bg-secondarycolor"
                           : ""
                       } rounded-full mr-3`}
@@ -196,7 +201,7 @@ const PublicSidebar = () => {
 
           <li className={`overflow-hidden flex items-start gap-2`}>
             {isActive("/revenue-earnings") ||
-            isActive("/ad-revenue-settings") ? (
+            isActive("/revenue-settings") ? (
               <div className="bg-secondarycolor w-[3px] h-10 rounded-lg mt-0.5"></div>
             ) : (
               <div className="w-[3px] h-10 mt-0.5"></div>
@@ -205,7 +210,7 @@ const PublicSidebar = () => {
               <div
                 className={`flex items-center gap-3 cursor-pointer py-2.5 w-full rounded-t-md ${
                   isActive("/revenue-earnings") ||
-                  isActive("/ad-revenue-settings")
+                  isActive("/revenue-settings")
                     ? "bg-secondarycolor text-white"
                     : "text-blackcolor"
                 } ${
@@ -216,7 +221,7 @@ const PublicSidebar = () => {
                 <UserCircle
                   className={`w-5 h-5 ${
                     isActive("/revenue-earnings") ||
-                    isActive("/ad-revenue-settings")
+                    isActive("/revenue-settings")
                       ? "text-white"
                       : "text-blackcolor"
                   } ml-2`}
@@ -224,7 +229,7 @@ const PublicSidebar = () => {
                 <span
                   className={`font-normal md:text-base lg:text-lg ${
                     isActive("/revenue-earnings") ||
-                    isActive("/ad-revenue-settings")
+                    isActive("/revenue-settings")
                       ? "text-white"
                       : "text-blackcolor"
                   }`}
@@ -239,7 +244,7 @@ const PublicSidebar = () => {
                   isRevenueDropdownVisible ? "" : "hidden"
                 } ${
                   isActive("/revenue-earnings") ||
-                  isActive("/ad-revenue-settings")
+                  isActive("/revenue-settings")
                     ? "bg-lightblue rounded-b-md"
                     : ""
                 }`}
@@ -263,16 +268,16 @@ const PublicSidebar = () => {
                 </li>
                 <li>
                   <Link
-                    href="/ad-revenue-settings"
+                    href="/revenue-settings"
                     className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                      isActive("/ad-revenue-settings")
+                      isActive("/revenue-settings")
                         ? "text-blackcolor font-normal"
                         : "text-blackcolor font-normal"
                     }`}
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/ad-revenue-settings")
+                        isActive("/revenue-settings")
                           ? "bg-secondarycolor"
                           : ""
                       } rounded-full mr-3`}

@@ -74,7 +74,7 @@ export default function ContactNumber() {
       </Label>
       <div className="relative flex items-center w-full gap-2">
         <Select value={selectedCountry} onValueChange={handleCountryChange}>
-          <SelectTrigger className="w-[100px] bg-gray-200 text-black border rounded-md z-10">
+          <SelectTrigger className="w-[100px] bg-gray-200 text-black border border-borderColor1  h-12 rounded-md z-10">
             <SelectValue placeholder="Select Country">
               {selectedCountry
                 ? `${selectedCountryData?.code} (${selectedCountryData?.phoneCode})`
@@ -100,7 +100,7 @@ export default function ContactNumber() {
               setPhoneNumber(value)
             }
           }}
-          className="w-full border rounded-md p-2 h-10"
+          className="w-full border border-borderColor1 rounded-md p-2 h-12"
         />
       </div>
     </div>

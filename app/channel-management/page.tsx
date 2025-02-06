@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState, useEffect,useRef, KeyboardEvent } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
 import { User, Pencil,X,ArrowUpDown } from "lucide-react";
@@ -9,13 +9,27 @@ import { Input } from "@/components/ui/input";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
 import BarChart from "@/components/BarChart";
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default function ChannelManagement() {
   const router = useRouter();
 
   const [categories, setCategories] = useState<string[]>(["Books"]);
   const [inputValue, setInputValue] = useState("");
-   const [image, setImage] = useState<string | null>(null);
+  const [image, setImage] = useState<string | null>(null);
+   const [openFilter1, setOpenFilter1] = useState(false);
+  const [openFilter2, setOpenFilter2] = useState(false);
+   const [showCalendar1, setShowCalendar1] = useState(false);
+  const [showCalendar2, setShowCalendar2] = useState(false);
+   const dropdownRef1 = useRef<HTMLDivElement>(null);
+  const dropdownRef2 = useRef<HTMLDivElement>(null);
+    const calendarRef1 = useRef<HTMLDivElement>(null);
+    const calendarRef2 = useRef<HTMLDivElement>(null);
 
     const handleAddCategory = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === "Enter" && inputValue.trim()) {
@@ -30,24 +44,7 @@ export default function ChannelManagement() {
         setCategories(categories.filter((c) => c !== category));
       };
 
-      const [showDropdown, setShowDropdown] = useState<string | null>(null);
-      const [showCalendar, setShowCalendar] = useState<string | null>(null);
-      const [date, setDate] = useState<Date | undefined>(new Date());
-    
-      const toggleDropdown = (dropdown: string) => {
-        setShowDropdown(showDropdown === dropdown ? null : dropdown);
-        if (showDropdown === dropdown) {
-          setShowCalendar(null);
-        }
-      };
-    
-      const handleOptionClick = (dropdown: string, option: string) => {
-        if (option === "Custom Dates") {
-          setShowCalendar(dropdown);
-        } else {
-          setShowCalendar(null);
-        }
-      };
+     
     
    useEffect(() => {
      const storedImage = localStorage.getItem("channelImage");
@@ -55,6 +52,30 @@ export default function ChannelManagement() {
        setImage(storedImage);
      }
    }, []);
+  
+    useEffect(() => {
+      const handleClickOutside = (event: MouseEvent) => {
+        if (
+          dropdownRef1.current &&
+          !dropdownRef1.current.contains(event.target as Node) &&
+          dropdownRef2.current &&
+          !dropdownRef2.current.contains(event.target as Node) &&
+          calendarRef1.current &&
+          !calendarRef1.current.contains(event.target as Node) &&
+          calendarRef2.current &&
+          !calendarRef2.current.contains(event.target as Node)
+        ) {
+          setOpenFilter1(false);
+          setOpenFilter2(false);
+          setShowCalendar1(false);
+          setShowCalendar2(false);
+        }
+      };
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
+    }, []);
     
 
   return (
@@ -234,26 +255,29 @@ export default function ChannelManagement() {
                   <h1 className="font-semibold text-base">
                     Content Performance (Graph)
                   </h1>
-                  <div
-                    className={`relative z-30 ${
-                      showDropdown === "filter1" ? "hidden" : ""
-                    }`}
-                  >
-                    <button
-                      className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
-                      onClick={() => toggleDropdown("filter2")}
+                  <div className="relative inline-block" ref={dropdownRef1}>
+                    <Button
+                      onClick={() => {
+                        setOpenFilter1(!openFilter1);
+                        setOpenFilter2(false);
+                      }}
+                      variant="outline"
+                      className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </button>
-                    {showDropdown === "filter2" && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-400 rounded-md shadow-lg z-40">
+                      <ArrowUpDown />
+                    </Button>
+
+                    {openFilter1 && (
+                      <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
                         <ul className="text-center">
                           <li
                             className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() =>
-                              handleOptionClick("filter2", "Custom Dates")
-                            }
+                            onClick={() => {
+                              setShowCalendar1(true);
+                              setOpenFilter1(true);
+                              setOpenFilter2(false);
+                            }}
                           >
                             Custom Dates
                           </li>
@@ -278,17 +302,25 @@ export default function ChannelManagement() {
                             1 year
                           </li>
                         </ul>
-                        {showCalendar === "filter2" && (
-                          <div className="absolute top-0 right-48 mt-2 bg-gray-300 rounded-md z-40">
-                            <Calendar
-                              mode="single"
-                              selected={date}
-                              onSelect={setDate}
-                              className="rounded-md border"
-                            />
-                          </div>
-                        )}
                       </div>
+                    )}
+                    {/* Show Calendar on Left Side */}
+                    {showCalendar1 && (
+                      <Popover
+                        open={showCalendar1}
+                        onOpenChange={setShowCalendar1}
+                      >
+                        <PopoverTrigger asChild>
+                          <span
+                            ref={calendarRef1}
+                            className="absolute left-[-220px] top-0 z-50"
+                          >
+                            <PopoverContent className="w-auto p-2">
+                              <Calendar mode="single" />
+                            </PopoverContent>
+                          </span>
+                        </PopoverTrigger>
+                      </Popover>
                     )}
                   </div>
                 </div>
@@ -297,28 +329,29 @@ export default function ChannelManagement() {
 
               <div className="flex items-center justify-between mt-5">
                 <h1 className="font-semibold text-base">Metrics Table:</h1>
-                <div
-                  className={`relative z-30 ${
-                    showDropdown === "filter1" || showDropdown === "filter2"
-                      ? "hidden"
-                      : ""
-                  }`}
-                >
-                  <button
-                    className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
-                    onClick={() => toggleDropdown("filter3")}
+                <div className="relative inline-block" ref={dropdownRef2}>
+                  <Button
+                    onClick={() => {
+                      setOpenFilter2(!openFilter2);
+                      setOpenFilter1(false);
+                    }}
+                    variant="outline"
+                    className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                  </button>
-                  {showDropdown === "filter3" && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-400 rounded-md shadow-lg z-40">
+                    <ArrowUpDown />
+                  </Button>
+
+                  {openFilter2 && (
+                    <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
                       <ul className="text-center">
                         <li
                           className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                          onClick={() =>
-                            handleOptionClick("filter3", "Custom Dates")
-                          }
+                          onClick={() => {
+                            setShowCalendar2(true);
+                            setOpenFilter2(true);
+                            setOpenFilter1(false);
+                          }}
                         >
                           Custom Dates
                         </li>
@@ -343,17 +376,25 @@ export default function ChannelManagement() {
                           1 year
                         </li>
                       </ul>
-                      {showCalendar === "filter3" && (
-                        <div className="absolute top-0 right-48 mt-2 bg-gray-300 rounded-md z-40">
-                          <Calendar
-                            mode="single"
-                            selected={date}
-                            onSelect={setDate}
-                            className="rounded-md border"
-                          />
-                        </div>
-                      )}
                     </div>
+                  )}
+                  {/* Show Calendar on Left Side */}
+                  {showCalendar2 && (
+                    <Popover
+                      open={showCalendar2}
+                      onOpenChange={setShowCalendar2}
+                    >
+                      <PopoverTrigger asChild>
+                        <span
+                          ref={calendarRef2}
+                          className="absolute left-[-220px] top-0 z-50"
+                        >
+                          <PopoverContent className="w-auto p-2">
+                            <Calendar mode="single" />
+                          </PopoverContent>
+                        </span>
+                      </PopoverTrigger>
+                    </Popover>
                   )}
                 </div>
               </div>
