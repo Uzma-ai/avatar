@@ -1,32 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
 import { User, ArrowUpDown, TrendingUp } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export default function ChannelManagement() {
   const router = useRouter();
-  const [showDropdown, setShowDropdown] = useState<string | null>(null);
-  const [showCalendar, setShowCalendar] = useState<string | null>(null);
-  const [date, setDate] = useState<Date | undefined>(new Date());
+  const [openFilter1, setOpenFilter1] = useState(false);
+    const [openFilter2, setOpenFilter2] = useState(false);
+     const [showCalendar1, setShowCalendar1] = useState(false);
+    const [showCalendar2, setShowCalendar2] = useState(false);
+     const dropdownRef1 = useRef<HTMLDivElement>(null);
+    const dropdownRef2 = useRef<HTMLDivElement>(null);
+      const calendarRef1 = useRef<HTMLDivElement>(null);
+      const calendarRef2 = useRef<HTMLDivElement>(null);
  
-
-  const toggleDropdown = (dropdown: string) => {
-    setShowDropdown(showDropdown === dropdown ? null : dropdown);
-    if (showDropdown === dropdown) {
-      setShowCalendar(null);
-    }
-  };
-
-  const handleOptionClick = (dropdown: string, option: string) => {
-    if (option === "Custom Dates") {
-      setShowCalendar(dropdown);
-    } else {
-      setShowCalendar(null);
-    }
-  };
+ 
+      useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+          if (
+            dropdownRef1.current &&
+            !dropdownRef1.current.contains(event.target as Node) &&
+            dropdownRef2.current &&
+            !dropdownRef2.current.contains(event.target as Node) &&
+            calendarRef1.current &&
+            !calendarRef1.current.contains(event.target as Node) &&
+            calendarRef2.current &&
+            !calendarRef2.current.contains(event.target as Node)
+          ) {
+            setOpenFilter1(false);
+            setOpenFilter2(false);
+            setShowCalendar1(false);
+            setShowCalendar2(false);
+          }
+        };
+  
+        document.addEventListener("mousedown", handleClickOutside);
+        return () =>
+          document.removeEventListener("mousedown", handleClickOutside);
+      }, []);
+      
 
   
   
@@ -46,7 +67,7 @@ export default function ChannelManagement() {
               <div className="flex items-center justify-between">
                 <div className="text-black ml-4 flex items-center gap-3">
                   <span
-                    onClick={() => router.push("/content-management")}
+                    onClick={() => router.push("/revenue-earnings")}
                     className="cursor-pointer"
                   >
                     Revenue
@@ -54,7 +75,7 @@ export default function ChannelManagement() {
                   <span>&gt;</span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => router.push("/content-management")}
+                    onClick={() => router.push("/revenue-settings")}
                   >
                     Ad Revenue Settings
                   </span>
@@ -70,19 +91,22 @@ export default function ChannelManagement() {
                 <h2 className="text-lg font-semibold"> Ad Revenue Settings</h2>
                 <div className="flex justify-between">
                   <p className="font-normal text-sm">
-                    Manage how ads are integrated into your content, optimize CPM rates, and track ad earnings in real time.
+                    Manage how ads are integrated into your content, optimize
+                    CPM rates, and track ad earnings in real time.
                   </p>
                 </div>
               </div>
 
-              <h1 className="text-lg font-semibold mb-2 mt-6">Configure Ad Integration</h1>
+              <h1 className="text-lg font-semibold mb-2 mt-6">
+                Configure Ad Integration
+              </h1>
 
               <div className="mb-6 flex items-center justify-between mt-3">
                 <h2 className="md:text-sm lg:text-base font-medium">
                   Pre-roll Ads
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
+                <div className="flex items-center gap-2">
+                  <span className="md:text-sm lg:text-base font-medium text-gray-400">
                     Display ads before the content starts.
                   </span>
                   <label className="relative inline-flex items-center cursor-pointer">
@@ -96,9 +120,10 @@ export default function ChannelManagement() {
                 <h2 className="md:text-sm lg:text-base font-medium">
                   Mid-roll Ads
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
-                    Show ads in the middle of the content for maximum engagement.
+                <div className="flex items-center gap-2">
+                  <span className="md:text-sm lg:text-base font-medium text-gray-400 text-right">
+                    Show ads in the middle of the content for maximum
+                    engagement.
                   </span>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" className="sr-only peer" />
@@ -111,8 +136,8 @@ export default function ChannelManagement() {
                 <h2 className="md:text-sm lg:text-base font-medium">
                   Post-roll Ads
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
+                <div className="flex items-center gap-2">
+                  <span className="md:text-sm lg:text-base font-medium text-gray-400 text-right">
                     Play ads after the content ends.
                   </span>
                   <label className="relative inline-flex items-center cursor-pointer">
@@ -126,9 +151,10 @@ export default function ChannelManagement() {
                 <h2 className="md:text-sm lg:text-base font-medium">
                   AI Organic Speech Integration
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
-                    Enable AI_powered organic speech transitions for seamless ad delivery.
+                <div className="flex items-center gap-2">
+                  <span className="md:text-sm lg:text-base font-medium text-gray-400 text-right">
+                    Enable AI-powered organic speech transitions for seamless ad
+                    delivery.
                   </span>
                   <label className="relative inline-flex items-center cursor-pointer">
                     <input type="checkbox" className="sr-only peer" />
@@ -141,135 +167,200 @@ export default function ChannelManagement() {
                 <h1 className="font-semibold text-base">
                   Dynamic CPM Rate Adjustments
                 </h1>
-                <div className="relative z-30">
-                    <button
-                      className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
-                      onClick={() => toggleDropdown("filter1")}
+                <div className="relative inline-block" ref={dropdownRef1}>
+                  <Button
+                    onClick={() => {
+                      setOpenFilter1(!openFilter1);
+                      setOpenFilter2(false);
+                    }}
+                    variant="outline"
+                    className="border-borderColor1 flex items-center justify-center gap-2"
+                  >
+                    Filter
+                    <ArrowUpDown />
+                  </Button>
+
+                  {openFilter1 && (
+                    <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
+                      <ul className="text-center">
+                        <li
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => {
+                            setShowCalendar1(true);
+                            setOpenFilter1(true);
+                            setOpenFilter2(false);
+                          }}
+                        >
+                          Custom Dates
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          7 days
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 month
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          3 months
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          6 months
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 year
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                  {/* Show Calendar on Left Side */}
+                  {showCalendar1 && (
+                    <Popover
+                      open={showCalendar1}
+                      onOpenChange={setShowCalendar1}
                     >
-                      Filter
-                      <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </button>
-                    {showDropdown === "filter1" && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-400 rounded-md shadow-lg z-40">
-                        <ul className="text-center">
-                          <li
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleOptionClick("filter1", "Custom Dates")}
-                          >
-                            Custom Dates
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">7 days</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 month</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">3 months</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">6 months</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 year</li>
-                        </ul>
-                        {showCalendar === "filter1" && (
-                          <div className="absolute top-0 right-48 mt-2 bg-gray-300 rounded-md z-40">
-                            <Calendar
-                              mode="single"
-                              selected={date}
-                              onSelect={setDate}
-                              className="rounded-md border"
-                            />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                      <PopoverTrigger asChild>
+                        <span
+                          ref={calendarRef1}
+                          className="absolute left-[-220px] top-0 z-50"
+                        >
+                          <PopoverContent className="w-auto p-2">
+                            <Calendar mode="single" />
+                          </PopoverContent>
+                        </span>
+                      </PopoverTrigger>
+                    </Popover>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 mt-4">
+                <div className="flex flex-col justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                  <h3 className="text-base font-normal">Average CPM</h3>
+                  <p className="text-3xl font-bold">$15.23</p>
+                </div>
+
+                <div className="flex flex-col justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                  <h3 className="text-base font-normal text-white">
+                    Top Region{" "}
+                  </h3>
+                  <p className="text-3xl font-bold text-white">North America</p>
+                </div>
+
+                <div className="flex flex-col justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                  <h3 className="text-base font-normal text-white">
+                    Top Device
+                  </h3>
+                  <p className="text-3xl font-bold text-white">Mobile</p>
+                </div>
               </div>
 
               <div className="flex items-center justify-between mt-10">
                 <h1 className="font-semibold text-base">
-                  Real-Time Ad Earnings 
+                  Real-Time Ad Earnings
                 </h1>
-                <div className={`relative ${showDropdown === "filter1" ? "z-10 opacity-50" : "z-30"}`}>
+                <div className="relative inline-block" ref={dropdownRef2}>
+                  <Button
+                    onClick={() => {
+                      setOpenFilter2(!openFilter2);
+                      setOpenFilter1(false);
+                    }}
+                    variant="outline"
+                    className="border-borderColor1 flex items-center justify-center gap-2"
+                  >
+                    Filter
+                    <ArrowUpDown />
+                  </Button>
 
-                    <button
-                      className="w-24 h-10 rounded-md border border-borderColor1 flex items-center justify-center"
-                      onClick={() => toggleDropdown("filter2")}
+                  {openFilter2 && (
+                    <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
+                      <ul className="text-center">
+                        <li
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => {
+                            setShowCalendar2(true);
+                            setOpenFilter2(true);
+                            setOpenFilter1(false);
+                          }}
+                        >
+                          Custom Dates
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          7 days
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 month
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          3 months
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          6 months
+                        </li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 year
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                  {/* Show Calendar on Left Side */}
+                  {showCalendar2 && (
+                    <Popover
+                      open={showCalendar2}
+                      onOpenChange={setShowCalendar2}
                     >
-                      Filter
-                      <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </button>
-                    {showDropdown === "filter2" && (
-                      <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-400 rounded-md shadow-lg z-40">
-                        <ul className="text-center">
-                          <li
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleOptionClick("filter2", "Custom Dates")}
-                          >
-                            Custom Dates
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">7 days</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 month</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">3 months</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">6 months</li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">1 year</li>
-                        </ul>
-                        {showCalendar === "filter2" && (
-                          <div className="absolute top-0 right-48 mt-2 bg-gray-300 rounded-md z-40">
-                            <Calendar
-                              mode="single"
-                              selected={date}
-                              onSelect={setDate}
-                              className="rounded-md border"
-                            />
-                          </div>
-                        )}
-                      </div>
-                    )}
-                  </div>
-              </div>
-
-              <div className="flex flex-wrap items-center gap-4 mt-4">
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <h3 className="text-lg font-semibold">Average CPM</h3>
-                  <p className="text-3xl font-bold mt-10">$15.23</p>
-                </div>
-
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <h3 className="text-lg font-semibold text-white">Top Region </h3>
-                  <p className="text-3xl font-bold mt-10 text-white">North America</p>
-                </div>
-
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <h3 className="text-lg font-semibold text-white">Top Device</h3>
-                  <p className="text-3xl font-bold mt-10 text-white">Mobile</p>
+                      <PopoverTrigger asChild>
+                        <span
+                          ref={calendarRef2}
+                          className="absolute left-[-220px] top-0 z-50"
+                        >
+                          <PopoverContent className="w-auto p-2">
+                            <Calendar mode="single" />
+                          </PopoverContent>
+                        </span>
+                      </PopoverTrigger>
+                    </Popover>
+                  )}
                 </div>
               </div>
 
               <div className="mt-6">
                 <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex items-center justify-center min-w-[200px] h-40 relative">
-                  <h3 className="text-lg font-semibold mr-4">Total Ads Earnings</h3>
+                  <h3 className="text-base font-normal mr-4">
+                    Total Ads Earnings
+                  </h3>
                   <p className="text-6xl font-bold">$52,342</p>
-                  <TrendingUp className="absolute bottom-4 ml-96 h-14 w-14 text-lightGreen mt-2" />
+                  <TrendingUp className="absolute bottom-4 ml-[30rem] h-14 w-14 text-lightGreen mt-2" />
                 </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-4 mt-6">
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <h3 className="text-lg font-semibold">Pre-roll Ads Earnings</h3>
-                  <p className="text-3xl font-bold mt-10">$1215.3</p>
+                <div className="flex flex-col justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                  <h3 className="text-base font-normal">
+                    Pre-roll Ads Earnings
+                  </h3>
+                  <p className="text-3xl font-bold">$1215.3</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <h3 className="text-lg font-semibold">Mid-roll Ads Earnings</h3>
+                <div className="flex flex-col justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                  <h3 className="text-base font-normal">
+                    Mid-roll Ads Earnings
+                  </h3>
                   <p className="text-3xl font-bold mt-10">$20,232</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <h3 className="text-lg font-semibold">Post-roll Ads Earnings</h3>
+                <div className="flex flex-col justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                  <h3 className="text-base font-normal">
+                    Post-roll Ads Earnings
+                  </h3>
                   <p className="text-3xl font-bold mt-10">$1540</p>
                 </div>
               </div>
