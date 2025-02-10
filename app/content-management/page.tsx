@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
-import { User, Pencil, Upload, X, CheckCircle2 } from "lucide-react";
+import { User, Upload, X, CheckCircle2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -97,38 +97,26 @@ export default function ContentManagement() {
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center h-28 py-4 px-7 rounded-md">
-            <div className="w-full">
-              <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                <User className="mr-2 h-6 w-6 text-mediumblack" />
+          <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
+            <div className="flex flex-col items-start gap-1">
+              <h2 className="text-2xl font-semibold mb-2 flex items-center">
+                <User className="mr-2 h-6 w-6 text-black" />
                 <span>Content</span>
               </h2>
-              <div className="flex items-center justify-between">
-                <div className="text-black ml-4 flex items-center gap-3">
-                  <span
-                    onClick={() => router.push("/content-management")}
-                    className="cursor-pointer"
-                  >
-                    Content
-                  </span>
-                  <span>&gt;</span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => router.push("/content-management")}
-                  >
-                    Management
-                  </span>
-                </div>
-                <div className="flex items-center justify-center gap-5">
-                  <button className="w-[5.8rem] h-10 rounded-md border border-black flex items-center justify-center gap-2">
-                    <Pencil />
-                    Filter
-                  </button>
-                  <button className="w-[5.8rem] h-10 rounded-md border border-black flex items-center justify-center gap-2">
-                    <Pencil />
-                    Sort
-                  </button>
-                </div>
+              <div className="text-black ml-4 flex items-center gap-3">
+                <span
+                  onClick={() => router.push("/content-management")}
+                  className="cursor-pointer"
+                >
+                  Content
+                </span>
+                <span>&gt;</span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => router.push("/content-management")}
+                >
+                  Management
+                </span>
               </div>
             </div>
           </div>

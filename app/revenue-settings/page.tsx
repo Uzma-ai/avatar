@@ -58,28 +58,26 @@ export default function ChannelManagement() {
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center h-28 py-4 px-7 rounded-md">
-            <div className="w-full">
-              <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                <User className="mr-2 h-6 w-6 text-mediumblack" />
+          <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
+            <div className="flex flex-col items-start gap-1">
+              <h2 className="text-2xl font-semibold mb-2 flex items-center">
+                <User className="mr-2 h-6 w-6 text-black" />
                 <span>Revenue</span>
               </h2>
-              <div className="flex items-center justify-between">
-                <div className="text-black ml-4 flex items-center gap-3">
-                  <span
-                    onClick={() => router.push("/revenue-earnings")}
-                    className="cursor-pointer"
-                  >
-                    Revenue
-                  </span>
-                  <span>&gt;</span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => router.push("/revenue-settings")}
-                  >
-                    Ad Revenue Settings
-                  </span>
-                </div>
+              <div className="text-black ml-4 flex items-center gap-3">
+                <span
+                  onClick={() => router.push("/revenue-earnings")}
+                  className="cursor-pointer"
+                >
+                  Revenue
+                </span>
+                <span>&gt;</span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => router.push("/revenue-settings")}
+                >
+                  Ad Revenue Settings
+                </span>
               </div>
             </div>
           </div>
