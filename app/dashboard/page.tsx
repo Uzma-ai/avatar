@@ -60,13 +60,13 @@ export default function Dashboard() {
       <div className="flex h-screen">
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
-          <div className="flex justify-between items-center h-28 py-4 px-7 rounded-md">
-            <div>
+          <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
+            <div className="flex flex-col items-start gap-1">
               <h2 className="text-2xl font-semibold mb-2 flex items-center">
                 <User className="mr-2 h-6 w-6 text-black" />
                 <span>Dashboard</span>
               </h2>
-              <div className="text-black ml-4">Dashboard</div>
+              <div className="text-black px-2">Dashboard</div>
             </div>
           </div>
 
@@ -150,40 +150,44 @@ export default function Dashboard() {
                   </div>
                 </div>
                 <div className="flex flex-wrap items-center gap-4 mt-4">
-                  <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36 relative">
+                  <div className="flex flex-col items-start justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36">
                     <h3 className="text-lg font-semibold">Total earnings</h3>
-                    <p className="text-2xl font-bold mt-2">$2,342</p>
-                    <p className="text-sm mt-2">Earnings for Dec</p>
-                    <TrendingUp className="absolute bottom-4 right-4 h-5 w-5 text-lightGreen" />
+                    <p className="text-2xl font-bold">$2,342</p>
+                    <div className="flex items-center justify-between w-full">
+                      <p className="text-sm">Earnings for Dec</p>
+                      <TrendingUp className="h-7 w-7 text-lightGreen" />
+                    </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36 relative">
+                  <div className="flex flex-col items-start justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36">
                     <h3 className="text-lg font-semibold text-white">
                       Impressions
                     </h3>
-                    <p className="text-2xl font-bold mt-2 text-white">
-                      120,000
-                    </p>
-                    <p className="text-sm mt-2 text-white">Total Reach</p>
-                    <TrendingDown className="absolute bottom-4 right-4 h-5 w-5 text-red" />
+                    <p className="text-2xl font-bold text-white">120,000</p>
+                    <div className="flex items-center justify-between w-full">
+                      <p className="text-sm text-white">Total Reach</p>
+                      <TrendingUp className="h-7 w-7 text-lightGreen" />
+                    </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36 relative">
+                  <div className="flex flex-col items-start justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36">
                     <h3 className="text-lg font-semibold text-white">Clicks</h3>
-                    <p className="text-2xl font-bold mt-2 text-white">15,800</p>
-                    <p className="text-sm mt-2 text-white">Interaction Count</p>
-                    <TrendingUp className="absolute bottom-4 right-4 h-5 w-5 text-lightGreen" />
+                    <p className="text-2xl font-bold text-white">15,800</p>
+                    <div className="flex items-center justify-between w-full">
+                      <p className="text-sm text-white">Interaction Count</p>
+                      <TrendingUp className="h-7 w-7 text-lightGreen" />
+                    </div>
                   </div>
 
-                  <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36 relative">
+                  <div className="flex flex-col items-start justify-between bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[250px] h-36">
                     <h3 className="text-lg font-semibold text-white">
                       Engagement Rate
                     </h3>
                     <p className="text-2xl font-bold mt-2 text-white">12.5%</p>
-                    <p className="text-sm mt-2 text-white">
-                      Interaction per View
-                    </p>
-                    <TrendingDown className="absolute bottom-4 right-4 h-5 w-5 text-red" />
+                    <div className="flex items-center justify-between w-full">
+                      <p className="text-sm text-white">Interaction per View</p>
+                      <TrendingDown className="h-7 w-7 text-red" />
+                    </div>
                   </div>
                 </div>
 
