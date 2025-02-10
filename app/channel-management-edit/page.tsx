@@ -53,28 +53,26 @@ export default function ChannelManagement() {
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center h-28 py-4 px-7 rounded-md">
-            <div className="w-full">
-              <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                <User className="mr-2 h-6 w-6 text-mediumblack" />
+          <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
+            <div className="flex flex-col items-start gap-1">
+              <h2 className="text-2xl font-semibold mb-2 flex items-center">
+                <User className="mr-2 h-6 w-6 text-black" />
                 <span>Content</span>
               </h2>
-              <div className="flex items-center justify-between">
-                <div className="text-black ml-4 flex items-center gap-3">
-                  <span
-                    onClick={() => router.push("/content-management")}
-                    className="cursor-pointer"
-                  >
-                    Content
-                  </span>
-                  <span>&gt;</span>
-                  <span
-                    className="cursor-pointer"
-                    onClick={() => router.push("/channel-management")}
-                  >
-                    Channel Management
-                  </span>
-                </div>
+              <div className="text-black ml-4 flex items-center gap-3">
+                <span
+                  onClick={() => router.push("/content-management")}
+                  className="cursor-pointer"
+                >
+                  Content
+                </span>
+                <span>&gt;</span>
+                <span
+                  className="cursor-pointer"
+                  onClick={() => router.push("/channel-management")}
+                >
+                  Channel management
+                </span>
               </div>
             </div>
           </div>
@@ -93,20 +91,18 @@ export default function ChannelManagement() {
               </div>
               <div className="flex items-center justify-center mt-6">
                 <label htmlFor="imageUpload" className="cursor-pointer">
-               
-                <div className="w-28 h-28 rounded-full overflow-hidden relative flex items-center justify-center">
-                <Image
-               src={image || "/background.jpeg"}
-               alt="avatar"
-              className="object-cover w-full h-full"
-              width={112}
-              height={112}
-              />
-           <p className="absolute text-white text-sm font-semibold  bg-opacity-50 px-2 py-1 rounded-md">
-            Change Image
-           </p>
-          </div>
-
+                  <div className="w-28 h-28 rounded-full overflow-hidden relative flex items-center justify-center">
+                    <Image
+                      src={image || "/background.jpeg"}
+                      alt="avatar"
+                      className="object-cover w-full h-full"
+                      width={112}
+                      height={112}
+                    />
+                    <p className="absolute text-white text-sm font-semibold  bg-opacity-50 px-2 py-1 rounded-md">
+                      Change Image
+                    </p>
+                  </div>
                 </label>
                 <input
                   id="imageUpload"

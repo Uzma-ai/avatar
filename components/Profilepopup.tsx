@@ -156,6 +156,20 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
               </p>
             )}
           </div>
+          <div className="flex items-center justify-between gap-4">
+            <label className="block text-sm font-normal">
+              Personality Type
+            </label>
+            <input
+              type="text"
+              placeholder="Type"
+              className="px-5 w-20 py-3 rounded-md border border-borderColor1 focus:!outline-none "
+            />
+          </div>
+          <div className="flex flex-col items-center justify-center text-sm font-normal">
+            <p>Dont know your Type?</p>
+            <p className="underline cursor-pointer">Click here to find out!</p>
+          </div>
         </div>
 
         <div className="pt-8">

@@ -37,10 +37,12 @@ export default function ReveneuEarnings() {
   const router = useRouter();
   const [openFilter1, setOpenFilter1] = useState(false);
   const [openFilter2, setOpenFilter2] = useState(false);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendar1, setShowCalendar1] = useState(false);
+  const [showCalendar2, setShowCalendar2] = useState(false);
   const dropdownRef1 = useRef<HTMLDivElement>(null);
   const dropdownRef2 = useRef<HTMLDivElement>(null);
-  const calendarRef = useRef<HTMLDivElement>(null);
+  const calendarRef1 = useRef<HTMLDivElement>(null);
+  const calendarRef2 = useRef<HTMLDivElement>(null);
   const [inputValue, setInputValue] = useState("");
   const [selectedMethod, setSelectedMethod] = useState("credit-card");
 
@@ -62,12 +64,15 @@ export default function ReveneuEarnings() {
         !dropdownRef1.current.contains(event.target as Node) &&
         dropdownRef2.current &&
         !dropdownRef2.current.contains(event.target as Node) &&
-        calendarRef.current &&
-        !calendarRef.current.contains(event.target as Node)
+        calendarRef1.current &&
+        !calendarRef1.current.contains(event.target as Node) &&
+        calendarRef2.current &&
+        !calendarRef2.current.contains(event.target as Node)
       ) {
         setOpenFilter1(false);
         setOpenFilter2(false);
-        setShowCalendar(false);
+        setShowCalendar1(false);
+        setShowCalendar2(false);
       }
     };
 
@@ -87,13 +92,13 @@ export default function ReveneuEarnings() {
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center h-28 py-4 px-7 rounded-md">
-            <div className="w-full">
-              <h2 className="text-2xl font-semibold flex items-center py-2">
-                <User className="mr-2 h-6 w-6 text-mediumblack" />
+          <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
+            <div className="flex flex-col items-start gap-1 w-full">
+              <h2 className="text-2xl font-semibold mb-2 flex items-center">
+                <User className="mr-2 h-6 w-6 text-black" />
                 <span>Revenue</span>
               </h2>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between w-full">
                 <div className="text-black ml-4 flex items-center gap-3">
                   <span
                     onClick={() => router.push("/revenue-earnings")}
@@ -150,40 +155,50 @@ export default function ReveneuEarnings() {
                   </Button>
 
                   {openFilter1 && (
-                    <div className="absolute right-1 mt-1 w-36 bg-white border border-borderColor1 rounded-md z-50">
-                      <ul className="py-2 text-sm px-2 font-normal">
+                    <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
+                      <ul className="text-center">
                         <li
-                          className="py-1 cursor-pointer border-b border-secondarycolor"
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                           onClick={() => {
-                            setShowCalendar(true);
+                            setShowCalendar1(true);
                             setOpenFilter1(false);
                           }}
                         >
-                          Custom Date
+                          Custom Dates
                         </li>
-                        <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                          7 Days
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          7 days
                         </li>
-                        <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                          1 Month
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 month
                         </li>
-                        <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                          3 Months
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          3 months
                         </li>
-                        <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                          6 Months
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          6 months
                         </li>
-                        <li className="py-1 cursor-pointer">1 year</li>
+                        <hr className="border-t border-lightblue" />
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          1 year
+                        </li>
                       </ul>
                     </div>
                   )}
 
                   {/* Show Calendar on Left Side */}
-                  {showCalendar && (
-                    <Popover open={showCalendar} onOpenChange={setShowCalendar}>
+                  {showCalendar1 && (
+                    <Popover
+                      open={showCalendar1}
+                      onOpenChange={setShowCalendar1}
+                    >
                       <PopoverTrigger asChild>
                         <span
-                          ref={calendarRef}
+                          ref={calendarRef1}
                           className="absolute left-[-220px] top-0 z-50"
                         >
                           <PopoverContent className="w-auto p-2">
@@ -281,32 +296,57 @@ export default function ReveneuEarnings() {
                       </Button>
 
                       {openFilter2 && (
-                        <div className="absolute right-1 mt-1 w-36 bg-white border border-borderColor1 rounded-md z-50">
-                          <ul className="py-2 text-sm px-2 font-normal">
+                        <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
+                          <ul className="text-center">
                             <li
-                              className="py-1 cursor-pointer border-b border-secondarycolor"
+                              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                               onClick={() => {
-                                setShowCalendar(true);
+                                setShowCalendar2(true);
                                 setOpenFilter2(false);
                               }}
                             >
-                              Custom Date
+                              Custom Dates
                             </li>
-                            <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                              7 Days
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              7 days
                             </li>
-                            <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                              1 Month
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              1 month
                             </li>
-                            <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                              3 Months
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              3 months
                             </li>
-                            <li className="py-2 cursor-pointer border-b border-secondarycolor">
-                              6 Months
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              6 months
                             </li>
-                            <li className="py-1 cursor-pointer">1 year</li>
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              1 year
+                            </li>
                           </ul>
                         </div>
+                      )}
+                      {/* Show Calendar on Left Side */}
+                      {showCalendar2 && (
+                        <Popover
+                          open={showCalendar2}
+                          onOpenChange={setShowCalendar2}
+                        >
+                          <PopoverTrigger asChild>
+                            <span
+                              ref={calendarRef2}
+                              className="absolute left-[-220px] top-0 z-50"
+                            >
+                              <PopoverContent className="w-auto p-2">
+                                <Calendar mode="single" />
+                              </PopoverContent>
+                            </span>
+                          </PopoverTrigger>
+                        </Popover>
                       )}
                     </div>
                   </div>
@@ -471,16 +511,23 @@ export default function ReveneuEarnings() {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-mediumWhite p-4 rounded-lg max-w-[44rem] w-full h-[35rem] text-white backdrop-blur-sm flex flex-col items-start justify-center">
             <div className="flex flex-col items-center py-4 px-3 w-full">
-         
-          <div className="w-full flex justify-end">
-            <button onClick={() => setIsWithdrawalSuccessfullOpen(false)} className="text-white">
-              ✖
-            </button>
-          </div>
+              <div className="w-full flex justify-end">
+                <button
+                  onClick={() => setIsWithdrawalSuccessfullOpen(false)}
+                  className="text-white"
+                >
+                  ✖
+                </button>
+              </div>
               <div className="my-8">
-               <div className="h-16 w-16 rounded-full bg-green-500 flex items-center justify-center">
-                                  <Image src="/payment-success.gif" alt="success" width={70} height={70}/>
-                 </div>
+                <div className="h-16 w-16 rounded-full bg-green-500 flex items-center justify-center">
+                  <Image
+                    src="/payment-success.gif"
+                    alt="success"
+                    width={70}
+                    height={70}
+                  />
+                </div>
               </div>
               <h2 className="text-2xl font-semibold mb-2 text-center">
                 Withdrawal Successful
@@ -495,49 +542,39 @@ export default function ReveneuEarnings() {
                   <div className="py-2">
                     <p className="text-xs font-medium">PAYMENT METHOD</p>
                   </div>
-                  
-                    <div className="p-4 bg-white border border-lightblue rounded-md text-blackcolor">
-                      <div className="flex items-center gap-3 ">
-                        
-                        <div className="flex-1">
-                          <Label
-                            htmlFor="credit-card"
-                            className="font-semibold text-base"
-                          >
-                            Amazon pay ICICI bank credit card
-                          </Label>
-                          <p className="text-xs font-semibold text-mediumgray2 py-1">
-                            **3425 | Gaurav Yadav
-                          </p>
-                        </div>
 
-                      </div>
-                      
-                    </div>
-                 
-                </div>
-               
-                <div className="text-white text-sm mt-2 flex justify-between">
-                       <span className="mr-10 ">Order ID</span>
-                      <span className="ml-10 ">ID12345574324324</span>
-                 </div>
-
-                 <div className="text-white  mt-2 flex justify-between">
-                       <span className="mr-10 text-sm">Total Amount</span>
-                      <span className="ml-10 text-lg   font-semibold">$243</span>
-                 </div>
-
-                 <div className="flex justify-center">
-                        <Button
-                          className="px-32 bg-secondarycolor text-white h-12 text-base hover:bg-secondarycolor hover:text-white"
-                         
+                  <div className="p-4 bg-white border border-lightblue rounded-md text-blackcolor">
+                    <div className="flex items-center gap-3 ">
+                      <div className="flex-1">
+                        <Label
+                          htmlFor="credit-card"
+                          className="font-semibold text-base"
                         >
-                          Done
-                        </Button>
+                          Amazon pay ICICI bank credit card
+                        </Label>
+                        <p className="text-xs font-semibold text-mediumgray2 py-1">
+                          **3425 | Gaurav Yadav
+                        </p>
                       </div>
+                    </div>
+                  </div>
+                </div>
 
+                <div className="text-white text-sm mt-2 flex justify-between">
+                  <span className="mr-10 ">Order ID</span>
+                  <span className="ml-10 ">ID12345574324324</span>
+                </div>
 
+                <div className="text-white  mt-2 flex justify-between">
+                  <span className="mr-10 text-sm">Total Amount</span>
+                  <span className="ml-10 text-lg   font-semibold">$243</span>
+                </div>
 
+                <div className="flex justify-center">
+                  <Button className="px-32 bg-secondarycolor text-white h-12 text-base hover:bg-secondarycolor hover:text-white">
+                    Done
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
