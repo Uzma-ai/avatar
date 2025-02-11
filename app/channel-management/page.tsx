@@ -27,6 +27,15 @@ export default function ChannelManagement() {
   const calendarRef1 = useRef<HTMLDivElement>(null);
   const calendarRef2 = useRef<HTMLDivElement>(null);
 
+  const [categories, setCategories] = useState<string[]>([]);
+
+  useEffect(() => {
+    const storedCategories = localStorage.getItem("categories");
+    if (storedCategories) {
+      setCategories(JSON.parse(storedCategories));
+    }
+  }, []);
+
      
     
    useEffect(() => {
@@ -59,7 +68,22 @@ export default function ChannelManagement() {
       return () =>
         document.removeEventListener("mousedown", handleClickOutside);
     }, []);
-    
+
+    const [description, setDescription] = useState("");
+
+    useEffect(() => {
+      const storedDescription = localStorage.getItem("channelDescription");
+      setDescription(
+        storedDescription ||
+          `Welcome to UX Avatars, your go-to channel for exploring the intersection of creativity, user experience, and innovation!
+          
+          Our channel is dedicated to:
+          - Showcasing Avatars: Dive into a world of interacting and visually stunning avatars designed to elevate digital experiences.
+          - Educational Content: Learn the principles of user-centric design and discover how avatars enhance engagement across various platforms.
+          - Inspiration & Trends: Stay ahead with the latest trends in UX, UI, and virtual avatar technology.
+          - Interactive Demos: Experience how avatars can transform interactions in business, gaming, and social media.`
+      );
+    }, []);
 
   return (
     <>
@@ -150,76 +174,46 @@ export default function ChannelManagement() {
               </div>
 
               <div className="mt-6 px-2">
-                <h4 className="text-base font-semibold ">Description:</h4>
-                <p className="text-base text-charcoalBlack mt-2 font-normal">
-                  Welcome to{" "}
-                  <span className=" font-semibold"> UX Avatars,</span> your
-                  go-to channel for exploring the intersection of
-                  creativity,user experience, and Innovation!
-                </p>
-                <p className="text-base text-charcoalBlack mt-2 font-normal">
-                  Our channel is dedicated to:
-                </p>
-                <ul className="list-disc list-inside mt-2 text-charcoalBlack text-base">
-                  <li className="mt-1">
-                    <span className=" font-semibold"> Showcasing Avatars:</span>{" "}
-                    Dive into a world of interacting and visually stunning
-                    avatars designed to elevate digital experiences.
-                  </li>
-                  <li className="mt-1">
-                    <span className=" font-semibold">
-                      {" "}
-                      Educational Content:
-                    </span>{" "}
-                    Learn the principles of user eccentric-design and discover
-                    how avatars enhance engagement across various platforms.
-                  </li>
-                  <li className="mt-1">
-                    <span className=" font-semibold">
-                      {" "}
-                      Inspiration & Trends:
-                    </span>{" "}
-                    Stay ahead with the latest trends in UX,UI, and virtual
-                    avatar technology.
-                  </li>
-                  <li className="mt-1">
-                    <span className=" font-semibold"> Interactive Demos:</span>{" "}
-                    Experience how avatars can transform interactions in
-                    business, gaming, and social media.{" "}
-                  </li>
-                </ul>
-              </div>
+    <h4 className="text-base font-semibold">Description:</h4>
+    <p className="text-base text-charcoalBlack mt-2 font-normal whitespace-pre-line">
+      {description}
+    </p>
+  </div>
+
+
+
               <hr className="border-t border-secondarycolor mb-6 mt-6" />
 
               <div className="mt-6 border-b border-secondarycolor pb-6">
-                <p className="text-sm text-charcoalBlack mt-2 font-normal">
-                  <span className=" font-semibold text-base text-black">
-                    {" "}
-                    Added Categories
-                  </span>{" "}
-                  (Please add minimum 5 categories for proper channel
-                  management)
-                </p>
+              <p className="text-sm text-charcoalBlack mt-2 font-normal">
+              <span className="font-semibold text-base text-black">
+               {" "} Added Categories
+               </span>{" "}
+              (Please add minimum 5 categories for proper channel management)
+              </p>
 
-                <div className="flex flex-wrap gap-2 my-3">
-                    <Badge
-                      variant="secondary"
-                      className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground text-sm"
-                    >
-                     Books
-                      <button
-                        className="ml-1 hover:bg-muted rounded-full"
-                      >
-                        <X className="h-4 w-4" />
-                        <span className="sr-only">
-                          Remove category
-                        </span>
-                      </button>
-                    </Badge>
-             
-                </div>
-               
-              </div>
+              <div className="flex flex-wrap gap-2 my-3">
+             {categories.length > 0 ? (
+              categories.map((category, index) => (
+              <Badge
+               key={index}
+               variant="secondary"
+              className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground text-sm"
+                >
+             {category}
+            
+           </Badge>
+           ))
+         ) : (
+          <Badge
+        variant="secondary"
+        className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground text-sm"
+      >
+        Books
+      </Badge>
+         )}
+       </div>
+        </div>
 
               <div>
                 <div className="flex items-center justify-between mt-5">
