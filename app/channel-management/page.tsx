@@ -2,7 +2,7 @@
 import { useState, useEffect,useRef } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User, X , ArrowUpDown, Pencil} from "lucide-react";
+import { User, ArrowUpDown, Pencil} from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from "@/components/ui/calendar";

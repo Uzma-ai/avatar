@@ -166,7 +166,7 @@ export default function Dashboard() {
                     <p className="text-2xl font-bold text-white">120,000</p>
                     <div className="flex items-center justify-between w-full">
                       <p className="text-sm text-white">Total Reach</p>
-                      <TrendingUp className="h-7 w-7 text-lightGreen" />
+                      <TrendingDown className="h-7 w-7 text-red" />
                     </div>
                   </div>
 
