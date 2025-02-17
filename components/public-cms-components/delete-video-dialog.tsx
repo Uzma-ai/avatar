@@ -36,7 +36,7 @@ export function DeleteVideoDialog({
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={onConfirm}
-            className="bg-secondarycolor text-destructive-foreground hover:bg-destructive/90"
+            className="bg-red text-destructive-foreground hover:bg-destructive/90"
           >
             Delete
           </AlertDialogAction>
