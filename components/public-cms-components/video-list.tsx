@@ -238,7 +238,7 @@ export function VideoList() {
               <TableHead className="w-[220px] text-blackcolor font-semibold text-center">
                 Date
               </TableHead>
-              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-[80px] text-center text-blackcolor font-semibold">
                 Actions
               </TableHead>
             </TableRow>

@@ -222,7 +222,7 @@ export function RevenueList() {
               <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Actions
               </TableHead>
-              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
                 Boost
               </TableHead>
             </TableRow>
