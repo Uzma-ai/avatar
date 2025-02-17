@@ -204,25 +204,25 @@ export function RevenueList() {
                 <ArrowUpDown size={18} />
                 <Search size={18} />
               </TableHead>
-              <TableHead className="w-[150px] text-left text-blackcolor font-semibold">
+              <TableHead className="w-[200px] text-left text-blackcolor font-semibold">
                 Name
               </TableHead>
-              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Times Published
               </TableHead>
-              <TableHead className="w-[100px] text-blackcolor text-center font-semibold">
+              <TableHead className="w-[200px] text-blackcolor text-center font-semibold">
                 Status
               </TableHead>
-              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Likes
               </TableHead>
-              <TableHead className="w-[120px] text-blackcolor font-semibold text-center">
+              <TableHead className="w-[220px] text-blackcolor font-semibold text-center">
                 Date
               </TableHead>
-              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Actions
               </TableHead>
-              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Boost
               </TableHead>
             </TableRow>
