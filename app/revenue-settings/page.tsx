@@ -184,6 +184,41 @@ export default function ChannelManagement() {
                   </div>
               </div>
 
+              <div className="flex flex-wrap items-center gap-4 mt-4">
+                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                <img 
+               src="/cost-per-impression.svg" 
+               alt="Cost Per Impression" 
+               className="absolute top-4 right-4 w-10 h-10"
+                />
+                  <h3 className="text-lg font-semibold">Average CPM</h3>
+                  <p className="text-3xl font-bold mt-10">$15.23</p>
+                </div>
+
+                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+                <img 
+                 src="/location.svg" 
+                 alt="Location" 
+                className="absolute top-4 right-4 w-10 h-10"
+                 />
+
+                
+                  <h3 className="text-lg font-semibold text-white">Top Region </h3>
+                  <p className="text-3xl font-bold mt-10 text-white">North America</p>
+                </div>
+
+                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
+
+                <img 
+                 src="/mobile.svg" 
+                 alt="Mobile" 
+                className="absolute top-4 right-4 w-10 h-10"
+                 />
+                  <h3 className="text-lg font-semibold text-white">Top Device</h3>
+                  <p className="text-3xl font-bold mt-10 text-white">Mobile</p>
+                </div>
+              </div>
+
               <div className="flex items-center justify-between mt-10">
                 <h1 className="font-semibold text-base">
                   Real-Time Ad Earnings 
@@ -232,40 +267,7 @@ export default function ChannelManagement() {
                   </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4 mt-4">
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                <img 
-               src="/cost-per-impression.svg" 
-               alt="Cost Per Impression" 
-               className="absolute top-4 right-4 w-10 h-10"
-                />
-                  <h3 className="text-lg font-semibold">Average CPM</h3>
-                  <p className="text-3xl font-bold mt-10">$15.23</p>
-                </div>
-
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                <img 
-                 src="/location.svg" 
-                 alt="Location" 
-                className="absolute top-4 right-4 w-10 h-10"
-                 />
-
-                
-                  <h3 className="text-lg font-semibold text-white">Top Region </h3>
-                  <p className="text-3xl font-bold mt-10 text-white">North America</p>
-                </div>
-
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-
-                <img 
-                 src="/mobile.svg" 
-                 alt="Mobile" 
-                className="absolute top-4 right-4 w-10 h-10"
-                 />
-                  <h3 className="text-lg font-semibold text-white">Top Device</h3>
-                  <p className="text-3xl font-bold mt-10 text-white">Mobile</p>
-                </div>
-              </div>
+             
 
               <div className="mt-6">
                 <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex items-center justify-center min-w-[200px] h-40 relative">
