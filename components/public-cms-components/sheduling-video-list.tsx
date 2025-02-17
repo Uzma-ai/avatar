@@ -223,7 +223,7 @@ export function ShedulingVideoList() {
               <TableHead className="w-[200px] text-left text-blackcolor font-semibold">
                 Name
               </TableHead>
-              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-180px] text-center text-blackcolor font-semibold">
                 Times Published
               </TableHead>
               <TableHead className="w-[200px] text-blackcolor text-center font-semibold">
@@ -238,10 +238,10 @@ export function ShedulingVideoList() {
               <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Comments
               </TableHead>
-              <TableHead className="w-[220px] text-blackcolor font-semibold text-center">
+              <TableHead className="w-[200px] text-blackcolor font-semibold text-center">
                 Date
               </TableHead>
-              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
+              <TableHead className="w-[300px] text-center text-blackcolor font-semibold">
                 Actions
               </TableHead>
             </TableRow>
