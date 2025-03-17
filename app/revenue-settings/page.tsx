@@ -22,7 +22,6 @@ export default function ChannelManagement() {
     const dropdownRef2 = useRef<HTMLDivElement>(null);
     const calendarRef1 = useRef<HTMLDivElement>(null);
     const calendarRef2 = useRef<HTMLDivElement>(null);
-  const [date, setDate] = useState<Date | undefined>(new Date());
  
 
   useEffect(() => {
