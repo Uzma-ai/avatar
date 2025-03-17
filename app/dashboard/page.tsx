@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
-import { User, TrendingDown, TrendingUp, Filter } from "lucide-react";
+import { User, TrendingDown, TrendingUp, SlidersHorizontal,Bell } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import BarChart from "@/components/BarChart";
 import { Button } from "@/components/ui/button";
@@ -61,10 +61,11 @@ export default function Dashboard() {
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
-            <div className="flex flex-col items-start gap-1">
+            <div className="flex flex-col items-start gap-1 relative ">
               <h2 className="text-2xl font-semibold mb-2 flex items-center">
                 <User className="mr-2 h-6 w-6 text-black" />
                 <span>Dashboard</span>
+                <Bell className="mr-2 h-6 w-6 text-black absolute left-73"/>
               </h2>
               <div className="text-black px-2">Dashboard</div>
             </div>
@@ -89,7 +90,7 @@ export default function Dashboard() {
                       className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <Filter />
+                      <SlidersHorizontal/>
                     </Button>
 
                     {openFilter1 && (
@@ -207,7 +208,7 @@ export default function Dashboard() {
                         className="border-borderColor1 flex items-center justify-center gap-2"
                       >
                         Filter
-                        <Filter />
+                        <SlidersHorizontal/>
                       </Button>
 
                       {openFilter2 && (
@@ -287,7 +288,7 @@ export default function Dashboard() {
                       className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <Filter />
+                      <SlidersHorizontal/>
                     </Button>
 
                     {openFilter3 && (
