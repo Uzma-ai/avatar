@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
-import { User, TrendingDown, TrendingUp, ArrowUpDown } from "lucide-react";
+import { User, TrendingDown, TrendingUp, Filter } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import BarChart from "@/components/BarChart";
 import { Button } from "@/components/ui/button";
@@ -89,7 +89,7 @@ export default function Dashboard() {
                       className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <ArrowUpDown />
+                      <Filter />
                     </Button>
 
                     {openFilter1 && (
@@ -207,7 +207,7 @@ export default function Dashboard() {
                         className="border-borderColor1 flex items-center justify-center gap-2"
                       >
                         Filter
-                        <ArrowUpDown />
+                        <Filter />
                       </Button>
 
                       {openFilter2 && (
@@ -287,7 +287,7 @@ export default function Dashboard() {
                       className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <ArrowUpDown />
+                      <Filter />
                     </Button>
 
                     {openFilter3 && (
