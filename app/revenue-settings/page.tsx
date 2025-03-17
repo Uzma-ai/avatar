@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User, ArrowUpDown, TrendingUp } from "lucide-react";
+import { User, Filter , TrendingUp } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -67,7 +67,7 @@ export default function ChannelManagement() {
               <div className="flex items-center justify-between">
                 <div className="text-black ml-4 flex items-center gap-3">
                   <span
-                    onClick={() => router.push("/content-management")}
+                    onClick={() => router.push("/revenue-settings")}
                     className="cursor-pointer"
                   >
                     Revenue
@@ -75,7 +75,7 @@ export default function ChannelManagement() {
                   <span>&gt;</span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => router.push("/content-management")}
+                    onClick={() => router.push("/revenue-settings")}
                   >
                     Ad Revenue Settings
                   </span>
@@ -177,7 +177,7 @@ export default function ChannelManagement() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <ArrowUpDown />
+                    <Filter />
                   </Button>
 
                   {openFilter1 && (
@@ -290,7 +290,7 @@ export default function ChannelManagement() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <ArrowUpDown />
+                    <Filter />
                   </Button>
 
                   {openFilter2 && (

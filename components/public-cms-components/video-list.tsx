@@ -184,6 +184,13 @@ export function VideoList() {
 
   return (
     <div className="w-full py-6">
+      <div className="flex items-center justify-end pb-6">
+        {" "}
+        <button className="text-secondarycolor underline  cursor-pointer">
+          See All
+        </button>
+      </div>
+
       <div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mb-3">
         <h2 className="text-lg font-semibold">Uploaded Videos</h2>
         <div className="flex gap-4">

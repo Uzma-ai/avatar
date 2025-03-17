@@ -126,7 +126,7 @@ useEffect(() => {
                   </p>
                 </div>
               </div>
-              <div className="flex items-center justify-center mt-6">
+              <div className="flex flex-col items-center justify-center mt-6">
                 <label htmlFor="imageUpload" className="cursor-pointer">
                   <div className="w-28 h-28 rounded-full overflow-hidden relative flex items-center justify-center">
                     <Image
@@ -136,7 +136,7 @@ useEffect(() => {
                       width={112}
                       height={112}
                     />
-                    <p className="absolute text-white text-sm font-semibold  bg-opacity-50 px-2 py-1 rounded-md">
+                    <p className="absolute bg-black w-full h-full flex items-center justify-center text-white text-sm font-semibold  bg-opacity-30 px-2 py-1 rounded-md">
                       Change Image
                     </p>
                   </div>
@@ -148,6 +148,7 @@ useEffect(() => {
                   className="hidden"
                   onChange={handleImageChange}
                 />
+                <span className="text-secondarycolor underline text-sm cursor-pointer py-2">Remove Current Photo</span>
               </div>
 
               <div className="flex justify-center mt-3">

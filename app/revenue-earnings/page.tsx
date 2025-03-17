@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User, ArrowUpDown, TrendingUp, TrendingDown } from "lucide-react";
+import { User, Filter , TrendingUp, TrendingDown } from "lucide-react";
 import Image from "next/image";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
@@ -114,18 +114,21 @@ export default function ReveneuEarnings() {
                     Revenue & Earnings
                   </span>
                 </div>
-                <button
-                  className="w-32 h-10 bg-secondarycolor rounded-md text-white flex items-center justify-center gap-2"
-                  onClick={handleWithdrawPopup}
-                >
-                  <Image
-                    src="/withdraw.svg"
-                    alt="Withdraw"
-                    width={25}
-                    height={25}
-                  />
-                  Withdraw
-                </button>
+                <div className="flex items-center justify-center gap-6">
+                  <span className="text-secondarycolor underline text-sm cursor-pointer">View Monetization Policies</span>
+                  <button
+                    className="w-32 h-10 bg-secondarycolor rounded-md text-white flex items-center justify-center gap-2"
+                    onClick={handleWithdrawPopup}
+                  >
+                    <Image
+                      src="/withdraw.svg"
+                      alt="Withdraw"
+                      width={25}
+                      height={25}
+                    />
+                    Withdraw
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -151,7 +154,7 @@ export default function ReveneuEarnings() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <ArrowUpDown />
+                    <Filter />
                   </Button>
 
                   {openFilter1 && (
@@ -292,7 +295,7 @@ export default function ReveneuEarnings() {
                         className="border-borderColor1 flex items-center justify-center gap-2"
                       >
                         Filter
-                        <ArrowUpDown />
+                        <Filter />
                       </Button>
 
                       {openFilter2 && (
