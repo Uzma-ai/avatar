@@ -2,13 +2,14 @@
 import { useState, useEffect,useRef } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User, Filter , Pencil} from "lucide-react";
+import { User,Pencil, SlidersHorizontal} from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from "@/components/ui/calendar";
 import Link from "next/link";
 import BarChart from "@/components/BarChart";
 import { Button } from "@/components/ui/button";
+
 import {
   Popover,
   PopoverContent,
@@ -230,7 +231,7 @@ export default function ChannelManagement() {
                       className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <Filter  />
+                      <SlidersHorizontal />
                     </Button>
 
                     {openFilter1 && (
@@ -304,7 +305,7 @@ export default function ChannelManagement() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <Filter  />
+                    <SlidersHorizontal />
                   </Button>
 
                   {openFilter2 && (
