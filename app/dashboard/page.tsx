@@ -349,7 +349,7 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div className="bg-white mt-5 rounded-lg border border-secondarycolor shadow-md px-6 py-3 mx-auto overflow-x-auto">
+                <div className="bg-white mt-5 rounded-lg border border-secondarycolor shadow-md px-6 py-3 mx-auto overflow-x-auto whitespace-nowrap">
                   <table className="w-full text-left border-collapse gap-1">
                     <thead className="text-base font-semibold">
                       <tr>
