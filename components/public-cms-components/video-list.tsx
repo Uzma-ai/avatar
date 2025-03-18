@@ -1,7 +1,15 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { Search, Trash2, CalendarClock, ArrowUpDown } from "lucide-react";
+import {
+  Search,
+  Trash2,
+  CalendarClock,
+  ArrowUpDown,
+  MoveUp,
+  ChevronRight,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Video } from "@/types/video";
 import { DeleteVideoDialog } from "./delete-video-dialog";
@@ -93,6 +101,16 @@ export function VideoList() {
   // State for the video modal
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+   const [boostedVideos, setBoostedVideos] = useState<Record<string, boolean>>(
+     {}
+  );
+  
+  const toggleBoost = (videoId: string) => {
+    setBoostedVideos((prev) => ({
+      ...prev,
+      [videoId]: !prev[videoId], // Toggle only for this video
+    }));
+  };
 
   useEffect(() => {
     const generatedVideos: Video[] = videoData.map((video, index) => ({
@@ -186,8 +204,9 @@ export function VideoList() {
     <div className="w-full py-6">
       <div className="flex items-center justify-end pb-6">
         {" "}
-        <button className="text-secondarycolor underline  cursor-pointer">
+        <button className="text-secondarycolor text-sm font-bold cursor-pointer flex items-center gap-1">
           See All
+          <ChevronRight size={16} />
         </button>
       </div>
 
@@ -245,6 +264,7 @@ export function VideoList() {
               <TableHead className="w-[220px] text-blackcolor font-semibold text-center">
                 Date
               </TableHead>
+              <TableHead className="w-[80px] text-center text-blackcolor font-semibold"></TableHead>
               <TableHead className="w-[80px] text-center text-blackcolor font-semibold">
                 Actions
               </TableHead>
@@ -295,13 +315,12 @@ export function VideoList() {
                   <span>{video.comments}</span>
                 </TableCell>
                 <TableCell className="text-center">
-                  <span>
+                  <span className="whitespace-nowrap">
                     {new Date(video.publishDate).toISOString().split("T")[0]}
                   </span>
                 </TableCell>
 
                 <TableCell className="">
-                  {/* Action Buttons - Stack on small screens */}
                   <div className="flex gap-1">
                     <Button variant="ghost" size="sm">
                       <CalendarClock className="w-4 h-4" />
@@ -315,6 +334,21 @@ export function VideoList() {
                       <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>
+                </TableCell>
+                <TableCell className="text-center">
+                  <button
+                    className={`w-24 h-11 rounded-md flex items-center justify-center gap-2 text-whitecolor ${
+                      boostedVideos[video.id] ? "bg-redcolor" : "bg-skycolor"
+                    }`}
+                    onClick={() => toggleBoost(video.id)}
+                  >
+                    {boostedVideos[video.id] ? (
+                      <X size={15} />
+                    ) : (
+                      <MoveUp size={15} />
+                    )}
+                    {boostedVideos[video.id] ? "Stop" : "Boost"}
+                  </button>
                 </TableCell>
               </TableRow>
             ))}

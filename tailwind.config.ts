@@ -11,7 +11,9 @@ const config: Config = {
   	extend: {
   		colors: {
 			primarycolor: '#F3F3F3',
-			skycolor:"#5182E3",
+			skycolor: "#5182E3",
+			redcolor: "#FE5353",
+			popbg:"#0000004D",
 			secondarycolor: '#5D8BE5',
 			lightblue:'#D6E6FF',
   			legendText: '#F7F7F7',

@@ -3,7 +3,12 @@
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User, Filter , TrendingUp, TrendingDown } from "lucide-react";
+import {
+  User,
+  SlidersHorizontal,
+  TrendingUp,
+  TrendingDown,
+} from "lucide-react";
 import Image from "next/image";
 import { Calendar } from "@/components/ui/calendar";
 import { Button } from "@/components/ui/button";
@@ -115,7 +120,9 @@ export default function ReveneuEarnings() {
                   </span>
                 </div>
                 <div className="flex items-center justify-center gap-6">
-                  <span className="text-secondarycolor underline text-sm cursor-pointer">View Monetization Policies</span>
+                  <span className="text-secondarycolor underline text-sm cursor-pointer">
+                    View Monetization Policies
+                  </span>
                   <button
                     className="w-32 h-10 bg-secondarycolor rounded-md text-white flex items-center justify-center gap-2"
                     onClick={handleWithdrawPopup}
@@ -154,7 +161,7 @@ export default function ReveneuEarnings() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <Filter />
+                    <SlidersHorizontal />
                   </Button>
 
                   {openFilter1 && (
@@ -295,7 +302,7 @@ export default function ReveneuEarnings() {
                         className="border-borderColor1 flex items-center justify-center gap-2"
                       >
                         Filter
-                        <Filter />
+                        <SlidersHorizontal />
                       </Button>
 
                       {openFilter2 && (
@@ -366,7 +373,7 @@ export default function ReveneuEarnings() {
           {/*Popups */}
           {withdrawPopup && (
             <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-2">
-              <div className="bg-mediumWhite rounded-lg p-4 max-w-[57rem] w-full h-[44rem] backdrop-blur-sm text-white overflow-y-scroll scroll">
+              <div className="bg-popbg rounded-lg p-4 max-w-[57rem] w-full h-[44rem] backdrop-blur-sm text-white overflow-y-scroll scroll">
                 <div className="flex items-center justify-between">
                   <h1 className="font-bold text-lg">Withdraw Money</h1>
                   <button onClick={closeWithdrawPopup} className="text-white">
@@ -513,7 +520,7 @@ export default function ReveneuEarnings() {
       </div>
       {isWithdrawalSuccessfullOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-mediumWhite p-4 rounded-lg max-w-[44rem] w-full h-[35rem] text-white backdrop-blur-sm flex flex-col items-start justify-center">
+          <div className="bg-popbg p-4 rounded-lg max-w-[44rem] w-full h-[35rem] text-white backdrop-blur-sm flex flex-col items-start justify-center">
             <div className="flex flex-col items-center py-4 px-3 w-full">
               <div className="w-full flex justify-end">
                 <button

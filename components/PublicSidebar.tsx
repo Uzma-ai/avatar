@@ -98,8 +98,12 @@ const PublicSidebar = () => {
                 }`}
                 onClick={toggleContentDropdown} // Toggle dropdown on click
               >
-                <ShoppingCart
-                  className={`w-5 h-5 ${
+                <Image
+                  src="/content-icon.svg"
+                  alt="Content"
+                  width={20}
+                  height={20}
+                  className={`${
                     isActive("/content") ||
                     isActive("/content-management") ||
                     isActive("/content-scheduling") ||
@@ -180,14 +184,18 @@ const PublicSidebar = () => {
                   <Link
                     href="/channel-management"
                     className={`flex items-center p-2 md:text-sm lg:text-base rounded-md ${
-                      isActive("/content") || isActive("/channel-management") || isActive("/channel-management-edit")
+                      isActive("/content") ||
+                      isActive("/channel-management") ||
+                      isActive("/channel-management-edit")
                         ? "text-blackcolor font-normal"
                         : "text-blackcolor font-normal"
                     }`}
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/content") || isActive("/channel-management") || isActive("/channel-management-edit")
+                        isActive("/content") ||
+                        isActive("/channel-management") ||
+                        isActive("/channel-management-edit")
                           ? "bg-secondarycolor"
                           : ""
                       } rounded-full mr-3`}
@@ -200,8 +208,7 @@ const PublicSidebar = () => {
           </li>
 
           <li className={`overflow-hidden flex items-start gap-2`}>
-            {isActive("/revenue-earnings") ||
-            isActive("/revenue-settings") ? (
+            {isActive("/revenue-earnings") || isActive("/revenue-settings") ? (
               <div className="bg-secondarycolor w-[3px] h-10 rounded-lg mt-0.5"></div>
             ) : (
               <div className="w-[3px] h-10 mt-0.5"></div>
@@ -209,8 +216,7 @@ const PublicSidebar = () => {
             <div className="w-full">
               <div
                 className={`flex items-center gap-3 cursor-pointer py-2.5 w-full rounded-t-md ${
-                  isActive("/revenue-earnings") ||
-                  isActive("/revenue-settings")
+                  isActive("/revenue-earnings") || isActive("/revenue-settings")
                     ? "bg-secondarycolor text-white"
                     : "text-blackcolor"
                 } ${
@@ -243,8 +249,7 @@ const PublicSidebar = () => {
                 className={`space-y-1 ${
                   isRevenueDropdownVisible ? "" : "hidden"
                 } ${
-                  isActive("/revenue-earnings") ||
-                  isActive("/revenue-settings")
+                  isActive("/revenue-earnings") || isActive("/revenue-settings")
                     ? "bg-lightblue rounded-b-md"
                     : ""
                 }`}
@@ -277,9 +282,7 @@ const PublicSidebar = () => {
                   >
                     <span
                       className={`w-2 h-2 ${
-                        isActive("/revenue-settings")
-                          ? "bg-secondarycolor"
-                          : ""
+                        isActive("/revenue-settings") ? "bg-secondarycolor" : ""
                       } rounded-full mr-3`}
                     ></span>
                     Ad Revenue Settings

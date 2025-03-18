@@ -2,7 +2,14 @@
 
 import { useState, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
-import { User, Upload, X, CheckCircle2 } from "lucide-react";
+import {
+  User,
+  Upload,
+  X,
+  CheckCircle2,
+  CalendarIcon,
+  CalendarClock,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import {
@@ -15,6 +22,17 @@ import {
 import type { VideoFormData } from "@/types/video";
 import { VideoList } from "@/components/public-cms-components/video-list";
 import { useRouter } from "next/navigation";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+
 
 export default function ContentManagement() {
    const router = useRouter();
@@ -23,6 +41,8 @@ export default function ContentManagement() {
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [date, setDate] = useState<Date>();
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -214,25 +234,6 @@ export default function ContentManagement() {
                     />
                   </div>
                   <div className="flex items-center justify-center gap-8">
-                    <Input
-                      name="tags"
-                      placeholder="Add Tags"
-                      className="py-6 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0"
-                    />
-                    <Select name="contentType">
-                      <SelectTrigger className="py-6 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0">
-                        <SelectValue placeholder="Content Type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="entertainment">
-                          Entertainment
-                        </SelectItem>
-                        <SelectItem value="education">Education</SelectItem>
-                        <SelectItem value="gaming">Gaming</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="flex items-center justify-center gap-8">
                     <Select name="language">
                       <SelectTrigger className="py-6 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0">
                         <SelectValue placeholder="Language" />
@@ -254,7 +255,78 @@ export default function ContentManagement() {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="flex items-center justify-end">
+                  <div className="flex items-center justify-center gap-8">
+                    <Input
+                      name="tags"
+                      placeholder="Add Tags"
+                      className="py-6 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0"
+                    />
+                    <Select name="contentType">
+                      <SelectTrigger className="py-6 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0">
+                        <SelectValue placeholder="Content Type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="entertainment">
+                          Entertainment
+                        </SelectItem>
+                        <SelectItem value="education">Education</SelectItem>
+                        <SelectItem value="gaming">Gaming</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  {isChecked && (
+                    <div className="flex items-center justify-center gap-8">
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-full py-6 border border-borderColor1 justify-between text-left font-normal rounded-md",
+                              !date && "text-muted-foreground"
+                            )}
+                          >
+                            {date ? format(date, "PPP") : <span>Set Date</span>}
+                            <CalendarIcon />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0" align="start">
+                          <Calendar
+                            mode="single"
+                            selected={date}
+                            onSelect={setDate}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-full py-6 border border-borderColor1 justify-between text-left font-normal rounded-md"
+                            )}
+                          >
+                            <span>Set Time</span>
+                            <CalendarClock />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent
+                          className="w-auto p-2"
+                          align="start"
+                        ></PopoverContent>
+                      </Popover>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <Checkbox
+                        checked={isChecked}
+                        onCheckedChange={(checked) => setIsChecked(!!checked)}
+                      />
+                      <span className="font-normal text-sm">
+                        Schedule Video
+                      </span>
+                    </div>
                     <button
                       type="submit"
                       className="w-full md:w-auto bg-secondarycolor px-10 py-2 rounded-sm text-white"
