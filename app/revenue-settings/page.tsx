@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User, Filter , TrendingUp } from "lucide-react";
+import { User,  TrendingUp, SlidersHorizontal } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -176,7 +176,7 @@ export default function ChannelManagement() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <Filter />
+                    <SlidersHorizontal />
                   </Button>
 
                   {openFilter1 && (
@@ -239,9 +239,9 @@ export default function ChannelManagement() {
               <div className="flex flex-wrap items-center gap-4 mt-4">
                 <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
                   <img
-                    src="/cost-per-impression.svg"
+                    src="/payments.png"
                     alt="Cost Per Impression"
-                    className="absolute top-4 right-4 w-10 h-10"
+                    className="absolute top-4 right-4 w-10 h-8"
                   />
                   <h3 className="text-lg font-semibold">Average CPM</h3>
                   <p className="text-3xl font-bold mt-10">$15.23</p>
@@ -249,9 +249,9 @@ export default function ChannelManagement() {
 
                 <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
                   <img
-                    src="/location.svg"
+                    src="/distance.png"
                     alt="Location"
-                    className="absolute top-4 right-4 w-10 h-10"
+                    className="absolute top-4 right-4 w-6 h-10"
                   />
 
                   <h3 className="text-lg font-semibold text-white">
@@ -264,9 +264,9 @@ export default function ChannelManagement() {
 
                 <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
                   <img
-                    src="/mobile.svg"
+                    src="/phone_iphone.png"
                     alt="Mobile"
-                    className="absolute top-4 right-4 w-10 h-10"
+                    className="absolute top-4 right-4 w-6 h-10"
                   />
                   <h3 className="text-lg font-semibold text-white">
                     Top Device
@@ -289,7 +289,7 @@ export default function ChannelManagement() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                    <Filter />
+                   <SlidersHorizontal />
                   </Button>
 
                   {openFilter2 && (

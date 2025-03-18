@@ -8,6 +8,7 @@ import {
   SlidersHorizontal,
   TrendingUp,
   TrendingDown,
+  Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import { Calendar } from "@/components/ui/calendar";
@@ -411,23 +412,23 @@ export default function ReveneuEarnings() {
                           onValueChange={setSelectedMethod}
                         >
                           <div className="p-4 bg-white border border-lightblue rounded-md text-blackcolor">
-                            <div className="flex items-center gap-3 ">
-                              <RadioGroupItem
-                                value="credit-card"
-                                id="credit-card"
-                              />
-                              <div className="flex-1">
-                                <Label
-                                  htmlFor="credit-card"
-                                  className="font-semibold text-base"
-                                >
-                                  Amazon pay ICICI bank credit card
-                                </Label>
-                                <p className="text-xs font-semibold text-mediumgray2 py-1">
-                                  **3425 | Gaurav Yadav
-                                </p>
-                              </div>
-                            </div>
+                          <div className="flex items-center gap-3 justify-between">
+                          <div className="flex items-center gap-3">
+                          <RadioGroupItem value="credit-card" id="credit-card" />
+                          <div className="flex-1">
+                          <Label htmlFor="credit-card" className="font-semibold text-base">
+                         Amazon pay ICICI bank credit card
+                         </Label>
+                        <p className="text-xs font-semibold text-mediumgray2 py-1">
+                        **3425 | Gaurav Yadav
+                        </p>
+                     </div>
+                     </div>
+                    <Trash2 className="text-red w-6 h-6 cursor-pointer" /> 
+
+
+                  </div>
+
                           </div>
 
                           <div className="py-2">

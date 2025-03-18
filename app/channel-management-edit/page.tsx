@@ -116,7 +116,7 @@ useEffect(() => {
 
           {/* Content */}
           <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
-            <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
+          <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
               <div className="border-b border-secondarycolor pb-4">
                 <h2 className="text-lg font-semibold">Channel Management</h2>
                 <div className="flex justify-between">
@@ -159,16 +159,16 @@ useEffect(() => {
               </div>
 
               <div className="mt-6 px-2 border-b border-secondarycolor pb-6">
-  <h4 className="text-base font-semibold">Description:</h4>
-  <textarea
-    value={description}
-    onChange={(e) => {
-      setDescription(e.target.value);
-      localStorage.setItem("channelDescription", e.target.value);
-    }}
-    className="w-full h-52 p-3 border rounded-lg border-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-base text-charcoalBlack"
-    style={{ minHeight: "100px", overflow: "hidden" }} // Auto-resize
-    onInput={(e) => {
+             <h4 className="text-base font-semibold">Description:</h4>
+            <textarea
+             value={description}
+            onChange={(e) => {
+            setDescription(e.target.value);
+           localStorage.setItem("channelDescription", e.target.value);
+            }}
+       className="w-full h-52 p-3 border rounded-lg border-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-base text-charcoalBlack"
+       style={{ minHeight: "100px", overflow: "hidden" }} // Auto-resize
+       onInput={(e) => {
       const target = e.target as HTMLTextAreaElement;
       target.style.height = "auto"; // Reset height
       target.style.height = `${target.scrollHeight}px`; // Adjust height dynamically
@@ -210,7 +210,7 @@ useEffect(() => {
                     </Badge>
                   ))}
                 </div>
-                <h1 className="text-lg font-semibold py-2 ">Add Categories</h1>
+                <h1 className="text-lg font-semibold py-2 ">Add Custom Categories</h1>
                 <Input
                   placeholder="Add Categories"
                   className="w-full py-5 border border-borderColor1 outline-none focus:!outline-none focus:ring-0"
@@ -220,8 +220,11 @@ useEffect(() => {
                 />
               </div>
 
-              <div className="justify-end mt-10 flex">
-                <button className="w-40 py-2 bg-neutral-300 text-neutral-400 rounded-md ml-auto">
+              <div className=" flex justify-end mt-10 flex ">
+                <button className="w-40 py-2 border border-secondarycolor text-secondarycolor rounded-md ">
+                Cancel
+                </button>
+                <button className="w-40 py-2 bg-neutral-300 text-neutral-400 rounded-md ml-2 ">
                   Save Changes
                 </button>
               </div>

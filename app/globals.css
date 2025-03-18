@@ -136,3 +136,13 @@ body,
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+.left-73{
+  left:73rem;
+}
+.w-45{
+  width: 95%;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
