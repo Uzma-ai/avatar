@@ -186,7 +186,7 @@ useEffect(() => {
                     Added Categories
                   </span>{" "}
                   (Please add minimum 5 categories for proper channel
-                  management)``
+                  management)
 
                 </p>
 

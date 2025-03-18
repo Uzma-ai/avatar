@@ -369,7 +369,7 @@ export default function ChannelManagement() {
                 <table className="w-full text-left border-collapse gap-1">
                   <thead className="text-base font-semibold">
                     <tr>
-                      <th className="px-4 py-2 text-left font-semibold">
+                      <th className="px-4 py-2 text-left font-semibold whitespace-nowrap">
                         Content Title
                       </th>
                       <th className="px-4 py-2 text-center font-semibold">
@@ -378,7 +378,7 @@ export default function ChannelManagement() {
                       <th className="px-4 py-2 text-center font-semibold">
                         Clicks
                       </th>
-                      <th className="px-4 py-2 text-center font-semibold">
+                      <th className="px-4 py-2 text-center font-semibold whitespace-nowrap">
                         Engagement Rate
                       </th>
                       <th className="px-4 py-2 text-center font-semibold">
