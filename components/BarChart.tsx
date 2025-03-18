@@ -92,7 +92,7 @@ const BarChart = () => {
       </div>
 
       {/* Custom Legend (on the right side) */}
-      <div className="w-1/6 flex justify-center">
+      <div className=" flex justify-center pb-11">
         <CustomLegend toggleDataset={toggleDataset} />
       </div>
     </div>
