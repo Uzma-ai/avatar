@@ -142,3 +142,7 @@ body,
 .w-45{
   width: 95%;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

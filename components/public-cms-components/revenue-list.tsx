@@ -7,6 +7,8 @@ import {
   CalendarClock,
   ArrowUpDown,
   MoveUp,
+  X,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Video } from "@/types/boost-video";
@@ -86,6 +88,18 @@ export function RevenueList() {
     videoId: null,
     videoTitle: "",
   });
+
+     const [boostedVideos, setBoostedVideos] = useState<Record<string, boolean>>(
+       {}
+    );
+    
+    const toggleBoost = (videoId: string) => {
+      setBoostedVideos((prev) => ({
+        ...prev,
+        [videoId]: !prev[videoId], // Toggle only for this video
+      }));
+    };
+  
 
   useEffect(() => {
     const generatedVideos: Video[] = videoData.map((video, index) => ({
@@ -171,6 +185,13 @@ export function RevenueList() {
 
   return (
     <div className="w-full pb-2 pt-10">
+      <div className="flex items-center justify-end pb-6">
+        {" "}
+        <button className="text-secondarycolor text-sm font-bold cursor-pointer flex items-center gap-1">
+          See All
+          <ChevronRight size={16} />
+        </button>
+      </div>
       <div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
         <h2 className="text-lg font-semibold">Boost Uploaded Video’s</h2>
         <div className="flex gap-4">
@@ -285,9 +306,18 @@ export function RevenueList() {
                   </div>
                 </TableCell>
                 <TableCell className="text-center">
-                  <button className="w-24 h-11 rounded-md bg-skycolor text-whitecolor flex items-center justify-center gap-2">
-                    <MoveUp size={15} />
-                    Boost
+                  <button
+                    className={`w-24 h-11 rounded-md flex items-center justify-center gap-2 text-whitecolor ${
+                      boostedVideos[video.id] ? "bg-redcolor" : "bg-skycolor"
+                    }`}
+                    onClick={() => toggleBoost(video.id)}
+                  >
+                    {boostedVideos[video.id] ? (
+                      <X size={15} />
+                    ) : (
+                      <MoveUp size={15} />
+                    )}
+                    {boostedVideos[video.id] ? "Stop" : "Boost"}
                   </button>
                 </TableCell>
               </TableRow>

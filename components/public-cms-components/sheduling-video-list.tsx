@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { Search, Trash2, CalendarClock, ArrowUpDown } from "lucide-react";
+import {
+  Search,
+  Trash2,
+  CalendarClock,
+  ArrowUpDown,
+  MoveUp,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Video } from "@/types/video";
 import { DeleteVideoDialog } from "./delete-video-dialog";
@@ -89,6 +96,16 @@ export function ShedulingVideoList() {
   // State for the video modal
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+    const [boostedVideos, setBoostedVideos] = useState<Record<string, boolean>>(
+      {}
+    );
+
+    const toggleBoost = (videoId: string) => {
+      setBoostedVideos((prev) => ({
+        ...prev,
+        [videoId]: !prev[videoId], // Toggle only for this video
+      }));
+    };
 
   useEffect(() => {
     const generatedVideos: Video[] = videoData.map((video, index) => ({
@@ -241,6 +258,7 @@ export function ShedulingVideoList() {
               <TableHead className="w-[200px] text-blackcolor font-semibold text-center">
                 Date
               </TableHead>
+              <TableHead className="w-[300px] text-center text-blackcolor font-semibold"></TableHead>
               <TableHead className="w-[300px] text-center text-blackcolor font-semibold">
                 Actions
               </TableHead>
@@ -291,7 +309,7 @@ export function ShedulingVideoList() {
                   <span>{video.comments}</span>
                 </TableCell>
                 <TableCell className="text-center">
-                  <span>
+                  <span className="whitespace-nowrap">
                     {new Date(video.publishDate).toISOString().split("T")[0]}
                   </span>
                 </TableCell>
@@ -318,6 +336,21 @@ export function ShedulingVideoList() {
                       <Trash2 className="w-4 h-4" />
                     </Button>
                   </div>
+                </TableCell>
+                <TableCell className="text-center">
+                  <button
+                    className={`w-24 h-11 rounded-md flex items-center justify-center gap-2 text-whitecolor ${
+                      boostedVideos[video.id] ? "bg-redcolor" : "bg-skycolor"
+                    }`}
+                    onClick={() => toggleBoost(video.id)}
+                  >
+                    {boostedVideos[video.id] ? (
+                      <X size={15} />
+                    ) : (
+                      <MoveUp size={15} />
+                    )}
+                    {boostedVideos[video.id] ? "Stop" : "Boost"}
+                  </button>
                 </TableCell>
               </TableRow>
             ))}
