@@ -104,8 +104,8 @@ export default function ChannelManagement() {
                 <h2 className="md:text-sm lg:text-base font-medium">
                   Pre-roll Ads
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
+                <div className="flex items-center gap-2">
+                  <span className="text-right md:text-sm lg:text-base font-medium text-gray-400">
                     Display ads before the content starts.
                   </span>
                   <label className="relative inline-flex items-center cursor-pointer">
@@ -119,8 +119,8 @@ export default function ChannelManagement() {
                 <h2 className="md:text-sm lg:text-base font-medium">
                   Mid-roll Ads
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
+                <div className="flex items-center gap-2">
+                  <span className="text-right md:text-sm lg:text-base font-medium text-gray-400">
                     Show ads in the middle of the content for maximum
                     engagement.
                   </span>
@@ -135,8 +135,8 @@ export default function ChannelManagement() {
                 <h2 className="md:text-sm lg:text-base font-medium">
                   Post-roll Ads
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
+                <div className="flex items-center gap-2">
+                  <span className="text-right md:text-sm lg:text-base font-medium text-gray-400">
                     Play ads after the content ends.
                   </span>
                   <label className="relative inline-flex items-center cursor-pointer">
@@ -150,8 +150,8 @@ export default function ChannelManagement() {
                 <h2 className="md:text-sm lg:text-base font-medium">
                   AI Organic Speech Integration
                 </h2>
-                <div className="flex items-center">
-                  <span className="mr-2 md:text-sm lg:text-base font-medium text-gray-400">
+                <div className="flex items-center gap-2">
+                  <span className="text-right md:text-sm lg:text-base font-medium text-gray-400">
                     Enable AI_powered organic speech transitions for seamless ad
                     delivery.
                   </span>
@@ -257,9 +257,10 @@ export default function ChannelManagement() {
                   <h3 className="text-lg font-semibold text-white">
                     Top Region{" "}
                   </h3>
-                  <p className="text-3xl font-bold mt-10 text-white">
-                    North America
-                  </p>
+                  <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">
+                 North America
+                 </p>
+
                 </div>
 
                 <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
@@ -271,7 +272,7 @@ export default function ChannelManagement() {
                   <h3 className="text-lg font-semibold text-white">
                     Top Device
                   </h3>
-                  <p className="text-3xl font-bold mt-10 text-white">Mobile</p>
+                  <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">Mobile</p>
                 </div>
               </div>
 
@@ -354,7 +355,7 @@ export default function ChannelManagement() {
                   <h3 className="text-lg font-semibold mr-4">
                     Total Ads Earnings
                   </h3>
-                  <p className="text-6xl font-bold">$52,342</p>
+                  <p className="text-4xl lg:text-6xl font-bold">$52,342</p>
                   <TrendingUp className="absolute bottom-4 ml-96 h-14 w-14 text-lightGreen mt-2" />
                 </div>
               </div>
