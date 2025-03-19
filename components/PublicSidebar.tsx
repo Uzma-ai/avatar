@@ -2,10 +2,9 @@
 
 import React, { useState } from "react";
 import {
-  User,
-  Settings,
-  MessageCircleQuestion,
-  UserCircle,
+  LayoutDashboard,
+  ChartNoAxesColumn,
+  Globe,
   Wallet,
 } from "lucide-react";
 import Link from "next/link";
@@ -78,7 +77,7 @@ const PublicSidebar = () => {
                   : "text-blackcolor"
               }`}
             >
-              <User
+              <LayoutDashboard
                 className={`w-5 h-5 ${
                   isActive("/dashboard") ? "text-white" : "text-blackcolor"
                 }`}
@@ -130,8 +129,8 @@ const PublicSidebar = () => {
                     isActive("/content-scheduling") ||
                     isActive("/channel-management-edit") ||
                     isActive("/channel-management")
-                      ? "text-white"
-                      : "text-blackcolor"
+                      ? "invert"
+                      : ""
                   } ml-2`}
                 />
                 <span
@@ -246,12 +245,16 @@ const PublicSidebar = () => {
                 }`}
                 onClick={toggleRevenueDropdown}
               >
-                <UserCircle
-                  className={`w-5 h-5 ${
+                <Image
+                  src="/revenue-icon.svg"
+                  alt="Content"
+                  width={20}
+                  height={20}
+                  className={`${
                     isActive("/revenue-earnings") ||
                     isActive("/revenue-settings")
-                      ? "text-white"
-                      : "text-blackcolor"
+                      ? "invert"
+                      : ""
                   } ml-2`}
                 />
                 <span
@@ -364,12 +367,16 @@ const PublicSidebar = () => {
                 }`}
                 onClick={toggleEngagementDropdown}
               >
-                <MessageCircleQuestion
-                  className={`w-5 h-5 ${
+                <Image
+                  src="/engagement-icon.svg"
+                  alt="Engagement"
+                  width={20}
+                  height={20}
+                  className={`${
                     isActive("/engagement-community") ||
                     isActive("/engagement-collaboration")
-                      ? "text-white"
-                      : "text-blackcolor"
+                      ? "invert"
+                      : ""
                   } ml-2`}
                 />
                 <span
@@ -455,12 +462,16 @@ const PublicSidebar = () => {
                 }`}
                 onClick={togglePricingDropdown}
               >
-                <Settings
-                  className={`w-5 h-5 ${
+                <Image
+                  src="/pricing-icon.svg"
+                  alt="Pricing"
+                  width={20}
+                  height={20}
+                  className={`${
                     isActive("/pricing-subscription") ||
                     isActive("/pricing-payment")
-                      ? "text-white"
-                      : "text-blackcolor"
+                      ? "invert"
+                      : ""
                   } ml-2`}
                 />
                 <span
@@ -546,7 +557,7 @@ const PublicSidebar = () => {
                 }`}
                 onClick={toggleReportsDropdown}
               >
-                <MessageCircleQuestion
+                <ChartNoAxesColumn
                   className={`w-5 h-5 ${
                     isActive("/reports-performance") ||
                     isActive("/reports-audience") ||
@@ -651,7 +662,7 @@ const PublicSidebar = () => {
                 } ${isGlobalDropdownVisible ? "rounded-b-none" : "rounded-md"}`}
                 onClick={toggleGlobalDropdown}
               >
-                <MessageCircleQuestion
+                <Globe
                   className={`w-5 h-5 ${
                     isActive("/global-trends") ||
                     isActive("/global-notification")
@@ -660,7 +671,7 @@ const PublicSidebar = () => {
                   } ml-2`}
                 />
                 <span
-                  className={`font-normal md:text-base lg:text-lg ${
+                  className={`font-normal md:text-base lg:text-lg whitespace-nowrap ${
                     isActive("/global-trends") ||
                     isActive("/global-notification")
                       ? "text-white font-light"

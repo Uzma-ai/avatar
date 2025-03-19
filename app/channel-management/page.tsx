@@ -117,7 +117,7 @@ export default function ChannelManagement() {
           </div>
 
           {/* Content */}
-          <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-128px)] overflow-y-auto scroll">
             <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
               <div className="border-b border-secondarycolor pb-4">
                 <h2 className="text-lg font-semibold">Channel Management</h2>

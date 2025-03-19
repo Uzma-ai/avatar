@@ -142,7 +142,7 @@ export default function ContentManagement() {
           </div>
 
           {/* Content */}
-          <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-gray-100 py-7 px-7 h-[calc(100%-128px)] overflow-y-auto scroll">
             <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
               {/* Upload Section */}
               <div className="relative h-52 border border-inputbackground rounded-lg p-4">

@@ -61,18 +61,20 @@ export default function Dashboard() {
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
-            <div className="flex flex-col items-start gap-1 relative ">
-              <h2 className="text-2xl font-semibold mb-2 flex items-center">
-                <User className="mr-2 h-6 w-6 text-black" />
-                <span>Dashboard</span>
-                <Bell className="mr-2 h-6 w-6 text-black absolute left-73"/>
-              </h2>
+            <div className="flex flex-col items-start gap-1 relative w-full">
+              <div className="text-2xl font-semibold mb-2 flex items-center justify-between w-full">
+                <div className="flex items-center">
+                  <User className="mr-2 h-6 w-6 text-black" />
+                  <span>Dashboard</span>
+                </div>
+                <Bell className="h-5 w-5 text-black cursor-pointer" />
+              </div>
               <div className="text-black px-2">Dashboard</div>
             </div>
           </div>
 
           {/* Content */}
-          <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-gray-100 py-7 px-7 h-[calc(100%-128px)] overflow-y-auto scroll">
             <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
               <div>
                 <div className="flex items-center justify-between">
@@ -90,7 +92,7 @@ export default function Dashboard() {
                       className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <SlidersHorizontal/>
+                      <SlidersHorizontal />
                     </Button>
 
                     {openFilter1 && (
@@ -208,7 +210,7 @@ export default function Dashboard() {
                         className="border-borderColor1 flex items-center justify-center gap-2"
                       >
                         Filter
-                        <SlidersHorizontal/>
+                        <SlidersHorizontal />
                       </Button>
 
                       {openFilter2 && (
@@ -288,7 +290,7 @@ export default function Dashboard() {
                       className="border-borderColor1 flex items-center justify-center gap-2"
                     >
                       Filter
-                      <SlidersHorizontal/>
+                      <SlidersHorizontal />
                     </Button>
 
                     {openFilter3 && (
