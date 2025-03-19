@@ -5,8 +5,8 @@
 
 
 @layer base {
-  body {
-    @apply font-figtree;
+ html, body {
+    @apply font-figtree overflow-hidden;
   }
 }
 

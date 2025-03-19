@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect,  KeyboardEvent } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
 import { User, X } from "lucide-react";
@@ -12,9 +12,7 @@ export default function ChannelManagementEdit() {
 
   const [categories, setCategories] = useState<string[]>(["Books"]);
   const [inputValue, setInputValue] = useState("");
-   const [image, setImage] = useState<string | null>(null);
-
-
+  const [image, setImage] = useState<string | null>(null);
 
   useEffect(() => {
     const storedImage = localStorage.getItem("channelImage");
@@ -23,20 +21,20 @@ export default function ChannelManagementEdit() {
     }
   }, []);
 
-   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-     const file = event.target.files?.[0];
-     if (file) {
-       const reader = new FileReader();
-       reader.onloadend = () => {
-         const base64Image = reader.result as string;
-         setImage(base64Image);
-         localStorage.setItem("channelImage", base64Image); // Save to localStorage
-       };
-       reader.readAsDataURL(file);
-     }
-   };
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64Image = reader.result as string;
+        setImage(base64Image);
+        localStorage.setItem("channelImage", base64Image); // Save to localStorage
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
-   const handleAddCategory = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleAddCategory = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim()) {
       const newCategory = inputValue.trim();
       if (!categories.includes(newCategory)) {
@@ -47,7 +45,7 @@ export default function ChannelManagementEdit() {
       }
     }
   };
-  
+
   const handleRemoveCategory = (category: string) => {
     const updatedCategories = categories.filter((c) => c !== category);
     setCategories(updatedCategories);
@@ -61,32 +59,25 @@ export default function ChannelManagementEdit() {
     }
   }, []);
 
-
   const [description, setDescription] = useState("");
 
-useEffect(() => {
-  // Load saved description from localStorage OR use default text
-  const storedDescription = localStorage.getItem("channelDescription");
-  setDescription(
-    storedDescription ||
-      `Welcome to UX Avatars, your go-to channel for exploring the intersection of creativity, user experience, and innovation!
+  useEffect(() => {
+    // Load saved description from localStorage OR use default text
+    const storedDescription = localStorage.getItem("channelDescription");
+    setDescription(
+      storedDescription ||
+        `Welcome to UX Avatars, your go-to channel for exploring the intersection of creativity, user experience, and innovation!
       
       Our channel is dedicated to:
       - Showcasing Avatars: Dive into a world of interacting and visually stunning avatars designed to elevate digital experiences.
       - Educational Content: Learn the principles of user-centric design and discover how avatars enhance engagement across various platforms.
       - Inspiration & Trends: Stay ahead with the latest trends in UX, UI, and virtual avatar technology.
       - Interactive Demos: Experience how avatars can transform interactions in business, gaming, and social media.`
-  );
-}, []);
-
-  
-
-  
-  
-
+    );
+  }, []);
   return (
     <>
-      <div className="flex h-screen">
+      <div className="flex h-screen ">
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
@@ -115,8 +106,8 @@ useEffect(() => {
           </div>
 
           {/* Content */}
-          <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
-          <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
+          <div className="bg-gray-100 py-7 px-7 h-[calc(100%-128px)] overflow-y-auto scroll">
+            <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
               <div className="border-b border-secondarycolor pb-4">
                 <h2 className="text-lg font-semibold">Channel Management</h2>
                 <div className="flex justify-between">
@@ -126,7 +117,7 @@ useEffect(() => {
                   </p>
                 </div>
               </div>
-              <div className="flex flex-col items-center justify-center mt-6">
+              <div className="flex flex-col items-center justify-center pt-6">
                 <label htmlFor="imageUpload" className="cursor-pointer">
                   <div className="w-28 h-28 rounded-full overflow-hidden relative flex items-center justify-center">
                     <Image
@@ -148,38 +139,37 @@ useEffect(() => {
                   className="hidden"
                   onChange={handleImageChange}
                 />
-                <span className="text-secondarycolor underline text-sm cursor-pointer py-2">Remove Current Photo</span>
+                <span className="text-secondarycolor underline text-sm cursor-pointer py-2">
+                  Remove Current Photo
+                </span>
               </div>
 
-              <div className="flex justify-center mt-3">
+              <div className="flex justify-center pt-3">
                 <Input
                   placeholder="Change Name"
                   className="w-full max-w-md py-5 border border-mediumgray outline-none focus:!outline-none focus:!ring-0"
                 />
               </div>
 
-              <div className="mt-6 px-2 border-b border-secondarycolor pb-6">
-             <h4 className="text-base font-semibold">Description:</h4>
-            <textarea
-             value={description}
-            onChange={(e) => {
-            setDescription(e.target.value);
-           localStorage.setItem("channelDescription", e.target.value);
-            }}
-       className="w-full h-52 p-3 border rounded-lg border-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-base text-charcoalBlack"
-       style={{ minHeight: "100px", overflow: "hidden" }} // Auto-resize
-       onInput={(e) => {
-      const target = e.target as HTMLTextAreaElement;
-      target.style.height = "auto"; // Reset height
-      target.style.height = `${target.scrollHeight}px`; // Adjust height dynamically
-    }}
-  />
-</div>
+              <div className="px-2 border-b border-secondarycolor py-6">
+                <h4 className="text-base font-semibold">Description:</h4>
+                <textarea
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                    localStorage.setItem("channelDescription", e.target.value);
+                  }}
+                  className="w-full h-52 p-3 border rounded-lg border-black resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 text-base text-charcoalBlack"
+                  style={{ minHeight: "100px", overflow: "hidden" }} // Auto-resize
+                  onInput={(e) => {
+                    const target = e.target as HTMLTextAreaElement;
+                    target.style.height = "auto"; // Reset height
+                    target.style.height = `${target.scrollHeight}px`; // Adjust height dynamically
+                  }}
+                />
+              </div>
 
-
-
-
-              <div className="mt-6">
+              <div className="pt-5">
                 <p className="text-sm text-charcoalBlack mt-2 font-normal">
                   <span className=" font-semibold text-lg text-black">
                     {" "}
@@ -187,7 +177,6 @@ useEffect(() => {
                   </span>{" "}
                   (Please add minimum 5 categories for proper channel
                   management)
-
                 </p>
 
                 <div className="flex flex-wrap gap-2 my-3">
@@ -210,7 +199,9 @@ useEffect(() => {
                     </Badge>
                   ))}
                 </div>
-                <h1 className="text-lg font-semibold py-2 ">Add Custom Categories</h1>
+                <h1 className="text-lg font-semibold py-2 ">
+                  Add Custom Categories
+                </h1>
                 <Input
                   placeholder="Add Categories"
                   className="w-full py-5 border border-borderColor1 outline-none focus:!outline-none focus:ring-0"
@@ -220,9 +211,9 @@ useEffect(() => {
                 />
               </div>
 
-              <div className=" flex justify-end mt-10 flex ">
+              <div className="justify-end pt-10 flex ">
                 <button className="w-40 py-2 border border-secondarycolor text-secondarycolor rounded-md ">
-                Cancel
+                  Cancel
                 </button>
                 <button className="w-40 py-2 bg-neutral-300 text-neutral-400 rounded-md ml-2 ">
                   Save Changes

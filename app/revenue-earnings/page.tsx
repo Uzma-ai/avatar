@@ -98,7 +98,7 @@ export default function ReveneuEarnings() {
         <PublicSidebar />
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
-          <div className="flex items-center h-28 py-4 px-7 rounded-md">
+          <div className="flex items-center h-32 py-4 px-7 rounded-md">
             <div className="w-full">
               <h2 className="text-2xl font-semibold flex items-center py-2">
                 <User className="mr-2 h-6 w-6 text-mediumblack" />
@@ -142,7 +142,7 @@ export default function ReveneuEarnings() {
           </div>
 
           {/* Content */}
-          <div className="bg-gray-100 py-7 px-7 h-[calc(100vh-112px)] overflow-y-auto scroll">
+          <div className="bg-gray-100 py-7 px-7 h-[calc(100%-128px)] overflow-y-auto scroll">
             <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
               <div className="pb-4 flex items-center justify-between">
                 <div>
