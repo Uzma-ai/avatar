@@ -10,6 +10,7 @@ import {
   CircleUserRound,
   Sparkles,
   Save,
+  X,
 } from "lucide-react";
 
 interface SubscriptionPopupProps {
@@ -38,7 +39,13 @@ const Subscriptionpopup: React.FC<SubscriptionPopupProps> = ({ setIsMobileSubscr
         className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[22rem] w-full relative h-[40rem] overflow-y-auto scroll"
       >
         <div className="border-b border-secondarycolor pb-4">
-          <h1 className="text-lg font-semibold">Your Current Subscription</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-lg font-semibold">Your Current Subscription</h1>
+            <X
+              className="cursor-pointer"
+              onClick={() => setIsMobileSubscriptionOpen(false)}
+            />
+          </div>
           <h2 className="text-sm font-semibold pt-1">
             Current Plan:{" "}
             <span className="text-sm font-normal">

@@ -118,7 +118,7 @@ export default function ChatAssistant() {
                     <button
                       className={`flex items-center justify-between gap-2 bg-blurwhite/60 sm:bg-blurwhite/10 backdrop-blur-sm p-1 pr-3 shadow-sm focus:!outline-none  ${
                         isAvatarDropdownOpen
-                          ? "rounded-t-2xl rounded-b-none w-[171px]"
+                          ? "rounded-t-2xl rounded-b-none w-[170px]"
                           : "rounded-full"
                       }`}
                       aria-label="User menu"
@@ -149,7 +149,7 @@ export default function ChatAssistant() {
                   <DropdownMenuContent
                     className="w-[170px] bg-blurwhite/60 sm:bg-blurwhite/10 rounded-b-2xl rounded-t-none backdrop-blur-lg border border-white/10 shadow-xl animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2 "
                     align="start"
-                    alignOffset={1}
+                    alignOffset={0}
                     sideOffset={0}
                   >
                     <DropdownMenuItem>
