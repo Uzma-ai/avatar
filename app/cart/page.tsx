@@ -100,7 +100,7 @@ export default function Cart() {
 
     return (
       <>
-        <div className="max-w-3xl mx-auto bg-primarycolor min-h-screen md:hidden">
+        <div className="max-w-3xl mx-auto bg-primarycolor h-screen md:hidden flex flex-col">
           {/* Header */}
           <header className="p-4">
             <div className="flex items-center justify-center relative border-b pb-4 border-secondarycolor">
@@ -115,7 +115,7 @@ export default function Cart() {
             </div>
           </header>
 
-          <div className="px-4 space-y-4">
+          <div className="px-4 space-y-4 flex-1 overflow-y-auto h-[calc(100vh-72px)]">
             {/* Proceed to buy button */}
             <Button
               className="w-full bg-secondarycolor text-white h-12"

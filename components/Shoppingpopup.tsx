@@ -65,6 +65,7 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
     },
   ]);
   const [editingAddress, setEditingAddress] = useState<Address | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false); 
   const [selectedImage, setSelectedImage] = React.useState(0);
 
@@ -116,12 +117,14 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
      };
      setAddresses([...addresses, newAddress]);
      setEditingAddress(newAddress);
+      setIsEditing(false);
      setIsDialogOpen(true);
      
    };
 
    const handleEditAddress = (address: Address) => {
      setEditingAddress(address);
+      setIsEditing(true);
      setIsDialogOpen(true);
    };
 
@@ -660,7 +663,7 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
             <Button
               variant="outline"
               className="flex-1 border border-secondarycolor text-secondarycolor h-12"
-              onClick={()=>  setIsMobileShoppingOpen(false) }
+              onClick={() => setIsMobileShoppingOpen(false)}
             >
               Cancel
             </Button>
@@ -679,10 +682,10 @@ const Shoppingpopup: React.FC<ShoppingPopupProps> = ({
           }
         }}
       >
-        <DialogContent className="dialog-content">
+        <DialogContent className="dialog-content max-w-[22rem] w-full rounded-lg h-[23rem] overflow-y-auto scroll shadow-xl px-4 py-4">
           <DialogHeader>
-            <DialogTitle>
-              {editingAddress?.id ? "Edit Address" : "Add Address"}
+            <DialogTitle className="text-left font-semibold text-base border-b border-secondarycolor pb-">
+              {isEditing ? "Edit Address" : "Add Address"}
             </DialogTitle>
           </DialogHeader>
           {editingAddress && (

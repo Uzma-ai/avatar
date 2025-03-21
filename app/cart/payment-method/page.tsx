@@ -40,7 +40,7 @@ export default function Payment() {
   };
 
     return (
-      <div className="max-w-3xl mx-auto bg-primarycolor min-h-screen md:hidden">
+      <div className="max-w-3xl mx-auto bg-primarycolor h-screen md:hidden flex flex-col">
         <header className="p-4">
           <div className="flex items-center justify-center relative border-b pb-4 border-secondarycolor">
             <span className="absolute left-0" onClick={() => router.back()}>
@@ -51,7 +51,7 @@ export default function Payment() {
             </div>
           </div>
         </header>
-        <div className="px-4 space-y-4 py-4">
+        <div className="px-4 space-y-4 py-4 flex-1 h-[calc(100vh-72px)] overflow-y-auto">
           <div className="py-1 border-b border-secondarycolor">
             <div className="flex justify-between items-start mb-3">
               <h2 className="font-semibold text-sm">Shipping Address</h2>

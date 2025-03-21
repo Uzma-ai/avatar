@@ -9,11 +9,7 @@ import {
   X,
   Search,
 } from "lucide-react";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
@@ -28,29 +24,30 @@ interface SupportPopupProps {
   setIsMobileSupportOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-
-const Supportpopup: React.FC<SupportPopupProps> = ({ setIsMobileSupportOpen }) => {
+const Supportpopup: React.FC<SupportPopupProps> = ({
+  setIsMobileSupportOpen,
+}) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isFAQOpen, setIsFAQOpen] = useState(false);
 
-   useEffect(() => {
-     const handleClickOutside = (event: MouseEvent) => {
-       if (
-         popupRef.current &&
-         !popupRef.current.contains(event.target as Node)
-       ) {
-         if (isDrawerOpen) {
-           setIsDrawerOpen(false);
-         } else {
-           setIsMobileSupportOpen(false);
-         }
-       }
-     };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        if (isDrawerOpen) {
+          setIsDrawerOpen(false);
+        } else {
+          setIsMobileSupportOpen(false);
+        }
+      }
+    };
 
-     document.addEventListener("mousedown", handleClickOutside);
-     return () => document.removeEventListener("mousedown", handleClickOutside);
-   }, [setIsMobileSupportOpen, isDrawerOpen]);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [setIsMobileSupportOpen, isDrawerOpen]);
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10 px-2">
       {isFAQOpen ? (
@@ -271,9 +268,15 @@ const Supportpopup: React.FC<SupportPopupProps> = ({ setIsMobileSupportOpen }) =
             className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[22rem] w-full relative h-[35rem] overflow-y-auto scroll"
           >
             <div className="border-b border-secondarycolor pb-4">
-              <h1 className="text-lg font-semibold">
-                Need Help with Your Avatar?
-              </h1>
+              <div className="flex items-center justify-between">
+                <h1 className="text-lg font-semibold">
+                  Need Help with Your Avatar?
+                </h1>
+                <X
+                  className="cursor-pointer"
+                  onClick={() => setIsMobileSupportOpen(false)}
+                />
+              </div>
               <h2 className="text-sm font-normal pt-1">
                 Our customer support team is here to assist you with any issues
                 or questions.
@@ -388,6 +391,6 @@ const Supportpopup: React.FC<SupportPopupProps> = ({ setIsMobileSupportOpen }) =
       )}
     </div>
   );
-}
+};
 
 export default Supportpopup;
