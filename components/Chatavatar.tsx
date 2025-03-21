@@ -33,7 +33,7 @@ import Settingpopup from "@/components/Settingpopup";
 import Shoppingpopup from "@/components/Shoppingpopup";
 
 export default function ChatAssistant() {
-  const [isAvatarDropdownOpen, setIsAvatarDropdoenOpen] = useState(false);
+  const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false);
   const [checked, setChecked] = useState(true);
   const [voicechecked, setVoiceChecked] = useState(false);
   const { selectedAvatar } = useAvatar();
@@ -108,196 +108,191 @@ export default function ChatAssistant() {
 
           {/* Navbar section */}
           <div className="w-full h-20 flex items-center justify-between p-2 md:p-6">
-            <div className="flex items-end gap-4">
-              <DropdownMenu
-                open={isAvatarDropdownOpen}
-                onOpenChange={setIsAvatarDropdoenOpen}
-              >
-                <DropdownMenuTrigger asChild>
-                  <button
-                    className="flex items-center gap-2 rounded-full bg-mediumWhite p-1 pr-3 shadow-sm hover:bg-gray-100/50 focus:!outline-none"
-                    aria-label="User menu"
-                  >
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src="/useravtar.jpeg"
-                        alt="User avatar"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>H</AvatarFallback>
-                    </Avatar>
-                    <ChevronDown
-                      className={`h-4 w-4 text-blackcolor transition-transform ${
-                        isAvatarDropdownOpen ? "rotate-180" : ""
-                      }`}
-                    />
-                    {isAvatarDropdownOpen && (
-                      <span className="sr-only">
-                        Menu is open, press escape to close
-                      </span>
-                    )}
-                  </button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="w-[200px] bg-blurwhite rounded-2xl "
-                  align="start"
-                  alignOffset={1}
-                  sideOffset={5}
+            <div className="flex items-end gap-4 relative">
+              <div className="w-16 z-10">
+                <DropdownMenu
+                  open={isAvatarDropdownOpen}
+                  onOpenChange={setIsAvatarDropdownOpen}
                 >
-                  <div className="flex items-center gap-2 p-2 mb-1">
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src="/useravtar.jpeg"
-                        alt="User avatar"
-                        className="object-cover"
-                      />
-                      <AvatarFallback>H</AvatarFallback>
-                    </Avatar>
-                    <span className="text-sm text-secondarycolor font-bold">
-                      Hannah
-                    </span>
-                  </div>
-                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
-                  <DropdownMenuItem>
-                    {/* Mobile: Show Popup */}
-                    <div
-                      onClick={toggleProfilePopup}
-                      className="block md:hidden"
+                  <DropdownMenuTrigger asChild>
+                    <button
+                      className={`flex items-center justify-between gap-2 bg-blurwhite/60 sm:bg-blurwhite/10 backdrop-blur-sm p-1 pr-3 shadow-sm focus:!outline-none  ${
+                        isAvatarDropdownOpen
+                          ? "rounded-t-2xl rounded-b-none w-[171px]"
+                          : "rounded-full"
+                      }`}
+                      aria-label="User menu"
                     >
-                      <button
-                        className="flex items-center gap-2"
+                      {" "}
+                      <div className="flex items-center">
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage
+                            src="/useravtar.jpeg"
+                            alt="User avatar"
+                            className="object-cover"
+                          />
+                          <AvatarFallback>HN</AvatarFallback>
+                        </Avatar>
+                        {isAvatarDropdownOpen && (
+                          <span className="ml-2 text-secondarycolor font-bold">
+                            Hannah
+                          </span>
+                        )}
+                      </div>
+                      <ChevronDown
+                        className={`h-4 w-4 text-blackcolor transition-transform ${
+                          isAvatarDropdownOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent
+                    className="w-[170px] bg-blurwhite/60 sm:bg-blurwhite/10 rounded-b-2xl rounded-t-none backdrop-blur-lg border border-white/10 shadow-xl animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2 "
+                    align="start"
+                    alignOffset={1}
+                    sideOffset={0}
+                  >
+                    <DropdownMenuItem>
+                      {/* Mobile: Show Popup */}
+                      <div
                         onClick={toggleProfilePopup}
+                        className="block md:hidden"
+                      >
+                        <button
+                          className="flex items-center gap-2"
+                          onClick={toggleProfilePopup}
+                        >
+                          <User className="mr-2 h-4 w-4 text-secondarycolor" />
+                          <span>User Profile</span>
+                        </button>
+                      </div>
+
+                      {/* Desktop: Navigate with Link */}
+                      <Link
+                        href="/profile"
+                        className="hidden md:flex items-center gap-2"
                       >
                         <User className="mr-2 h-4 w-4 text-secondarycolor" />
                         <span>User Profile</span>
-                      </button>
-                    </div>
-
-                    {/* Desktop: Navigate with Link */}
-                    <Link
-                      href="/profile"
-                      className="hidden md:flex items-center gap-2"
-                    >
-                      <User className="mr-2 h-4 w-4 text-secondarycolor" />
-                      <span>User Profile</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
-                  <DropdownMenuItem>
-                    {/* Mobile: Show Popup */}
-                    <div
-                      onClick={toggleSubscriptionPopup}
-                      className="block md:hidden"
-                    >
-                      <button
-                        className="flex items-center gap-2"
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
+                    <DropdownMenuItem>
+                      {/* Mobile: Show Popup */}
+                      <div
                         onClick={toggleSubscriptionPopup}
+                        className="block md:hidden"
+                      >
+                        <button
+                          className="flex items-center gap-2"
+                          onClick={toggleSubscriptionPopup}
+                        >
+                          <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
+                          <span>Subscription</span>
+                        </button>
+                      </div>
+
+                      {/* Desktop: Navigate with Link */}
+                      <Link
+                        href="/subscription"
+                        className="hidden md:flex items-center gap-2"
                       >
                         <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
                         <span>Subscription</span>
-                      </button>
-                    </div>
-
-                    {/* Desktop: Navigate with Link */}
-                    <Link
-                      href="/subscription"
-                      className="hidden md:flex items-center gap-2"
-                    >
-                      <ShoppingCart className="mr-2 h-4 w-4 text-secondarycolor" />
-                      <span>Subscription</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
-                  <DropdownMenuItem>
-                    <Link href="/chat" className="flex items-center gap-2">
-                      <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
-                      <span>My Avatar</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
-                  <Link href="/avatars">
-                    <DropdownMenuItem>
-                      <Users className="mr-2 h-4 w-4 text-secondarycolor" />
-                      <span>Public Avatar</span>
+                      </Link>
                     </DropdownMenuItem>
-                  </Link>
-                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
-                  <DropdownMenuItem>
-                    {/* Mobile: Show Popup */}
-                    <div
-                      onClick={toggleShoopingPopup}
-                      className="block md:hidden"
-                    >
-                      <button
-                        className="flex items-center gap-2"
+                    <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
+                    <DropdownMenuItem>
+                      <Link href="/chat" className="flex items-center gap-2">
+                        <CircleUserRound className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>My Avatar</span>
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
+                    <Link href="/avatars">
+                      <DropdownMenuItem>
+                        <Users className="mr-2 h-4 w-4 text-secondarycolor" />
+                        <span>Public Avatar</span>
+                      </DropdownMenuItem>
+                    </Link>
+                    <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
+                    <DropdownMenuItem>
+                      {/* Mobile: Show Popup */}
+                      <div
                         onClick={toggleShoopingPopup}
+                        className="block md:hidden"
+                      >
+                        <button
+                          className="flex items-center gap-2"
+                          onClick={toggleShoopingPopup}
+                        >
+                          <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
+                          <span>Shopping</span>
+                        </button>
+                      </div>
+
+                      {/* Desktop: Navigate with Link */}
+                      <Link
+                        href="/shopping"
+                        className="hidden md:flex items-center gap-2"
                       >
                         <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
                         <span>Shopping</span>
-                      </button>
-                    </div>
-
-                    {/* Desktop: Navigate with Link */}
-                    <Link
-                      href="/shopping"
-                      className="hidden md:flex items-center gap-2"
-                    >
-                      <ShoppingBag className="mr-2 h-4 w-4 text-secondarycolor" />
-                      <span>Shopping</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
-                  <DropdownMenuItem>
-                    {/* Mobile: Show Popup */}
-                    <div
-                      onClick={toggleSettingPopup}
-                      className="block md:hidden"
-                    >
-                      <button
-                        className="flex items-center gap-2"
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
+                    <DropdownMenuItem>
+                      {/* Mobile: Show Popup */}
+                      <div
                         onClick={toggleSettingPopup}
+                        className="block md:hidden"
+                      >
+                        <button
+                          className="flex items-center gap-2"
+                          onClick={toggleSettingPopup}
+                        >
+                          <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
+                          <span>Settings</span>
+                        </button>
+                      </div>
+
+                      {/* Desktop: Navigate with Link */}
+                      <Link
+                        href="/settings"
+                        className="hidden md:flex items-center gap-2"
                       >
                         <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
                         <span>Settings</span>
-                      </button>
-                    </div>
-
-                    {/* Desktop: Navigate with Link */}
-                    <Link
-                      href="/settings"
-                      className="hidden md:flex items-center gap-2"
-                    >
-                      <Settings className="mr-2 h-4 w-4 text-secondarycolor" />
-                      <span>Settings</span>
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
-                  <DropdownMenuItem>
-                    {/* Mobile: Show Popup */}
-                    <div
-                      onClick={toggleSupportPopup}
-                      className="block md:hidden"
-                    >
-                      <button
-                        className="flex items-center gap-2"
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
+                    <DropdownMenuItem>
+                      {/* Mobile: Show Popup */}
+                      <div
                         onClick={toggleSupportPopup}
+                        className="block md:hidden"
+                      >
+                        <button
+                          className="flex items-center gap-2"
+                          onClick={toggleSupportPopup}
+                        >
+                          <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
+                          <span>Support</span>
+                        </button>
+                      </div>
+
+                      {/* Desktop: Navigate with Link */}
+                      <Link
+                        href="/support"
+                        className="hidden md:flex items-center gap-2"
                       >
                         <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
                         <span>Support</span>
-                      </button>
-                    </div>
-
-                    {/* Desktop: Navigate with Link */}
-                    <Link
-                      href="/support"
-                      className="hidden md:flex items-center gap-2"
-                    >
-                      <MessageCircleQuestion className="mr-2 h-4 w-4 text-secondarycolor" />
-                      <span>Support</span>
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
               <div className="flex flex-col items-center gap-1">
                 <h2
                   className={`${
