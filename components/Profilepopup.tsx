@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { useState, useRef, useEffect } from "react";
 import { Switch } from "@/components/ui/switch";
-import { Pencil, Camera, Upload, Mic } from "lucide-react";
+import { Pencil, Camera, Upload, Mic, X } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import Image from "next/image";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -87,13 +87,18 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
       >
         <div className="flex items-center justify-between border-b border-secondarycolor pb-4">
           <h1 className="text-lg font-semibold">Personal Information</h1>
-          <button
-            className="w-8 h-8 bg-secondarycolor rounded-full flex items-center justify-center"
-            onClick={handleEditClick}
-          >
-            {" "}
-            <Pencil color="white" size={18} />
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              className="w-8 h-8 bg-secondarycolor rounded-full flex items-center justify-center"
+              onClick={handleEditClick}
+            >
+              <Pencil color="white" size={18} />
+            </button>
+            <X
+              className="cursor-pointer"
+              onClick={() => setIsMobileProfileOpen(false)}
+            />
+          </div>
         </div>
 
         {/* Edit Section Of User */}
@@ -165,6 +170,11 @@ const Profilepopup: React.FC<ProfilePopupProps> = ({
               placeholder="Type"
               className="px-5 w-20 py-3 rounded-md border border-borderColor1 focus:!outline-none "
             />
+          </div>
+          <div>
+            <button className="w-full h-10 bg-secondarycolor text-whitecolor font-normal rounded-md">
+              Save Changes
+            </button>
           </div>
           <div className="flex flex-col items-center justify-center text-sm font-normal">
             <p>Dont know your Type?</p>
