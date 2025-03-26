@@ -1,18 +1,7 @@
 import React from "react";
 import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import {
-  Headset,
-  Gauge,
-  Inbox,
-  Infinity,
-  ChartNoAxesColumn,
-  MonitorOff,
-  CircleUserRound,
-  Sparkles,
-  Save,
-  X,
-} from "lucide-react";
+import {X} from "lucide-react";
 
 interface SubscriptionPopupProps {
   setIsMobileSubscriptionOpen: React.Dispatch<React.SetStateAction<boolean>>;
