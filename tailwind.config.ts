@@ -39,6 +39,7 @@ const config: Config = {
 			success:"#56C466",
 			lightGreen:'#56C466',
 			red:'#FE5353',
+			transparentskycolor:"#5182E34D",
 			charcoalBlack:'#49454F',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
