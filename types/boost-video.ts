@@ -5,6 +5,8 @@ export interface Video {
   times: number
   publish: string
   likes: number
+  impressions: number 
+  comments: number
   publishDate: string
   thumbnail: string
   status: "published" | "draft"

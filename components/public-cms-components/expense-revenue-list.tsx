@@ -1,15 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import {
-  Search,
-  Trash2,
-  CalendarClock,
-  ArrowUpDown,
-  MoveUp,
-  X,
-  ChevronRight,
-} from "lucide-react";
+import { Trash2, CalendarClock, MoveUp, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Video } from "@/types/boost-video";
 import { DeleteVideoDialog } from "./delete-video-dialog";
@@ -21,15 +13,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
 import { Scan, Play, FastForward, Rewind } from "lucide-react";
+
 type SortOption = "date" | "views" | "likes" | "comments";
 
 const videoData = [
@@ -53,29 +38,9 @@ const videoData = [
     thumbnail: "/food-list.png",
     category: "Fitness",
   },
-  {
-    title: "How to Bake a Cake",
-    thumbnail: "/food-list.png",
-    category: "Food",
-  },
-  {
-    title: "Mastering React.js",
-    thumbnail: "/food-list.png",
-    category: "Technology",
-  },
-  {
-    title: "Exploring Space",
-    thumbnail: "/food-list.png",
-    category: "Science",
-  },
-  {
-    title: "Yoga for Beginners",
-    thumbnail: "/food-list.png",
-    category: "Wellness",
-  },
 ];
 
-export function RevenueList() {
+export function ExpenseRevenueList() {
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -163,14 +128,6 @@ export function RevenueList() {
     return result;
   }, [videos, searchQuery, sortBy]);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
-
-  const handleSort = (value: string) => {
-    setSortBy(value as SortOption);
-  };
-
   const handleDeleteClick = (video: Video) => {
     setDeleteDialog({
       open: true,
@@ -198,8 +155,8 @@ export function RevenueList() {
 
   return (
     <div className="w-full pb-2 pt-10">
-      <div className="flex items-center justify-end pb-6">
-        {" "}
+      <div className="w-full flex items-center justify-between pb-6">
+        <h2 className="text-lg font-semibold">Recent Expenses</h2>
         <button className="text-secondarycolor text-sm font-bold cursor-pointer flex items-center gap-1">
           See All
           <ChevronRight size={16} />
@@ -286,39 +243,11 @@ export function RevenueList() {
         )}
       </div>
 
-      <div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
-        <h2 className="text-lg font-semibold">Boost Uploaded Video’s</h2>
-        <div className="flex gap-4">
-          <div className="relative ">
-            <Search className="absolute right-2 top-4 h-4 w-4" />
-            <Input
-              placeholder="Search by title or category"
-              value={searchQuery}
-              onChange={handleSearch}
-              className="border border-borderColor1 w-96 h-12 focus:!outline-none focus:!ring-0 rounded-md"
-            />
-          </div>
-          <Select onValueChange={handleSort} defaultValue="date">
-            <SelectTrigger className="w-[80px] h-12 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="date">Date</SelectItem>
-              <SelectItem value="views">Views</SelectItem>
-              <SelectItem value="likes">Likes</SelectItem>
-              <SelectItem value="comments">Comments</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
       <div>
         <Table className="w-full overflow-x-auto">
           <TableHeader>
-            <TableRow className="border-b border-secondarycolor">
-              <TableHead className="w-[150px] text-blackcolor flex items-center justify-center gap-5">
-                <ArrowUpDown size={18} />
-                <Search size={18} />
-              </TableHead>
+            <TableRow className="border-b border-secondarycolor whitespace-nowrap">
+              <TableHead className="w-[200px] text-left text-blackcolor font-semibold"></TableHead>
               <TableHead className="w-[200px] text-left text-blackcolor font-semibold">
                 Name
               </TableHead>
@@ -328,8 +257,14 @@ export function RevenueList() {
               <TableHead className="w-[200px] text-blackcolor text-center font-semibold">
                 Status
               </TableHead>
+              <TableHead className="w-[200px] text-blackcolor text-center font-semibold">
+                Impressions
+              </TableHead>
               <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Likes
+              </TableHead>
+              <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
+                Comments
               </TableHead>
               <TableHead className="w-[220px] text-blackcolor font-semibold text-center">
                 Date
@@ -337,12 +272,9 @@ export function RevenueList() {
               <TableHead className="w-[200px] text-center text-blackcolor font-semibold">
                 Actions
               </TableHead>
-              <TableHead className="w-[100px] text-center text-blackcolor font-semibold">
-                Boost
-              </TableHead>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="whitespace-nowrap">
             {filteredAndSortedVideos.map((video) => (
               <TableRow key={video.id} className="border-none">
                 <TableCell className="w-[100px]">
@@ -375,7 +307,13 @@ export function RevenueList() {
                   </span>
                 </TableCell>
                 <TableCell className="text-center">
+                  <span>{video.impressions}</span>
+                </TableCell>
+                <TableCell className="text-center">
                   <span>{video.likes}</span>
+                </TableCell>
+                <TableCell className="text-center">
+                  <span>{video.comments}</span>
                 </TableCell>
                 <TableCell className="text-center">
                   <span>
