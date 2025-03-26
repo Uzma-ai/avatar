@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect,useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User,Pencil, SlidersHorizontal} from "lucide-react";
+import { User, Pencil, SlidersHorizontal, Bell } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Calendar } from "@/components/ui/calendar";
@@ -37,54 +37,51 @@ export default function ChannelManagement() {
     }
   }, []);
 
-     
-    
-   useEffect(() => {
-     const storedImage = localStorage.getItem("channelImage");
-     if (storedImage) {
-       setImage(storedImage);
-     }
-   }, []);
-  
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          dropdownRef1.current &&
-          !dropdownRef1.current.contains(event.target as Node) &&
-          dropdownRef2.current &&
-          !dropdownRef2.current.contains(event.target as Node) &&
-          calendarRef1.current &&
-          !calendarRef1.current.contains(event.target as Node) &&
-          calendarRef2.current &&
-          !calendarRef2.current.contains(event.target as Node)
-        ) {
-          setOpenFilter1(false);
-          setOpenFilter2(false);
-          setShowCalendar1(false);
-          setShowCalendar2(false);
-        }
-      };
+  useEffect(() => {
+    const storedImage = localStorage.getItem("channelImage");
+    if (storedImage) {
+      setImage(storedImage);
+    }
+  }, []);
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () =>
-        document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef1.current &&
+        !dropdownRef1.current.contains(event.target as Node) &&
+        dropdownRef2.current &&
+        !dropdownRef2.current.contains(event.target as Node) &&
+        calendarRef1.current &&
+        !calendarRef1.current.contains(event.target as Node) &&
+        calendarRef2.current &&
+        !calendarRef2.current.contains(event.target as Node)
+      ) {
+        setOpenFilter1(false);
+        setOpenFilter2(false);
+        setShowCalendar1(false);
+        setShowCalendar2(false);
+      }
+    };
 
-    const [description, setDescription] = useState("");
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-    useEffect(() => {
-      const storedDescription = localStorage.getItem("channelDescription");
-      setDescription(
-        storedDescription ||
-          `Welcome to UX Avatars, your go-to channel for exploring the intersection of creativity, user experience, and innovation!
+  const [description, setDescription] = useState("");
+
+  useEffect(() => {
+    const storedDescription = localStorage.getItem("channelDescription");
+    setDescription(
+      storedDescription ||
+        `Welcome to UX Avatars, your go-to channel for exploring the intersection of creativity, user experience, and innovation!
           
           Our channel is dedicated to:
           - Showcasing Avatars: Dive into a world of interacting and visually stunning avatars designed to elevate digital experiences.
           - Educational Content: Learn the principles of user-centric design and discover how avatars enhance engagement across various platforms.
           - Inspiration & Trends: Stay ahead with the latest trends in UX, UI, and virtual avatar technology.
           - Interactive Demos: Experience how avatars can transform interactions in business, gaming, and social media.`
-      );
-    }, []);
+    );
+  }, []);
 
   return (
     <>
@@ -93,11 +90,17 @@ export default function ChannelManagement() {
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
           <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
-            <div className="flex flex-col items-start gap-1">
-              <h2 className="text-2xl font-semibold mb-2 flex items-center">
-                <User className="mr-2 h-6 w-6 text-black" />
-                <span>Content</span>
+            <div className="flex flex-col items-start gap-1 w-full">
+              <h2 className="text-2xl font-semibold mb-2 flex items-center justify-between w-full">
+                <div className="flex items-center">
+                  <User className="mr-2 h-6 w-6 text-black" />
+                  <span>Content</span>
+                </div>
+                <a href="/notification">
+                  <Bell className="h-5 w-5 text-black cursor-pointer" />
+                </a>
               </h2>
+
               <div className="text-black ml-4 flex items-center gap-3">
                 <span
                   onClick={() => router.push("/content-management")}
@@ -110,7 +113,7 @@ export default function ChannelManagement() {
                   className="cursor-pointer"
                   onClick={() => router.push("/channel-management")}
                 >
-                    Channel management
+                  Channel management
                 </span>
               </div>
             </div>
@@ -175,46 +178,45 @@ export default function ChannelManagement() {
               </div>
 
               <div className="mt-6 px-2">
-    <h4 className="text-base font-semibold">Description:</h4>
-    <p className="text-base text-charcoalBlack mt-2 font-normal whitespace-pre-line">
-      {description}
-    </p>
-  </div>
-
-
+                <h4 className="text-base font-semibold">Description:</h4>
+                <p className="text-base text-charcoalBlack mt-2 font-normal whitespace-pre-line">
+                  {description}
+                </p>
+              </div>
 
               <hr className="border-t border-secondarycolor mb-6 mt-6" />
 
               <div className="mt-6 border-b border-secondarycolor pb-6">
-              <p className="text-sm text-charcoalBlack mt-2 font-normal">
-              <span className="font-semibold text-base text-black">
-               {" "} Added Categories
-               </span>{" "}
-              (Please add minimum 5 categories for proper channel management)
-              </p>
+                <p className="text-sm text-charcoalBlack mt-2 font-normal">
+                  <span className="font-semibold text-base text-black">
+                    {" "}
+                    Added Categories
+                  </span>{" "}
+                  (Please add minimum 5 categories for proper channel
+                  management)
+                </p>
 
-              <div className="flex flex-wrap gap-2 my-3">
-             {categories.length > 0 ? (
-              categories.map((category, index) => (
-              <Badge
-               key={index}
-               variant="secondary"
-              className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground text-sm"
-                >
-             {category}
-            
-           </Badge>
-           ))
-         ) : (
-          <Badge
-        variant="secondary"
-        className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground text-sm"
-      >
-        Books
-      </Badge>
-         )}
-       </div>
-        </div>
+                <div className="flex flex-wrap gap-2 my-3">
+                  {categories.length > 0 ? (
+                    categories.map((category, index) => (
+                      <Badge
+                        key={index}
+                        variant="secondary"
+                        className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground text-sm"
+                      >
+                        {category}
+                      </Badge>
+                    ))
+                  ) : (
+                    <Badge
+                      variant="secondary"
+                      className="flex items-center gap-1 w-20 h-8 rounded-md bg-inputbackground text-sm"
+                    >
+                      Books
+                    </Badge>
+                  )}
+                </div>
+              </div>
 
               <div>
                 <div className="flex items-center justify-between mt-5">

@@ -67,7 +67,9 @@ export default function Dashboard() {
                   <User className="mr-2 h-6 w-6 text-black" />
                   <span>Dashboard</span>
                 </div>
-                <Bell className="h-5 w-5 text-black cursor-pointer" />
+                <a href="/notification">
+                  <Bell className="h-5 w-5 text-black cursor-pointer" />
+                </a>
               </div>
               <div className="text-black px-2">Dashboard</div>
             </div>
