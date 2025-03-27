@@ -1,31 +1,65 @@
 import React from "react";
-import { useRef, useEffect } from "react";
-import {
-  Headset,
-  Gauge,
-  Inbox,
-  Infinity,
-  ChartNoAxesColumn,
-  MonitorOff,
-  CircleUserRound,
-  Sparkles,
-  Save,
-  X,
-} from "lucide-react";
+import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
+import {X} from "lucide-react";
 
 interface SubscriptionPopupProps {
   setIsMobileSubscriptionOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
+interface Plan {
+  price: string;
+  questions: string;
+  prePostAds: string;
+  organicAds: string;
+  publicAvatars: string;
+  premiumAvatars: string;
+  liveStreams: string;
+}
 
-const Subscriptionpopup: React.FC<SubscriptionPopupProps> = ({ setIsMobileSubscriptionOpen }) => {
-  
+const plans: Record<"adFree" | "premium" | "yearly", Plan> = {
+  adFree: {
+    price: "$7",
+    questions: "Unlimited",
+    prePostAds: "No",
+    organicAds: "No",
+    publicAvatars: "Yes",
+    premiumAvatars: "No",
+    liveStreams: "No",
+  },
+  premium: {
+    price: "$15",
+    questions: "Unlimited",
+    prePostAds: "No",
+    organicAds: "No",
+    publicAvatars: "Yes",
+    premiumAvatars: "Yes",
+    liveStreams: "Yes",
+  },
+  yearly: {
+    price: "$77",
+    questions: "Unlimited",
+    prePostAds: "No",
+    organicAds: "No",
+    publicAvatars: "Yes",
+    premiumAvatars: "Yes",
+    liveStreams: "Yes",
+  },
+};
+const Subscriptionpopup: React.FC<SubscriptionPopupProps> = ({
+  setIsMobileSubscriptionOpen,
+}) => {
   const popupRef = useRef<HTMLDivElement | null>(null);
+  const [selectedPlan, setSelectedPlan] =
+    useState<keyof typeof plans>("adFree");
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-     if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
-       setIsMobileSubscriptionOpen(false);
-     }
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        setIsMobileSubscriptionOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -36,7 +70,7 @@ const Subscriptionpopup: React.FC<SubscriptionPopupProps> = ({ setIsMobileSubscr
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10 px-2">
       <div
         ref={popupRef}
-        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[22rem] w-full relative h-[40rem] overflow-y-auto scroll"
+        className="bg-white rounded-lg shadow-xl px-4 py-6 max-w-[25rem] w-full relative h-[30rem]  scroll"
       >
         <div className="border-b border-secondarycolor pb-4">
           <div className="flex items-center justify-between">
@@ -49,88 +83,58 @@ const Subscriptionpopup: React.FC<SubscriptionPopupProps> = ({ setIsMobileSubscr
           <h2 className="text-sm font-semibold pt-1">
             Current Plan:{" "}
             <span className="text-sm font-normal">
-              Free - Enjoy basic features with the Free Plan.
+              Freemium(Basic) - Ad Supported,access to 5 questions with
+              interruptions.
             </span>
           </h2>
         </div>
-        <div className="space-y-2 pt-4">
-          <h1 className="text-base font-semibold">Why get premium?</h1>
-          <ul className="space-y-4">
-            <li className="flex items-start gap-3">
-              <Headset size={20} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Get access to 24/7 priority customer support.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Gauge size={20} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Faster response times and optimized performance.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Inbox size={20} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Unlock exclusive tools and capabilities.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Infinity size={25} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Enjoy unlimited interactions and increased session durations.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <ChartNoAxesColumn size={25} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Detailed analytics and insights to help you maximize your
-                results.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <MonitorOff size={25} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Enjoy an uninterrupted, ad-free experience while using the app.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <CircleUserRound size={25} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Personalize your experience with advanced avatar customization.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Sparkles size={25} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Access premium templates, designs, or pre-trained models.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <Save size={25} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Save and sync your data across all devices seamlessly.
-              </span>
-            </li>
-            <li className="flex items-start gap-3">
-              <ChartNoAxesColumn size={25} className="text-secondarycolor" />
-              <span className="text-sm font-normal">
-                Be the first to try out new features and updates before anyone
-                else!
-              </span>
-            </li>
-          </ul>
-          <button className="w-full h-10 bg-secondarycolor text-whitecolor font-normal rounded-md mt-2">
-            Upgrade to Premium
-          </button>
+        <div className="flex justify-between gap-2 pt-4">
+          {Object.keys(plans).map((plan) => (
+            <button
+              key={plan}
+              onClick={() => setSelectedPlan(plan as keyof typeof plans)}
+              className={`border ${
+                selectedPlan === plan ? "border-skycolor bg-skycolor text-white" : "border-transparentskycolor"
+              } sm:px-5 w-28 rounded-lg flex flex-col items-center sm:items-start gap-1 `}
+            >
+              <Image
+                src="/support_agent.svg"
+                alt="Support"
+                width={30}
+                height={30}
+                className={`${selectedPlan === plan ? "filter invert" : ""}`}
+              />
+              <span className="text-sm font-normal text-left capitalize pb-1">{plan}</span>
+            </button>
+          ))}
         </div>
-        <div className="text-center pt-3">
-          <p className="text-xs font-normal">
-            Enjoy unlimited access to all features for $10/month.
-          </p>
+
+        <div className="pt-4">
+          <ul>
+            {Object.entries(plans[selectedPlan]).map(
+              ([key, value]: [string, string]) => (
+                <li key={key} className="flex justify-between pt-2">
+                  <span className="text-mediumgray2 font-normal text-sm capitalize">
+                    {key.replace(/([A-Z])/g, " $1")}
+                  </span>
+                
+                    <span className="text-blackcolor font-semibold text-sm transition duration-300 ease-in-out">
+                      {value}
+                    </span>
+                 
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+        <div className="space-y-2 pt-4">
+          <button className="w-full h-10 bg-secondarycolor text-whitecolor font-normal rounded-md">
+            Upgrade Plan
+          </button>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Subscriptionpopup;

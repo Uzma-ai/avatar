@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   CalendarIcon,
   CalendarClock,
+  Bell,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
@@ -33,9 +34,8 @@ import {
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
 
-
 export default function ContentManagement() {
-   const router = useRouter();
+  const router = useRouter();
   const [dragActive, setDragActive] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<number | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -118,10 +118,15 @@ export default function ContentManagement() {
         <div className="flex-1 h-full px-2 overflow-hidden">
           {/* Header */}
           <div className="flex justify-between items-center h-32 pt-5 px-7 rounded-md">
-            <div className="flex flex-col items-start gap-1">
-              <h2 className="text-2xl font-semibold mb-2 flex items-center">
-                <User className="mr-2 h-6 w-6 text-black" />
-                <span>Content</span>
+            <div className="flex flex-col items-start gap-1 w-full">
+              <h2 className="text-2xl font-semibold mb-2 flex items-center justify-between w-full">
+                <div className="flex items-center">
+                  <User className="mr-2 h-6 w-6 text-black" />
+                  <span>Content</span>
+                </div>
+                <a href="/notification">
+                  <Bell className="h-5 w-5 text-black cursor-pointer" />
+                </a>
               </h2>
               <div className="text-black ml-4 flex items-center gap-3">
                 <span

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User } from "lucide-react";
+import { User, Bell } from "lucide-react";
 import { ChevronDown } from "lucide-react";
 import { Trash2, Star, StarHalf } from "lucide-react";
 import {
@@ -102,10 +102,16 @@ export default function EngagementCommunity() {
 
           <div className="flex items-center h-32 py-4 px-7 rounded-md">
             <div className="w-full">
-              <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                <User className="mr-2 h-6 w-6 text-mediumblack" />
-                <span>Engagement</span>
+              <h2 className="text-2xl font-semibold mb-4 flex items-center justify-between">
+                <div className="flex items-center">
+                  <User className="mr-2 h-6 w-6 text-mediumblack" />
+                  <span>Engagement</span>
+                </div>
+                <a href="/notification">
+                  <Bell className="h-5 w-5 text-black cursor-pointer" />
+                </a>
               </h2>
+
               <div className="flex items-center justify-between">
                 <div className="text-black ml-4 flex items-center gap-3">
                   <span
