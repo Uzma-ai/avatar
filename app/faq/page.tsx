@@ -151,49 +151,42 @@ const FAQPage: React.FC = () => {
             >
               <DropdownMenuTrigger asChild>
                 <button
-                  className="flex items-center gap-2 rounded-full bg-white p-1 pr-3 shadow-sm hover:bg-gray-100/50 focus:!outline-none"
+                  className={`flex items-center justify-between gap-2 bg-blurwhite/60 sm:bg-blurwhite/10 backdrop-blur-sm p-1 pr-3 shadow-sm focus:!outline-none  ${
+                    isAvatarDropdownOpen
+                      ? "rounded-t-2xl rounded-b-none w-[170px]"
+                      : "rounded-full"
+                  }`}
                   aria-label="User menu"
                 >
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage
-                      src="/useravtar.jpeg"
-                      alt="User avatar"
-                      className="object-cover"
-                    />
-                    <AvatarFallback>H</AvatarFallback>
-                  </Avatar>
+                  {" "}
+                  <div className="flex items-center">
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage
+                        src="/useravtar.jpeg"
+                        alt="User avatar"
+                        className="object-cover"
+                      />
+                      <AvatarFallback>HN</AvatarFallback>
+                    </Avatar>
+                    {isAvatarDropdownOpen && (
+                      <span className="ml-2 text-secondarycolor font-bold">
+                        Hannah
+                      </span>
+                    )}
+                  </div>
                   <ChevronDown
                     className={`h-4 w-4 text-blackcolor transition-transform ${
                       isAvatarDropdownOpen ? "rotate-180" : ""
                     }`}
                   />
-                  {isAvatarDropdownOpen && (
-                    <span className="sr-only">
-                      Menu is open, press escape to close
-                    </span>
-                  )}
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-[200px] bg-white rounded-2xl "
+                className="w-[170px] bg-blurwhite/60 sm:bg-blurwhite/10 rounded-b-2xl rounded-t-none backdrop-blur-lg border border-white/10 shadow-xl animate-in fade-in-80 data-[side=bottom]:slide-in-from-top-2 "
                 align="start"
-                alignOffset={1}
-                sideOffset={5}
+                alignOffset={0}
+                sideOffset={0}
               >
-                <div className="flex items-center gap-2 p-2 mb-1">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage
-                      src="/useravtar.jpeg"
-                      alt="User avatar"
-                      className="object-cover"
-                    />
-                    <AvatarFallback>H</AvatarFallback>
-                  </Avatar>
-                  <span className="text-sm text-secondarycolor font-bold">
-                    Hannah
-                  </span>
-                </div>
-                <DropdownMenuSeparator className="opacity-30 md:opacity-1" />
                 <DropdownMenuItem>
                   {/* Mobile: Show Popup */}
                   <div onClick={toggleProfilePopup} className="block md:hidden">

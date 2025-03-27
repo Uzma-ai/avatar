@@ -14,6 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import Image from "next/image";
 
 export default function EngagementCommunity() {
   const router = useRouter();
@@ -108,7 +109,7 @@ export default function EngagementCommunity() {
               <div className="flex items-center justify-between">
                 <div className="text-black ml-4 flex items-center gap-3">
                   <span
-                    onClick={() => router.push("/revenue-settings")}
+                    onClick={() => router.push("/engagement-community")}
                     className="cursor-pointer"
                   >
                     Engagement
@@ -116,7 +117,7 @@ export default function EngagementCommunity() {
                   <span>&gt;</span>
                   <span
                     className="cursor-pointer"
-                    onClick={() => router.push("/revenue-settings")}
+                    onClick={() => router.push("/engagement-community")}
                   >
                     Community
                   </span>
@@ -128,7 +129,7 @@ export default function EngagementCommunity() {
           {/* Content */}
           <div className="bg-gray-100 py-7 px-7 h-[calc(100%-128px)] overflow-y-auto scroll">
             <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
-              <div className="border-b border-secondarycolor pb-4">
+              <div className="border-b border-secondarycolor pb-6">
                 <h2 className="text-lg font-semibold">Community Engagement</h2>
                 <div className="flex justify-between">
                   <p className="font-normal text-sm">
@@ -138,83 +139,84 @@ export default function EngagementCommunity() {
                 </div>
               </div>
 
-              <h1 className="text-lg font-semibold mb-2 mt-6">
+              <h1 className="text-base font-semibold mb-2 mt-6">
                 Fan Interaction Metrics
               </h1>
 
               <div className="flex flex-wrap items-center gap-4 mt-4">
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <img
-                    src="/recommend.png"
-                    alt="recommend"
-                    className="absolute top-4 right-4 w-8 h-8"
-                  />
-                  <h3 className="text-lg font-semibold">Total Likes</h3>
-                  <p className="text-3xl font-bold mt-10">223,230</p>
+                <div className="bg-gradient-to-r flex flex-col justify-between from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40">
+                  <div className="flex items-start justify-between">
+                    <h3 className="text-lg font-normal">Total Likes</h3>
+                    <Image
+                      src="/recommend.png"
+                      alt="recommend"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <p className="text-3xl font-bold">223,230</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <img
-                    src="/mobile_screen_share.png"
-                    alt="Mobile"
-                    className="absolute top-4 right-4 w-6 h-10"
-                  />
-                  <h3 className="text-lg font-semibold text-white">
-                    Total Shares
-                  </h3>
-                  <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">
-                    12,521
-                  </p>
+                <div className="bg-gradient-to-r flex flex-col justify-between from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40">
+                  <div className="flex items-start justify-between">
+                    <h3 className="text-lg font-normal">Total Shares</h3>
+                    <Image
+                      src="/mobile_screen_share.png"
+                      alt="Mobile"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <p className="text-2xl lg:text-3xl font-bold">12,521</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <img
-                    src="/alternate_email.png"
-                    alt="alternate_email"
-                    className="absolute top-4 right-4 w-8 h-8"
-                  />
-                  <h3 className="text-lg font-semibold text-white">
-                    Total Mentions
-                  </h3>
-                  <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">
-                    534
-                  </p>
+                <div className="bg-gradient-to-r flex flex-col justify-between from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] text-white p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40">
+                  <div className="flex items-start justify-between">
+                    <h3 className="text-lg font-normal">Total Mentions</h3>
+                    <Image
+                      src="/alternate_email.png"
+                      alt="Email"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <p className="text-2xl lg:text-3xl font-bold">534</p>
                 </div>
 
-                <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
-                  <img
-                    src="/forum.png"
-                    alt="Forum"
-                    className="absolute top-4 right-4 w-8 h-8"
-                  />
-                  <h3 className="text-lg font-semibold text-white">
-                    Total Comments
-                  </h3>
-                  <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">
-                    23,583
-                  </p>
+                <div className="bg-gradient-to-r flex flex-col justify-between from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 text-white min-w-[200px] h-40">
+                  <div className="flex items-start justify-between">
+                    <h3 className="text-lg font-normal">Total Comments</h3>
+                    <Image
+                      src="/forum.png"
+                      alt="Forum"
+                      width={30}
+                      height={30}
+                    />
+                  </div>
+                  <p className="text-2xl lg:text-3xl font-bold">23,583</p>
                 </div>
               </div>
 
-              <h1 className="text-lg font-semibold mb-2 mt-6">
+              <h1 className="text-base font-semibold mb-2 mt-6">
                 Top 3 Content with Most Engagement
               </h1>
-              <Table className="w-full overflow-x-auto table-fixed">
+              <Table className="w-full overflow-x-auto table-fixed scroll">
                 <TableHeader>
                   <TableRow className="border-b border-secondarycolor">
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[50px] text-center"></TableHead>
+                    <TableHead className="w-[200px] text-left pl-14 text-blackcolor font-semibold text-sm">
                       Post Name
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Likes
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Comments
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Mentions
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Share
                     </TableHead>
                   </TableRow>
@@ -223,22 +225,28 @@ export default function EngagementCommunity() {
                 <TableBody>
                   {/* First Row */}
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
+                    <TableCell className="w-[100px] flex items-center py-3">
+                      <Image
                         src="/quality-badge.png"
-                        alt="Dinner Post"
-                        className="w-12 h-12 rounded"
+                        alt="Badge"
+                        width={40}
+                        height={40}
                       />
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-44 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
+                    </TableCell>
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
+                        />
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
                     <TableCell className="w-[200px] text-center">
@@ -255,112 +263,125 @@ export default function EngagementCommunity() {
 
                   {/* Second Row */}
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
+                    <TableCell className="w-[100px] flex items-center  py-3">
+                      <Image
                         src="/quality-badge 2.png"
-                        alt="Dinner Post"
-                        className="w-12 h-12 rounded"
+                        alt="Badge"
+                        width={40}
+                        height={40}
                       />
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-44 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
+                    </TableCell>
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
+                        />
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       23,230
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       200
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       1,573
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       1,573
                     </TableCell>
                   </TableRow>
 
                   {/* Third Row */}
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
+                    <TableCell className="w-[100px] flex items-center  py-3">
+                      <Image
                         src="/quality-badge 3.png"
-                        alt="Dinner Post"
-                        className="w-12 h-12 rounded"
+                        alt="Badge"
+                        width={40}
+                        height={40}
                       />
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-40 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
+                    </TableCell>
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
+                        />
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       23,230
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       200
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       1,573
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center font-normal">
                       1,573
                     </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
               <div className="flex justify-between items-center mt-6">
-                <div className="flex items-center gap-2">
-                  <h1 className="text-lg font-semibold">
-                    Recent Reported Comments
+                <div className="flex items-end lg:items-center gap-2">
+                  <div className="flex flex-col lg:flex-row items-start lg:items-center lg:gap-2">
+                    <h1 className="text-base font-semibold">
+                      Recent Reported Comments
+                    </h1>
                     <span className="text-base font-normal text-mediumgray2">
                       (Click on the comment to see details)
                     </span>
-                  </h1>
-                  <div className="bg-skycolor text-white rounded-full w-8 h-8 flex items-center justify-center text-center">
+                  </div>
+                  <div className="bg-skycolor text-white rounded-full w-8 h-8 flex items-center justify-center text-center text-xs">
                     50
                   </div>
                 </div>
-
                 <span className="text-base font-normal text-skycolor underline cursor-pointer">
-                  See all
+                  See All
                 </span>
               </div>
-              <Table className="w-full overflow-x-auto table-fixed mt-4">
+              <Table className="w-full overflow-x-auto table-fixed mt-4 hide-scrollbar">
                 <TableHeader>
                   <TableRow className="border-b border-secondarycolor">
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-sm">
                       Post Name
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-sm">
                       Comment by
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Comment
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Reported by
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Date & Time
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Report Count
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[150px] text-center text-blackcolor font-semibold text-sm">
                       Actions
                     </TableHead>
                   </TableRow>
@@ -369,67 +390,72 @@ export default function EngagementCommunity() {
                 <TableBody>
                   {/* First Row */}
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-20 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal ">
-                      <div className="flex items-center justify-center">
-                        <img
-                          src="Harvey.jpg" // Replace with the actual image path
-                          alt="Harvey Specter"
-                          className="object-cover w-10 h-10 rounded-lg mr-2 ml-6 " // Adjust the size and styling of the image
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
                         />
-                        Harvey Specter
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] flex items-center gap-2 text-center text-sm font-normal px-4">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Harvey.jpg"
+                          alt="Harvey Specter"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                      <span>Harvey Specter</span>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       <div className="flex flex-col items-center text-red ">
                         <span>Poor quality,******</span>
                         <span>******yourself</span>
                       </div>
                     </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <img
-                        src="Reported_img.jpg"
-                        alt="image"
-                        className=" object-cover w-10 h-10 rounded-lg"
-                      />
-                    </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                    <TableCell className="w-[150px] text-center text-base font-normal flex justify-center items-center py-5">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Reported_img.jpg"
+                          alt="Reported Image"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
+                      <div>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       5
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-base font-normal">
                       {/* Dropdown button */}
                       <div className="relative inline-block text-left">
                         <button
                           type="button"
-                          className={`inline-flex items-center px-3 py-2 text-white rounded ${getButtonColor(
+                          className={`inline-flex items-center px-3 py-2 text-white text-sm justify-between rounded w-28 ${getButtonColor(
                             status1
                           )}`}
                           onClick={() => setIsDropdownOpen1(!isDropdownOpen1)} // Toggle dropdown for row 1
                         >
                           {status1.charAt(0).toUpperCase() + status1.slice(1)}
-                          <ChevronDown className="ml-2" />
+                          <ChevronDown />
                         </button>
 
                         {/* Dropdown menu for row 1 */}
@@ -460,65 +486,72 @@ export default function EngagementCommunity() {
 
                   {/* Second Row */}
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-20 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div className="flex items-center justify-center">
-                        <img
-                          src="Harvey.jpg" // Replace with the actual image path
-                          alt="Harvey Specter"
-                          className="object-cover w-10 h-10 rounded-lg mr-2 ml-6" // Adjust the size and styling of the image
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
                         />
-                        Harvey Specter
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] flex items-center gap-2 text-center text-base font-normal px-4">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Harvey.jpg"
+                          alt="Harvey Specter"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                      <span>Harvey Specter</span>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       <div className="flex flex-col items-center text-red ">
                         <span>Poor quality,******</span>
                         <span>******yourself</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <img
-                        src="Reported_img.jpg"
-                        alt="image"
-                        className=" object-cover w-10 h-10 rounded-lg"
-                      />
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                    <TableCell className="w-[150px] text-center text-base font-normal flex justify-center items-center py-5">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Reported_img.jpg"
+                          alt="Reported Image"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
+                      <div>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       5
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-base font-normal">
                       {/* Dropdown button */}
                       <div className="relative inline-block text-left">
                         <button
                           type="button"
-                          className={`inline-flex items-center px-3 py-2 text-white rounded ${getButtonColor(
+                          className={`inline-flex items-center px-3 py-2 text-white rounded w-28 text-sm justify-between ${getButtonColor(
                             status2
                           )}`}
                           onClick={() => setIsDropdownOpen2(!isDropdownOpen2)} // Toggle dropdown for row 2
                         >
                           {status2.charAt(0).toUpperCase() + status2.slice(1)}
-                          <ChevronDown className="ml-2" />
+                          <ChevronDown />
                         </button>
 
                         {/* Dropdown menu for row 2 */}
@@ -549,65 +582,72 @@ export default function EngagementCommunity() {
 
                   {/* Third Row */}
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-20 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div className="flex items-center justify-center">
-                        <img
-                          src="Harvey.jpg" // Replace with the actual image path
-                          alt="Harvey Specter"
-                          className="object-cover w-10 h-10 rounded-lg mr-2 ml-6" // Adjust the size and styling of the image
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
                         />
-                        Harvey Specter
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] flex items-center gap-2 text-center text-base font-normal px-4">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Harvey.jpg"
+                          alt="Harvey Specter"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                      <span>Harvey Specter</span>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       <div className="flex flex-col items-center text-red ">
                         <span>Poor quality,******</span>
                         <span>******yourself</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <img
-                        src="Reported_img.jpg"
-                        alt="image"
-                        className=" object-cover w-10 h-10 rounded-lg"
-                      />
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                    <TableCell className="w-[150px] text-center text-base font-normal flex justify-center items-center py-5">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Reported_img.jpg"
+                          alt="Reported Image"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
+                      <div>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       5
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-base font-normal">
                       {/* Dropdown button */}
                       <div className="relative inline-block text-left">
                         <button
                           type="button"
-                          className={`inline-flex items-center px-3 py-2 text-white rounded ${getButtonColor(
+                          className={`inline-flex items-center px-3 py-2 text-white rounded w-28 text-sm justify-between ${getButtonColor(
                             status3
                           )}`}
                           onClick={() => setIsDropdownOpen3(!isDropdownOpen3)} // Toggle dropdown for row 2
                         >
                           {status3.charAt(0).toUpperCase() + status3.slice(1)}
-                          <ChevronDown className="ml-2" />
+                          <ChevronDown />
                         </button>
 
                         {/* Dropdown menu for row 2 */}
@@ -637,66 +677,72 @@ export default function EngagementCommunity() {
                   </TableRow>
 
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-20 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div className="flex items-center justify-center">
-                        <img
-                          src="Harvey.jpg" // Replace with the actual image path
-                          alt="Harvey Specter"
-                          className="object-cover w-10 h-10 rounded-lg mr-2 ml-6" // Adjust the size and styling of the image
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
                         />
-                        Harvey Specter
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] flex items-center gap-2 text-center text-base font-normal px-4 ">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Harvey.jpg"
+                          alt="Harvey Specter"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                      <span>Harvey Specter</span>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       <div className="flex flex-col items-center text-red ">
                         <span>Poor quality,******</span>
                         <span>******yourself</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <img
-                        src="Reported_img.jpg"
-                        alt="image"
-                        className=" object-cover w-10 h-10 rounded-lg"
-                      />
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                    <TableCell className="w-[150px] text-center text-base font-normal flex justify-center items-center py-5">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Reported_img.jpg"
+                          alt="Reported Image"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
+                      <div>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       5
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-base font-normal">
                       {/* Dropdown button for row 4 */}
                       <div className="relative inline-block text-left">
                         <button
                           type="button"
-                          className={`inline-flex items-center px-3 py-2 text-white rounded ${getButtonColor(
+                          className={`inline-flex items-center px-3 py-2 text-white rounded w-28 text-sm justify-between ${getButtonColor(
                             status4
                           )}`}
                           onClick={() => setIsDropdownOpen4(!isDropdownOpen4)} // Toggle dropdown for row 4
                         >
                           {status4.charAt(0).toUpperCase() + status4.slice(1)}
-                          <ChevronDown className="ml-2" />
+                          <ChevronDown />
                         </button>
 
                         {/* Dropdown menu for row 4 */}
@@ -726,65 +772,72 @@ export default function EngagementCommunity() {
                   </TableRow>
 
                   <TableRow className="border-0">
-                    <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/food-list.png"
-                        alt="Dinner Post"
-                        className="w-20 h-16 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Dinner Post</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Entertainment
-                        </p>
-                      </div>
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div className="flex items-center justify-center">
-                        <img
-                          src="Harvey.jpg" // Replace with the actual image path
-                          alt="Harvey Specter"
-                          className="object-cover w-10 h-10 rounded-lg mr-2 ml-6" // Adjust the size and styling of the image
+                    <TableCell className="w-[200px] text-center">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          src="/food-list.png"
+                          alt="Dinner Post"
+                          width={90}
+                          height={60}
                         />
-                        Harvey Specter
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Dinner Post</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Entertainment
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] flex items-center gap-2 text-center text-base font-normal px-4 ">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Harvey.jpg"
+                          alt="Harvey Specter"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
+                      </div>
+                      <span>Harvey Specter</span>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       <div className="flex flex-col items-center text-red ">
                         <span>Poor quality,******</span>
                         <span>******yourself</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <img
-                        src="Reported_img.jpg"
-                        alt="image"
-                        className=" object-cover w-10 h-10 rounded-lg"
-                      />
-                    </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
-                      <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                    <TableCell className="w-[150px] text-center text-base font-normal flex justify-center items-center py-5">
+                      <div className="w-8 h-8 rounded-lg overflow-hidden relative">
+                        <Image
+                          src="/Reported_img.jpg"
+                          alt="Reported Image"
+                          width={40}
+                          height={40}
+                          className="absolute inset-0 w-full h-full object-cover"
+                        />
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
+                      <div>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
+                      </div>
+                    </TableCell>
+                    <TableCell className="w-[150px] text-center text-sm font-normal">
                       5
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[150px] text-center text-base font-normal">
                       {/* Dropdown button */}
                       <div className="relative inline-block text-left">
                         <button
                           type="button"
-                          className={`inline-flex items-center px-3 py-2 text-white rounded ${getButtonColor(
+                          className={`inline-flex items-center px-3 py-2 text-white rounded w-28 text-sm justify-between ${getButtonColor(
                             status5
                           )}`}
                           onClick={() => setIsDropdownOpen5(!isDropdownOpen5)} // Toggle dropdown for row 5
                         >
                           {status5.charAt(0).toUpperCase() + status5.slice(1)}
-                          <ChevronDown className="ml-2" />
+                          <ChevronDown />
                         </button>
 
                         {/* Dropdown menu for row 5 */}
@@ -817,8 +870,8 @@ export default function EngagementCommunity() {
 
               <div className="flex justify-between items-center mt-6">
                 <div className="flex items-center gap-2">
-                  <h1 className="text-lg font-semibold">User Reviews</h1>
-                  <div className="bg-skycolor text-white rounded-full w-8 h-8 flex items-center justify-center text-center">
+                  <h1 className="text-base font-semibold">User Reviews</h1>
+                  <div className="bg-skycolor text-white rounded-full w-8 h-8 flex items-center justify-center text-center text-xs">
                     50
                   </div>
                 </div>
@@ -829,20 +882,19 @@ export default function EngagementCommunity() {
               <Table className="w-full overflow-x-auto table-fixed mt-4">
                 <TableHeader>
                   <TableRow className="border-b border-secondarycolor">
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-sm">
                       Post Name
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-sm">
                       Ratings
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-sm">
                       People Responded
                     </TableHead>
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-sm">
                       Date & Time
                     </TableHead>
-
-                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                    <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-sm">
                       Actions
                     </TableHead>
                   </TableRow>
@@ -852,208 +904,308 @@ export default function EngagementCommunity() {
                   {/* First Row */}
                   <TableRow className="border-0">
                     <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/Car.jpg"
-                        alt="Dinner Post"
-                        className="w-44 h-12 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Car Rental</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Informational
-                        </p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-12 rounded-md overflow-hidden relative">
+                          <Image
+                            src="/Car.jpg"
+                            alt="Car Post"
+                            width={40}
+                            height={40}
+                            className="absolute inset-0 w-full h-full object-center"
+                          />
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Car Rental</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Informational
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       {/* Full Filled Stars */}
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
 
                       {/* Half Filled Star */}
-                      <StarHalf className="text-yellow-500 inline-block" />
+                      <StarHalf
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       256,123
                     </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <Trash2 className="text-red" />
+                    <TableCell className="w-[200px] text-center flex justify-center items-center">
+                      <div className="py-2.5">
+                        <Trash2 className="text-red" />
+                      </div>
                     </TableCell>
                   </TableRow>
 
                   {/* Second Row */}
                   <TableRow className="border-0">
                     <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/Car.jpg"
-                        alt="Dinner Post"
-                        className="w-44 h-12 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Car Rental</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Informational
-                        </p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-12 rounded-md overflow-hidden relative">
+                          <Image
+                            src="/Car.jpg"
+                            alt="Car Post"
+                            width={40}
+                            height={40}
+                            className="absolute inset-0 w-full h-full object-center"
+                          />
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Car Rental</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Informational
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       {/* Full Filled Stars */}
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
 
                       {/* Half Filled Star */}
-                      <StarHalf className="text-yellow-500 inline-block" />
+                      <StarHalf
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       256,123
                     </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <Trash2 className="text-red" />
+                    <TableCell className="w-[200px] text-center flex justify-center items-center">
+                      <div className="py-2.5">
+                        <Trash2 className="text-red" />
+                      </div>
                     </TableCell>
                   </TableRow>
 
                   {/* Third Row */}
                   <TableRow className="border-0">
                     <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/Car.jpg"
-                        alt="Dinner Post"
-                        className="w-44 h-12 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Car Rental</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Informational
-                        </p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-12 rounded-md overflow-hidden relative">
+                          <Image
+                            src="/Car.jpg"
+                            alt="Car Post"
+                            width={40}
+                            height={40}
+                            className="absolute inset-0 w-full h-full object-center"
+                          />
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Car Rental</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Informational
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       {/* Full Filled Stars */}
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
 
                       {/* Half Filled Star */}
-                      <StarHalf className="text-yellow-500 inline-block" />
+                      <StarHalf
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       256,123
                     </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <Trash2 className="text-red" />
+                    <TableCell className="w-[200px] text-center flex justify-center items-center">
+                      <div className="py-2.5">
+                        <Trash2 className="text-red" />
+                      </div>
                     </TableCell>
                   </TableRow>
 
                   <TableRow className="border-0">
                     <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/Car.jpg"
-                        alt="Dinner Post"
-                        className="w-44 h-12 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Car Rental</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Informational
-                        </p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-12 rounded-md overflow-hidden relative">
+                          <Image
+                            src="/Car.jpg"
+                            alt="Car Post"
+                            width={40}
+                            height={40}
+                            className="absolute inset-0 w-full h-full object-center"
+                          />
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Car Rental</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Informational
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       {/* Full Filled Stars */}
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
 
                       {/* Half Filled Star */}
-                      <StarHalf className="text-yellow-500 inline-block" />
+                      <StarHalf
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       256,123
                     </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal flex justify-center items-center">
-                      <Trash2 className="text-red" />
+                    <TableCell className="w-[200px] text-center flex justify-center items-center">
+                      <div className="py-2.5">
+                        <Trash2 className="text-red" />
+                      </div>
                     </TableCell>
                   </TableRow>
 
                   <TableRow className="border-0">
                     <TableCell className="w-[200px] flex items-center justify-start gap-3">
-                      <img
-                        src="/Car.jpg"
-                        alt="Dinner Post"
-                        className="w-44 h-12 rounded"
-                      />
-                      <div className="flex flex-col">
-                        <p className="font-medium text-base">Car Rental</p>
-                        <p className="text-mediumgray2 text-base font-normal">
-                          Informational
-                        </p>
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-12 rounded-md overflow-hidden relative">
+                          <Image
+                            src="/Car.jpg"
+                            alt="Car Post"
+                            width={40}
+                            height={40}
+                            className="absolute inset-0 w-full h-full object-center"
+                          />
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <p className="font-medium text-sm">Car Rental</p>
+                          <p className="text-mediumgray2 text-sm font-normal">
+                            Informational
+                          </p>
+                        </div>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       {/* Full Filled Stars */}
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
-                      <Star className="text-yellow-500 inline-block" />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
+                      <Star
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
 
                       {/* Half Filled Star */}
-                      <StarHalf className="text-yellow-500 inline-block" />
+                      <StarHalf
+                        size={20}
+                        className="text-yellow-500 inline-block"
+                      />
                     </TableCell>
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       256,123
                     </TableCell>
-
-                    <TableCell className="w-[200px] text-center text-base font-normal">
+                    <TableCell className="w-[200px] text-center text-sm font-normal">
                       <div>
-                        <span className="text-base font-normal">
-                          6th Jan 2025
-                        </span>
-                        <span className="block text-sm">02:00 PM</span>
+                        <span className="font-normal">6th Jan 2025</span>
+                        <span className="block text-xs">02:00 PM</span>
                       </div>
                     </TableCell>
-                    <TableCell className="w-[200px] text-center  text-base font-normal flex justify-center items-center">
-                      <Trash2 className="text-red" />
+                    <TableCell className="w-[200px] text-center flex justify-center items-center">
+                      <div className="py-2.5">
+                        <Trash2 className="text-red" />
+                      </div>
                     </TableCell>
                   </TableRow>
                 </TableBody>
