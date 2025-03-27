@@ -2,7 +2,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
-import { User, TrendingDown, TrendingUp, SlidersHorizontal,Bell } from "lucide-react";
+import {
+  User,
+  TrendingDown,
+  TrendingUp,
+  SlidersHorizontal,
+  Bell,
+  ChevronRight,
+} from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import BarChart from "@/components/BarChart";
 import { Button } from "@/components/ui/button";
@@ -11,6 +18,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import Image from "next/image";
 
 export default function Dashboard() {
   const [openFilter1, setOpenFilter1] = useState(false);
@@ -26,34 +42,34 @@ export default function Dashboard() {
   const calendarRef2 = useRef<HTMLDivElement>(null);
   const calendarRef3 = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent) => {
-        if (
-          dropdownRef1.current &&
-          !dropdownRef1.current.contains(event.target as Node) &&
-          dropdownRef2.current &&
-          !dropdownRef2.current.contains(event.target as Node) &&
-          dropdownRef3.current &&
-          !dropdownRef3.current.contains(event.target as Node) &&
-          calendarRef1.current &&
-          !calendarRef1.current.contains(event.target as Node) &&
-          calendarRef2.current &&
-          !calendarRef2.current.contains(event.target as Node) &&
-          calendarRef3.current &&
-          !calendarRef3.current.contains(event.target as Node)
-        ) {
-          setOpenFilter1(false);
-          setOpenFilter2(false);
-          setOpenFilter3(false);
-          setShowCalendar1(false);
-          setShowCalendar2(false);
-          setShowCalendar3(false);
-        }
-      };
-  
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef1.current &&
+        !dropdownRef1.current.contains(event.target as Node) &&
+        dropdownRef2.current &&
+        !dropdownRef2.current.contains(event.target as Node) &&
+        dropdownRef3.current &&
+        !dropdownRef3.current.contains(event.target as Node) &&
+        calendarRef1.current &&
+        !calendarRef1.current.contains(event.target as Node) &&
+        calendarRef2.current &&
+        !calendarRef2.current.contains(event.target as Node) &&
+        calendarRef3.current &&
+        !calendarRef3.current.contains(event.target as Node)
+      ) {
+        setOpenFilter1(false);
+        setOpenFilter2(false);
+        setOpenFilter3(false);
+        setShowCalendar1(false);
+        setShowCalendar2(false);
+        setShowCalendar3(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <>
@@ -80,7 +96,7 @@ export default function Dashboard() {
             <div className="bg-white rounded-lg shadow-md px-4 py-3 mx-auto">
               <div>
                 <div className="flex items-center justify-between">
-                  <h1 className="font-semibold text-base">
+                  <h1 className="font-semibold text-lg">
                     Content Creator Dashboard
                   </h1>
                   <div className="relative inline-block" ref={dropdownRef1}>
@@ -198,7 +214,7 @@ export default function Dashboard() {
 
                 <div>
                   <div className="flex items-center justify-between mt-10">
-                    <h1 className="font-semibold text-base">
+                    <h1 className="font-semibold text-lg">
                       Content Performance Graph
                     </h1>
                     <div className="relative inline-block" ref={dropdownRef2}>
@@ -278,268 +294,240 @@ export default function Dashboard() {
                 </div>
 
                 <div className="flex items-center justify-between mt-10">
-                  <h1 className="font-semibold text-base">
+                  <h1 className="font-semibold text-lg">
                     Content Performance Table
                   </h1>
-                  <div className="relative inline-block" ref={dropdownRef3}>
-                    <Button
-                      onClick={() => {
-                        setOpenFilter3(!openFilter3);
-                        setOpenFilter1(false);
-                        setOpenFilter2(false);
-                      }}
-                      variant="outline"
-                      className="border-borderColor1 flex items-center justify-center gap-2"
-                    >
-                      Filter
-                      <SlidersHorizontal />
-                    </Button>
-
-                    {openFilter3 && (
-                      <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
-                        <ul className="text-center">
-                          <li
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => {
-                              setShowCalendar3(true);
-                              setOpenFilter3(true);
-                              setOpenFilter2(false);
-                              setOpenFilter1(false);
-                            }}
-                          >
-                            Custom Dates
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            7 days
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            1 month
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            3 months
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            6 months
-                          </li>
-                          <hr className="border-t border-lightblue" />
-                          <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                            1 year
-                          </li>
-                        </ul>
-                      </div>
-                    )}
-                    {/* Show Calendar on Left Side */}
-                    {showCalendar3 && (
-                      <Popover
-                        open={showCalendar3}
-                        onOpenChange={setShowCalendar3}
+                  <div className="flex items-center gap-4">
+                    {" "}
+                    <div className="relative inline-block" ref={dropdownRef3}>
+                      <Button
+                        onClick={() => {
+                          setOpenFilter3(!openFilter3);
+                          setOpenFilter1(false);
+                          setOpenFilter2(false);
+                        }}
+                        variant="outline"
+                        className="border-borderColor1 flex items-center justify-center gap-2"
                       >
-                        <PopoverTrigger asChild>
-                          <span
-                            ref={calendarRef3}
-                            className="absolute left-[-220px] top-0 z-50"
-                          >
-                            <PopoverContent className="w-auto p-2">
-                              <Calendar mode="single" />
-                            </PopoverContent>
-                          </span>
-                        </PopoverTrigger>
-                      </Popover>
-                    )}
+                        Filter
+                        <SlidersHorizontal />
+                      </Button>
+
+                      {openFilter3 && (
+                        <div className="absolute right-1 mt-1 w-40 py-2 bg-white border border-borderColor1 rounded-md z-50">
+                          <ul className="text-center">
+                            <li
+                              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                              onClick={() => {
+                                setShowCalendar3(true);
+                                setOpenFilter3(true);
+                                setOpenFilter2(false);
+                                setOpenFilter1(false);
+                              }}
+                            >
+                              Custom Dates
+                            </li>
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              7 days
+                            </li>
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              1 month
+                            </li>
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              3 months
+                            </li>
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              6 months
+                            </li>
+                            <hr className="border-t border-lightblue" />
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              1 year
+                            </li>
+                          </ul>
+                        </div>
+                      )}
+
+                      {/* Show Calendar on Left Side */}
+                      {showCalendar3 && (
+                        <Popover
+                          open={showCalendar3}
+                          onOpenChange={setShowCalendar3}
+                        >
+                          <PopoverTrigger asChild>
+                            <span
+                              ref={calendarRef3}
+                              className="absolute left-[-220px] top-0 z-50"
+                            >
+                              <PopoverContent className="w-auto p-2">
+                                <Calendar mode="single" />
+                              </PopoverContent>
+                            </span>
+                          </PopoverTrigger>
+                        </Popover>
+                      )}
+                    </div>
+                    {/* See All Button */}
+                    <div className="flex items-center gap-1 cursor-pointer text-skycolor ">
+                      <span className="text-base font-bold">See All</span>
+                      <ChevronRight className="w-4 h-4 font-bold" />
+                    </div>
                   </div>
                 </div>
 
-                <div className="bg-white mt-5 rounded-lg border border-secondarycolor shadow-md px-6 py-3 mx-auto overflow-x-auto whitespace-nowrap">
-                  <table className="w-full text-left border-collapse gap-1">
-                    <thead className="text-base font-semibold">
-                      <tr>
-                        <th className="px-4 py-2 text-left font-semibold">
-                          Content Title
-                        </th>
-                        <th className="px-4 py-2 text-center font-semibold">
-                          Impressions
-                        </th>
-                        <th className="px-4 py-2 text-center font-semibold">
-                          Clicks
-                        </th>
-                        <th className="px-4 py-2 text-center font-semibold">
-                          Engagement Rate
-                        </th>
-                        <th className="px-4 py-2 text-center font-semibold">
-                          Earnings
-                        </th>
-                      </tr>
-                      <tr>
-                        <td colSpan={5}>
-                          <hr className="border-t border-secondarycolor mb-1" />
-                        </td>
-                      </tr>
-                    </thead>
-                    <tbody className="space-x-4">
-                      <tr>
-                        <td className="px-4 py-2 text-left font-normal">
-                          Diwali Post
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          3546
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          7425
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          30%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $365
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-left font-normal">
-                          New Year
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          1202
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          3213
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          18%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $10
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-left font-normal">
-                          Birthday Post
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          2102
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          4541
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          63%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $30
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-left font-normal">
-                          Diwali Post
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          3546
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          7425
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          30%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $365
-                        </td>
-                      </tr>
-                      <tr>
-                        <td className="px-4 py-2 text-left font-normal">
-                          Birthday Post
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          2102
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          4541
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          63%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $30
-                        </td>
-                      </tr>
+                <Table className="w-full overflow-x-auto table-fixed scroll">
+                  <TableHeader>
+                    <TableRow className="border-b border-secondarycolor">
+                      <TableHead className="w-[200px] text-left pl-14 text-blackcolor font-semibold text-base">
+                        Content Title
+                      </TableHead>
+                      <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                        Impressions
+                      </TableHead>
+                      <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                        Clicks
+                      </TableHead>
+                      <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base whitespace-nowrap">
+                        Engagement Rate
+                      </TableHead>
+                      <TableHead className="w-[200px] text-center text-blackcolor font-semibold text-base">
+                        Earnings
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
 
-                      <tr className="">
-                        <td className="px-4 py-2 text-left font-normal">
-                          New Year
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          1202
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          3213
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          18%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $10
-                        </td>
-                      </tr>
+                  <TableBody>
+                    {/* First Row */}
+                    <TableRow className="border-0">
+                      <TableCell className="w-[200px] text-center">
+                        <div className="flex items-center gap-3">
+                          <Image
+                            src="/food-list.png"
+                            alt="Dinner Post"
+                            width={140}
+                            height={90}
+                          />
+                          <div className="flex flex-col items-start">
+                            <p className="font-normal text-base">Dinner Post</p>
+                            <p className="text-mediumgray2 text-base font-normal">
+                              Entertainment
+                            </p>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center text-base font-normal">
+                        200
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center text-base font-normal">
+                        150
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center text-base font-normal">
+                        15%
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center text-base font-normal text-lightGreen">
+                        $345
+                      </TableCell>
+                    </TableRow>
 
-                      <tr>
-                        <td className="px-4 py-2 text-left font-normal">
-                          Birthday Post
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          2102
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          4541
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          63%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $30
-                        </td>
-                      </tr>
+                    {/* Second Row */}
+                    <TableRow className="border-0">
+                      <TableCell className="w-[200px] text-center text-base font-normal">
+                        <div className="flex items-center gap-3">
+                          <Image
+                            src="/food-list.png"
+                            alt="Dinner Post"
+                            width={140}
+                            height={90}
+                          />
+                          <div className="flex flex-col items-start">
+                            <p className="text-base font-normal">Dinner Post</p>
+                            <p className="text-mediumgray2 text-base font-normal">
+                              Entertainment
+                            </p>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        200
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        150
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        15%
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base text-lightGreen">
+                        $345
+                      </TableCell>
+                    </TableRow>
 
-                      <tr>
-                        <td className="px-4 py-2 text-left font-normal">
-                          Diwali Post
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          3546
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          7425
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          30%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $365
-                        </td>
-                      </tr>
+                    {/* Third Row */}
+                    <TableRow className="border-0">
+                      <TableCell className="w-[200px] text-center">
+                        <div className="flex items-center gap-3">
+                          <Image
+                            src="/food-list.png"
+                            alt="Dinner Post"
+                            width={140}
+                            height={90}
+                          />
+                          <div className="flex flex-col items-start">
+                            <p className="text-base font-normal">Dinner Post</p>
+                            <p className="text-mediumgray2 text-base font-normal">
+                              Entertainment
+                            </p>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        200
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        150
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        15%
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base text-lightGreen">
+                        $345
+                      </TableCell>
+                    </TableRow>
 
-                      <tr className="">
-                        <td className="px-4 py-2 text-left font-normal">
-                          New Year
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          1202
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          3213
-                        </td>
-                        <td className="px-4 py-2 text-center font-normal">
-                          18%
-                        </td>
-                        <td className="px-4 py-2 text-lightGreen text-center font-normal">
-                          $10
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                    <TableRow className="border-0">
+                      <TableCell className="w-[200px] text-center">
+                        <div className="flex items-center gap-3">
+                          <Image
+                            src="/food-list.png"
+                            alt="Dinner Post"
+                            width={140}
+                            height={90}
+                          />
+                          <div className="flex flex-col items-start">
+                            <p className="text-base font-normal">Dinner Post</p>
+                            <p className="text-mediumgray2 text-base font-normal">
+                              Entertainment
+                            </p>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        200
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        150
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base">
+                        15%
+                      </TableCell>
+                      <TableCell className="w-[200px] text-center font-normal text-base text-lightGreen">
+                        $345
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
               </div>
             </div>
           </div>

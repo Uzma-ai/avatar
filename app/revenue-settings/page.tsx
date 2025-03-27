@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import PublicSidebar from "@/components/PublicSidebar";
 import { useRouter } from "next/navigation";
-import { User,  TrendingUp, SlidersHorizontal } from "lucide-react";
+import { User, TrendingUp, SlidersHorizontal, Bell } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -15,41 +15,36 @@ import { Button } from "@/components/ui/button";
 export default function ChannelManagement() {
   const router = useRouter();
   const [openFilter1, setOpenFilter1] = useState(false);
-    const [openFilter2, setOpenFilter2] = useState(false);
-    const [showCalendar1, setShowCalendar1] = useState(false);
-    const [showCalendar2, setShowCalendar2] = useState(false);
-    const dropdownRef1 = useRef<HTMLDivElement>(null);
-    const dropdownRef2 = useRef<HTMLDivElement>(null);
-    const calendarRef1 = useRef<HTMLDivElement>(null);
-    const calendarRef2 = useRef<HTMLDivElement>(null);
- 
+  const [openFilter2, setOpenFilter2] = useState(false);
+  const [showCalendar1, setShowCalendar1] = useState(false);
+  const [showCalendar2, setShowCalendar2] = useState(false);
+  const dropdownRef1 = useRef<HTMLDivElement>(null);
+  const dropdownRef2 = useRef<HTMLDivElement>(null);
+  const calendarRef1 = useRef<HTMLDivElement>(null);
+  const calendarRef2 = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-          if (
-            dropdownRef1.current &&
-            !dropdownRef1.current.contains(event.target as Node) &&
-            dropdownRef2.current &&
-            !dropdownRef2.current.contains(event.target as Node) &&
-            calendarRef1.current &&
-            !calendarRef1.current.contains(event.target as Node) &&
-            calendarRef2.current &&
-            !calendarRef2.current.contains(event.target as Node)
-          ) {
-            setOpenFilter1(false);
-            setOpenFilter2(false);
-            setShowCalendar1(false);
-            setShowCalendar2(false);
-          }
-        };
-  
-        document.addEventListener("mousedown", handleClickOutside);
-        return () =>
-          document.removeEventListener("mousedown", handleClickOutside);
-      }, []);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef1.current &&
+        !dropdownRef1.current.contains(event.target as Node) &&
+        dropdownRef2.current &&
+        !dropdownRef2.current.contains(event.target as Node) &&
+        calendarRef1.current &&
+        !calendarRef1.current.contains(event.target as Node) &&
+        calendarRef2.current &&
+        !calendarRef2.current.contains(event.target as Node)
+      ) {
+        setOpenFilter1(false);
+        setOpenFilter2(false);
+        setShowCalendar1(false);
+        setShowCalendar2(false);
+      }
+    };
 
-  
-  
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <>
@@ -59,10 +54,15 @@ export default function ChannelManagement() {
           {/* Header */}
           <div className="flex items-center h-32 py-4 px-7 rounded-md">
             <div className="w-full">
-              <h2 className="text-2xl font-semibold mb-4 flex items-center">
-                <User className="mr-2 h-6 w-6 text-mediumblack" />
-                <span>Revenue</span>
-              </h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-2xl font-semibold flex items-center">
+                  <User className="mr-2 h-6 w-6 text-mediumblack" />
+                  <span>Revenue</span>
+                </h2>
+                <a href="/notification">
+                  <Bell className="h-5 w-5 text-black cursor-pointer" />
+                </a>
+              </div>
               <div className="flex items-center justify-between">
                 <div className="text-black ml-4 flex items-center gap-3">
                   <span
@@ -258,9 +258,8 @@ export default function ChannelManagement() {
                     Top Region{" "}
                   </h3>
                   <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">
-                 North America
-                 </p>
-
+                    North America
+                  </p>
                 </div>
 
                 <div className="bg-gradient-to-r from-[#5182E3] via-[#7A9FE8] to-[#c0d4ff] p-4 rounded-3xl shadow-lg flex-1 min-w-[200px] h-40 relative">
@@ -272,7 +271,9 @@ export default function ChannelManagement() {
                   <h3 className="text-lg font-semibold text-white">
                     Top Device
                   </h3>
-                  <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">Mobile</p>
+                  <p className="text-2xl lg:text-3xl font-bold mt-10 text-white">
+                    Mobile
+                  </p>
                 </div>
               </div>
 
@@ -290,7 +291,7 @@ export default function ChannelManagement() {
                     className="border-borderColor1 flex items-center justify-center gap-2"
                   >
                     Filter
-                   <SlidersHorizontal />
+                    <SlidersHorizontal />
                   </Button>
 
                   {openFilter2 && (

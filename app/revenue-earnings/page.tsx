@@ -9,6 +9,7 @@ import {
   TrendingUp,
   TrendingDown,
   Trash2,
+  Bell,
 } from "lucide-react";
 import Image from "next/image";
 import { Calendar } from "@/components/ui/calendar";
@@ -102,10 +103,15 @@ export default function ReveneuEarnings() {
           {/* Header */}
           <div className="flex items-center h-32 py-4 px-7 rounded-md">
             <div className="w-full">
-              <h2 className="text-2xl font-semibold flex items-center py-2">
-                <User className="mr-2 h-6 w-6 text-mediumblack" />
-                <span>Revenue</span>
-              </h2>
+              <div className="flex items-center justify-between py-2">
+                <h2 className="text-2xl font-semibold flex items-center">
+                  <User className="mr-2 h-6 w-6 text-mediumblack" />
+                  <span>Revenue</span>
+                </h2>
+                <a href="/notification">
+                  <Bell className="h-5 w-5 text-black cursor-pointer" />
+                </a>
+              </div>
               <div className="flex items-center justify-between">
                 <div className="text-black ml-4 flex items-center gap-3">
                   <span
@@ -797,12 +803,10 @@ export default function ReveneuEarnings() {
                   amount="22,342"
                   trend="down"
                 />
-                
               </div>
 
-             
               {/* List */}
-              <ExpenseRevenueList/>
+              <ExpenseRevenueList />
             </div>
           </div>
 
@@ -1034,9 +1038,9 @@ export default function ReveneuEarnings() {
   );
   return (
     <div className="p-4">
-    {activeTab === "revenue" && <RevenueContent />}
-    {activeTab === "expenses" && <ExpensesContent />}
-  </div>
+      {activeTab === "revenue" && <RevenueContent />}
+      {activeTab === "expenses" && <ExpensesContent />}
+    </div>
   );
 }
 
