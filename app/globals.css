@@ -95,6 +95,30 @@
   border-radius: 10px;
 }
 
+.scroll-x::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-x::-webkit-scrollbar-track {
+  background: #D9D9D9;
+}
+
+.scroll-x::-webkit-scrollbar-thumb {
+  background-color: #A1A1A1;
+  border-radius: 10px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
 
     .custom-radio {
       @apply hidden;
@@ -119,13 +143,6 @@
       @apply absolute left-1 w-4 h-4 bg-pink-500 rounded-full;
     }
 
-    html,
-body,
-#root {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 
 .custom-scrollbar::-webkit-scrollbar {
   width: 0;
