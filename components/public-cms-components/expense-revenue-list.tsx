@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/table";
 import { Scan, Play, FastForward, Rewind } from "lucide-react";
 
-type SortOption = "date" | "views" | "likes" | "comments";
 
 const videoData = [
   {
@@ -53,9 +52,9 @@ export function ExpenseRevenueList() {
     setIsModalOpen(false);
     setSelectedVideo(null);
   };
-  const [searchQuery, setSearchQuery] = useState("");
+ 
   const [videos, setVideos] = useState<Video[]>([]);
-  const [sortBy, setSortBy] = useState<SortOption>("date");
+ 
   const [deleteDialog, setDeleteDialog] = useState<{
     open: boolean;
     videoId: string | null;
@@ -97,36 +96,8 @@ export function ExpenseRevenueList() {
     setVideos(generatedVideos);
   }, []);
 
-  const filteredAndSortedVideos = useMemo(() => {
-    let result = videos;
+  const Videos = useMemo(() => videos, [videos]); // Just return videos
 
-    // Filter videos based on search query
-    if (searchQuery) {
-      const lowerCaseQuery = searchQuery.toLowerCase();
-      result = result.filter(
-        (video) =>
-          video.title.toLowerCase().includes(lowerCaseQuery) ||
-          video.category.toLowerCase().includes(lowerCaseQuery)
-      );
-    }
-
-    // Sort videos
-    result.sort((a, b) => {
-      switch (sortBy) {
-        case "date":
-          return (
-            new Date(b.publishDate).getTime() -
-            new Date(a.publishDate).getTime()
-          );
-        case "likes":
-          return b.likes - a.likes;
-        default:
-          return 0;
-      }
-    });
-
-    return result;
-  }, [videos, searchQuery, sortBy]);
 
   const handleDeleteClick = (video: Video) => {
     setDeleteDialog({
@@ -275,7 +246,7 @@ export function ExpenseRevenueList() {
             </TableRow>
           </TableHeader>
           <TableBody className="whitespace-nowrap">
-            {filteredAndSortedVideos.map((video) => (
+            {Videos.map((video) => (
               <TableRow key={video.id} className="border-none">
                 <TableCell className="w-[100px]">
                   {/* Thumbnail Image */}
@@ -361,7 +332,7 @@ export function ExpenseRevenueList() {
           </TableBody>
         </Table>
       </div>
-      {filteredAndSortedVideos.length === 0 && (
+      {Videos.length === 0 && (
         <p className="text-center text-muted-foreground mt-8">
           No videos found.
         </p>
