@@ -159,7 +159,9 @@
 .w-45{
   width: 95%;
 }
-
+.gap-32{
+  gap: 8rem;
+}
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
