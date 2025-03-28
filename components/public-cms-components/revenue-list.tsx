@@ -288,18 +288,19 @@ export function RevenueList() {
 
       <div className="w-full flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
         <h2 className="text-lg font-semibold">Boost Uploaded Video’s</h2>
-        <div className="flex gap-4">
-          <div className="relative ">
+        <div className="flex gap-2 sm:gap-4 w-full sm:w-auto justify-between sm:justify-start">
+          <div className="relative w-full sm:w-[65%] md:w-80 lg:w-96">
             <Search className="absolute right-2 top-4 h-4 w-4" />
             <Input
               placeholder="Search by title or category"
               value={searchQuery}
               onChange={handleSearch}
-              className="border border-borderColor1 w-96 h-12 focus:!outline-none focus:!ring-0 rounded-md"
+              className="border border-borderColor1 w-full h-12 focus:!outline-none focus:!ring-0 rounded-md"
             />
           </div>
+
           <Select onValueChange={handleSort} defaultValue="date">
-            <SelectTrigger className="w-[80px] h-12 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0">
+            <SelectTrigger className="w-[90px] sm:w-[110px] md:w-[120px] h-12 border border-borderColor1 rounded-md focus:!outline-none focus:!ring-0">
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
@@ -311,6 +312,7 @@ export function RevenueList() {
           </Select>
         </div>
       </div>
+
       <div>
         <Table className="w-full overflow-x-auto">
           <TableHeader>
