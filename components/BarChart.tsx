@@ -85,14 +85,14 @@ const BarChart = () => {
   };
 
   return (
-    <div className="flex items-center justify-between w-full h-60 gap-2">
+    <div className="flex items-center  w-full h-60 lg:gap-32 md:gap-6">
       {/* Bar Chart */}
-      <div className="w-5/6 h-full">
+      <div className="w-5/6 md:w-4/6 h-full">
         <Bar data={data} options={options} />
       </div>
 
       {/* Custom Legend (on the right side) */}
-      <div className=" flex justify-center pb-11">
+      <div className=" flex justify-center pb-11 lg:pb-0">
         <CustomLegend toggleDataset={toggleDataset} />
       </div>
     </div>
